@@ -15,17 +15,21 @@ export const Container = styled.div`
     width: 65px;
     height: 65px;
     border-radius: 50%;
+
+    &:hover {
+      border-radius: 20%;
+    }
   }
 `;
 
 export const Header = styled.div`
   color: #9c98a6;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 
   div {
     padding: 8px;
-    margin-right: 7rem;
+    margin-right: 2rem;
 
     display: flex;
     flex-direction: row;

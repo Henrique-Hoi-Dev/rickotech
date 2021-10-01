@@ -26,11 +26,21 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased !important;
     background-color: #4D4C4C;
 
-      .MuiPaper-root  {
-      background-color: #4D4C4C;
+    .MuiPaper-root  {
+      width: 160px;
+      height: 120px;
+      margin-top: 30px;
+      background-color: #353535;
       font-weight: bold;
       color: #9c98a6;
-    } 
+
+      .css-2s90m6-MuiAvatar-root {
+        background: none;
+      }
+      .css-cveggr-MuiListItemIcon-root {
+        min-width: 40px;
+      }
+    }
 }
   
   body, input, button {
