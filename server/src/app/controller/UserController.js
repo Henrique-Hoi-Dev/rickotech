@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import User from '../models/User';
 import File from '../models/File';
+import Adress from '../models/Adress';
 
 class UserController {
   async store(req, res) {
@@ -25,25 +26,9 @@ class UserController {
         .json({ error: 'Esse email de usuário já existe.' });
     }
 
-    const {
-      id,
-      name,
-      email,
-      provider,
-      cpf,
-      cargo,
-      data_nacimento,
-    } = await User.create(req.body);
+    const users = await User.create(req.body);
 
-    return res.json({
-      id,
-      name,
-      email,
-      provider,
-      cpf,
-      cargo,
-      data_nacimento,
-    });
+    return res.json(users);
   }
 
   async update(req, res) {
@@ -89,17 +74,9 @@ class UserController {
       id,
       name,
       avatar,
-      endereco,
       cargo,
       data_nacimento,
       cpf,
-      cep,
-      logradouro,
-      complemento,
-      numero,
-      bairro,
-      cidade,
-      uf,
     } = await User.findByPk(req.userId, {
       include: [
         {
@@ -115,18 +92,47 @@ class UserController {
       name,
       email,
       avatar,
-      endereco,
       cargo,
       data_nacimento,
       cpf,
-      cep,
-      logradouro,
-      complemento,
-      numero,
-      bairro,
-      cidade,
-      uf,
     });
+  }
+  async getAll(req, res) {
+    const users = await User.findAll({
+      attributes: [ 
+        'name', 
+        'email', 
+        'provider', 
+        'cargo', 
+        'cpf', 
+        'avatar_id', 
+        'data_nascimento' 
+      ],
+      include: [
+      {
+        model: File,
+        as: 'avatar',
+        attributes:  [ 'id', 'path', 'url' ],
+      },
+      {
+        model: Adress,
+        as: 'adress',
+        attributes:  [ 
+          'cep', 
+          'logradouro', 
+          'complemento',
+          'numero',
+          'bairro',
+          'cidade',
+          'uf', 
+        ],
+      }
+    ],  
+    });
+    return res.status(200).json(users);
+  }
+  catch(error) {
+    return res.status(400).json(error);
   }
 }
 export default new UserController();

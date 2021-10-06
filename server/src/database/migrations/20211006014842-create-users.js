@@ -16,20 +16,21 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
-      data_nacimento: {
-        type: Sequelize.STRING,
+      data_nascimento: {
+        type: Sequelize.DATE,
         allowNull: true,
       },
       cpf: {
         type: Sequelize.STRING,
         allowNull: true,
       },
+      cargo: {
+        type: Sequelize.ENUM,
+        values: ['CEO', 'COLARADOR', 'DIRETOR', 'GERENTE'],
+        defaultValue: 'COLARADOR',
+      },
       avatar_id: {
         type: Sequelize.INTEGER,
-      },
-      cargo: {
-        type: Sequelize.STRING,
-        allowNull: true,
       },
       password_hash: {
         type: Sequelize.STRING,
@@ -39,34 +40,6 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
         allowNull: false,
-      },
-      cep: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      logradouro: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      complemento: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      numero: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      bairro: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      cidade: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      uf: {
-        type: Sequelize.STRING,
-        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,

@@ -58,6 +58,8 @@ export const Container = styled.div`
 
       &:hover {
         color: ${darken(0.03, '#6842c2')};
+        transform: scale(1.1);
+        transition: all 0.5s;
       }
   }
 

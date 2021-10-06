@@ -3,10 +3,11 @@ import File from '../app/models/File';
 import Product from '../app/models/Product';
 import Financeiro from '../app/models/Financeiro';
 import User from '../app/models/User';
+import Adress from '../app/models/Adress';
 
 import databaseConfig from '../config/database';
 
-const models = [User, File, Product, Financeiro];
+const models = [User, File, Product, Financeiro, Adress];
 
 class Database {
   constructor() {

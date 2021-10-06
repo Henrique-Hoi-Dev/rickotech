@@ -12,6 +12,7 @@ import {
 } from '~/store/modules/venda/actions';
 
 import { Container } from './styles';
+import HeaderList from '~/components/HeaderVenda';
 
 const tipoParcelamento = [
   { id: 'Cartão de credito', title: 'Cartão de credito' },
@@ -60,43 +61,44 @@ const handleReset = (resetForm) => {
 
   return (
     <>
-      <Container>
+    <HeaderList/>
+      <Container>  
         <Form initialData={form} onSubmit={handleSubmit}>
-          <Input name="valor" type="text" />
-          <h2>Valor do produto</h2>
-
-          <Input name="valor_desconto" type="text" />
-          <h2>Desconto</h2>
-
-          <Input name="produto_id" type="text" />
-          <h2>Nome do produto</h2>
-
-          <Select
-            options={tipoPagamento}
-            name="tipo_pagamento"
-            type="text"
-          />
-          <h2>Tipo de venda</h2>
-
-          <Select
-            options={tipoParcelamento}
-            name="tipo_parcela"
-            type="text"
-          />
-          <h2>Tipo de parcelamento</h2>
-
-          <Input  name="valor_parcela" type="text" />
-          <h2>Valor Parcelas</h2>
-
-          <Input  name="parcelas" type="text" />
-          <h2>Parcelas</h2>
-
-          <Input  name="valor_pendente" type="text" />
-          <h2>Valor pendente</h2>
-
-        <div>
-             <button type="submit">Confirmar venda</button>
-        </div>
+          <div className="statos">
+            <h2>Nome</h2>
+            <Input name="produto_id" type="text" />
+            <h2>Desconto</h2>
+            <Input name="valor_desconto" type="number" />
+          </div>
+          <div className="tipo-venda">
+            <h2>Valor</h2>
+            <Input name="valor" type="number" />
+            
+          </div>
+          <div className="tipo-venda-1">
+            <h2>Tipo de venda</h2>
+              <Select
+                options={tipoPagamento}
+                name="tipo_pagamento"
+                type="text"
+              />
+            <h2>Valor total</h2>
+            <Input  name="valor_pendente" type="number" />
+          </div>
+          <div className="final">
+            <h2>Tipo de parcelamento</h2>
+            <Select
+              options={tipoParcelamento}
+              name="tipo_parcela"
+              type="text"
+            />
+            <h2>Valor parcelas</h2>
+            <Input  name="valor_parcela" type="number" />
+          </div>
+         <div className="but">
+            <button type="submit">Confirmar venda</button>
+            <button type="submit" className="cancela">Cancelar venda</button>
+          </div>
         </Form>
       </Container>      
     </>

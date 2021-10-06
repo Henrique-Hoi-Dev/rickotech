@@ -25,7 +25,7 @@ export const Container = styled.div`
 export const Header = styled.div`
   color: #9c98a6;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 
   div {
     padding: 8px;

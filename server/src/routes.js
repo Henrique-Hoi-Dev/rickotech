@@ -8,6 +8,7 @@ import UserController from './app/controller/UserController';
 import ProductController from './app/controller/ProductController';
 import FileController from './app/controller/FileController';
 import FinanceiroController from './app/controller/FinanceiroController';
+import AdressController from './app/controller/AdressController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -23,6 +24,10 @@ routes.use(authMiddleware);
 
 //perfil
 routes.put('/users', UserController.update);
+routes.get('/users', UserController.getAll);
+
+//endereço 
+routes.post('/adress/:user_id', AdressController.store)
 
 //avatar
 routes.post('/files', upload.single('file'), FileController.store);

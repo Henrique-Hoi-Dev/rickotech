@@ -8,20 +8,69 @@ export const Container = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
   border-radius: 0.8rem;
 
-  margin: 2rem auto 2rem;
+  margin: -3rem auto 2rem;
   padding: 3rem;
   overflow: hidden;
+  display: flex;
+
+  flex-direction: column;
+  align-items: stretch;
+
+  .titulo {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    h1 {
+      padding: 0.5rem;
+      font-weight: bold;
+
+      color: #9c98a6;
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    }
+  }
 
   form {
     display: grid; 
-    grid-template-columns: 1fr 2fr;
-    /* grid-template-rows: 1fr 1fr 1fr;
+    justify-items: center;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
     grid-template-areas:
-      'valor-parcela valor-parcela'
-      'parcelas parcelas'; */
+    'statos tipo-venda'
+    'final tipo-venda-1'
+    'but but';
 
+    .statos {
+      grid-area: statos;
+      display: flex;
+      flex-direction: column;
+    }
+    .tipo-venda {
+      grid-area: tipo-venda;
+      max-height: 90px;
+      display: flex;
+      flex-direction: column;
+    }
+    .tipo-venda-1 {
+      grid-area: tipo-venda-1;
+      display: flex;
+      flex-direction: column;
+    }
+    .final{
+      grid-area: final;
+      display: flex;
+      flex-direction: column;
+    }
+    .but{
+      grid-area: but;
+      display: flex;
+      flex-direction: row;
+
+      .cancela {
+        margin-left: 15px;
+        background: red;
+      }
+    }
     h2 {
-      margin-left: 1rem;
       padding: 0.5rem;
       font-weight: bold;
 
@@ -61,6 +110,8 @@ export const Container = styled.div`
 
     &:hover {
       background: ${darken(0.03, '#8945de')};
+      transform: scale(1.1);
+      transition: all 0.5s;
     }
   }
 
@@ -70,7 +121,7 @@ export const Container = styled.div`
   }
 
   input {
-    max-width: 15rem;
+    min-width: 15rem;
     background: rgba(0, 0, 0, 0.1);
     padding: 0 15px;
     font: 1rem Archivo;
@@ -89,6 +140,7 @@ export const Container = styled.div`
 
   select {
     font: 1rem Archivo;
+    max-width: 15rem;
     border-radius: 0.5rem;
     height: 2.2rem;
     padding: 0 1rem;

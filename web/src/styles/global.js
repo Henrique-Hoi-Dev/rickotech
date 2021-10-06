@@ -26,13 +26,20 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased !important;
     background-color: #4D4C4C;
 
+    .MuiMenuItem-root {
+      &:hover {
+        transform: scale(1.1);
+        transition: all 0.5s;
+      }
+    }
     .MuiPaper-root  {
-      width: 160px;
-      height: 120px;
+      /* width: 160px;
+      height: 120px; */
       margin-top: 30px;
       background-color: #353535;
       font-weight: bold;
       color: #9c98a6;
+      border-radius: 20px;
 
       .css-2s90m6-MuiAvatar-root {
         background: none;
@@ -40,13 +47,21 @@ export default createGlobalStyle`
       .css-cveggr-MuiListItemIcon-root {
         min-width: 40px;
       }
+      .css-i4bv87-MuiSvgIcon-root{
+        margin-right: 20px;
+      }
+      .css-1p823my-MuiListItem-root {
+        &:hover {
+          transform: scale(1.1);
+          transition: all 0.5s;
+        }
+      }
     }
 }
   
   body, input, button {
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
-
   }
 
   button {

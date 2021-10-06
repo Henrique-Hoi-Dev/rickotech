@@ -19,7 +19,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      dia_da_semana: {
+      dia_semana: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -35,7 +35,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      codigo_de_barra: {
+      codigo_barra: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -43,7 +43,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      preco: {
+      valor: {
         type: Sequelize.STRING,
         allowNull: false,
       },
