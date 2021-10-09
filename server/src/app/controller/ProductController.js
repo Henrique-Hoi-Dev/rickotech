@@ -1,36 +1,82 @@
 import * as Yup from 'yup';
 import File from '../models/File';
 import Product from '../models/Product';
+import Sales from '../models/Sales';
 
 class ProductController {
   async store(req, res) {
-    const schema = Yup.object().shape({
-      name: Yup.string().required().max(100),
-      codigo_de_barra: Yup.string().required(),
-    });
+    try {
+      const schema = Yup.object().shape({
+        name: Yup.string().required().max(100),
+        codigo_barra: Yup.string().required(),
+      });
 
-    if (!(await schema.isValid(req.body.values))) {
-      return res.status(400).json({ error: 'Falha na validação' });
+      if (!(await schema.isValid(req.body))) {
+        return res.status(400).json({ error: 'Falha na validação' });
+      }
+
+      const ProductExist = await Product.findOne({
+        where: { name: req.body.name },
+      });
+
+      if (ProductExist) {
+        return res.status(400).json({ error: 'Esse Produto já existe.' });
+      }
+
+      const { 
+        name,
+        status,
+        valor,
+        categoria,
+        dia_semana,
+        horario,
+        altura,
+        comprimento,
+        previous,
+        codigo_barra,
+        descricao
+       } = await Product.create(req.body);
+
+      return res.json({
+        name,
+        status,
+        valor,
+        categoria,
+        dia_semana,
+        horario,
+        altura,
+        comprimento,
+        previous,
+        codigo_barra,
+        descricao
+      });
+    } catch (error) {
+      return res.status(400).json(error);
     }
-
-    const ProductExist = await Product.findOne({
-      where: { name: req.body.values.name },
-    });
-
-    if (ProductExist) {
-      return res.status(400).json({ error: 'Esse Produto já existe.' });
-    }
-    const product = await Product.create(req.body.values);
-
-    return res.json(product);
   }
-
+    
   async getAll(req, res) {
     const product = await Product.findAll({
-      include: {
+      include: [
+      {
         model: File,
         as: 'avatar',
+        attributes: [ 'url', 'id' ]
       },
+      {
+        model: Sales,
+        as: 'sales',  
+        attributes: [ 
+          'name', 
+          'valor',
+          'desconto', 
+          'tipo_pagamento',
+          'tipo_parcela',
+          'parcela_valor',
+          'parcela_numero'
+        ]
+      }
+    ]  
     });
     return res.status(200).json(product);
   }
@@ -42,10 +88,26 @@ class ProductController {
     try {
       let { id } = req.params;
       let product = await Product.findByPk(id, {
-        include: {
-          model: File,
-          as: 'avatar',
-        },
+        include: [
+          {
+            model: File,
+            as: 'avatar',
+            attributes: [ 'url', 'id' ]
+          },
+          {
+            model: Sales,
+            as: 'sales',  
+            attributes: [ 
+              'name', 
+              'valor',
+              'desconto', 
+              'tipo_pagamento',
+              'tipo_parcela',
+              'parcela_valor',
+              'parcela_numero'
+            ]
+          }
+        ] 
       });
 
       return res.status(200).json(product);

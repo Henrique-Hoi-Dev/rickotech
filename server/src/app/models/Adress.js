@@ -8,7 +8,7 @@ class Adress extends Model {
         cep: Sequelize.STRING,
         logradouro: Sequelize.STRING,
         complemento: Sequelize.STRING,
-        numero: Sequelize.DECIMAL,
+        numero: Sequelize.STRING,
         bairro: Sequelize.STRING,
         cidade: Sequelize.STRING,
         uf: Sequelize.STRING,

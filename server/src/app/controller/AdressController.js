@@ -24,12 +24,11 @@ class AdressController {
         uf
       });
 
-      return res.json(adress);
+      return res.status(200).json(adress);
     } catch (error) {
       return res.status(400).json(error);
     }
   }
-
 }
 
 export default new AdressController();

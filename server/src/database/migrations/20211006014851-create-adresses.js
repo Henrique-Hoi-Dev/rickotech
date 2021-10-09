@@ -27,7 +27,7 @@ module.exports = {
         unique: true,
       },
       numero: {
-        type: Sequelize.DECIMAL,
+        type: Sequelize.STRING,
         unique: true,
       },
       bairro: {

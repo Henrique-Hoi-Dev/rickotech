@@ -4,18 +4,19 @@ class Product extends Model {
   static init(sequelize) {
     super.init(
       {
+        avatar_id: Sequelize.INTEGER,
+        status: Sequelize.ENUM('EM-ESTOQUE', 'VENDIDO'),
         name: Sequelize.STRING,
+        valor: Sequelize.DECIMAL,
         categoria: Sequelize.STRING,
+        dia_semana: Sequelize.STRING,
+        horario: Sequelize.STRING,
         altura: Sequelize.STRING,
         largura: Sequelize.STRING,
         comprimento: Sequelize.STRING,
-        codigo_barra: Sequelize.STRING,
         peso: Sequelize.STRING,
-        valor: Sequelize.STRING,
+        codigo_barra: Sequelize.STRING,
         descricao: Sequelize.STRING,
-        dia_semana: Sequelize.STRING,
-        horario: Sequelize.STRING,
-        avatar_id: Sequelize.INTEGER,
       },
       {
         sequelize,
@@ -26,6 +27,7 @@ class Product extends Model {
   }
   static associate(models) {
     this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
+    this.hasOne(models.Sales, { foreignKey: 'product_id', as: 'sales' });
   }
 }
 
