@@ -1,31 +1,24 @@
-import Adress from "../models/Adress";
-import User from "../models/User";
+import AdressService from "../../service/AdressService";
 
 class AdressController {
-  async store(req, res) {
+  async storeAdress(req, res) {
+    let response;     
     try {
-      let { user_id } = req.params;
-      let { cep, logradouro, complemento, numero, bairro, cidade, uf } = req.body;
-
-      const user = await User.findByPk(user_id);
-
-      if (!user) {
-        return res.status(400).json({ error: 'User not found' });
-      }
-
-      const adress = await Adress.create({
-        user_id,
-        cep, 
-        logradouro, 
-        complemento, 
-        numero, 
-        bairro, 
-        cidade, 
-        uf
-      });
-
-      return res.status(200).json(adress);
-    } catch (error) {
+      response = await AdressService.storeAdress(req.body, req.params);
+      return res.status(200).send(response);
+        
+    } catch(error) {
+      return res.status(400).json(error);
+    }
+  }
+  
+  async deleteAdress(req, res) {
+    let response;     
+    try {
+      response = await AdressService.deleteAdress(req.params);
+      return res.status(200).send(response);
+        
+    } catch(error) {
       return res.status(400).json(error);
     }
   }

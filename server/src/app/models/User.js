@@ -10,7 +10,7 @@ class User extends Model {
         password: Sequelize.VIRTUAL,
         password_hash: Sequelize.STRING,
         provider: Sequelize.BOOLEAN,
-        cargo: Sequelize.ENUM('CEO', 'COLARADOR', 'DIRETOR', 'GERENTE'),
+        cargo: Sequelize.ENUM('COLABORADOR', 'CEO', 'DIRETOR', 'GERENTE'),
         cpf: Sequelize.STRING,
         data_nascimento: Sequelize.DATE,
         avatar_id: Sequelize.INTEGER,

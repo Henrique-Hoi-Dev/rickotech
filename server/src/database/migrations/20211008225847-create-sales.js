@@ -33,9 +33,8 @@ module.exports = {
       },
       tipo_parcela: {
         type: Sequelize.ENUM,
-        values: ['CARTAO-CREDITO', 'BOLETO', 'PAGO'],
-        allowNull: true,
-        defaultValue: null,
+        values: ['PAGO', 'CARTAO-CREDITO', 'BOLETO'],
+        defaultValue: 'PAGO',
       },
       parcela_valor: {
         type: Sequelize.DOUBLE,

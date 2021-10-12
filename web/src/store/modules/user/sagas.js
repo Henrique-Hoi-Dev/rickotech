@@ -13,14 +13,7 @@ export function* updateProfile({ payload }) {
       avatar_id,
       cargo,
       cpf,
-      data_nacimento,
-      cep,
-      logradouro,
-      complemento,
-      numero,
-      bairro,
-      cidade,
-      uf,
+      data_nascimento,
       ...rest
     } = payload.data;
 
@@ -30,18 +23,12 @@ export function* updateProfile({ payload }) {
       avatar_id,
       cargo,
       cpf,
-      data_nacimento,
-      cep,
-      logradouro,
-      complemento,
-      numero,
-      bairro,
-      cidade,
-      uf,
+      data_nascimento,
       ...(rest.oldPassword ? rest : {}),
     };
+    console.log(payload)
 
-    const response = yield call(api.put, 'users', profile);
+    const response = yield call(api.put, `/users/${payload.data.id}`, profile);
 
     toast.success('Perfil atualizado com sucesso!');
 

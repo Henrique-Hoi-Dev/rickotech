@@ -17,9 +17,9 @@ export default function Profile() {
   }
 
   const cargos = [
-    { id: 'Colaborador', title: 'Colaborador' },
-    { id: 'Diretor', title: 'Diretor' },
-    { id: 'Gerente', title: 'Gerente' },
+    { id: 'COLABORADOR', title: 'Colaborador' },
+    { id: 'DIRETOR', title: 'Diretor' },
+    { id: 'GERENTE', title: 'Gerente' },
     { id: 'CEO', title: 'CEO' },
   ];
 

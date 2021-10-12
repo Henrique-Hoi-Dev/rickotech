@@ -1,122 +1,59 @@
-import Sales from '../models/Sales';
-import Product from '../models/Product';
+import SalesService from '../../service/SalesService';
 
 class SalesController {
-  async store(req, res) {
+  async storeSales(req, res) {
+    let response;     
     try {
-      let { product_id } = req.params;
-      let { 
-            name, 
-            valor, 
-            desconto, 
-            tipo_pagamento, 
-            tipo_parcela, 
-            parcela_valor, 
-            parcela_numero } = req.body;
-
-      const products = await Product.findByPk(product_id);
-
-      if (!products) {
-        return res.status(400).json({ error: 'User not found' });
-      }
-
-      const saleses = await Sales.create({
-          product_id,
-          name, 
-          valor, 
-          desconto, 
-          tipo_pagamento, 
-          tipo_parcela, 
-          parcela_valor, 
-          parcela_numero
-      });
-
-      return res.status(200).json(saleses);
+      response = await SalesService.storeSales(req.body, req.params);
+      return res.status(200).send(response);
+        
     } catch (error) {
       return res.status(400).json(error);
     }
   }
 
-  async getById(req, res) {
+  async getSalesDetails(req, res) {
+    let response;      
     try {
-      let { id } = req.params;
-      let sales = await Sales.findByPk(id, {
-        attributes: [ 
-          'id', 
-          'product_id', 
-          'name', 
-          'valor', 
-          'desconto', 
-          'tipo_pagamento',
-          'tipo_parcela',
-          'parcela_valor',
-          'parcela_numero'
-        ],
-        include: {
-          model: Product,
-          as: 'product',
-          attributes: [ 
-            'name', 
-            'status',
-            'valor' 
-          ],
-        },
-      });
-
-      return res.status(200).json(sales);
+      response = await SalesService.getSalesDetails();
+      return res.status(200).send(response);
+        
     } catch (error) {
       return res.status(400).json(error);
     }
   }
 
-  async getAll(req, res) {
+  async getSalesDetailsId(req, res) {
+    let response;      
     try {
-      let sales = await Sales.findAll({
-        attributes: [ 
-          'id', 
-          'product_id', 
-          'name', 
-          'valor', 
-          'desconto', 
-          'tipo_pagamento',
-          'tipo_parcela',
-          'parcela_valor',
-          'parcela_numero'
-        ],
-        include: {
-          model: Product,
-          as: 'product',
-          attributes: [ 
-            'name', 
-            'status',
-            'valor' 
-          ],
-        },
-      });
-
-      return res.status(200).json(sales);
+      response = await SalesService.getSalesDetailsId(req.params);
+      return res.status(200).send(response);
+        
     } catch (error) {
       return res.status(400).json(error);
     }
   }
 
-  async update(req, res) {
-    const { id } = req.params;
+  async updateSalesId(req, res) {
+    let response;
+    try {
+      response = await SalesService.updateSalestId(req.params, req.body);
+      return res.status(200).send(response);
+        
+    } catch (error) {
+      return res.status(400).json(error);
+    }
+  }
 
-    const sales = await Sales.findByPk(id, {
-      include: [
-        {
-          model: Product,
-          as: 'produto',
-          attributes: ['id', 'name', 'preco'],
-        },
-      ],
-    });
-
-    let Updated = await sales.update(req.body);
-
-    console.log('Updated com sucesso');
-    return res.json(Updated);
+  async deleteSalesId(req, res) {
+    let response;     
+    try {
+      response = await SalesService.deleteSalesId(req.params);
+      return res.status(200).send(response);
+        
+    } catch (error) {
+      return res.status(400).json(error);
+    }
   }
 }
 

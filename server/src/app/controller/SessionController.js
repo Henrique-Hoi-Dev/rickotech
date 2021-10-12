@@ -4,8 +4,21 @@ import * as Yup from 'yup';
 import User from '../models/User';
 import File from '../models/File';
 import authConfig from '../../config/auth';
+import SessionService from '../../service/SessionService';
+import Adress from '../models/Adress';
 
 class SessionController {
+  async storeSession(req, res) {
+    let response;     
+    try {
+      response = await SessionService.storeSession(req.body);
+      return res.status(200).send(response);
+        
+    } catch (error) {
+      return res.status(400).json(error);
+    }
+  }
+  
   async store(req, res) {
     const schema = Yup.object().shape({
       email: Yup.string().email().required(),
@@ -25,7 +38,7 @@ class SessionController {
           model: File,
           as: 'avatar',
           attributes: ['id', 'path', 'url'],
-        },
+        }
       ],
     });
 

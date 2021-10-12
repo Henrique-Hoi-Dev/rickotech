@@ -16,34 +16,37 @@ const routes = new Router();
 const upload = multer(multerConfig);
 
 //cadastro
-routes.post('/users/register', UserController.store);
-routes.post('/users/authenticate', SessionController.store);
+routes.post('/users/register', UserController.storeUser);
+routes.post('/users/authenticate', SessionController.storeSession);
 
 //autenticação
 routes.use(authMiddleware);
 
 //perfil
-routes.put('/users', UserController.update);
-routes.get('/users', UserController.getAll);
+routes.put('/user/:id', UserController.updateUserId);
+routes.get('/users', UserController.getUserDetails);
+routes.get('/user/:id', UserController.getUserDetailsId);
 
 //endereço 
-routes.post('/adress/:user_id', AdressController.store)
+routes.post('/adress/:user_id', AdressController.storeAdress)
+routes.delete('/adress/:id', AdressController.deleteAdress)
 
 //avatar
 routes.post('/files', upload.single('file'), FileController.store);
 
 //produtos
-routes.post('/products/new', ProductController.store);
-routes.put('/products/:id', ProductController.updateProduct);
-routes.get('/products', ProductController.getAll);
-routes.get('/products/:id', ProductController.getById);
-routes.post('/product/avatar', ProductController.updateProduct);
-routes.delete('/products/:id', ProductController.deleteProduct);
+routes.post('/products/new', ProductController.storeProduct);
+routes.put('/product/:id', ProductController.updateProductId);
+routes.get('/products', ProductController.getProductDetails);
+routes.get('/product/:id', ProductController.getProductDetailsId);
+routes.post('/product/avatar', ProductController.updateProductId);
+routes.delete('/product/:id', ProductController.deleteProductId);
 
 //vendas
-routes.post('/sales/:product_id', SalesController.store);
-routes.get('/sales/:id', SalesController.getById);
-routes.get('/sales', SalesController.getAll);
-routes.put('/sales/:id', SalesController.update);
+routes.post('/sales/:product_id', SalesController.storeSales);
+routes.get('/sales/:id', SalesController.getSalesDetailsId);
+routes.get('/saleses', SalesController.getSalesDetails);
+routes.put('/sales/:id', SalesController.updateSalesId);
+routes.delete('/sales/:id', SalesController.deleteSalesId);
 
 export default routes;

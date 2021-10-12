@@ -26,8 +26,8 @@ module.exports = {
       },
       cargo: {
         type: Sequelize.ENUM,
-        values: ['CEO', 'COLARADOR', 'DIRETOR', 'GERENTE'],
-        defaultValue: 'COLARADOR',
+        values: ['COLABORADOR', 'CEO', 'DIRETOR', 'GERENTE'],
+        defaultValue: null,
       },
       avatar_id: {
         type: Sequelize.INTEGER,
