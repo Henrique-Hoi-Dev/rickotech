@@ -39,7 +39,7 @@ export default {
   async getUserDetails(req, res) {
     try {
       const users = await User.findAll({
-        attributes: [ 'name', 'email', 'provider', 'cargo', 
+        attributes: [ 'id', 'name', 'email', 'provider', 'cargo', 
                       'cpf', 'avatar_id', 'data_nascimento' ],
         include: [
         {
@@ -64,7 +64,7 @@ export default {
   async getUserDetailsId(req, res) {
     try {
       let user = await User.findByPk(req.id, {
-        attributes: [ 'name', 'email', 'provider', 'cargo', 
+        attributes: [ 'id', 'name', 'email', 'provider', 'cargo', 
                       'cpf', 'avatar_id', 'data_nascimento' ],
         include: [
         {
@@ -88,7 +88,7 @@ export default {
 
   async updateUserId(req, res) {    
     try {
-      let userId = res.id
+      // let userId = res.id
       let users = req
 
       const schema = Yup.object().shape({
@@ -111,7 +111,7 @@ export default {
   
       const { email, oldPassword } = users ;
       
-      const user = await User.findByPk(userId);
+      const user = await User.findByPk(users.id);
       
       if (email !== user.dataValues.email) {
         const userExist = await User.findOne({ where: { email } });
@@ -127,7 +127,7 @@ export default {
       
       await user.update(users);
 
-      const result = await User.findByPk(userId, {
+      const result = await User.findByPk(users.id, {
         attributes: ['id', 'name', 'email', 'cargo', 'cpf', 'data_nascimento' ],
         include: [
           {
@@ -162,7 +162,7 @@ export default {
       result = {httpStatus: httpStatus.OK, status: "successful", responseData: users}      
       return result
     } catch (error) {
-      return res.status(400).json(error.message);
+      return res.status(400).json(error);
     }
   }
 }

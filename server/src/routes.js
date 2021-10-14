@@ -23,7 +23,7 @@ routes.post('/users/authenticate', SessionController.storeSession);
 routes.use(authMiddleware);
 
 //perfil
-routes.put('/user/:id', UserController.updateUserId);
+routes.put('/user', UserController.updateUserId);
 routes.get('/users', UserController.getUserDetails);
 routes.get('/user/:id', UserController.getUserDetailsId);
 routes.delete('/user/:id', UserController.deleteUserId);

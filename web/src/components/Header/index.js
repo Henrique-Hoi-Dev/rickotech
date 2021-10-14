@@ -49,7 +49,7 @@ export default function Home() {
     >
       <List>
         <ListItem >
-         <DashboardIcon /> <Link to="/dashboard/inicio"> Dashboard </Link> 
+         <DashboardIcon /> <Link to="/dashboard"> Dashboard </Link> 
         </ListItem >
         <ListItem >
          <AttachMoneyIcon /> <Link to="/caixa"> Caixa </Link> 
