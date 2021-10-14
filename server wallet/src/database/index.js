@@ -1,17 +1,20 @@
-import Sequelize from 'sequelize';
+import { Sequelize } from 'sequelize';
+import mongoose from 'mongoose';
+require('dotenv/config');
+
 import File from '../app/models/File';
-import Product from '../app/models/Product';
+import Account from '../app/models/Account';
 import User from '../app/models/User';
-import Adress from '../app/models/Adress';
-import Sales from '../app/models/Sales';
+import Portion from '../app/models/Portion';
 
 import databaseConfig from '../config/database';
 
-const models = [ User, Adress, Product, File, Sales ];
+const models = [User, File, Account, Portion];
 
 class Database {
   constructor() {
     this.init();
+    this.mongo();
   }
 
   init() {
@@ -22,6 +25,13 @@ class Database {
       .map(
         (model) => model.associate && model.associate(this.connetion.models)
       );
+  }
+
+  mongo() {
+    this.mongoConnection = mongoose.connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
   }
 }
 

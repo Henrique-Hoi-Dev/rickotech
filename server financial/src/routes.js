@@ -35,6 +35,9 @@ routes.delete('/adress/:id', AdressController.deleteAdress)
 
 //avatar
 routes.post('/files', upload.single('file'), FileController.store);
+routes.get('/avatar', FileController.getFileDetails);
+routes.delete('/avatar/:id', FileController.deleteFileId);
+
 
 //produtos
 routes.post('/products/new', ProductController.storeProduct);

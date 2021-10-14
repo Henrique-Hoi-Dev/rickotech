@@ -33,7 +33,7 @@ export default {
                 model: Adress,
                 as: 'adress',
                 attributes:  [ 'cep', 'logradouro', 'complemento', 
-                          'numero', 'bairro', 'cidade', 'uf' ],
+                               'numero', 'bairro', 'cidade', 'uf' ],
               }
             ],
           });
@@ -46,13 +46,14 @@ export default {
             return res.status(401).json({ error: 'Senha está incorreta' });
           }
 
-          const { id, name, avatar, adress, provider } = user;
+          const { id, name, avatar, cargo, adress, provider } = user;
           const 
             users = {
               id,
               name,
               email,
               avatar,
+              cargo,
               adress,
               provider,
             },
