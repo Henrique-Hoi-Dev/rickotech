@@ -11,7 +11,6 @@ class SalesController {
       return res.status(400).json(error);
     }
   }
-
   async getSalesDetails(req, res) {
     let response;      
     try {
@@ -22,7 +21,6 @@ class SalesController {
       return res.status(400).json(error);
     }
   }
-
   async getSalesDetailsId(req, res) {
     let response;      
     try {
@@ -33,7 +31,6 @@ class SalesController {
       return res.status(400).json(error);
     }
   }
-
   async updateSalesId(req, res) {
     let response;
     try {
@@ -44,7 +41,6 @@ class SalesController {
       return res.status(400).json(error);
     }
   }
-
   async deleteSalesId(req, res) {
     let response;     
     try {
@@ -56,5 +52,4 @@ class SalesController {
     }
   }
 }
-
 export default new SalesController();

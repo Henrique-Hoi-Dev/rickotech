@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 import Adress from '../app/models/Adress';
 import File from '../app/models/File';
 import User from "../app/models/User";
+import httpStatus from 'http-status-codes';
 
 export default {
   async storeUser(req, res) {
@@ -140,6 +141,28 @@ export default {
       return result
     } catch (error) {
       return res.status(400).json(error);
+    }
+  },
+
+  async deleteUserId(req, res) {
+    let result = {}
+    try {
+      const id  = req.id;
+
+      const users = await User.destroy({
+        where: {
+          id: id,
+        },
+      });
+
+      if (!users) {
+        return res.status(400).json({ message: 'adress not found' });
+      }
+
+      result = {httpStatus: httpStatus.OK, status: "successful", responseData: users}      
+      return result
+    } catch (error) {
+      return res.status(400).json(error.message);
     }
   }
 }

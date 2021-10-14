@@ -33,6 +33,19 @@ export default {
     }
   },
 
+  async updateAdressId(req, res) {
+    try {
+      let adresses = res
+
+      const adress = await Adress.findByPk(req.id);
+      let adressUpdated = await adress.update(adresses);
+
+      return adressUpdated;
+    } catch (error) {
+      return res.status(400).json(error);
+    }
+  },
+
   async deleteAdress(req, res) {
     let result = {}
     try {

@@ -26,9 +26,11 @@ routes.use(authMiddleware);
 routes.put('/user/:id', UserController.updateUserId);
 routes.get('/users', UserController.getUserDetails);
 routes.get('/user/:id', UserController.getUserDetailsId);
+routes.delete('/user/:id', UserController.deleteUserId);
 
 //endereço 
 routes.post('/adress/:user_id', AdressController.storeAdress)
+routes.put('/adress/:id', AdressController.updateAdressId)
 routes.delete('/adress/:id', AdressController.deleteAdress)
 
 //avatar
