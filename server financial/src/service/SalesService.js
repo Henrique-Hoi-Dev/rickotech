@@ -1,8 +1,10 @@
 import Product from "../app/models/Product";
 import Sales from "../app/models/Sales";
 import httpStatus from 'http-status-codes';
+import FinancialBox from "../app/models/FinancialBox";
 
 export default  {
+  // create uma nova venda 
   async storeSales(req, res) {
     let sales = req
     let product_id = res.product_id
@@ -24,17 +26,25 @@ export default  {
       return res.status(400).json(error.menssage);
     }
   },
-
+  //busca todas as vendas, com os prudotos e caixa inclusos 
   async getSalesDetails(req, res) {
     try {
       let sales = await Sales.findAll({
-        attributes: [ 'id', 'product_id', 'name', 'valor', 'desconto', 
-          'tipo_pagamento', 'tipo_parcela', 'parcela_valor', 'parcela_numero'],
-        include: {
-          model: Product,
-          as: 'product',
-          attributes: [ 'name', 'status', 'valor' ],
-        },
+        attributes: [ 'id', 'product_id', 'financial_id', 'name', 'valor', 'desconto', 'tipo_pagamento', 
+                      'tipo_parcela', 'parcela_valor', 'parcela_numero'],
+          include: [
+            {
+              model: Product,
+              as: 'product',
+              attributes: [ 'name', 'status', 'valor' ],
+            },
+            {
+              model: FinancialBox,
+              as: 'financial',
+              attributes: [ 'id', 'valor_sales_total', 'valor_service_total', 
+                            'valor_total', 'open_caixa', 'close_caixa'],
+            }
+          ],
       });
 
       return sales;
@@ -42,32 +52,27 @@ export default  {
       return res.status(400).json(error);
     }
   },
-
+  // busca uma venda por Id, com os prudotos e caixa inclusos
   async getSalesDetailsId(req, res) {
     try {
       let id = req.id
 
       let sales = await Sales.findByPk(id, {
-        attributes: [ 
-          'id', 
-          'product_id', 
-          'name', 
-          'valor', 
-          'desconto', 
-          'tipo_pagamento',
-          'tipo_parcela',
-          'parcela_valor',
-          'parcela_numero'
+        attributes: [ 'id', 'product_id', 'name', 'valor', 'desconto', 'tipo_pagamento',
+                      'tipo_parcela', 'parcela_valor', 'parcela_numero' ],
+        include: [
+          {
+            model: Product,
+            as: 'product',
+            attributes: [ 'name', 'status', 'valor' ],
+          },
+          {
+            model: FinancialBox,
+            as: 'financial',
+            attributes: [ 'id', 'valor_sales_total', 'valor_service_total', 
+                          'valor_total', 'open_caixa', 'close_caixa'],
+          }
         ],
-        include: {
-          model: Product,
-          as: 'product',
-          attributes: [ 
-            'name', 
-            'status',
-            'valor' 
-          ],
-        },
       });
 
       if (!sales) {
@@ -76,10 +81,47 @@ export default  {
 
       return sales;
     } catch (error) {
-      return res.status(400).json(error.menssage);
+      return res.status(400).json(error);
     }
   },
+  // busca uma  venda por caixa Id que esta vinculada, inclundo produto e dados do caixa e valor total 
+  async getsSalesDetailsTotalValorId(req, res) {
+    let financialId = req.financial_id 
+    try {
+      let saleses = await Sales.findAll({ where : { financial_id: financialId },
+        attributes: [ 'id', 'product_id', 'name', 'valor', 'desconto', 'tipo_pagamento',
+                      'tipo_parcela', 'parcela_valor', 'parcela_numero' ],
+          include: [
+            {
+              model: Product,
+              as: 'product',
+              attributes: [ 'name', 'status', 'valor' ],
+            },
+            {
+              model: FinancialBox,
+              as: 'financial',
+              attributes: [ 'id', 'valor_sales_total', 'valor_service_total', 
+                            'valor_total', 'open_caixa', 'close_caixa'],
+            }
+          ],
+      });
+      const validSales = saleses.filter(function (result) {
+        return result.dataValues;
+      });
+      const venciSales = validSales.map(function (result) {
+      const valor = parseInt(result.dataValues.valor);
+        return valor;
+      });
+      const totalSales = venciSales.reduce((acumulado, x) => {
+        return acumulado + x;
+      });
 
+      return {saleses, totalSales};
+    } catch (error) {
+      return res.status(400).json(error)
+    }
+  },
+  // faz atualização de um venda 
   async updateSalestId(req, res) {
     try {
       let id = req.id;
@@ -93,7 +135,7 @@ export default  {
       return res.status(400).json(error);
     }
   },
-
+  // exclui uma venda por id
   async deleteSalesId(req, res) {
     let result = {}
     try {

@@ -5,6 +5,7 @@ class Sales extends Model {
     super.init(
       {
         product_id: Sequelize.INTEGER,
+        financial_id: Sequelize.INTEGER,
         name: Sequelize.STRING,
         valor: Sequelize.DOUBLE,
         desconto: Sequelize.DOUBLE,
@@ -22,6 +23,7 @@ class Sales extends Model {
   }
   static associate(models) {
     this.belongsTo(models.Product, { foreignKey: 'product_id', as: 'product' });
+    this.belongsTo(models.FinancialBox, { foreignKey: 'financial_id', as: 'financial' });
   }
 }
 

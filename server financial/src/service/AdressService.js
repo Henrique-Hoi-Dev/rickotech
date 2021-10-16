@@ -3,6 +3,7 @@ import User from "../app/models/User";
 import httpStatus from 'http-status-codes';
 
 export default {
+  // create de um endereço de usuário
   async storeAdress(req, res) {
     try {
       let user_id  = res.user_id;
@@ -16,23 +17,15 @@ export default {
         return res.status(400).json({ error: 'User not found' });
       }
 
-      const adress = await Adress.create({
-        user_id,
-        cep, 
-        logradouro, 
-        complemento, 
-        numero, 
-        bairro, 
-        cidade, 
-        uf
-      });
+      const adress = await Adress.create({  user_id, cep, logradouro, complemento, 
+                                            numero, bairro, cidade, uf  });
 
       return adress;
     } catch (error) {
       return res.status(400).json(error);
     }
   },
-
+  // atualiza o endereço do usuário
   async updateAdressId(req, res) {
     try {
       let adresses = res
@@ -45,7 +38,7 @@ export default {
       return res.status(400).json(error);
     }
   },
-
+  // exclui o endereço do usuário
   async deleteAdress(req, res) {
     let result = {}
     try {

@@ -7,6 +7,7 @@ import authConfig from '../config/auth';
 import Adress from '../app/models/Adress';
 
 export default {
+  // login do usuario trazendo umas informações primarias
   async storeSession(req, res) {
     let body = req
     try {
@@ -47,16 +48,7 @@ export default {
           }
 
           const { id, name, avatar, cargo, adress, provider } = user;
-          const 
-            users = {
-              id,
-              name,
-              email,
-              avatar,
-              cargo,
-              adress,
-              provider,
-            },
+          const users = { id, name, email, avatar, cargo, adress, provider, },
             token = jwt.sign({ id }, authConfig.secret, {
               expiresIn: authConfig.expiresIn,
             });

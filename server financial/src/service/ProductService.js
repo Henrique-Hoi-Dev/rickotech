@@ -5,7 +5,7 @@ import Sales from "../app/models/Sales";
 import httpStatus from 'http-status-codes';
 
 export default {
-
+// create um novo produto, validando se á um produto com o mesmo nome ou codigo de barra
 async storeProduct(req, res) {
   let product = req;
   try {
@@ -32,7 +32,8 @@ async storeProduct(req, res) {
     return res.status(400).json(error.message);
   }
 },
-
+// busca todos os produtos, incluindo a informação se ele já possui uma venda
+// e informação do avatar do produto
 async getProductDetails(req, res) {
     try {
       const product = await Product.findAll({
@@ -45,15 +46,8 @@ async getProductDetails(req, res) {
         {
           model: Sales,
           as: 'sales',  
-          attributes: [ 
-            'name', 
-            'valor',
-            'desconto', 
-            'tipo_pagamento',
-            'tipo_parcela',
-            'parcela_valor',
-            'parcela_numero'
-          ]
+          attributes: [ 'name', 'valor', 'desconto', 'tipo_pagamento', 
+                        'tipo_parcela', 'parcela_valor', 'parcela_numero' ]
         }
       ]  
     });
@@ -62,7 +56,7 @@ async getProductDetails(req, res) {
   return res.status(400).json(error)
   }
 },
-
+// busca um produto por Id, incluindo informações do avatar e se á uma venda
 async getProductDetailsId(req, res) {
   try {
     let product = await Product.findByPk(req.id, {
@@ -75,15 +69,8 @@ async getProductDetailsId(req, res) {
         {
           model: Sales,
           as: 'sales',  
-          attributes: [ 
-            'name', 
-            'valor',
-            'desconto', 
-            'tipo_pagamento',
-            'tipo_parcela',
-            'parcela_valor',
-            'parcela_numero'
-          ]
+          attributes: [ 'name', 'valor', 'desconto', 'tipo_pagamento', 
+                        'tipo_parcela', 'parcela_valor', 'parcela_numero' ]
         }
       ] 
     });
@@ -91,7 +78,7 @@ async getProductDetailsId(req, res) {
   } catch (error) {
     return res.status(400).json(error)};
   },
-
+  // atualiza um produto
   async updateProductId(req, res) {
     try {
       let products = res
@@ -104,7 +91,7 @@ async getProductDetailsId(req, res) {
       return res.status(400).json(error);
     }
   },
-
+  // exclui um produto por Id
   async deleteProductId(req, res) {
     let result = {}
     try {

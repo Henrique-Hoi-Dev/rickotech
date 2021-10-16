@@ -4,13 +4,10 @@ class Service extends Model {
   static init(sequelize) {
     super.init(
       {
-        sales_id: Sequelize.INTEGER,
-        valor: Sequelize.DOUBLE,
-        desconto: Sequelize.DOUBLE,
-        tipo_pagamento: Sequelize.ENUM('AVISTA', 'PARCELADO'),
-        tipo_parcela: Sequelize.ENUM('PAGO', 'CARTAO-CREDITO', 'BOLETO'),
-        parcela_valor: Sequelize.DOUBLE,
-        parcela_numero: Sequelize.STRING,
+        financial_id: Sequelize.INTEGER,
+        name: Sequelize.DECIMAL,
+        valor: Sequelize.DECIMAL,
+        data_serviço: Sequelize.DATE
       },
       {
         sequelize,
@@ -20,7 +17,7 @@ class Service extends Model {
     return this;
   }
   static associate(models) {
-    this.belongsTo(models.Sales, { foreignKey: 'product_id', as: 'product' });
+    this.belongsTo(models.FinancialBox, { foreignKey: 'financial_id', as: 'financial' });
   }
 }
 
