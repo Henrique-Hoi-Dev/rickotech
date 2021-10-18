@@ -1,6 +1,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('files', {
+    return queryInterface.createTable('accounts', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -11,10 +11,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      path: {
-        type: Sequelize.STRING,
+      data_vencimento: {
+        type: Sequelize.DATE,
         allowNull: false,
-        unique: true,
+      },
+      status: {
+        type: Sequelize.ENUM,
+        values: ['pendente', 'cancelado', 'pago'],
+        defaultValue: 'pendente'
       },
       created_at: {
         type: Sequelize.DATE,
@@ -28,6 +32,6 @@ module.exports = {
   },
 
   down: (queryInterface) => {
-    return queryInterface.dropTable('files');
+    return queryInterface.dropTable('accounts');
   },
 };

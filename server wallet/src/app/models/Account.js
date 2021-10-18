@@ -16,10 +16,7 @@ class Account extends Model {
     return this;
   }
   static associate(models) {
-    this.hasMany(models.Portion, {
-      foreignKey: 'accounts_id',
-      as: 'parcela',
-    });
+    this.hasMany(models.Portion, { foreignKey: 'accounts_id', as: 'parcela' });
   }
 }
 

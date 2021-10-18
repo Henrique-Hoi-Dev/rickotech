@@ -18,10 +18,7 @@ class Portion extends Model {
     return this;
   }
   static associate(models) {
-    this.belongsTo(models.Account, {
-      foreignKey: 'accounts_id',
-      as: 'account',
-    });
+    this.belongsTo(models.Account, { foreignKey: 'accounts_id', as: 'account' });
   }
 }
 

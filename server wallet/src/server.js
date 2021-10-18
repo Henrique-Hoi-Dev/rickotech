@@ -1,4 +1,4 @@
 import app from './app';
 
-app.listen(3333);
-console.log('Rodando na porta:3333');
+app.listen(3434);
+console.log("server running",3434)
