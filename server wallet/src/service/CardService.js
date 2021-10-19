@@ -7,22 +7,18 @@ export default {
     let result = {}
     try {
       const accounts = await Portion.findAll();
-
       const valid = accounts.filter(function (result) {
         return result.dataValues;
       });
-
       const venci = valid.map(function (result) {
         const valor = parseInt(result.dataValues.valor);
-
         return valor;
       });
-
       const totalContas = venci.reduce((acumulado, x) => {
         return acumulado + x;
       });
       
-      result = {responseData: totalContas}      
+      result = {totalContas}      
       return result
     } catch (error) {
       return res.status(400).json(error)
@@ -33,24 +29,20 @@ export default {
     let result = {}
     try {
       const accounts = await Portion.findAll();
-  
       const valid = accounts.filter(function (result) {
         if (result.dataValues.pago == true) {
           return result.dataValues;
         }
       });
-  
       const venci = valid.map(function (result) {
         const valor = parseInt(result.dataValues.valor);
-  
         return valor;
       });
-  
       const totalPagas = venci.reduce((acumulado, x) => {
         return acumulado + x;
       });
   
-      result = {responseData: totalPagas}      
+      result = {totalPagas}      
       return result;
     } catch (error) {
       return res.status(400).json(error)
@@ -61,24 +53,20 @@ export default {
     let result = {}
     try {
       const accounts = await Portion.findAll();
-
       const valid = accounts.filter(function (result) {
         if (result.dataValues.pago == false) {
           return result.dataValues;
         }
       });
-
       const venci = valid.map(function (result) {
         const valor = parseInt(result.dataValues.valor);
-
         return valor;
       });
-
       const totalPendente = venci.reduce((acumulado, x) => {
         return acumulado + x;
       });
 
-      result = {responseData: totalPendente}      
+      result = {totalPendente}      
       return result
     } catch (error) {
       return res.status(400).json(error);
@@ -93,11 +81,7 @@ export default {
           {
             model: Portion,
             as: 'parcela',
-            attributes: [
-              'accounts_id',
-              'valor',
-              'data_vencimento',
-            ],
+            attributes: [ 'accounts_id', 'valor' ]
           },
         ],
       });
@@ -109,23 +93,19 @@ export default {
           return result.dataValues;
         }
       });
-
-      const contasVencidas = valid.map(function (result) {
-        const parValor = result.parcela.map(function (par) {
-          const valor = parseInt(par.dataValues.valor);
-          return valor
-        })
-        const total = parValor.reduce((acumulado, x) => {
-          return acumulado + x;
-        });
-        return total   
+      const contasVencidas = valid.map(function (par) {
+        const parcelas = par.dataValues.parcela;
+          const valoresParcelas = parcelas.map(function (valores) {
+            return valores.valor
+          })    
+          const parcela = parseInt(valoresParcelas);         
+          return parcela
       });
-      console.log(contasVencidas)
       const totalVenvidas = contasVencidas.reduce((acumulado, x) => {
         return acumulado + x;
       });
 
-      result = {responseData: totalVenvidas}      
+      result = {totalVenvidas}      
       return result
     } catch (error) {
       return res.status(400).json(error)

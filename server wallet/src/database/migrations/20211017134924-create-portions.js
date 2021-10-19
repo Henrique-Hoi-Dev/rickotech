@@ -15,7 +15,7 @@ module.exports = {
         onDelete: 'CASCADE',
       },
       valor: {
-        type: Sequelize.STRING,
+        type: Sequelize.DECIMAL,
         allowNull: false,
       },
       numero_parcela: {

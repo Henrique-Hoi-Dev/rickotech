@@ -5,7 +5,7 @@ class Portion extends Model {
     super.init(
       {
         accounts_id: Sequelize.INTEGER,
-        valor: Sequelize.STRING,
+        valor: Sequelize.DECIMAL,
         numero_parcela: Sequelize.DECIMAL,
         data_vencimento: Sequelize.DATE,
         pago: Sequelize.BOOLEAN,
