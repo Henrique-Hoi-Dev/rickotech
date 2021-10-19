@@ -1,19 +1,21 @@
+import * as Yup from 'yup';
 import Account from "../app/models/Account";
 import Portion from "../app/models/Portion";
+import httpStatus from 'http-status-codes';
 
 export default {
   // create uma nova parcela
   async storePortion(req, res) {
-    try {
-      let accounts_id = req;
-      let { valor, numero_parcela, data_vencimento, pago } = res;
+    let accounts_id = req.accounts_id;
+    let { valor, numero_parcela, data_vencimento, pago } = res;
 
+    try {
       const schema = Yup.object().shape({
-        valor: Yup.string().required(),
-        numero_parcela: Yup.string().required(),
+        valor: Yup.number().required(),
+        numero_parcela: Yup.number().required(),
       });
 
-      if (!(await schema.isValid(req.body))) {
+      if (!(await schema.isValid(res))) { 
         return res.status(400).json({ error: 'Complete todos os campos' });
       }
 
@@ -54,9 +56,9 @@ export default {
   },
   // busca conta por Id com todas as parcelas, com soma de todos os valores 
   async getPortionDetailsWithValouTotal(req, res) {
+    let id = req.accounts_id;
+    console.log(id)
     try {
-      let id = req;
-
       const portion = await Portion.findAndCountAll({
         where: { accounts_id: id },
         order: [['numero_parcela', 'ASC']],
@@ -77,16 +79,16 @@ export default {
       const total = venci.reduce((acumulado, x) => {
         return acumulado + x;
       });
-      return { portion, total };
+      return {portion, total};
     } catch (error) {
-      return res.status(400).json(error.message);
+      return res.status(400).json(error);
     }
   },
   // busca uma parcela por Id
   async getPortionDetailsId(req, res) {
-    try {
-      let id = req;
+    let id = req.id;
 
+    try {
       let parcela = await Portion.findByPk(id);
 
       return parcela;
@@ -96,10 +98,10 @@ export default {
   },
   // atualiza parcela por Id
   async updatePortionId(req, res) {
-    try {
-      let id = req;
-      let body = res
+    let id = req.accounts_id;
+    let body = res
 
+    try {
       const schema = Yup.object().shape({
         valor: Yup.string().required(),
       });
@@ -118,9 +120,10 @@ export default {
   },
   // excluir uma parcela por Id
   async deletePortionId(req, res) {
+    let id = req.id;
     let result = {}
-    try {
-      let id = req;
+
+    try { 
       const portion = await Portion.destroy({
         where: {
           id: id,
