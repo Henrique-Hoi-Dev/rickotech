@@ -4,9 +4,9 @@ class FinancialBox extends Model {
   static init(sequelize) {
     super.init(
       {
-        valor_sales_total: Sequelize.DECIMAL,
-        valor_service_total: Sequelize.DECIMAL,
-        valor_total: Sequelize.DECIMAL,
+        valor_sales_total: Sequelize.DOUBLE,
+        valor_service_total: Sequelize.DOUBLE,
+        valor_total: Sequelize.DOUBLE,
         open_caixa: Sequelize.DATE,
         close_caixa: Sequelize.DATE
       },

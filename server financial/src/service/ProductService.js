@@ -18,13 +18,13 @@ async storeProduct(req, res) {
       return res.status(400).json({ message: 'Falha na validação' });
     }
 
-    const ProductExist = await Product.findOne({
-      where: { name: product.name },
-    });
+    // const ProductExist = await Product.findOne({
+    //   where: { name: product.name },
+    // });
 
-    if (ProductExist) {
-      return res.status(400).json({ message: 'Esse Produto já existe.' });
-    }
+    // if (ProductExist) {
+    //   return res.status(400).json({ message: 'Esse Produto já existe.' });
+    // }
     const products = await Product.create(product);
 
     return products;
@@ -37,6 +37,9 @@ async storeProduct(req, res) {
 async getProductDetails(req, res) {
     try {
       const product = await Product.findAll({
+        attributes: [ 'status', 'name', 'valor', 'categoria', 'dia_semana',
+                      'horario', 'altura', 'largura', 'comprimento', 'peso',
+                      'codigo_barra', 'descricao' ],
         include: [
         {
           model: File,

@@ -8,22 +8,35 @@ export default  {
   async storeSales(req, res) {
     let sales = req
     let product_id = res.product_id
+    let financial_id = res.financial_id
+
     try {
       let { name, valor, desconto, tipo_pagamento, tipo_parcela, 
             parcela_valor, parcela_numero } = sales;
 
       const products = await Product.findByPk(product_id);
-
       if (!products) {
-        return res.status(400).json({ menssage: 'User not found' });
+        return res.status(401).json({ menssage: 'Product not found' });
       }
 
-      const saleses = await Sales.create({ product_id, name, valor, desconto, 
+      const SalesProductExist = await Sales.findOne({
+        where: { product_id: product_id },
+      });
+      if (SalesProductExist) {
+        return res.status(400).json({ message: 'Já existe uma venda.' });
+      }
+      
+      const financialBox = await FinancialBox.findByPk(financial_id);
+      if (!financialBox) {
+        return res.status(400).json({ menssage: 'Financial not found' });
+      }
+
+      const saleses = await Sales.create({ product_id, financial_id, name, valor, desconto, 
           tipo_pagamento, tipo_parcela, parcela_valor, parcela_numero });
 
       return saleses;
     } catch (error) {
-      return res.status(400).json(error.menssage);
+      return res.status(400).json(error);
     }
   },
   //busca todas as vendas, com os prudotos e caixa inclusos 

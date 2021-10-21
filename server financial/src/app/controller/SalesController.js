@@ -18,7 +18,7 @@ class SalesController {
       return res.status(200).send(response);
         
     } catch (error) {
-      return res.status(400).json(error);
+      return res.status(400).json({error: 'Erro no create uma venda'});
     }
   }
   async getSalesDetailsId(req, res) {

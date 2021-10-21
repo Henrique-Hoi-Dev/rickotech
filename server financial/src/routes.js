@@ -50,7 +50,7 @@ routes.get('/product/:id', ProductController.getProductDetailsId);
 routes.delete('/product/:id', ProductController.deleteProductId);
 
 //sales
-routes.post('/sales/:product_id', SalesController.storeSales);
+routes.post('/sales/:product_id/:financial_id', SalesController.storeSales);
 routes.get('/saleses', SalesController.getSalesDetails);
 routes.put('/sales/:id', SalesController.updateSalesId);
 routes.get('/sales/:id', SalesController.getSalesDetailsId);
@@ -65,6 +65,7 @@ routes.get('/serviceFinancial/:financial_id', ServiceController.getsServiceDetai
 
 //financialBox 
 routes.post('/financialBox/new', FinancialBoxController.storeFinancialBox);
+routes.put('/financialBox/:id', FinancialBoxController.updateFinancialBoxId);
 routes.get('/financialBoxs', FinancialBoxController.getsFinancialBoxDetails);
 routes.get('/financialBox/:id', FinancialBoxController.getsFinancialBoxDetailsId);
 routes.delete('/financialBox/:id', FinancialBoxController.deleteFinancialBoxId);

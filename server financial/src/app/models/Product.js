@@ -7,7 +7,7 @@ class Product extends Model {
         avatar_id: Sequelize.INTEGER,
         status: Sequelize.ENUM('EM-ESTOQUE', 'VENDIDO'),
         name: Sequelize.STRING,
-        valor: Sequelize.DECIMAL,
+        valor: Sequelize.DOUBLE,
         categoria: Sequelize.STRING,
         dia_semana: Sequelize.STRING,
         horario: Sequelize.STRING,

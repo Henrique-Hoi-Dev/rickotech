@@ -20,7 +20,7 @@ module.exports = {
         allowNull: false,
       },
       valor: {
-        type: Sequelize.DECIMAL,
+        type: Sequelize.DOUBLE,
         allowNull: false,
       },
       categoria: {

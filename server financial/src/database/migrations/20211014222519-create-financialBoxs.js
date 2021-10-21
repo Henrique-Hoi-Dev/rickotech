@@ -8,15 +8,15 @@ module.exports = {
         primaryKey: true,
       },
       valor_sales_total: {
-        type: Sequelize.DECIMAL,
+        type: Sequelize.DOUBLE,
         allowNull: false,
       },
       valor_service_total: {
-        type: Sequelize.DECIMAL,
+        type: Sequelize.DOUBLE,
         allowNull: false,
       },
       valor_total: {
-        type: Sequelize.DECIMAL,
+        type: Sequelize.DOUBLE,
         allowNull: false,
       },
       open_caixa: {
