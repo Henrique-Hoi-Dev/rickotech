@@ -34,7 +34,6 @@ export const Container = styled.div`
       td {
         max-height: 5px;
         border-bottom: 0.2rem solid #8945de;
-        border-radius: 0.8rem;
       }
     }
 
@@ -85,7 +84,9 @@ export const Container = styled.div`
     .avatar {
       width: 3.5rem;
       height: 3.5rem;
-      border-radius: 10%;
+      img {
+        border-radius: 10%; 
+      }  
     }
   }
 

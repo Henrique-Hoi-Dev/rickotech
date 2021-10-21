@@ -43,20 +43,23 @@ const ProductList = ({ productList, handlerRemoveProduct }) => {
           <table className="table-list">
             <thead>
               <tr className="table-title">
-                <td>Nome:</td>
-                <td>Preço:</td>
-                <td>Data:</td>
-                <td>Descrição:</td>
-                <td>Imagem</td>
+                <td>Nome</td>
+                <td>Valor</td>
+                <td>Data Registro</td>
+                <td>Categoria</td>
+                <td>Avatar</td>
+                <td>Editar</td>
+                <td>Excluir</td>
+                <td>Status</td>
               </tr>
             </thead>
             <tbody>
               {[].concat(productList).map((produto, i) => (
                 <tr key={i} value={produto.id}>
                   <td>{produto.name}</td>
-                  <td>{currencyFormat(produto.preco)}</td>
-                  <td>{moment(produto.createdAt).format('DD-MM-YYYY')}</td>
-                  <td>{produto.descricao}</td>
+                  <td>{currencyFormat(produto.valor)}</td>
+                  <td>{moment(produto.data_registro).format('DD-MM-YYYY')}</td>
+                  <td>{produto.categoria}</td>
                   <td className="avatar">
                     <img
                       src={

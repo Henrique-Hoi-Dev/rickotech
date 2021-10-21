@@ -27,12 +27,8 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      dia_semana: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      horario: {
-        type: Sequelize.STRING,
+      data_registro: {
+        type: Sequelize.DATE,
         allowNull: false,
       },
       altura: {
