@@ -12,7 +12,7 @@ import {
   resetFormulario,
 } from '~/store/modules/product/actions';
 
-import Header from '~/components/HeaderRecord';
+import Header from '~/components/HeaderListAndRegister';
 import AvatarInput from './Avatarinput';
 import { FcHighPriority } from 'react-icons/fc';
 import { Container } from './styles';
@@ -90,7 +90,7 @@ export default function RegistrationProduct() {
 
   return (
     <Container>
-      <Header />
+      <Header title="Registro de produtos"/>
       <div className="header-main">
         <Formik
           onSubmit={handleSubmit}

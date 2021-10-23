@@ -37,7 +37,7 @@ async storeProduct(req, res) {
 async getProductDetails(req, res) {
     try {
       const product = await Product.findAll({
-        attributes: [ 'status', 'name', 'valor', 'categoria','data_registro', 
+        attributes: [ 'id', 'status', 'name', 'valor', 'categoria','data_registro', 
                       'altura', 'largura', 'comprimento', 'peso',
                       'codigo_barra', 'descricao' ],
         include: [

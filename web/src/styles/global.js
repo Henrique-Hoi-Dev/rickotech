@@ -26,6 +26,12 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased !important;
     background-color: #4D4C4C;
 
+    .makeStyles-card-14 {
+      background: #333!important;
+    }
+    .makeStyles-cardTitle-10 {
+      color: #fff;
+    }
     .MuiMenuItem-root {
       &:hover {
         transform: scale(1.1);

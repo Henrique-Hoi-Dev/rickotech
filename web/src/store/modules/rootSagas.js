@@ -4,7 +4,8 @@ import auth from './auth/sagas';
 import user from './user/sagas';
 import product from './product/sagas';
 import venda from './venda/sagas';
+import account from './account/sagas';
 
 export default function* rootSaga() {
-  return yield all([auth, user, product, venda]);
+  return yield all([auth, user, product, venda, account]);
 }

@@ -4,9 +4,9 @@ import { persistReducer } from 'redux-persist';
 export default (reducers) => {
   const persistedReducer = persistReducer(
     {
-      key: 'RICKOTECH_API',
+      key: 'vendas',
       storage,
-      whitelist: ['auth', 'user', 'product', 'venda'],
+      whitelist: ['auth', 'user', 'product', 'venda', 'account'],
     },
     reducers
   );
