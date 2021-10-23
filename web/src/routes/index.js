@@ -7,9 +7,10 @@ import SignIn from '~/pages/SignIn';
 import SignUp from '~/pages/SignUp';
 import Profile from '~/pages/Profile';
 import Caixa from '~/pages/Caixa';
-import Venda from '~/pages/Venda';
+import Sales from '~/pages/Sales';
 import Dashboard from '~/pages/Dashboard';
 import ListProduct from '~/pages/ListProduct';
+import ListAccount from '~/pages/ListAccounts';
 import RegistrationProduct from '~/pages/RegistrationProduct';
 
 function Routes() {
@@ -20,9 +21,10 @@ function Routes() {
 
       <Route isPrivate path="/perfil" exact component={Profile} />
       <Route isPrivate path="/caixa" exact component={Caixa} />
-      <Route isPrivate path="/venda" exact component={Venda} />
+      <Route isPrivate path="/sales" exact component={Sales} />
       <Route isPrivate path="/dashboard" exact component={Dashboard} />
       <Route isPrivate path="/list" exact component={ListProduct} />
+      <Route isPrivate path="/listAccount" exact component={ListAccount} />
       <Route isPrivate path="/product" exact component={RegistrationProduct} />
       <Route
         exact
@@ -30,10 +32,7 @@ function Routes() {
         path="/product/:id"
         render={(props) => <RegistrationProduct {...props} />}
       />
-      <Route
-      exact
-      isPrivate
-      path="/venda/:id"/>
+      <Route exact isPrivate path="/venda/:id"/>
     </Switch>
   );
 }

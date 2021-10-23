@@ -3,9 +3,9 @@ import { connect, useDispatch } from 'react-redux';
 import * as moment from 'moment';
 
 import { Container } from './styles';
-import Header from '../../components/HeaderList';
-import { FcEmptyTrash, FcOk } from 'react-icons/fc';
-import { BiEditAlt } from 'react-icons/bi';
+import Header from '../../components/HeaderListAndRegister';
+import { FcEmptyTrash, FcSalesPerformance } from 'react-icons/fc';
+import { BiEdit } from 'react-icons/bi';
 
 import { Link } from 'react-router-dom';
 import {
@@ -37,7 +37,7 @@ const ProductList = ({ productList, handlerRemoveProduct }) => {
 
   return (
     <Container>
-      <Header />
+      <Header  title="Todos produtos"/>
       <div className="header-main">
         <form className="form-table">
           <table className="table-list">
@@ -47,10 +47,11 @@ const ProductList = ({ productList, handlerRemoveProduct }) => {
                 <td>Valor</td>
                 <td>Data Registro</td>
                 <td>Categoria</td>
+                <td>status</td>
                 <td>Avatar</td>
                 <td>Editar</td>
                 <td>Excluir</td>
-                <td>Status</td>
+                <td>Vender</td>
               </tr>
             </thead>
             <tbody>
@@ -60,6 +61,7 @@ const ProductList = ({ productList, handlerRemoveProduct }) => {
                   <td>{currencyFormat(produto.valor)}</td>
                   <td>{moment(produto.data_registro).format('DD-MM-YYYY')}</td>
                   <td>{produto.categoria}</td>
+                  <td>{produto.status}</td>
                   <td className="avatar">
                     <img
                       src={
@@ -74,7 +76,7 @@ const ProductList = ({ productList, handlerRemoveProduct }) => {
                   <td>
                     <button>
                       <Link to={`/product/${produto.id}`}>
-                        <BiEditAlt />
+                        <BiEdit />
                       </Link>
                     </button>
                   </td>
@@ -88,7 +90,7 @@ const ProductList = ({ productList, handlerRemoveProduct }) => {
                   <td>
                     <button >
                       <Link to={`/venda/${produto.id}`}>
-                        < FcOk/>
+                        < FcSalesPerformance/>
                       </Link>
                     </button>
                   </td>

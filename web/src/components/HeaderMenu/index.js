@@ -55,7 +55,7 @@ export default function Home() {
          <AttachMoneyIcon /> <Link to="/caixa"> Caixa </Link> 
         </ListItem >
         <ListItem >
-         <PointOfSaleIcon /> <Link to="/venda"> Fazer uma venda </Link> 
+         <PointOfSaleIcon /> <Link to="/sales"> Fazer uma venda </Link> 
         </ListItem >
         <ListItem >
          <ProductionQuantityLimitsIcon /> <Link to="/product">Registro de produto</Link> 
@@ -67,7 +67,7 @@ export default function Home() {
       <Divider />
       <List>
         <ListItem >
-         <ListAltIcon /> <Link to="#">Todos os dividendos</Link> 
+         <ListAltIcon /> <Link to="/listAccount">Todos os dividendos</Link> 
         </ListItem >
         <ListItem >
          <ListAltIcon /> <Link to="#">Lista pagos </Link> 

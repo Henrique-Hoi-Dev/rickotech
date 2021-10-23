@@ -12,7 +12,7 @@ import {
 } from '~/store/modules/venda/actions';
 
 import { Container } from './styles';
-import HeaderList from '~/components/HeaderVenda';
+import Header from '~/components/HeaderListAndRegister';
 
 const tipoParcelamento = [
   { id: 'Cartão de credito', title: 'Cartão de credito' },
@@ -61,7 +61,7 @@ const handleReset = (resetForm) => {
 
   return (
     <>
-    <HeaderList/>
+    <Header title="Venda"/>
       <Container>  
         <Form initialData={form} onSubmit={handleSubmit}>
           <div className="statos">
