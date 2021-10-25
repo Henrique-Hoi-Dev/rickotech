@@ -15,8 +15,11 @@ routes.post('/account/new', AccountController.storeAccount);
 routes.put('/account/:id', AccountController.updateAccountId);
 routes.get('/account/:id', AccountController.getAccountDetailsId);
 routes.get('/accounts', AccountController.getAccountDetails);
-routes.get('/vencidas', AccountController.getAccountOverdueDetails);
+routes.get('/overdues', AccountController.getAccountOverdueDetails);
 routes.delete('/account/:id', AccountController.deleteAccountId);
+routes.get('/paidAccount', AccountController.getAccountPaidDetails);
+routes.get('/pendingAccount', AccountController.getAccountPendingDetails);
+routes.get('/cancelAccount', AccountController.getAccountCancelDetails);
 
 // rotas de parcelas
 routes.post('/account/:accounts_id/portion', PortionController.storePortion);

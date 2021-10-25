@@ -34,7 +34,7 @@ class UserController {
   async updateUserId(req, res) {
     let response;
     try {
-      response = await UserService.updateUserId(req.body);
+      response = await UserService.updateUserId(req.body, req.params);
       return res.status(200).send(response);
         
     } catch (error) {

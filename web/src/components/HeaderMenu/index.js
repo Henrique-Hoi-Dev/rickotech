@@ -58,28 +58,28 @@ export default function Home() {
          <PointOfSaleIcon /> <Link to="/sales"> Fazer uma venda </Link> 
         </ListItem >
         <ListItem >
-         <ProductionQuantityLimitsIcon /> <Link to="/product">Registro de produto</Link> 
+         <ProductionQuantityLimitsIcon /> <Link to="/registreProduct">Registro de produto</Link> 
         </ListItem >
         <ListItem >
-         <ListAltIcon /> <Link to="/list"> Lista produtos </Link> 
+         <ListAltIcon /> <Link to="/listProducts"> Lista produtos </Link> 
         </ListItem >
       </List>
       <Divider />
       <List>
         <ListItem >
-         <ListAltIcon /> <Link to="/listAccount">Todos os dividendos</Link> 
+         <ListAltIcon /> <Link to="/listTodasAccounts">Todos os dividendos</Link> 
         </ListItem >
         <ListItem >
-         <ListAltIcon /> <Link to="#">Lista pagos </Link> 
+         <ListAltIcon /> <Link to="/listPaidAccounts">Lista pagos</Link> 
         </ListItem >
         <ListItem >
-         <ListAltIcon /> <Link to="#">Lista pendentes </Link> 
+         <ListAltIcon /> <Link to="/listPendingAccouts">Lista pendentes</Link> 
         </ListItem >
         <ListItem >
-         <ListAltIcon /> <Link to="#">Lista cancelados</Link> 
+         <ListAltIcon /> <Link to="listaCancelAccounts">Lista cancelados</Link> 
         </ListItem >
         <ListItem >
-         <ListAltIcon /> <Link to="#">Lista vencidos</Link> 
+         <ListAltIcon /> <Link to="/listaLateAccounts">Lista vencidos</Link> 
         </ListItem >
         <ListItem >
          <ProductionQuantityLimitsIcon /> <Link to="#">Registro de dividendo</Link> 
@@ -195,7 +195,7 @@ export default function Home() {
               >
                 <MenuItem>
                   <Avatar />
-                  <Link className={classes.root} to="/perfil">
+                  <Link className={classes.root} to={`/perfil/${profile.id}`}>
                     Profile
                   </Link>
                 </MenuItem>

@@ -5,9 +5,13 @@ import history from '~/services/history';
 import api from '~/services/api2';
 
 import {
-  accountFailure,
   findAllAccountSuccess,
+  findAllPaidAccountSuccess,
+  findAllPendingAccountSuccess,
+  findAllCancelAccountSuccess,
+  findAllLateAccountSuccess,
   getByIdAccountSuccess,
+  accountFailure
 } from './actions';
 
 export function* createAccount({ payload }) {
@@ -32,9 +36,53 @@ export function* findAllAccount() {
   }
 }
 
+export function* findAllAccountPaid() {
+  try {
+    const response = yield call(api.get, '/paidAccount');
+
+    yield put(findAllPaidAccountSuccess(response.data));
+  } catch (err) {
+    toast.error('Error searching account check data.');
+    yield put(accountFailure());
+  }
+}
+
+export function* findAllAccountPending() {
+  try {
+    const response = yield call(api.get, '/pendingAccount');
+
+    yield put(findAllPendingAccountSuccess(response.data));
+  } catch (err) {
+    toast.error('Error searching account check data.');
+    yield put(accountFailure());
+  }
+}
+
+export function* findAllAccountOverdue() {
+  try {
+    const response = yield call(api.get, '/overdues');
+
+    yield put(findAllLateAccountSuccess(response.data));
+  } catch (err) {
+    toast.error('Error searching account check data.');
+    yield put(accountFailure());
+  }
+}
+
+export function* findAllAccountCancel() {
+  try {
+    const response = yield call(api.get, '/cancelAccount');
+
+    yield put(findAllCancelAccountSuccess(response.data));
+  } catch (err) {
+    toast.error('Error searching account check data.');
+    yield put(accountFailure());
+  }
+}
+
 export function* getByIdAccount({ payload }) {
   try {
-    const response = yield call(api.get, `/products/${payload.data}`);
+    const response = yield call(api.get, `/account/${payload.data}`);
 
     yield put(getByIdAccountSuccess(response.data));
   } catch (err) {
@@ -45,9 +93,9 @@ export function* getByIdAccount({ payload }) {
 
 export function* UpdateAccount({ payload }) {
   try {
-    yield call(api.put, `/products/${payload.data.id}`, payload.data.values);
+    yield call(api.put, `/account/${payload.data.id}`, payload.data.values);
 
-    const response = yield call(api.get, `/products`);
+    const response = yield call(api.get, `/accounts`);
 
     yield put(findAllAccountSuccess(response.data));
 
@@ -76,7 +124,11 @@ export function* deleteAccount({ payload }) {
 
 export default all([
   takeLatest('@account/CREATE_ACCOUNT_REQUEST', createAccount),
-  takeLatest('@account/FINDALL_ACCOUNT_REQUEST', findAllAccount),
+  takeLatest('@account/FIND_ALL_ACCOUNT_REQUEST', findAllAccount),
+  takeLatest('@account/FIND_ALL_PAID_ACCOUNT_REQUEST', findAllAccountPaid),
+  takeLatest('@account/FIND_ALL_PENDING_ACCOUNT_REQUEST', findAllAccountPending),
+  takeLatest('@account/FIND_ALL_LATE_ACCOUNT_REQUEST', findAllAccountOverdue),
+  takeLatest('@account/FIND_ALL_CANCEL_ACCOUNT_REQUEST', findAllAccountCancel),
   takeLatest('@account/GET_BYID_ACCOUNT_REQUEST', getByIdAccount),
   takeLatest('@account/UPDATE_ACCOUNT_REQUEST', UpdateAccount),
   takeLatest('@account/DELETE_ACCOUNT_REQUEST', deleteAccount),

@@ -9,7 +9,7 @@ import {
   getByIdVendaRequest,
   UpdateVendaRequest,
   resetFormulario,
-} from '~/store/modules/venda/actions';
+} from '~/store/modules/sales/actions';
 
 import { Container } from './styles';
 import Header from '~/components/HeaderListAndRegister';
