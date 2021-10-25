@@ -35,17 +35,6 @@ class AccountController {
       return res.status(400).json({error: 'Erro na busca'});
     }
   }
-  // busca todas as contas vencidas
-  async getAccountOverdueDetails(req, res) {
-    let response;      
-    try {
-      response = await AccoutService.getAccountOverdueDetails();
-      return res.status(200).send(response);
-        
-    } catch (error) {
-      return res.status(400).json({error: 'Erro na busca'});
-    }
-  }
   // atualiza conta por Id
   async updateAccountId(req, res) {
     let response;      
@@ -66,6 +55,50 @@ class AccountController {
         
     } catch (error) {
       return res.status(400).json({error: 'Erro no excluir'});
+    }
+  }
+  // busca todas as contas vencidas
+  async getAccountOverdueDetails(req, res) {
+    let response;      
+    try {
+      response = await AccoutService.getAccountOverdueDetails();
+      return res.status(200).send(response);
+        
+    } catch (error) {
+      return res.status(400).json({error: 'Erro na busca'});
+    }
+  }
+  // busca todas as contas pagas
+  async getAccountPaidDetails(req, res) {
+    let response;      
+    try {
+      response = await AccoutService.getAccountPaidDetails();
+      return res.status(200).send(response);
+        
+    } catch (error) {
+      return res.status(400).json({error: 'Erro na busca'});
+    }
+  }
+  // busca todas as contas pendentes
+  async getAccountPendingDetails(req, res) {
+    let response;      
+    try {
+      response = await AccoutService.getAccountPendingDetails();
+      return res.status(200).send(response);
+        
+    } catch (error) {
+      return res.status(400).json({error: 'Erro na busca'});
+    }
+  }
+  // busca todas as contas canceladas
+  async getAccountCancelDetails(req, res) {
+    let response;      
+    try {
+      response = await AccoutService.getAccountCancelDetails();
+      return res.status(200).send(response);
+        
+    } catch (error) {
+      return res.status(400).json({error: 'Erro na busca'});
     }
   }
 }

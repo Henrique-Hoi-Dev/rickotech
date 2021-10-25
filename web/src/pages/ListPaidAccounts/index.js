@@ -8,16 +8,16 @@ import { Container } from './styles';
 import Header from '../../components/HeaderListAndRegister';
 import { Link } from 'react-router-dom';
 import {
-  findAllAccountRequest,
+  findAllPaidAccountRequest,
   deleteAccountRequest,
 } from '../../store/modules/account/actions';
 
-const AccountList = ({ accountList, handlerRemoveAccount }) => {
+const ListPaidAccounts = ({ accountList, handlerRemoveAccount }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     function onLoad() {
-      dispatch(findAllAccountRequest());
+      dispatch(findAllPaidAccountRequest());
     }
     onLoad();
   }, [dispatch]);
@@ -36,7 +36,7 @@ const AccountList = ({ accountList, handlerRemoveAccount }) => {
 
   return (
     <Container>
-      <Header title="Todas account"/>
+      <Header title="Todas dividas pagas"/>
       <div className="header-main">
         <form className="form-table">
           <table className="table-list">
@@ -108,4 +108,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountList);
+export default connect(mapStateToProps, mapDispatchToProps)(ListPaidAccounts);

@@ -89,8 +89,8 @@ export default {
   // atualiza usuário
   async updateUserId(req, res) {    
     try {
-      // let userId = res.id
       let users = req
+      let userId = res.id
 
       const schema = Yup.object().shape({
           name: Yup.string(),
@@ -112,7 +112,7 @@ export default {
   
       const { email, oldPassword } = users ;
       
-      const user = await User.findByPk(users.id);
+      const user = await User.findByPk(userId);
       
       if (email !== user.dataValues.email) {
         const userExist = await User.findOne({ where: { email } });
@@ -128,7 +128,7 @@ export default {
       
       await user.update(users);
 
-      const result = await User.findByPk(users.id, {
+      const result = await User.findByPk(userId, {
         attributes: ['id', 'name', 'email', 'cargo', 'cpf', 'data_nascimento' ],
         include: [
           {

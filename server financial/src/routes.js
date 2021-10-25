@@ -25,7 +25,7 @@ routes.post('/users/authenticate', SessionController.storeSession);
 routes.use(authMiddleware);
 
 //users
-routes.put('/user', UserController.updateUserId);
+routes.put('/user/:id', UserController.updateUserId);
 routes.get('/users', UserController.getUserDetails);
 routes.get('/user/:id', UserController.getUserDetailsId);
 routes.delete('/user/:id', UserController.deleteUserId);
