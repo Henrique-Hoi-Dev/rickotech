@@ -12,7 +12,7 @@ import { Container } from './styles';
 export default function Profile() {
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.user.profile);
-  
+
   function handleSubmit(data) {
     dispatch(updateProfileRequest(data, profile.id));
   }

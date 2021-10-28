@@ -4,17 +4,17 @@ const INITIAL_STATE = {
   productList: [],
   form: {
     id: undefined,
+    status: '',
     name: '',
-    categoria: 'celular',
+    categoria: '',
     altura: '',
     largura: '',
     comprimento: '',
-    codigo_de_barra: '',
+    codigo_barra: '',
     peso: '',
-    preco: '',
+    valor: '',
     descricao: '',
-    dia_da_semana: 'domingo',
-    horario: '00:00',
+    data_registro: '',
   },
 };
 
@@ -24,17 +24,17 @@ export default function product(state = INITIAL_STATE, action) {
       case '@product/RESET_FORM': {
         draft.form = {
           id: undefined,
+          status: '',
           name: '',
-          categoria: 'calular',
+          categoria: '',
           altura: '',
           largura: '',
           comprimento: '',
-          codigo_de_barra: '',
+          codigo_barra: '',
           peso: '',
-          preco: '',
+          valor: '',
           descricao: '',
-          dia_da_semana: 'domingo',
-          horario: '00:00',
+          data_registro: '',
         };
         break;
       }

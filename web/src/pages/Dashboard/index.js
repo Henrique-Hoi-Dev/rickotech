@@ -3,15 +3,12 @@ import ChartistGraph from 'react-chartist';
 
 import { makeStyles } from '@material-ui/core/styles';
 // @material-ui/icons
-import AllInboxIcon from '@material-ui/icons/AllInbox';
-import AirplayIcon from '@material-ui/icons/Airplay';
 import DateRange from '@material-ui/icons/DateRange';
 import LocalOffer from '@material-ui/icons/LocalOffer';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import Update from '@material-ui/icons/Update';
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import AccessTime from '@material-ui/icons/AccessTime';
-import Accessibility from '@material-ui/icons/Accessibility';
 
 // core components
 import GridItem from 'components/Grid/GridItem.js';
@@ -43,16 +40,14 @@ export default function Dashboard() {
           <Card>
             <CardHeader color="warning" stats icon>
               <CardIcon color="warning">
-                <AirplayIcon />
+                <AttachMoneyIcon />
               </CardIcon>
-              <p className={classes.cardCategory}>Espaço livre</p>
-              <h3 className={classes.cardTitle}>
-                49/50 <small>GB</small>
-              </h3>
+              <p className={classes.cardCategory}>Valor total</p>
+              <h3 className={classes.cardTitle}>$34,245</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
-                <DateRange />
+                <AttachMoneyIcon />
                 Últimas 24 Horas
               </div>
             </CardFooter>
@@ -79,7 +74,7 @@ export default function Dashboard() {
           <Card>
             <CardHeader color="danger" stats icon>
               <CardIcon color="danger">
-                <AllInboxIcon />
+                <AttachMoneyIcon />
               </CardIcon>
               <p className={classes.cardCategory}>Total Produtos</p>
               <h3 className={classes.cardTitle}>75</h3>
@@ -96,7 +91,7 @@ export default function Dashboard() {
           <Card>
             <CardHeader color="info" stats icon>
               <CardIcon color="info">
-                <Accessibility />
+                <AttachMoneyIcon />
               </CardIcon>
               <p className={classes.cardCategory}>Pessoas registradas </p>
               <h3 className={classes.cardTitle}>+245</h3>

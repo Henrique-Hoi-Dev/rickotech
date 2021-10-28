@@ -24,10 +24,10 @@ const tipoPagamento = [
   { id: 'Parcelado', title: 'Parcelado' },
 ];
 
-export default function Venda() {
+export default function Sales() {
 const dispatch = useDispatch();
 const { id } = useParams();
-const { form } = useSelector((state) => state.venda);
+const { form } = useSelector((state) => state.sales);
 
   useEffect(() => {
     if (id) {
@@ -38,7 +38,6 @@ const { form } = useSelector((state) => state.venda);
   }, [id, dispatch]);
   
 const handleSubmit = async (values, { resetForm }) => {
-  console.log(values)
   try {
     let body = JSON.parse(JSON.stringify(values));
 

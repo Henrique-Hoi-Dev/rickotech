@@ -33,7 +33,7 @@ function Routes() {
       <Route isPrivate path="/listaCancelAccounts" exact component={ListCancelAccounts} />
       <Route isPrivate path="/listaLateAccounts" exact component={ListLateAccounts} />
       <Route isPrivate path="/registreProduct" exact component={RegistrationProduct} />
-      <Route isPrivate path="/listProducts" exact component={ListProduct} />
+      <Route isPrivate path="/listProducts" exact component={(props) => <ListProduct {...props} />} />
       <Route
         exact
         isPrivate

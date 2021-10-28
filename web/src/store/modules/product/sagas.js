@@ -11,6 +11,7 @@ import {
 } from './actions';
 
 export function* createProduct({ payload }) {
+  console.log(payload)
   try {
     yield call(api.post, 'products/new', payload);
 
@@ -21,7 +22,7 @@ export function* createProduct({ payload }) {
   }
 }
 
-export function* findAllProduct({ payload }) {
+export function* findAllProduct() {
   try {
     const response = yield call(api.get, `/products`);
 
@@ -34,7 +35,7 @@ export function* findAllProduct({ payload }) {
 
 export function* getByIdProduct({ payload }) {
   try {
-    const response = yield call(api.get, `/products/${payload.data}`);
+    const response = yield call(api.get, `/product/${payload.data}`);
 
     yield put(getByIdProductSuccess(response.data));
   } catch (err) {
@@ -45,14 +46,14 @@ export function* getByIdProduct({ payload }) {
 
 export function* UpdateProduct({ payload }) {
   try {
-    yield call(api.put, `/products/${payload.data.id}`, payload.data.values);
+    yield call(api.put, `/product/${payload.data.id}`, payload.data.values);
 
     const response = yield call(api.get, `/products`);
 
     yield put(findAllProductSuccess(response.data));
 
     toast.success('Editado com sucesso.');
-    history.push('/list');
+    history.push('/listProducts');
   } catch (err) {
     toast.error('Error editing products checking data.');
     yield put(productFailure());
@@ -61,7 +62,7 @@ export function* UpdateProduct({ payload }) {
 
 export function* deleteProduct({ payload }) {
   try {
-    yield call(api.delete, `/products/${payload.data}`);
+    yield call(api.delete, `/product/${payload.data}`);
 
     const response = yield call(api.get, `/products`);
 

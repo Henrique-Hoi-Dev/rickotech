@@ -114,7 +114,6 @@ export function* deleteAccount({ payload }) {
     const response = yield call(api.get, '/accounts');
 
     yield put(findAllAccountSuccess(response.data));
-
     toast.success('Produto deletado');
   } catch (err) {
     toast.error('Erro em excluir produto');

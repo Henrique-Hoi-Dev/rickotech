@@ -3,7 +3,60 @@ import { toast } from 'react-toastify';
 
 import api from '~/services/api';
 
-import { updateProfileSuccess } from './actions';
+import { updateProfileSuccess, updateAdressSuccess, getByIdUserSuccess, adressFailure } from './actions';
+
+export function* createAdress({ payload }) {
+  const {
+    cep,
+    logradouro,
+    complemento,
+    numero,
+    bairro,
+    cidade,
+    uf
+  } = payload.values;
+  const adress = {
+    cep,
+    logradouro,
+    complemento,
+    numero,
+    bairro,
+    cidade,
+    uf
+  };
+  try {
+    yield call(api.post, `/adress/${payload.id}`, adress);
+
+    toast.success('Endereço salvo com sucesso.');
+  } catch (err) {
+    yield put(adressFailure());
+    toast.error('Error em salvar endereço.');
+  }
+}
+
+export function* getByIdUser({ payload }) {
+  try {
+    const response = yield call(api.get, `/user/${payload.id}`);
+
+    yield put(getByIdUserSuccess(response.data));
+  } catch (err) {
+    toast.error('Error searching user check data.');
+    yield put(adressFailure());
+  }
+}
+
+export function* updateAdress({ payload }) {
+  try {
+    const response = yield call(api.put, `/adress/${payload.id}`, payload.data);
+
+    yield put(updateAdressSuccess(response.data));
+
+    toast.success('Endereço atualizado com sucesso!');
+  } catch (err) {
+    toast.error('Error atualizado endereço.');
+    yield put(adressFailure());
+  }
+}
 
 export function* updateProfile({ payload }) {
   try {
@@ -36,4 +89,8 @@ export function* updateProfile({ payload }) {
   }
 }
 
-export default all([takeLatest('@user/UPDATE_PROFILE_REQUEST', updateProfile)]);
+export default all([
+  takeLatest('@user/UPDATE_PROFILE_REQUEST', updateProfile),
+  takeLatest('@user/UPDATE_ADRESS_REQUEST', updateAdress),
+  takeLatest('@user/CREATE_ADRESS_REQUEST', createAdress)
+]);

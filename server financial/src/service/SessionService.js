@@ -33,7 +33,7 @@ export default {
               {
                 model: Adress,
                 as: 'adress',
-                attributes:  [ 'cep', 'logradouro', 'complemento', 
+                attributes:  [ 'id', 'cep', 'logradouro', 'complemento', 
                                'numero', 'bairro', 'cidade', 'uf' ],
               }
             ],

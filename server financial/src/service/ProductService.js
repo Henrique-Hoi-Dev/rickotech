@@ -18,13 +18,6 @@ async storeProduct(req, res) {
       return res.status(400).json({ message: 'Falha na validação' });
     }
 
-    // const ProductExist = await Product.findOne({
-    //   where: { name: product.name },
-    // });
-
-    // if (ProductExist) {
-    //   return res.status(400).json({ message: 'Esse Produto já existe.' });
-    // }
     const products = await Product.create(product);
 
     return products;
@@ -44,12 +37,12 @@ async getProductDetails(req, res) {
         {
           model: File,
           as: 'avatar',
-          attributes: [ 'url', 'id' ]
+          attributes: [ 'url', 'id', 'path' ]
         },
         {
           model: Sales,
           as: 'sales',  
-          attributes: [ 'name', 'valor', 'desconto', 'tipo_pagamento', 
+          attributes: [ 'id', 'name', 'valor', 'desconto', 'tipo_pagamento', 
                         'tipo_parcela', 'parcela_valor', 'parcela_numero' ]
         }
       ]  
@@ -67,7 +60,7 @@ async getProductDetailsId(req, res) {
         {
           model: File,
           as: 'avatar',
-          attributes: [ 'url', 'id' ]
+          attributes: [ 'url', 'id', 'path' ]
         },
         {
           model: Sales,
