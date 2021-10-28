@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   max-width: 600px;
@@ -62,5 +63,22 @@ export const Container = styled.div`
     height: 1px;
     background: rgba(255, 255, 255, 0.2);
     margin: 10px 0 20px;
+  }
+
+  .adresses {
+    width: 200px;
+    margin-left: 5px;
+    height: 44px;
+    background: #333;
+    color: #9c98a6;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background 0.2s;
+
+    &:hover {
+      background: ${darken(0.03, '#333')};
+    }
   }
 `;

@@ -2,9 +2,20 @@ import React from 'react';
 import { Form, Input, Select } from '@rocketseat/unform';
 
 import { Container } from './styles';
-// const adress = useSelector((state) => state.product.form);
+import { useDispatch, useSelector } from 'react-redux';
+import { createAdressRequest, updateAdressRequest } from '~/store/modules/user/actions';
 
-export default function adress() {
+export default function Adress() {
+  const dispatch = useDispatch();
+  const infos = useSelector((state) => state.user.profile);
+  const id = infos.id
+
+  function handleSubmit(data) {
+    dispatch(createAdressRequest(data, id));
+  }
+  function handleUpdate(data) {
+    dispatch(updateAdressRequest(data, id));
+  }
 
   const estados = [
     { id: 'AC', title: 'Acre' },
@@ -57,7 +68,7 @@ export default function adress() {
  return (
    <Container>
     <h2>Endereço</h2>
-     <Form initialData={adress}>
+     <Form initialData={infos.adress} onSubmit={handleSubmit}>
       <Input
         type="text"
         name="cep"
@@ -69,7 +80,11 @@ export default function adress() {
       <Input type="text" name="numero" placeholder="Número" />
       <Input type="text" name="bairro" placeholder="Bairro" />
       <Input type="text" name="cidade" placeholder="Cidade" />
-      <Select options={estados} name="uf" placeholder="UF" /> 
+      <Select options={estados} name="uf" placeholder="UF" />
+      <div className="but">
+        <button className="adresses" type="submit">Adicionar endereço</button>
+        <button className="adresses" onClick={(e) => handleUpdate(e)}>Atualizar endereço</button>
+      </div> 
      </Form>
    </Container>
   ); 

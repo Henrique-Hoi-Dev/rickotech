@@ -22,15 +22,14 @@ const schema = Yup.object().shape({
     .required('Este compo é obrigatório.')
     .max(100, 'No máximo 100 caracteres'),
   categoria: Yup.string().required('Este compo é obrigatório.'),
-  altura: Yup.number().required('Este compo é obrigatório.'),
-  largura: Yup.number().required('Este compo é obrigatório.'),
-  comprimento: Yup.number().required('Este compo é obrigatório.'),
-  codigo_de_barra: Yup.number().required('Este compo é obrigatório.'),
-  peso: Yup.number().required('Este compo é obrigatório.'),
-  preco: Yup.number().required('Este compo é obrigatório.'),
+  altura: Yup.string().required('Este compo é obrigatório.'),
+  largura: Yup.string().required('Este compo é obrigatório.'),
+  comprimento: Yup.string().required('Este compo é obrigatório.'),
+  codigo_barra: Yup.string().required('Este compo é obrigatório.'),
+  peso: Yup.string().required('Este compo é obrigatório.'),
+  valor: Yup.number().required('Este compo é obrigatório.'),
   descricao: Yup.string().required('Este compo é obrigatório.'),
-  dia_da_semana: Yup.string().required('Este compo é obrigatório.'),
-  horario: Yup.string().required('Horário é obrigatório.'),
+  data_registro: Yup.date().required('Data é obrigatório.'),
 });
 
 export default function RegistrationProduct() {
@@ -109,15 +108,15 @@ export default function RegistrationProduct() {
                     <Field name="name" type="text" placeholder="Nome Produto" />
                     <span>{formProps.errors.name}</span>
                     <label htmlFor="altura">Altura(cm)</label>
-                    <Field name="altura" type="number" placeholder="Altura" />
+                    <Field name="altura" type="text" placeholder="Altura" />
                     <span>{formProps.errors.altura}</span>
                     <label htmlFor="largura">Largura(cm)</label>
-                    <Field name="largura" type="number" placeholder="Largura" />
+                    <Field name="largura" type="text" placeholder="Largura" />
                     <span>{formProps.errors.largura}</span>
                     <label htmlFor="comprimento">Comprimento(cm)</label>
                     <Field
                       name="comprimento"
-                      type="number"
+                      type="text"
                       placeholder="Comprimento"
                     />
                     <span>{formProps.errors.comprimento}</span>
@@ -125,18 +124,18 @@ export default function RegistrationProduct() {
 
                   <div className="campo3">
                     <label htmlFor="peso">Peso do produto(kg)</label>
-                    <Field name="peso" type="number" placeholder="Peso(kg)" />
+                    <Field name="peso" type="text" placeholder="Peso(kg)" />
                     <span>{formProps.errors.peso}</span>
 
-                    <label htmlFor="preco">Preço($)</label>
+                    <label htmlFor="valor">Preço($)</label>
                     <Field
-                      name="preco"
-                      type="text"
+                      name="valor"
+                      type="number"
                       placeholder="Preço($)"
                       onkeyup={currencyFormat}
                     />
 
-                    <span>{formProps.errors.preco}</span>
+                    <span>{formProps.errors.valor}</span>
                     <ul>
                       <AvatarInput name="avatar_id" />
                     </ul>
@@ -144,39 +143,37 @@ export default function RegistrationProduct() {
 
                   <div className="campo4">
                     <label htmlFor="categoria">Categoria</label>
-                    <Field component="select" id="location" name="categoria">
-                      <option value="celular">Celular</option>
-                      <option value="tvs">Tvs</option>
-                      <option value="notebook">Notebook</option>
-                      <option value="acessorios">Acessórios</option>
-                    </Field>
+                    <Field 
+                      type="text" 
+                      placeholder="Categoria" 
+                      name="categoria"
+                    />
+                    <span>{formProps.errors.categoria}</span>
 
-                    <label htmlFor="dia_da_semana">Dia da semana</label>
+                    <label htmlFor="data_registro">Data do registro</label>
+                    <Field
+                      placeholder="Data do registro"
+                      type="date"
+                      name="data_registro"
+                    />
+                    <span>{formProps.errors.data_registro}</span>
+                    <label htmlFor="status">Satus compra</label>
                     <Field
                       component="select"
                       id="location"
-                      name="dia_da_semana"
+                      name="status"
                     >
-                      <option value="domingo">Domingo</option>
-                      <option value="segunda-feira">Segunda-feira</option>
-                      <option value="terça-feira">Terça-feira</option>
-                      <option value="quarta-feira">Quarta-feira</option>
-                      <option value="quinta-feira">Quinta-feira</option>
-                      <option value="sexta-feira">Sexta-feira</option>
-                      <option value="sabado">Sábado</option>
-                    </Field>
+                      <option value="EM-ESTOQUE">Em estoque</option>
+                      <option value="VENDIDO">Vendido</option>
+                    </Field>                    
 
-                    <label htmlFor="horario">Horário</label>
-                    <Field name="horario" type="time" />
-                    <span>{formProps.errors.horario}</span>
-
-                    <label htmlFor="codigo_de_barra">Código de barra</label>
+                    <label htmlFor="codigo_barra">Código de barra</label>
                     <Field
-                      name="codigo_de_barra"
-                      type="number"
+                      name="codigo_barra"
+                      type="text"
                       placeholder="Código de barras"
                     />
-                    <span>{formProps.errors.codigo_de_barra}</span>
+                    <span>{formProps.errors.codigo_barra}</span>
                   </div>
 
                   <div className="campo5">

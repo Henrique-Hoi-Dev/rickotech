@@ -49,19 +49,19 @@ export default function Home() {
     >
       <List>
         <ListItem >
-         <DashboardIcon /> <Link to="/dashboard"> Dashboard </Link> 
+         <DashboardIcon /> <Link to="/dashboard">Dashboard</Link> 
         </ListItem >
         <ListItem >
-         <AttachMoneyIcon /> <Link to="/caixa"> Caixa </Link> 
+         <AttachMoneyIcon /> <Link to="/caixa">Caixa</Link> 
         </ListItem >
         <ListItem >
-         <PointOfSaleIcon /> <Link to="/sales"> Fazer uma venda </Link> 
+         <PointOfSaleIcon /> <Link to="/sales">Fazer venda</Link> 
         </ListItem >
         <ListItem >
-         <ProductionQuantityLimitsIcon /> <Link to="/registreProduct">Registro de produto</Link> 
+         <ProductionQuantityLimitsIcon /> <Link to="/registreProduct">Registro produto</Link> 
         </ListItem >
         <ListItem >
-         <ListAltIcon /> <Link to="/listProducts"> Lista produtos </Link> 
+         <ListAltIcon /> <Link to="/listProducts">Lista produtos</Link> 
         </ListItem >
       </List>
       <Divider />
