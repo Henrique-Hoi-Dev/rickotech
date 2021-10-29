@@ -1,20 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Input, Select } from '@rocketseat/unform';
 
 import { Container } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { createAdressRequest, updateAdressRequest } from '~/store/modules/user/actions';
+import { createAdressRequest, updateAdressRequest, getByIdUserRequest } from '~/store/modules/user/actions';
 
-export default function Adress() {
+export default function Adress({user}) {
   const dispatch = useDispatch();
-  const infos = useSelector((state) => state.user.profile);
-  const id = infos.id
+  const profile = useSelector((state) => state.user.profile);
+  console.log(user)
+  useEffect(() => {
+    function onLoad() {
+      dispatch(getByIdUserRequest(profile.id));
+    }
+    onLoad();
+  }, [dispatch]);
 
-  function handleSubmit(data) {
-    dispatch(createAdressRequest(data, id));
-  }
-  function handleUpdate(data) {
-    dispatch(updateAdressRequest(data, id));
+  function handleSubmitAdress(data) {
+    const adresses = profile.adress
+    if(adresses) {
+      dispatch(updateAdressRequest(data, adresses.id)); 
+    } else {
+      dispatch(createAdressRequest(data, profile.id));
+    }
   }
 
   const estados = [
@@ -68,7 +76,7 @@ export default function Adress() {
  return (
    <Container>
     <h2>Endereço</h2>
-     <Form initialData={infos.adress} onSubmit={handleSubmit}>
+     <Form initialData={profile.adress} onSubmit={handleSubmitAdress}>
       <Input
         type="text"
         name="cep"
@@ -82,11 +90,9 @@ export default function Adress() {
       <Input type="text" name="cidade" placeholder="Cidade" />
       <Select options={estados} name="uf" placeholder="UF" />
       <div className="but">
-        <button className="adresses" type="submit">Adicionar endereço</button>
-        <button className="adresses" onClick={(e) => handleUpdate(e)}>Atualizar endereço</button>
+        <button className="adresses" type="submit">Atualizar endereço</button>
       </div> 
      </Form>
    </Container>
   ); 
 }
-
