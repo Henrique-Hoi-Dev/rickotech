@@ -35,6 +35,7 @@ export function* createAdress({ payload }) {
 }
 
 export function* getByIdUser({ payload }) {
+  console.log(payload)
   try {
     const response = yield call(api.get, `/user/${payload.id}`);
 
@@ -46,6 +47,7 @@ export function* getByIdUser({ payload }) {
 }
 
 export function* updateAdress({ payload }) {
+  console.log(payload)
   try {
     const response = yield call(api.put, `/adress/${payload.id}`, payload.data);
 
@@ -90,7 +92,8 @@ export function* updateProfile({ payload }) {
 }
 
 export default all([
+  takeLatest('@user/CREATE_ADRESS_REQUEST', createAdress),
   takeLatest('@user/UPDATE_PROFILE_REQUEST', updateProfile),
   takeLatest('@user/UPDATE_ADRESS_REQUEST', updateAdress),
-  takeLatest('@user/CREATE_ADRESS_REQUEST', createAdress)
+  takeLatest('@user/GET_BYID_USER_SUCCESS', getByIdUser),
 ]);

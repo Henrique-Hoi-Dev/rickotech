@@ -16,7 +16,7 @@ export default function user(state = INITIAL_STATE, action) {
         draft.profile = action.payload.adress;
         break;
       }
-      case '@product/GET_BYID_USER_SUCCESS': {
+      case '@user/GET_BYID_USER_SUCCESS': {
         draft.user = action.payload.data;
         break;
       }
