@@ -2,7 +2,7 @@ import produce from 'immer';
 
 const INITIAL_STATE = {
   profile: null,
-  user: []
+  users: []
 };
 
 export default function user(state = INITIAL_STATE, action) {
@@ -16,10 +16,6 @@ export default function user(state = INITIAL_STATE, action) {
         draft.profile = action.payload.adress;
         break;
       }
-      case '@user/GET_BYID_USER_SUCCESS': {
-        draft.user = action.payload.data;
-        break;
-      }
       case '@user/UPDATE_ADRESS_SUCCESS': {
         draft.profile = action.payload.adress;
         break;
@@ -28,7 +24,10 @@ export default function user(state = INITIAL_STATE, action) {
         draft.profile = action.payload.profile;
         break;
       }
-
+      case '@user/GET_BYID_USER_SUCCESS': {
+        draft.users = action.payload.data;
+        break;
+      }
       case '@auth/SIGN_OUT': {
         draft.profile = null;
         break;

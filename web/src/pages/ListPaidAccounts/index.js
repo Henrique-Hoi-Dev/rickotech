@@ -15,9 +15,10 @@ import { Link } from 'react-router-dom';
 import {
   findAllPaidAccountRequest,
   deleteAccountRequest,
+  deletePortionPaidRequest,
 } from '../../store/modules/account/actions';
 
-const ListPaidAccounts = ({ accountList, handlerRemoveAccount }) => {
+const ListPaidAccounts = ({ accountList, handlerRemoveAccount, handlerRemovePortion }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -116,7 +117,7 @@ const ListPaidAccounts = ({ accountList, handlerRemoveAccount }) => {
                         </td>
                         <td>
                           <button
-                            onClick={(e) => handlerRemoveAccount(e, parcelas.id)}
+                            onClick={(e) => handlerRemovePortion(e, parcelas.id)}
                           >
                             <FcEmptyTrash />
                           </button>
@@ -136,7 +137,6 @@ const ListPaidAccounts = ({ accountList, handlerRemoveAccount }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     accountList: state.account.accountList ? state.account.accountList : [],
   };
@@ -151,6 +151,15 @@ const mapDispatchToProps = (dispatch) => {
       );
       if (confirm) {
         dispatch(deleteAccountRequest(id));
+      }
+    },
+    handlerRemovePortion: async (e, id) => {
+      e.preventDefault();
+      const confirm = window.confirm(
+        'Tem certeza que deseja remover esse parcela?'
+      );
+      if (confirm) {
+        dispatch(deletePortionPaidRequest(id));
       }
     },
   };

@@ -26,7 +26,7 @@ import { TiThMenu } from 'react-icons/ti';
 import { Container, Header, Perfil } from './styles';
 
 export default function Home() {
-  const profile = useSelector((state) => state.user.profile);
+  const { name, cargo, avatar, id } = useSelector((state) => state.user.profile);
 
   const [state, setState] = React.useState({
     top: false,
@@ -146,15 +146,15 @@ export default function Home() {
         <Perfil>
           <nav>
             <h4>Profissional:</h4>
-            <strong>{profile.name}</strong>
+            <strong>{name}</strong>
             <h4>Cargo:</h4>
-            <strong>{profile.cargo ? profile.cargo : 'sem cargo'}</strong>
+            <strong>{cargo ? cargo : 'sem cargo'}</strong>
         
           </nav>
                <img onClick={handleClick} 
                 src={
-                  profile.avatar
-                  ? profile.avatar.url
+                  avatar
+                  ? avatar.url
                     : 'https://i.pinimg.com/474x/a6/70/05/a67005e9bf90bc529088205650784bba.jpg'
                   }
                 alt="avatar"
@@ -195,7 +195,7 @@ export default function Home() {
               >
                 <MenuItem>
                   <Avatar />
-                  <Link className={classes.root} to={`/perfil/${profile.id}`}>
+                  <Link className={classes.root} to={`/perfil/${id}`}>
                     Profile
                   </Link>
                 </MenuItem>

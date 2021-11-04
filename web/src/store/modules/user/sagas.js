@@ -6,26 +6,11 @@ import api from '~/services/api';
 import { updateProfileSuccess, updateAdressSuccess, getByIdUserSuccess, adressFailure } from './actions';
 
 export function* createAdress({ payload }) {
-  const {
-    cep,
-    logradouro,
-    complemento,
-    numero,
-    bairro,
-    cidade,
-    uf
-  } = payload.values;
-  const adress = {
-    cep,
-    logradouro,
-    complemento,
-    numero,
-    bairro,
-    cidade,
-    uf
-  };
   try {
-    yield call(api.post, `/adress/${payload.id}`, adress);
+    const { cep, logradouro, complemento, numero, bairro, cidade, uf } = payload.values;
+    const adress = { cep, logradouro, complemento, numero, bairro, cidade, uf };
+
+    yield call(api.post, `/adress`, adress);
 
     toast.success('Endereço salvo com sucesso.');
   } catch (err) {
@@ -35,7 +20,6 @@ export function* createAdress({ payload }) {
 }
 
 export function* getByIdUser({ payload }) {
-  console.log(payload)
   try {
     const response = yield call(api.get, `/user/${payload.id}`);
 
@@ -47,7 +31,6 @@ export function* getByIdUser({ payload }) {
 }
 
 export function* updateAdress({ payload }) {
-  console.log(payload)
   try {
     const response = yield call(api.put, `/adress/${payload.id}`, payload.data);
 
@@ -62,25 +45,11 @@ export function* updateAdress({ payload }) {
 
 export function* updateProfile({ payload }) {
   try {
-    const {
-      name,
-      email,
-      avatar_id,
-      cargo,
-      cpf,
-      data_nascimento,
-      ...rest
-    } = payload.data;
+    const { name, email, adress_id, avatar_id, cargo, cpf, data_nascimento, ...rest } = payload.data;
 
-    const profile = {
-      name,
-      email,
-      avatar_id,
-      cargo,
-      cpf,
-      data_nascimento,
-      ...(rest.oldPassword ? rest : {}),
-    };
+    const profile = { name, email, adress_id,  avatar_id, cargo, cpf, data_nascimento, 
+                      ...(rest.oldPassword ? rest : {}),};
+                      
     const response = yield call(api.put, `/user/${payload.id}`, profile);
 
     toast.success('Perfil atualizado com sucesso!');

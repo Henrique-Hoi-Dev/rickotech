@@ -136,6 +136,12 @@ export default {
             as: 'avatar',
             attributes: ['id', 'path', 'url'],
           },
+          {
+            model: Adress,
+            as: 'adress',
+            attributes: [ 'id', 'cep', 'logradouro', 'complemento', 
+                          'numero', 'bairro', 'cidade', 'uf' ],
+          },
         ],
       });
 

@@ -13,12 +13,13 @@ import { connect, useDispatch } from 'react-redux';
 import {
   findAllAccountRequest,
   deleteAccountRequest,
+  deletePortionTotalRequest
 } from '../../store/modules/account/actions';
 
 import { Container } from './styles';
 import Header from '../../components/HeaderListAndRegister';
 
-const ListTodasAccounts = ({ accountList, handlerRemoveAccount }) => {
+const ListTodasAccounts = ({ accountList, handlerRemoveAccount, handlerRemovePortion }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -117,7 +118,7 @@ const ListTodasAccounts = ({ accountList, handlerRemoveAccount }) => {
                           </td>
                           <td>
                             <button
-                              onClick={(e) => handlerRemoveAccount(e, parcelas.id)}
+                              onClick={(e) => handlerRemovePortion(e, parcelas.id)}
                             >
                               <FcEmptyTrash />
                             </button>
@@ -151,6 +152,15 @@ const mapDispatchToProps = (dispatch) => {
       );
       if (confirm) {
         dispatch(deleteAccountRequest(id));
+      }
+    },
+    handlerRemovePortion: async (e, id) => {
+      e.preventDefault();
+      const confirm = window.confirm(
+        'Tem certeza que deseja remover esse parcela?'
+      );
+      if (confirm) {
+        dispatch(deletePortionTotalRequest(id));
       }
     },
   };

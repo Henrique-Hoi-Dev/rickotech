@@ -16,9 +16,10 @@ import { Link } from 'react-router-dom';
 import {
   findAllLateAccountRequest,
   deleteAccountRequest,
+  deletePortionOverdueRequest,
 } from '../../store/modules/account/actions';
 
-const ListLateAccounts = ({ accountList, handlerRemoveAccount }) => {
+const ListLateAccounts = ({ accountList, handlerRemoveAccount, handlerRemovePortion }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -117,7 +118,7 @@ const ListLateAccounts = ({ accountList, handlerRemoveAccount }) => {
                         </td>
                         <td>
                           <button
-                            onClick={(e) => handlerRemoveAccount(e, parcelas.id)}
+                            onClick={(e) => handlerRemovePortion(e, parcelas.id)}
                           >
                             <FcEmptyTrash />
                           </button>
@@ -151,6 +152,15 @@ const mapDispatchToProps = (dispatch) => {
       );
       if (confirm) {
         dispatch(deleteAccountRequest(id));
+      }
+    },
+    handlerRemovePortion: async (e, id) => {
+      e.preventDefault();
+      const confirm = window.confirm(
+        'Tem certeza que deseja remover esse parcela?'
+      );
+      if (confirm) {
+        dispatch(deletePortionOverdueRequest(id));
       }
     },
   };

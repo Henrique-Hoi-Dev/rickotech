@@ -1,7 +1,7 @@
-export function createAdressRequest(values, id) {
+export function createAdressRequest(values) {
   return {
     type: '@user/CREATE_ADRESS_REQUEST',
-    payload: { values, id },
+    payload: { values },
   };
 }
 

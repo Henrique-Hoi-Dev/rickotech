@@ -1,27 +1,36 @@
-import React, { useEffect } from 'react';
-import { Form, Input, Select } from '@rocketseat/unform';
+import React, { useEffect, useRef, useState } from 'react';
+import { Form, Input, Select, useField } from '@rocketseat/unform';
 
 import { Container } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { createAdressRequest, updateAdressRequest, getByIdUserRequest } from '~/store/modules/user/actions';
+import { createAdressRequest, updateAdressRequest } from '~/store/modules/user/actions';
 
-export default function Adress({user}) {
+export default function Adress() {
   const dispatch = useDispatch();
-  const profile = useSelector((state) => state.user.profile);
-  console.log(user)
-  useEffect(() => {
-    function onLoad() {
-      dispatch(getByIdUserRequest(profile.id));
-    }
-    onLoad();
-  }, [dispatch]);
+  const { defaultValue, registerField } = useField('adress');
+  const { adress } = useSelector((state) => state.user.profile);
+  const [preview, setPreview] = useState(defaultValue && defaultValue.id);
 
-  function handleSubmitAdress(data) {
-    const adresses = profile.adress
-    if(adresses) {
-      dispatch(updateAdressRequest(data, adresses.id)); 
+  const ref = useRef();
+  console.log(ref)
+
+  useEffect(() => {
+    if (ref.current) {
+      registerField({
+        name: 'adress_id',
+        ref: ref.current,
+      });
+    }
+    if (adress) {
+      setPreview(adress.id);
+    }
+  }, [adress, ref, registerField]);
+
+  function handleSubmit(data) {
+    if(adress) {
+      dispatch(updateAdressRequest(data, adress.id)); 
     } else {
-      dispatch(createAdressRequest(data, profile.id));
+      dispatch(createAdressRequest(data));
     }
   }
 
@@ -74,25 +83,25 @@ export default function Adress({user}) {
   }
 
  return (
-   <Container>
+   <Container >
     <h2>Endereço</h2>
-     <Form initialData={profile.adress} onSubmit={handleSubmitAdress}>
-      <Input
-        type="text"
-        name="cep"
-        placeholder="CEP"
-        onBlur={(ev) => onBlurCep(ev)}
-      />
-      <Input type="text" name="logradouro" placeholder="Logradouro" />
-      <Input type="text" name="complemento" placeholder="Complemento" />
-      <Input type="text" name="numero" placeholder="Número" />
-      <Input type="text" name="bairro" placeholder="Bairro" />
-      <Input type="text" name="cidade" placeholder="Cidade" />
-      <Select options={estados} name="uf" placeholder="UF" />
+    <label htmlFor="adress">
+     <Form initialData={adress} onSubmit={handleSubmit} >
+        <Input type="text" name="cep" placeholder="CEP" onBlur={(ev) => onBlurCep(ev)} />
+        <Input type="text" name="logradouro" placeholder="Logradouro" />
+        <Input type="text" name="complemento" placeholder="Complemento" />
+        <Input type="text" name="numero" placeholder="Número" />
+        <Input type="text" name="bairro" placeholder="Bairro" />
+        <Input type="text" name="cidade" placeholder="Cidade" />
+        <Select options={estados} name="uf" placeholder="UF" />
+      
       <div className="but">
-        <button className="adresses" type="submit">Atualizar endereço</button>
+        <button className="adresses" type="submit">
+          Atulizar seu endereço
+        </button>
       </div> 
      </Form>
+     </label>
    </Container>
   ); 
 }

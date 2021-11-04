@@ -6,18 +6,11 @@ export default {
   // create de um endereço de usuário
   async storeAdress(req, res) {
     try {
-      let user_id  = res.user_id;
       let adresses = req;
 
       let { cep, logradouro, complemento, numero, bairro, cidade, uf } = adresses;
 
-      const user = await User.findByPk(user_id);
-
-      if (!user) {
-        return res.status(400).json({ error: 'User not found' });
-      }
-
-      const adress = await Adress.create({  user_id, cep, logradouro, complemento, 
+      const adress = await Adress.create({  cep, logradouro, complemento, 
                                             numero, bairro, cidade, uf  });
 
       return adress;

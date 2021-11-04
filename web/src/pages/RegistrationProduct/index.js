@@ -18,9 +18,7 @@ import { FcHighPriority } from 'react-icons/fc';
 import { Container } from './styles';
 
 const schema = Yup.object().shape({
-  name: Yup.string()
-    .required('Este compo é obrigatório.')
-    .max(100, 'No máximo 100 caracteres'),
+  name: Yup.string().required('Este compo é obrigatório.').max(100, 'No máximo 100 caracteres'),
   categoria: Yup.string().required('Este compo é obrigatório.'),
   altura: Yup.string().required('Este compo é obrigatório.'),
   largura: Yup.string().required('Este compo é obrigatório.'),

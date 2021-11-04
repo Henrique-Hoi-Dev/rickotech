@@ -4,7 +4,6 @@ class Adress extends Model {
   static init(sequelize) {
     super.init(
       {
-        user_id: Sequelize.INTEGER,
         cep: Sequelize.STRING,
         logradouro: Sequelize.STRING,
         complemento: Sequelize.STRING,
@@ -20,9 +19,9 @@ class Adress extends Model {
     );
     return this;
   }
-  static associate(models) {
-    this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
-  }
+  // static associate(models) {
+  //   this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
+  // }
 }
 
 export default Adress;
