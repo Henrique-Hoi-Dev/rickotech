@@ -82,7 +82,7 @@ export default function Home() {
          <ListAltIcon /> <Link to="/listaLateAccounts">Lista vencidos</Link> 
         </ListItem >
         <ListItem >
-         <ProductionQuantityLimitsIcon /> <Link to="#">Registro de dividendo</Link> 
+         <ProductionQuantityLimitsIcon /> <Link to="/registreAccount">Registro de dividendo</Link> 
         </ListItem >
       </List>
     </Box>

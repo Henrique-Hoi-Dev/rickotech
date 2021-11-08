@@ -4,7 +4,7 @@ class AdressController {
   async storeAdress(req, res) {
     let response;     
     try {
-      response = await AdressService.storeAdress(req.body);
+      response = await AdressService.storeAdress(req.body, req.params);
       return res.status(200).send(response);
         
     } catch (error) {

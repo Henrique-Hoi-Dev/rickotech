@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Form, Input, Select, useField } from '@rocketseat/unform';
+import React from 'react';
+import { Form, Input, Select } from '@rocketseat/unform';
 
 import { Container } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,30 +7,13 @@ import { createAdressRequest, updateAdressRequest } from '~/store/modules/user/a
 
 export default function Adress() {
   const dispatch = useDispatch();
-  const { defaultValue, registerField } = useField('adress');
-  const { adress } = useSelector((state) => state.user.profile);
-  const [preview, setPreview] = useState(defaultValue && defaultValue.id);
+  const { adress, id } = useSelector((state) => state.user.profile);
 
-  const ref = useRef();
-  console.log(ref)
-
-  useEffect(() => {
-    if (ref.current) {
-      registerField({
-        name: 'adress_id',
-        ref: ref.current,
-      });
-    }
-    if (adress) {
-      setPreview(adress.id);
-    }
-  }, [adress, ref, registerField]);
-
-  function handleSubmit(data) {
+  function* handleSubmit(data) {
     if(adress) {
-      dispatch(updateAdressRequest(data, adress.id)); 
+      yield dispatch(updateAdressRequest(data, adress.id)); 
     } else {
-      dispatch(createAdressRequest(data));
+      yield dispatch(createAdressRequest(data, id));
     }
   }
 

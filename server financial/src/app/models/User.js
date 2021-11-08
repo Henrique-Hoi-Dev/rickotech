@@ -14,7 +14,6 @@ class User extends Model {
         cpf: Sequelize.STRING,
         data_nascimento: Sequelize.DATE,
         avatar_id: Sequelize.INTEGER,
-        adress_id: Sequelize.INTEGER,
       },
       {
         sequelize,
@@ -33,7 +32,7 @@ class User extends Model {
 
   static associate(models) {
     this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
-    this.belongsTo(models.Adress, { foreignKey: 'adress_id', as: 'adress' });
+    this.hasOne(models.Adress, { foreignKey: 'user_id', as: 'adress' });
   }
 
   checkPassword(password) {

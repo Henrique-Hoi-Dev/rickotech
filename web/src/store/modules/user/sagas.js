@@ -10,7 +10,7 @@ export function* createAdress({ payload }) {
     const { cep, logradouro, complemento, numero, bairro, cidade, uf } = payload.values;
     const adress = { cep, logradouro, complemento, numero, bairro, cidade, uf };
 
-    yield call(api.post, `/adress`, adress);
+    yield call(api.post, `/adress/${payload.id}`, adress);
 
     toast.success('Endereço salvo com sucesso.');
   } catch (err) {
@@ -32,10 +32,12 @@ export function* getByIdUser({ payload }) {
 
 export function* updateAdress({ payload }) {
   try {
-    const response = yield call(api.put, `/adress/${payload.id}`, payload.data);
+    const { cep, logradouro, complemento, numero, bairro, cidade, uf } = payload.data;
+    const adress = { cep, logradouro, complemento, numero, bairro, cidade, uf };
+
+    const response = yield call(api.put, `/adress/${payload.id}`, adress);
 
     yield put(updateAdressSuccess(response.data));
-
     toast.success('Endereço atualizado com sucesso!');
   } catch (err) {
     toast.error('Error atualizado endereço.');
@@ -45,15 +47,14 @@ export function* updateAdress({ payload }) {
 
 export function* updateProfile({ payload }) {
   try {
-    const { name, email, adress_id, avatar_id, cargo, cpf, data_nascimento, ...rest } = payload.data;
+    const { name, email, avatar_id, cargo, cpf, data_nascimento, ...rest } = payload.data;
 
-    const profile = { name, email, adress_id,  avatar_id, cargo, cpf, data_nascimento, 
+    const profile = { name, email, avatar_id, cargo, cpf, data_nascimento, 
                       ...(rest.oldPassword ? rest : {}),};
                       
     const response = yield call(api.put, `/user/${payload.id}`, profile);
 
     toast.success('Perfil atualizado com sucesso!');
-
     yield put(updateProfileSuccess(response.data));
   } catch (err) {
     toast.error('Erro ao atualizar perfil, confira seus dados!');

@@ -11,6 +11,7 @@ class Adress extends Model {
         bairro: Sequelize.STRING,
         cidade: Sequelize.STRING,
         uf: Sequelize.STRING,
+        user_id: Sequelize.INTEGER
       },
       {
         sequelize,
@@ -19,9 +20,9 @@ class Adress extends Model {
     );
     return this;
   }
-  // static associate(models) {
-  //   this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
-  // }
+  static associate(models) {
+    this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
+  }
 }
 
 export default Adress;

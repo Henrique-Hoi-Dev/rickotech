@@ -7,9 +7,9 @@ import httpStatus from 'http-status-codes';
 export default {
   // create de um novo usuário
   async storeUser(req, res) {
-    try {
-      let user = req
+    let user = req
 
+    try {
       const schema = Yup.object().shape({
         name: Yup.string().required(),
         email: Yup.string().email().required(),
@@ -87,20 +87,18 @@ export default {
     }
   },
   // atualiza usuário
-  async updateUserId(req, res) {    
-    try {
-      let users = req
-      let userId = res.id
+  async updateUserId(req, res) {   
+    let users = req
+    let userId = res.id
 
+    try {
       const schema = Yup.object().shape({
           name: Yup.string(),
           email: Yup.string().email(),
           oldPassword: Yup.string().min(6),
-          password: Yup.string()
-          .min(8)
+          password: Yup.string().min(8)
           .when('oldPassword', (oldPassword, field) =>
-            oldPassword ? field.required() : field
-          ),
+            oldPassword ? field.required() : field),
           confirmPassword: Yup.string().when('password', (password, field) =>
           password ? field.required().oneOf([Yup.ref('password')]) : field
         ),
@@ -153,6 +151,7 @@ export default {
   // exclui usuário por Id
   async deleteUserId(req, res) {
     let result = {}
+    
     try {
       const id  = req.id;
 

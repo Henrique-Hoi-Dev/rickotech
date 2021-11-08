@@ -27,6 +27,7 @@ const schema = Yup.object().shape({
   peso: Yup.string().required('Este compo é obrigatório.'),
   valor: Yup.number().required('Este compo é obrigatório.'),
   descricao: Yup.string().required('Este compo é obrigatório.'),
+  status: Yup.string().required('Este compo é obrigatório.'),
   data_registro: Yup.date().required('Data é obrigatório.'),
 });
 
@@ -155,12 +156,9 @@ export default function RegistrationProduct() {
                       name="data_registro"
                     />
                     <span>{formProps.errors.data_registro}</span>
+
                     <label htmlFor="status">Satus compra</label>
-                    <Field
-                      component="select"
-                      id="location"
-                      name="status"
-                    >
+                    <Field  component="select" name="status" >
                       <option value="EM-ESTOQUE">Em estoque</option>
                       <option value="VENDIDO">Vendido</option>
                     </Field>                    

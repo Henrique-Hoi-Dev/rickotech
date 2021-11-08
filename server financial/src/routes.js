@@ -31,7 +31,7 @@ routes.get('/user/:id', UserController.getUserDetailsId);
 routes.delete('/user/:id', UserController.deleteUserId);
 
 //adress 
-routes.post('/adress', AdressController.storeAdress)
+routes.post('/adress/:user_id', AdressController.storeAdress)
 routes.put('/adress/:id', AdressController.updateAdressId)
 routes.delete('/adress/:id', AdressController.deleteAdress)
 

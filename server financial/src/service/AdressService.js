@@ -5,13 +5,20 @@ import httpStatus from 'http-status-codes';
 export default {
   // create de um endereço de usuário
   async storeAdress(req, res) {
-    try {
-      let adresses = req;
+    let adresses = req;
+    let user_id = res.user_id
 
+    try {
       let { cep, logradouro, complemento, numero, bairro, cidade, uf } = adresses;
 
+      const user = await User.findByPk(user_id);
+
+      if (!user) {
+        return res.status(400).json({ error: 'User not found' });
+      }
+
       const adress = await Adress.create({  cep, logradouro, complemento, 
-                                            numero, bairro, cidade, uf  });
+                                            numero, bairro, cidade, uf, user_id  });
 
       return adress;
     } catch (error) {

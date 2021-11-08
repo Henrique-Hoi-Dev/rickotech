@@ -14,7 +14,6 @@ export default function Profile() {
   const profile = useSelector((state) => state.user.profile);
 
   function handleSubmit(data) {
-    console.log(data)
     dispatch(updateProfileRequest(data, profile.id));
   }
 
@@ -49,7 +48,7 @@ export default function Profile() {
           placeholder="Confirme sua nova senha"
         />
         <hr />
-        <Adress name="adress_id"/>
+        <Adress />
         <button type="submit">Atualizar seu perfil</button>
       </Form>
     </Container>

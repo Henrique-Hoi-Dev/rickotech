@@ -14,11 +14,10 @@ export function* createProduct({ payload }) {
   console.log(payload)
   try {
     yield call(api.post, 'products/new', payload);
-
     toast.success('Produto salvo com sucesso.');
   } catch (err) {
     yield put(productFailure());
-    toast.error('Error saving product.');
+    toast.error('Erro em salvar produto.');
   }
 }
 
