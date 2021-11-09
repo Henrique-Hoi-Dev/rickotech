@@ -53,9 +53,9 @@ export default function RegistrationProduct() {
       );
 
       if (id) {
-        dispatch(UpdateProductRequest({ id: id, values: body }));
+        dispatch(UpdateProductRequest({ product_id: id, values: body }));
       } else {
-        dispatch(createProductRequest(body));
+        dispatch(createProductRequest(values));
 
         handleReset(resetForm);
       }

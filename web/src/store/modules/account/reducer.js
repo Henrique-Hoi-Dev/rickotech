@@ -2,14 +2,14 @@ import produce from 'immer';
 
 const INITIAL_STATE = {
   accountList: [],
-  form: null,
+  form: {},
 };
 
 export default function account(state = INITIAL_STATE, action) {
   return produce(state, (draft) => {
     switch (action.type) {
       case '@account/RESET_FORM': {
-        draft.form = null;
+        draft.form = {};
         break;
       }
       case '@account/CREATE_ACCOUNT_SUCCESS': {

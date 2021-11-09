@@ -17,16 +17,16 @@ import {
   resetFormulario,
 } from '~/store/modules/account/actions';
 
-const schema = Yup.object().shape({
-  name: Yup.string().required('Este compo é obrigatório.').max(100, 'No máximo 100 caracteres'),
-  data_vencimento: Yup.date().required('Este compo é obrigatório.'),
-  status: Yup.string().required('Este compo é obrigatório.'),
-});
+// const schema = Yup.object().shape({
+//   name: Yup.string().required('Este compo é obrigatório.').max(100, 'No máximo 100 caracteres'),
+//   data_vencimento: Yup.date().required('Este compo é obrigatório.'),
+//   status: Yup.string().required('Este compo é obrigatório.'),
+// });
 
 export default function RegistrationAccounts() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { accountList } = useSelector((state) => state.account);
+  const { form } = useSelector((state) => state.account);
 
   useEffect(() => {
     if (id) {
@@ -38,10 +38,10 @@ export default function RegistrationAccounts() {
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      // let body = JSON.parse(JSON.stringify(values));
+      let body = JSON.parse(JSON.stringify(values));
 
       if (id) {
-        dispatch(UpdateAccountRequest(id, values));
+        dispatch(UpdateAccountRequest({ account_id: id , values: body}));
       } else {
         dispatch(createAccountRequest(values));
 
@@ -62,9 +62,9 @@ export default function RegistrationAccounts() {
       <div className="header-main">
         <Formik
           onSubmit={handleSubmit}
-          validationSchema={schema}
+          // validationSchema={schema}
           enableReinitialize={true}
-          initialValues={accountList}
+          initialValues={form}
         >
           {(formProps) => {
             return (
@@ -87,8 +87,8 @@ export default function RegistrationAccounts() {
                       <option value="pago">Pago</option>
                     </Field>
                     <span>{formProps.errors.status}</span>
-                  </div>              
 
+                  </div>              
                   <footer className="buttons-container">
                     <p>
                       <FcHighPriority />

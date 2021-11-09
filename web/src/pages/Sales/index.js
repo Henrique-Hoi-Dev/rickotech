@@ -57,7 +57,6 @@ const handleReset = (resetForm) => {
   resetForm({});
 };
 
-
   return (
     <>
     <Header title="Venda"/>

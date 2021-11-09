@@ -123,7 +123,7 @@ export const Container = styled.div`
     }
   }  
 
-  @media (min-width: 1100px) {
+  @media (max-width: 700px) {
     #container-input {
       max-width: 1100px;
 

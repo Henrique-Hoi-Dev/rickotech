@@ -35,13 +35,14 @@ function Routes() {
       <Route isPrivate path="/listaCancelAccounts" exact component={ListCancelAccounts} />
       <Route isPrivate path="/listaLateAccounts" exact component={ListLateAccounts} />
       <Route isPrivate path="/registreProduct" exact component={RegistrationProduct} />
-      <Route isPrivate path="/listProducts" exact component={(props) => <ListProduct {...props} />} />
-      <Route isPrivate exact path="/product/:id"
-        component={(props) => <RegistrationProduct {...props} />}
+      <Route isPrivate path="/listProducts" exact component={ListProduct} />
+      <Route isPrivate exact path="/registreProduct/:id"
+        reder={(props) => <RegistrationProduct {...props} name="product"/>}
       />
       <Route isPrivate exact path="/account/:id"
-        component={(props) => <RegistrationAccount {...props} />}
+        reder={(props) => <RegistrationAccount {...props} name="account"/>}
       />
+      
       <Route exact isPrivate path="/venda/:id"/>
     </Switch>
   );
