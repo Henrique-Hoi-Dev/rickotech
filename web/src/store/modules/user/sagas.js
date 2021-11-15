@@ -3,54 +3,27 @@ import { toast } from 'react-toastify';
 
 import api from '~/services/api';
 
-import { updateProfileSuccess, updateAdressSuccess, getByIdUserSuccess, adressFailure } from './actions';
-
-export function* createAdress({ payload }) {
-  try {
-    const { cep, logradouro, complemento, numero, bairro, cidade, uf } = payload.values;
-    const adress = { cep, logradouro, complemento, numero, bairro, cidade, uf };
-
-    yield call(api.post, `/adress/${payload.id}`, adress);
-
-    toast.success('Endereço salvo com sucesso.');
-  } catch (err) {
-    yield put(adressFailure());
-    toast.error('Error em salvar endereço.');
-  }
-}
-
-export function* getByIdUser({ payload }) {
-  try {
-    const response = yield call(api.get, `/user/${payload.id}`);
-
-    yield put(getByIdUserSuccess(response.data));
-  } catch (err) {
-    toast.error('Error searching user check data.');
-    yield put(adressFailure());
-  }
-}
-
-export function* updateAdress({ payload }) {
-  try {
-    const { cep, logradouro, complemento, numero, bairro, cidade, uf } = payload.data;
-    const adress = { cep, logradouro, complemento, numero, bairro, cidade, uf };
-
-    const response = yield call(api.put, `/adress/${payload.id}`, adress);
-
-    yield put(updateAdressSuccess(response.data));
-    toast.success('Endereço atualizado com sucesso!');
-  } catch (err) {
-    toast.error('Error atualizado endereço.');
-    yield put(adressFailure());
-  }
-}
+import { updateProfileSuccess } from './actions';
 
 export function* updateProfile({ payload }) {
   try {
-    const { name, email, avatar_id, cargo, cpf, data_nascimento, ...rest } = payload.data;
+    const { 
+      name, 
+      email, 
+      avatar_id, 
+      cargo, 
+      cpf, 
+      data_nascimento, 
+      ...rest } = payload.data;
 
-    const profile = { name, email, avatar_id, cargo, cpf, data_nascimento, 
-                      ...(rest.oldPassword ? rest : {}),};
+    const profile = { 
+      name, 
+      email, 
+      avatar_id, 
+      cargo,
+      cpf, 
+      data_nascimento, 
+      ...(rest.oldPassword ? rest : {}),};
                       
     const response = yield call(api.put, `/user/${payload.id}`, profile);
 
@@ -62,8 +35,5 @@ export function* updateProfile({ payload }) {
 }
 
 export default all([
-  takeLatest('@user/CREATE_ADRESS_REQUEST', createAdress),
   takeLatest('@user/UPDATE_PROFILE_REQUEST', updateProfile),
-  takeLatest('@user/UPDATE_ADRESS_REQUEST', updateAdress),
-  takeLatest('@user/GET_BYID_USER_SUCCESS', getByIdUser),
 ]);

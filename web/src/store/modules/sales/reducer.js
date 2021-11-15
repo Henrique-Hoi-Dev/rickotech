@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   form: null,
 };
 
-export default function venda(state = INITIAL_STATE, action) {
+export default function sales(state = INITIAL_STATE, action) {
   return produce(state, (draft) => {
     switch (action.type) {
       case '@venda/RESET_FORM': {

@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input, Select } from '@rocketseat/unform';
+import { Link } from 'react-router-dom'
 
 import { updateProfileRequest } from '~/store/modules/user/actions';
 
 import AvatarInput from './AvatarInput';
-import Adress from './Adress';
 
 import { Container } from './styles';
 
@@ -48,8 +48,15 @@ export default function Profile() {
           placeholder="Confirme sua nova senha"
         />
         <hr />
-        <Adress />
-        <button type="submit">Atualizar seu perfil</button>
+        <div className="but">
+          <button type="submit">Atualizar seu perfil</button>
+          <button type="button">
+            <Link to={`/adress/${profile.id}`}> 
+              Adicionar endereço
+            </Link>
+          </button>
+        </div>
+        
       </Form>
     </Container>
   );

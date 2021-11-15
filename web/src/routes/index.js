@@ -6,6 +6,7 @@ import Route from './Route';
 import SignIn from '~/pages/SignIn';
 import SignUp from '~/pages/SignUp';
 import Profile from '~/pages/Profile';
+import Adress from '~/pages/Profile/Adress';
 import Caixa from '~/pages/Caixa';
 import Sales from '~/pages/Sales';
 import Dashboard from '~/pages/Dashboard';
@@ -18,13 +19,13 @@ import RegistrationProduct from '~/pages/RegistrationProduct'
 import RegistrationAccount from '~/pages/RegistrationAccounts'
 import ListProduct from '~/pages/ListProduct';
 
-function Routes() {
+function RoutesApp() {
   return (
     <Switch>
       <Route path="/" exact component={SignIn} />
       <Route path="/register" exact component={SignUp} />
-
       <Route isPrivate path="/perfil/:id" exact component={Profile} />
+      <Route isPrivate path="/adress/:id" exact component={Adress} />
       <Route isPrivate path="/caixa" exact component={Caixa} />
       <Route isPrivate path="/sales" exact component={Sales} />
       <Route isPrivate path="/dashboard" exact component={Dashboard} />
@@ -48,4 +49,4 @@ function Routes() {
   );
 }
 
-export default Routes;
+export default RoutesApp;

@@ -1,19 +1,25 @@
 import React from 'react';
 import { Form, Input, Select } from '@rocketseat/unform';
+import { useParams } from 'react-router';
 
 import { Container } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { createAdressRequest, updateAdressRequest } from '~/store/modules/user/actions';
+import { createAdressRequest, updateAdressRequest } from '~/store/modules/adress/actions';
 
 export default function Adress() {
   const dispatch = useDispatch();
-  const { adress, id } = useSelector((state) => state.user.profile);
+  const adresses = useSelector((state) => state.adress.adresses);
+  const { id } = useParams();
 
-  function* handleSubmit(data) {
-    if(adress) {
-      yield dispatch(updateAdressRequest(data, adress.id)); 
-    } else {
-      yield dispatch(createAdressRequest(data, id));
+  function handleSubmit(adress) {
+    try {
+      if(adresses === null) {
+        dispatch(createAdressRequest(adress, id));
+      } else {
+        dispatch(updateAdressRequest(adress, adresses.id)); 
+      }
+    } catch {
+      return 
     }
   }
 
@@ -66,10 +72,10 @@ export default function Adress() {
   }
 
  return (
-   <Container >
+   <Container>
     <h2>Endereço</h2>
     <label htmlFor="adress">
-     <Form initialData={adress} onSubmit={handleSubmit} >
+     <Form initialData={adresses} onSubmit={handleSubmit} >
         <Input type="text" name="cep" placeholder="CEP" onBlur={(ev) => onBlurCep(ev)} />
         <Input type="text" name="logradouro" placeholder="Logradouro" />
         <Input type="text" name="complemento" placeholder="Complemento" />
@@ -77,12 +83,10 @@ export default function Adress() {
         <Input type="text" name="bairro" placeholder="Bairro" />
         <Input type="text" name="cidade" placeholder="Cidade" />
         <Select options={estados} name="uf" placeholder="UF" />
-      
-      <div className="but">
+        <hr/>
         <button className="adresses" type="submit">
           Atulizar seu endereço
         </button>
-      </div> 
      </Form>
      </label>
    </Container>

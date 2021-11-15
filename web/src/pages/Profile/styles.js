@@ -8,6 +8,12 @@ export const Container = styled.div`
   form {
     display: flex;
     flex-direction: column;
+
+    .but {
+      display: flex;
+      justify-content: space-between;
+
+    }
   }
 
   h2 {
@@ -68,6 +74,7 @@ export const Container = styled.div`
 
   button {
     margin: 5px 0 0;
+    width: 250px;
     height: 44px;
     background: #8945de;
     font-weight: bold;
