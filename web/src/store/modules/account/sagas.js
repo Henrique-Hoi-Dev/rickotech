@@ -1,7 +1,7 @@
 import { takeLatest, call, all, put } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
-import history from '~/services/history';
+// import history from '~/services/history';
 import api from '~/services/api2';
 
 import {
@@ -16,7 +16,7 @@ import {
 
 export function* createAccount({ payload }) {
   try {
-    yield call(api.post, '/account/new', payload);
+    yield call(api.post, '/account/new', payload.values);
 
     toast.success('Conta salva com sucesso.');
   } catch (err) {
@@ -86,23 +86,21 @@ export function* getByIdAccount({ payload }) {
 
     yield put(getByIdAccountSuccess(response.data));
   } catch (err) {
-    toast.error('Error searching products check data.');
+    toast.error('Error no encontra conta.');
     yield put(accountFailure());
   }
 }
 
 export function* UpdateAccount({ payload }) {
   try {
-    yield call(api.put, `/account/${payload.data.id}`, payload.data.values);
+    yield call(api.put, `/account/${payload.data.account_id}`, payload.data.values);
 
     const response = yield call(api.get, `/accounts`);
 
     yield put(findAllAccountSuccess(response.data));
-
     toast.success('Editado com sucesso.');
-    history.push('/list');
   } catch (err) {
-    toast.error('Error editing products checking data.');
+    toast.error('Error no editar conta.');
     yield put(accountFailure());
   }
 }

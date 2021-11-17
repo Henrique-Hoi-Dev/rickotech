@@ -11,8 +11,9 @@ import {
 } from './actions';
 
 export function* createProduct({ payload }) {
+  console.log(payload)
   try {
-    yield call(api.post, 'products/new', payload);
+    yield call(api.post, 'products/new', payload.values);
     toast.success('Produto salvo com sucesso.');
   } catch (err) {
     yield put(productFailure());
@@ -44,7 +45,7 @@ export function* getByIdProduct({ payload }) {
 
 export function* UpdateProduct({ payload }) {
   try {
-    yield call(api.put, `/product/${payload.data.id}`, payload.data.values);
+    yield call(api.put, `/product/${payload.data.product_id}`, payload.data.values);
 
     const response = yield call(api.get, `/products`);
 

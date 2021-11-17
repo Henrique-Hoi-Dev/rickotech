@@ -98,14 +98,8 @@ export const Container = styled.div`
       text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
       line-height: 2.4rem;
       color: #9c98a6;
-    }
-
-    span {
-      color: #ff0000;
-      margin: 0 0 0 15px;
-      font-weight: bold;
-    }
-
+    } 
+    
     main {
       margin: 3.2rem auto;
       width: 90%;

@@ -105,10 +105,7 @@ export default {
         return res.status(400).json({ error: 'Falha na validação' });
       }
   
-      const { email, oldPassword, data_nascimento } = users ;
-
-      var date = new Date(data_nascimento);
-      date.toLocaleDateString()
+      const { email, oldPassword } = users ;
       
       const user = await User.findByPk(userId);
       

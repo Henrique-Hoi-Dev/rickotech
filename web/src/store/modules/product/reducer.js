@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   productList: [],
   form: {
     id: undefined,
-    status: '',
+    status: 'EM-ESTOQUE',
     name: '',
     categoria: '',
     altura: '',
@@ -24,7 +24,7 @@ export default function product(state = INITIAL_STATE, action) {
       case '@product/RESET_FORM': {
         draft.form = {
           id: undefined,
-          status: '',
+          status: 'EM-ESTOQUE',
           name: '',
           categoria: '',
           altura: '',
@@ -47,7 +47,7 @@ export default function product(state = INITIAL_STATE, action) {
         break;
       }
       case '@product/GET_BYID_PRODUCT_SUCCESS': {
-        draft.form = action.payload.data;
+        draft.productList = action.payload.data;
         break;
       }
       default:

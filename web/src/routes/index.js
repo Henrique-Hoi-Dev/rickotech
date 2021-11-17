@@ -37,13 +37,8 @@ function RoutesApp() {
       <Route isPrivate path="/listaLateAccounts" exact component={ListLateAccounts} />
       <Route isPrivate path="/registreProduct" exact component={RegistrationProduct} />
       <Route isPrivate path="/listProducts" exact component={ListProduct} />
-      <Route isPrivate exact path="/registreProduct/:id"
-        reder={(props) => <RegistrationProduct {...props} name="product"/>}
-      />
-      <Route isPrivate exact path="/account/:id"
-        reder={(props) => <RegistrationAccount {...props} name="account"/>}
-      />
-      
+      <Route isPrivate exact path="/product/:id" component={RegistrationProduct} />
+      <Route isPrivate exact path="/account/:id" component={RegistrationAccount} />
       <Route exact isPrivate path="/venda/:id"/>
     </Switch>
   );

@@ -3,9 +3,7 @@ import { darken } from 'polished';
 
 export const Container = styled.div` 
   font-size: 0.8rem;
-
   }
-
   .header-main {
     background: #353535;
     width: 100%;
@@ -15,12 +13,52 @@ export const Container = styled.div`
     border-radius: 0.8rem;
     margin: -3rem auto 3.2rem;
     padding-top: 3rem;
-    overflow: hidden;   
+    overflow: hidden;
+    
+    #container-input {
+      max-width: 1100px;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 5px 270px 1fr;
+      grid-template-areas:
+        'name name name'
+        'campo2  campo4 campo3'
+        'campo5 campo5 campo5'
+        'button button button';
+    }
+
+    .name-campo {
+      grid-area: name;    
+    }
+
+    .campo2 {
+      grid-area: campo2;
+    }
+    .campo3 {
+      grid-area: campo3;
+
+      ul {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+    .campo4 {
+      grid-area: campo4;
+    }
+    .campo5 {
+      grid-area: campo5;
+    }
+    .buttons-container {
+      grid-area: button;
+    }
+
 
   input {
     font: 1rem Archivo;
     border-radius: 0.5rem;
     height: 2.2rem;
+    width: 215px;
     padding: 0 1rem;
     margin: 0 0 1rem;
     border: 2px solid #8945de;
@@ -64,7 +102,6 @@ export const Container = styled.div`
   }
 
   .header-title {
-
 
     label {
       font: 700 1.4rem Archivo;
@@ -123,13 +160,13 @@ export const Container = styled.div`
     }
   }  
 
-  @media (min-width: 1100px) {
+  @media (max-width: 700px) {
     #container-input {
       max-width: 1100px;
 
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: 5px 455px 1fr;
+      grid-template-rows: 5px 250px 1fr;
       grid-template-areas:
         'name name name'
         'campo2  campo4 campo3'

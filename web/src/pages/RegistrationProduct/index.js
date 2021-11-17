@@ -27,14 +27,13 @@ const schema = Yup.object().shape({
   peso: Yup.string().required('Este compo é obrigatório.'),
   valor: Yup.number().required('Este compo é obrigatório.'),
   descricao: Yup.string().required('Este compo é obrigatório.'),
-  status: Yup.string().required('Este compo é obrigatório.'),
   data_registro: Yup.date().required('Data é obrigatório.'),
 });
 
 export default function RegistrationProduct() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { form } = useSelector((state) => state.product);
+  const { productList } = useSelector((state) => state.product);
 
   useEffect(() => {
     if (id) {
@@ -44,7 +43,7 @@ export default function RegistrationProduct() {
     }
   }, [id, dispatch]);
 
-  const handleSubmit = async (values, { resetForm }) => {
+  const handleSubmit = (values, { resetForm }) => {
     try {
       let body = JSON.parse(JSON.stringify(values));
 
@@ -94,7 +93,7 @@ export default function RegistrationProduct() {
           onSubmit={handleSubmit}
           validationSchema={schema}
           enableReinitialize={true}
-          initialValues={form}
+          initialValues={productList}
         >
           {(formProps) => {
             return (
@@ -103,16 +102,12 @@ export default function RegistrationProduct() {
                   <div className="name-campo"></div>
 
                   <div className="campo2">
-                    <label htmlFor="name">Nome do Produto</label>
                     <Field name="name" type="text" placeholder="Nome Produto" />
                     <span>{formProps.errors.name}</span>
-                    <label htmlFor="altura">Altura(cm)</label>
                     <Field name="altura" type="text" placeholder="Altura" />
                     <span>{formProps.errors.altura}</span>
-                    <label htmlFor="largura">Largura(cm)</label>
                     <Field name="largura" type="text" placeholder="Largura" />
                     <span>{formProps.errors.largura}</span>
-                    <label htmlFor="comprimento">Comprimento(cm)</label>
                     <Field
                       name="comprimento"
                       type="text"
@@ -122,18 +117,14 @@ export default function RegistrationProduct() {
                   </div>
 
                   <div className="campo3">
-                    <label htmlFor="peso">Peso do produto(kg)</label>
                     <Field name="peso" type="text" placeholder="Peso(kg)" />
                     <span>{formProps.errors.peso}</span>
-
-                    <label htmlFor="valor">Preço($)</label>
                     <Field
                       name="valor"
                       type="number"
                       placeholder="Preço($)"
                       onkeyup={currencyFormat}
                     />
-
                     <span>{formProps.errors.valor}</span>
                     <ul>
                       <AvatarInput name="avatar_id" />
@@ -141,29 +132,20 @@ export default function RegistrationProduct() {
                   </div>
 
                   <div className="campo4">
-                    <label htmlFor="categoria">Categoria</label>
                     <Field 
                       type="text" 
                       placeholder="Categoria" 
-                      name="categoria"
-                    />
+                      name="categoria" />
                     <span>{formProps.errors.categoria}</span>
-
-                    <label htmlFor="data_registro">Data do registro</label>
                     <Field
                       placeholder="Data do registro"
                       type="date"
-                      name="data_registro"
-                    />
+                      name="data_registro" />
                     <span>{formProps.errors.data_registro}</span>
-
-                    <label htmlFor="status">Satus compra</label>
                     <Field  component="select" name="status" >
                       <option value="EM-ESTOQUE">Em estoque</option>
                       <option value="VENDIDO">Vendido</option>
                     </Field>                    
-
-                    <label htmlFor="codigo_barra">Código de barra</label>
                     <Field
                       name="codigo_barra"
                       type="text"
@@ -173,8 +155,10 @@ export default function RegistrationProduct() {
                   </div>
 
                   <div className="campo5">
-                    <label htmlFor="descricao">Descrição</label>
-                    <Field as="textarea" name="descricao" type="text" />
+                    <Field 
+                      as="textarea" 
+                      name="descricao" 
+                      type="text" />
                     <span>{formProps.errors.descricao}</span>
                   </div>
 
