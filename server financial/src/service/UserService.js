@@ -14,9 +14,6 @@ export default {
         name: Yup.string().required(),
         email: Yup.string().email().required(),
         password: Yup.string().required().min(6),
-        cpf: Yup.string(),
-        data_nacimento: Yup.string(),
-        cargo: Yup.string(),
       });
   
       if (!(await schema.isValid(user))) {
@@ -40,7 +37,7 @@ export default {
   async getUserDetails(req, res) {
     try {
       const users = await User.findAll({
-        attributes: [ 'id', 'name', 'email', 'provider', 'cargo', 
+        attributes: [ 'id', 'name', 'email', 'provider', 'cargo', 'cpf', 'data_nascimento', 
                       'cpf', 'avatar_id', 'data_nascimento' ],
         include: [
         {
@@ -108,7 +105,10 @@ export default {
         return res.status(400).json({ error: 'Falha na validação' });
       }
   
-      const { email, oldPassword } = users ;
+      const { email, oldPassword, data_nascimento } = users ;
+
+      var date = new Date(data_nascimento);
+      date.toLocaleDateString()
       
       const user = await User.findByPk(userId);
       
@@ -123,7 +123,7 @@ export default {
       if (oldPassword && !(await user.checkPassword(oldPassword))) {
         return res.status(401).json({ error: 'Senha não corresponde' });
       }
-      
+
       await user.update(users);
 
       const result = await User.findByPk(userId, {

@@ -25,6 +25,7 @@ export const Container = styled.div`
 
   .form-table {
     padding: 0 2.4rem;
+    margin-bottom: 50px;
 
     table {
       background-color: #4d4c4c;
@@ -33,7 +34,6 @@ export const Container = styled.div`
 
       td {
         max-height: 5px;
-        border-bottom: 0.2rem solid #8945de;
       }
     }
 

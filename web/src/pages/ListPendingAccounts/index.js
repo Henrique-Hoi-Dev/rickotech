@@ -1,13 +1,25 @@
 import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import * as moment from 'moment';
+
+import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+import Collapse from "@material-ui/core/Collapse";
+import IconButton from "@material-ui/core/IconButton";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+
 import { FcEmptyTrash } from 'react-icons/fc';
 import { BiEdit } from 'react-icons/bi';
 
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
+import * as moment from 'moment';
 
 import { Container } from './styles';
 import Header from '../../components/HeaderListAndRegister';
@@ -17,6 +29,14 @@ import {
   deleteAccountRequest,
   deletePortionPendingRequest,
 } from '../../store/modules/account/actions';
+
+const useRowStyles = makeStyles({
+  root: {
+    "& > *": {
+      borderBottom: "unset"
+    }
+  }
+});
 
 const ListPendingAccounts = ({ accountList, handlerRemoveAccount, handlerRemovePortion }) => {
   const dispatch = useDispatch();
@@ -40,96 +60,132 @@ const ListPendingAccounts = ({ accountList, handlerRemoveAccount, handlerRemoveP
     }
   }
 
-  return (
-    <Container>
-      <Header title="Todas dividas pendentes"/>
-      <div className="header-main">
-        <form className="form-table">
-      {[].concat(accountList).map((contas, i) => (
-         <Accordion>
-            <AccordionSummary
-              aria-controls="panel1a-content"
-              id="panel1a-header"
+  function Row(props) {
+    const { row } = props;
+    const [open, setOpen] = React.useState(false);
+    const classes = useRowStyles();
+  
+    return (
+      <React.Fragment>
+        <TableRow className={classes.root}>
+          <TableCell>
+            <IconButton
+              aria-label="expand row"
+              size="small"
+              onClick={() => setOpen(!open)}
             >
-              <Typography sx={{ width: '100%' }}>
-                <table className="table-list">
-                  <thead>
-                    <tr className="table-title">
-                      <td>Nome</td>
-                      <td>Data Registro</td>
-                      <td>status</td>
-                      <td>Editar</td>
-                      <td>Excluir</td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr key={i} value={contas.id}>
-                      <td>{contas.name}</td>
-                      <td>{moment(contas.data_vencimento).format('DD-MM-YYYY')}</td>
-                      <td style={{ color: (contas.status === 'pendente' && 'red') || (contas.status === 'pago' && 'green') || (contas.status === 'cancelado' && 'black')}}>
-                        {(contas.status === 'pendente' && 'Pendente') || (contas.status === 'pago' && 'Pago') || (contas.status === 'cancelado' && 'Cancelado')}
-                      </td>
-                      <td>
+              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
+          </TableCell>
+          <TableCell component="th" scope="row">{row.name}
+          </TableCell>
+          <TableCell align="right">{moment(row.data_vencimento).format('DD-MM-YYYY')}</TableCell>
+          <TableCell align="right" 
+                    style={{ color: (row.status === 'pendente' && 'red') || 
+                    (row.status === 'pago' && 'green') || 
+                    (row.status === 'cancelado' && 'black')}}
+        >
+            {(row.status === 'pendente' && 'Pendente') || 
+             (row.status === 'pago' && 'Pago') || 
+             (row.status === 'cancelado' && 'Cancelado')}
+            </TableCell>
+          <TableCell align="right">
+            <button>
+              <Link to={`/account/${row.id}`}>
+                <BiEdit />
+              </Link>
+            </button>
+          </TableCell>
+          <TableCell align="right">
+            <button
+              onClick={(e) => handlerRemoveAccount(e, row.id)}>
+              <FcEmptyTrash />
+            </button>
+          </TableCell>
+        </TableRow>
+
+        <TableRow>
+          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <Box margin={1}>
+                <Typography variant="h6" gutterBottom component="div">
+                  Parcelas
+                </Typography>
+                <Table size="small" aria-label="purchases">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Valor</TableCell>
+                      <TableCell>N Parcela</TableCell>
+                      <TableCell align="right">Status</TableCell>
+                      <TableCell align="right">Data Vencimento</TableCell>
+                      <TableCell align="right">Editar</TableCell>
+                      <TableCell align="right">Excluir</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                  {row.parcela.map((parcelas, i) => (
+                    <TableRow key={i}>
+                      <TableCell component="th" scope="row">{currencyFormat(parcelas.valor)}</TableCell>
+                      <TableCell>{parcelas.numero_parcela}</TableCell>
+                      <TableCell align="right" style={{ color: (parcelas.pago === true && 'green') || 
+                      (parcelas.pago === false && 'red') }}
+                      >
+                      {(parcelas.pago === true && 'Pago') || 
+                       (parcelas.pago === false && 'Devendo')}
+                      </TableCell>
+                      <TableCell align="right">{moment(parcelas.data_vencimento).format('DD-MM-YYYY')}</TableCell>
+                      <TableCell align="right">
                         <button>
-                          <Link to={`/product/${contas.id}`}>
+                          <Link to={`/product/${parcelas.id}`}>
                             <BiEdit />
                           </Link>
                         </button>
-                      </td>
-                      <td>
+                      </TableCell>
+                      <TableCell align="right">
                         <button
-                          onClick={(e) => handlerRemoveAccount(e, contas.id)}
-                        >
+                          onClick={(e) => handlerRemovePortion(e, parcelas.id)}>
                           <FcEmptyTrash />
                         </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-              <Typography sx={{ width: '70%' }}>
-                {contas.parcela.map((parcelas, i) => (
-                  <table  className="table-list">
-                    <thead>
-                      <tr className="table-title">
-                        <td>Valor</td>
-                        <td>N parcela</td>
-                        <td>Status</td>
-                        <td>Editar</td>
-                        <td>Excluir</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>{currencyFormat(parcelas.valor)}</td>
-                        <td>{parcelas.numero_parcela}</td>
-                        <td style={{ color: (parcelas.pago === true && 'green') || (parcelas.pago === false && 'red') }}>
-                          {(parcelas.pago === true && 'Pago') || (parcelas.pago === false && 'Devendo')}
-                        </td>
-                        <td>
-                          <button>
-                            <Link to={`/product/${parcelas.id}`}>
-                              <BiEdit />
-                            </Link>
-                          </button>
-                        </td>
-                        <td>
-                          <button
-                            onClick={(e) => handlerRemovePortion(e, parcelas.id)}
-                          >
-                            <FcEmptyTrash />
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                  </TableBody>
+                </Table>
+              </Box>
+            </Collapse>
+          </TableCell>
+        </TableRow>
+      </React.Fragment>
+    );
+  }
+
+  return (
+    <Container>
+      <Header title="Todas contas pendentes"/>
+      <div className="header-main">
+        <form className="form-table">
+            <TableContainer component={Paper}>
+              <Table aria-label="collapsible table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell />
+                    <TableCell>Nome</TableCell>
+                    <TableCell align="right">Data Registro</TableCell>
+                    <TableCell align="right">Status</TableCell>
+                    <TableCell align="center">Editar</TableCell>
+                    <TableCell align="center">Excluir</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                {[].concat(accountList).map((contas, i) => (
+                    <Row key={i} row={contas} />
                 ))}
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-          ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+
+         
+
         </form>
       </div>
     </Container>

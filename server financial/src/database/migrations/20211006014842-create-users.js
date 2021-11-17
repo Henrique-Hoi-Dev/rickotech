@@ -17,7 +17,7 @@ module.exports = {
         unique: true,
       },
       data_nascimento: {
-        type: Sequelize.DATE,
+        type: Sequelize.STRING,
         allowNull: true,
       },
       cpf: {

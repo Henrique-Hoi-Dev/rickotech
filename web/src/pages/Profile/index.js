@@ -31,10 +31,10 @@ export default function Profile() {
         <h2>Informações básicas</h2>
         <Input name="name" placeholder="Seu nome completo" />
         <Input name="email" placeholder="Seu endereço e-mail" />
-        <Input type="text" name="cpf" placeholder="CPF" />
+        <Input name="cpf" placeholder="CPF" />
         <Input
           type="date"
-          name="data_nacimento"
+          name="data_nascimento"
           placeholder="Data de Nacimento"
         />
         <Select name="cargo" options={cargos} placeholder="Cargos" />

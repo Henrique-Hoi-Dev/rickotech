@@ -38,14 +38,29 @@ export default createGlobalStyle`
         transition: all 0.5s;
       }
     }
+    .MuiTableCell-head {
+      font-weight: bold;
+      color: #9c98a6;
+    }
+    .MuiTypography {
+      font-weight: bold;
+      color: #9c98a6;
+    }
+    .MuiTypography-h6 {
+      font-weight: bold;
+      color: #9c98a6;
+    }
+    .MuiTableCell-root {
+      font-weight: 700;
+    }
     .MuiPaper-root  {
       /* width: 160px;
       height: 120px; */
       margin-top: 30px;
       background-color: #353535;
-      font-weight: bold;
+      font-weight: bold!important;
       color: #9c98a6;
-      border-radius: 20px;
+      border-radius: 10px;
 
       .css-2s90m6-MuiAvatar-root {
         background: none;

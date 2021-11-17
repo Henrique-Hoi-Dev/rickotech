@@ -12,7 +12,7 @@ class User extends Model {
         provider: Sequelize.BOOLEAN,
         cargo: Sequelize.ENUM('COLABORADOR', 'CEO', 'DIRETOR', 'GERENTE'),
         cpf: Sequelize.STRING,
-        data_nascimento: Sequelize.DATE,
+        data_nascimento: Sequelize.STRING,
         avatar_id: Sequelize.INTEGER,
       },
       {

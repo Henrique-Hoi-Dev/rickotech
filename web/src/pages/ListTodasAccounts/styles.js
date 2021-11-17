@@ -14,17 +14,11 @@ export const Container = styled.div`
     margin: -3rem auto 3.2rem;
     padding-top: 3rem;
     overflow: hidden;
-
-    h1 {
-      margin: 3rem;
-      color: #6a6180;
-      font: 700 2.6rem Archivo;
-      cursor: pointer;
-    }
   }
 
   .form-table {
     padding: 0 2.4rem;
+    margin-bottom: 50px;
 
     table {
       background-color: #4d4c4c;
@@ -33,7 +27,6 @@ export const Container = styled.div`
 
       td {
         max-height: 5px;
-        border-bottom: 0.2rem solid #8945de;
       }
     }
 
