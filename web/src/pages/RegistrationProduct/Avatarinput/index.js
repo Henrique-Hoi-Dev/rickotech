@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 
 export default function AvatarInput() {
   const { defaultValue, registerField } = useField('avatar');
-  const { avatar } = useSelector((state) => state.product.form);
+  const { avatar } = useSelector((state) => state.product);
   const [file, setFile] = useState(defaultValue && defaultValue.id);
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
   const { id } = useParams();

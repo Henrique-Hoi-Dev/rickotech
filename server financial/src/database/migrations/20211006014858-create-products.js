@@ -28,7 +28,7 @@ module.exports = {
         allowNull: false,
       },
       data_registro: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: false,
       },
       altura: {

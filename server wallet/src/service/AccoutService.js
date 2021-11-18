@@ -1,6 +1,7 @@
 import Account from "../app/models/Account";
 import Portion from "../app/models/Portion";
 import httpStatus from 'http-status-codes';
+import * as moment from 'moment';
 
 export default {
   // create uma nova conta
@@ -109,9 +110,10 @@ export default {
       });
 
       const dataAtual = new Date();
-
+      
       const valid = accounts.filter(function (result) {
-        if (result.dataValues.data_vencimento <= dataAtual) {
+        const vencido = new Date(result.dataValues.data_vencimento)
+        if (vencido <= dataAtual) {
           if (result.dataValues.status === 'pendente')
           return result.dataValues;
         }

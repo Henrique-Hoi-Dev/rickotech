@@ -11,9 +11,36 @@ import {
 } from './actions';
 
 export function* createProduct({ payload }) {
-  console.log(payload)
   try {
-    yield call(api.post, 'products/new', payload.values);
+    const { 
+      name, 
+      status, 
+      valor, 
+      categoria, 
+      avatar_id, 
+      data_registro, 
+      altura,
+      largura,
+      comprimento,
+      pese,
+      codigo_barra,
+      descricao } = payload.values;
+
+    const product = { 
+      name, 
+      status, 
+      valor, 
+      categoria, 
+      avatar_id, 
+      data_registro, 
+      altura,
+      largura,
+      comprimento,
+      pese,
+      codigo_barra,
+      descricao };
+
+    yield call(api.post, 'products/new', product);
     toast.success('Produto salvo com sucesso.');
   } catch (err) {
     yield put(productFailure());

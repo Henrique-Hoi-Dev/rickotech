@@ -5,8 +5,6 @@ import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import * as moment from 'moment';
-
 import Header from '~/components/HeaderListAndRegister';
 import { FcHighPriority } from 'react-icons/fc';
 import { Container } from './styles';
@@ -21,7 +19,6 @@ export default function RegistrationAccounts() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { accountList } = useSelector((state) => state.account);
-  console.log(accountList)
   
   useEffect(() => {
     if (id) {
@@ -66,10 +63,7 @@ export default function RegistrationAccounts() {
                     type="date" 
                     placeholder="Data vencimento"
                     />
-                    <p>
-                    {accountList.data_vencimento}
-                    </p>
-
+                    
                   <label htmlFor="status">Status</label>
                   <Field component="select" id="location" name="status">
                     <option value="pendente">Pendente</option>

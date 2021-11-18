@@ -55,34 +55,37 @@ export default function Home() {
          <AttachMoneyIcon /> <Link to="/caixa">Caixa</Link> 
         </ListItem >
         <ListItem >
-         <PointOfSaleIcon /> <Link to="/sales">Fazer venda</Link> 
+         <PointOfSaleIcon /> <Link to="/sales">Registre Venda</Link> 
         </ListItem >
         <ListItem >
-         <ProductionQuantityLimitsIcon /> <Link to="/registreProduct">Registro produto</Link> 
+         <ProductionQuantityLimitsIcon /> <Link to="/#">Registre Serviço</Link> 
         </ListItem >
         <ListItem >
-         <ListAltIcon /> <Link to="/listProducts">Lista produtos</Link> 
+         <ProductionQuantityLimitsIcon /> <Link to="/registreProduct">Registre Produto</Link> 
+        </ListItem >
+        <ListItem >
+         <ProductionQuantityLimitsIcon /> <Link to="/registreAccount">Registre Dividendo</Link> 
         </ListItem >
       </List>
       <Divider />
       <List>
         <ListItem >
-         <ListAltIcon /> <Link to="/listTodasAccounts">Todos os dividendos</Link> 
+         <ListAltIcon /> <Link to="/listProducts">Todos Produtos</Link> 
         </ListItem >
         <ListItem >
-         <ListAltIcon /> <Link to="/listPaidAccounts">Lista pagos</Link> 
+         <ListAltIcon /> <Link to="/listTodasAccounts">Todos Dividendos</Link> 
         </ListItem >
         <ListItem >
-         <ListAltIcon /> <Link to="/listPendingAccouts">Lista pendentes</Link> 
+         <ListAltIcon /> <Link to="/listPaidAccounts">Dividendos Pagos</Link> 
         </ListItem >
         <ListItem >
-         <ListAltIcon /> <Link to="listaCancelAccounts">Lista cancelados</Link> 
+         <ListAltIcon /> <Link to="/listPendingAccouts">Dividendos Pendentes</Link> 
         </ListItem >
         <ListItem >
-         <ListAltIcon /> <Link to="/listaLateAccounts">Lista vencidos</Link> 
+         <ListAltIcon /> <Link to="/listaLateAccounts">Dividendos Vencidos</Link> 
         </ListItem >
         <ListItem >
-         <ProductionQuantityLimitsIcon /> <Link to="/registreAccount">Registro de dividendo</Link> 
+         <ListAltIcon /> <Link to="listaCancelAccounts">Dividendos Cancelados</Link> 
         </ListItem >
       </List>
     </Box>

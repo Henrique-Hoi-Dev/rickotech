@@ -7,10 +7,6 @@ const INITIAL_STATE = {
 export default function account(state = INITIAL_STATE, action) {
   return produce(state, (draft) => {
     switch (action.type) {
-      case '@account/CREATE_ACCOUNT_SUCCESS': {
-        draft.accountList = action.payload.data;
-        break;
-      }
       case '@account/FIND_ALL_ACCOUNT_SUCCESS': {
         draft.accountList = action.payload.data;
         break;

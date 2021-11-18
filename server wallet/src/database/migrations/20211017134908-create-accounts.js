@@ -12,7 +12,7 @@ module.exports = {
         allowNull: false,
       },
       data_vencimento: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: false,
       },
       status: {

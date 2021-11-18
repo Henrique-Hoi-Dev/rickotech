@@ -9,7 +9,7 @@ class Product extends Model {
         name: Sequelize.STRING,
         valor: Sequelize.DOUBLE,
         categoria: Sequelize.STRING,
-        data_registro: Sequelize.DATE,
+        data_registro: Sequelize.DATEONLY,
         altura: Sequelize.STRING,
         largura: Sequelize.STRING,
         comprimento: Sequelize.STRING,

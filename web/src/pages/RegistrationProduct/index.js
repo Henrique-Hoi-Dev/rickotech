@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import * as Yup from 'yup';
 import { Formik, Field, Form } from 'formik';
 import { toast } from 'react-toastify';
 
@@ -17,18 +16,6 @@ import AvatarInput from './Avatarinput';
 import { FcHighPriority } from 'react-icons/fc';
 import { Container } from './styles';
 
-const schema = Yup.object().shape({
-  name: Yup.string().required('Este compo é obrigatório.').max(100, 'No máximo 100 caracteres'),
-  categoria: Yup.string().required('Este compo é obrigatório.'),
-  altura: Yup.string().required('Este compo é obrigatório.'),
-  largura: Yup.string().required('Este compo é obrigatório.'),
-  comprimento: Yup.string().required('Este compo é obrigatório.'),
-  codigo_barra: Yup.string().required('Este compo é obrigatório.'),
-  peso: Yup.string().required('Este compo é obrigatório.'),
-  valor: Yup.number().required('Este compo é obrigatório.'),
-  descricao: Yup.string().required('Este compo é obrigatório.'),
-  data_registro: Yup.date().required('Data é obrigatório.'),
-});
 
 export default function RegistrationProduct() {
   const dispatch = useDispatch();
@@ -43,7 +30,7 @@ export default function RegistrationProduct() {
     }
   }, [id, dispatch]);
 
-  const handleSubmit = (values, { resetForm }) => {
+  const handleSubmit = async (values, { resetForm }) => {
     try {
       let body = JSON.parse(JSON.stringify(values));
 
@@ -91,57 +78,44 @@ export default function RegistrationProduct() {
       <div className="header-main">
         <Formik
           onSubmit={handleSubmit}
-          validationSchema={schema}
           enableReinitialize={true}
-          initialValues={productList}
-        >
-          {(formProps) => {
-            return (
-              <Form className="form-input">
-                <div id="container-input" className="header-title">
-                  <div className="name-campo"></div>
+          initialValues={productList} 
+          >           
+          <Form className="form-input">
+            <div id="container-input" className="header-title">
+              <div className="campo2">
+                <Field name="name" type="text" placeholder="Nome Produto" />
+                <Field name="altura" type="text" placeholder="Altura" />
+                <Field name="largura" type="text" placeholder="Largura" />
+                <Field
+                  name="comprimento"
+                  type="text"
+                  placeholder="Comprimento"
+                />
+              </div>
 
-                  <div className="campo2">
-                    <Field name="name" type="text" placeholder="Nome Produto" />
-                    <span>{formProps.errors.name}</span>
-                    <Field name="altura" type="text" placeholder="Altura" />
-                    <span>{formProps.errors.altura}</span>
-                    <Field name="largura" type="text" placeholder="Largura" />
-                    <span>{formProps.errors.largura}</span>
-                    <Field
-                      name="comprimento"
-                      type="text"
-                      placeholder="Comprimento"
-                    />
-                    <span>{formProps.errors.comprimento}</span>
-                  </div>
+              <div className="campo3">
+                <Field name="peso" type="text" placeholder="Peso(kg)" />
+                <Field
+                  name="valor"
+                  type="number"
+                  placeholder="Preço($)"
+                  // onkeyup="currencyFormat"
+                />
+                <ul>
+                  <AvatarInput name="avatar_id" />
+                </ul>
+                </div>
 
-                  <div className="campo3">
-                    <Field name="peso" type="text" placeholder="Peso(kg)" />
-                    <span>{formProps.errors.peso}</span>
-                    <Field
-                      name="valor"
-                      type="number"
-                      placeholder="Preço($)"
-                      onkeyup={currencyFormat}
-                    />
-                    <span>{formProps.errors.valor}</span>
-                    <ul>
-                      <AvatarInput name="avatar_id" />
-                    </ul>
-                  </div>
-
-                  <div className="campo4">
-                    <Field 
-                      type="text" 
-                      placeholder="Categoria" 
-                      name="categoria" />
-                    <span>{formProps.errors.categoria}</span>
-                    <Field
-                      placeholder="Data do registro"
-                      type="date"
-                      name="data_registro" />
-                    <span>{formProps.errors.data_registro}</span>
+                <div className="campo4">
+                  <Field 
+                    type="text" 
+                    placeholder="Categoria" 
+                    name="categoria" />
+                  <Field
+                    placeholder="Data do registro"
+                    type="date"
+                    name="data_registro" />
                     <Field  component="select" name="status" >
                       <option value="EM-ESTOQUE">Em estoque</option>
                       <option value="VENDIDO">Vendido</option>
@@ -151,7 +125,6 @@ export default function RegistrationProduct() {
                       type="text"
                       placeholder="Código de barras"
                     />
-                    <span>{formProps.errors.codigo_barra}</span>
                   </div>
 
                   <div className="campo5">
@@ -159,7 +132,6 @@ export default function RegistrationProduct() {
                       as="textarea" 
                       name="descricao" 
                       type="text" />
-                    <span>{formProps.errors.descricao}</span>
                   </div>
 
                   <footer className="buttons-container">
@@ -172,8 +144,6 @@ export default function RegistrationProduct() {
                   </footer>
                 </div>
               </Form>
-            );
-          }}
         </Formik>
       </div>
     </Container>

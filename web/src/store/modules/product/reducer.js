@@ -2,46 +2,11 @@ import produce from 'immer';
 
 const INITIAL_STATE = {
   productList: [],
-  form: {
-    id: undefined,
-    status: 'EM-ESTOQUE',
-    name: '',
-    categoria: '',
-    altura: '',
-    largura: '',
-    comprimento: '',
-    codigo_barra: '',
-    peso: '',
-    valor: '',
-    descricao: '',
-    data_registro: '',
-  },
 };
 
 export default function product(state = INITIAL_STATE, action) {
   return produce(state, (draft) => {
     switch (action.type) {
-      case '@product/RESET_FORM': {
-        draft.form = {
-          id: undefined,
-          status: 'EM-ESTOQUE',
-          name: '',
-          categoria: '',
-          altura: '',
-          largura: '',
-          comprimento: '',
-          codigo_barra: '',
-          peso: '',
-          valor: '',
-          descricao: '',
-          data_registro: '',
-        };
-        break;
-      }
-      case '@product/CREATE_PRODUCT_SUCCESS': {
-        draft.productList = action.payload.data;
-        break;
-      }
       case '@product/FIND_ALL_PRODUCT_SUCCESS': {
         draft.productList = action.payload.data;
         break;

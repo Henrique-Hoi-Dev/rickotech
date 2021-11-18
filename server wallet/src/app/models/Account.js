@@ -5,7 +5,7 @@ class Account extends Model {
     super.init(
       {
         name: Sequelize.STRING,
-        data_vencimento: Sequelize.DATE,
+        data_vencimento: Sequelize.DATEONLY,
         status: Sequelize.ENUM('pendente', 'cancelado', 'pago'),
       },
       {

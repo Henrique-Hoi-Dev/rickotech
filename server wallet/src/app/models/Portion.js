@@ -7,7 +7,7 @@ class Portion extends Model {
         accounts_id: Sequelize.INTEGER,
         valor: Sequelize.DECIMAL,
         numero_parcela: Sequelize.DECIMAL,
-        data_vencimento: Sequelize.DATE,
+        data_vencimento: Sequelize.DATEONLY,
         pago: Sequelize.BOOLEAN,
       },
       {
