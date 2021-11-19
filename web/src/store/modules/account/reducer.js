@@ -2,11 +2,26 @@ import produce from 'immer';
 
 const INITIAL_STATE = {
   accountList: [],
+  form: {
+    id: undefined,
+    name: '',
+    data_vencimento: '',
+    status: 'pendente',
+  }
 };
 
 export default function account(state = INITIAL_STATE, action) {
   return produce(state, (draft) => {
     switch (action.type) {
+      case '@account/RESET_FORM': {
+        draft.form = {
+          id: undefined,
+          name: '',
+          data_vencimento: '',
+          status: 'pendente',
+        };
+        break;
+      }
       case '@account/FIND_ALL_ACCOUNT_SUCCESS': {
         draft.accountList = action.payload.data;
         break;
@@ -28,7 +43,7 @@ export default function account(state = INITIAL_STATE, action) {
         break;
       }
       case '@account/GET_BYID_ACCOUNT_SUCCESS': {
-        draft.accountList = action.payload.data;
+        draft.form = action.payload.data;
         break;
       }
       default:

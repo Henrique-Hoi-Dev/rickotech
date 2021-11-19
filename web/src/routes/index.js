@@ -37,9 +37,9 @@ function RoutesApp() {
       <Route isPrivate path="/listaLateAccounts" exact component={ListLateAccounts} />
       <Route isPrivate path="/registreProduct" exact component={RegistrationProduct} />
       <Route isPrivate path="/listProducts" exact component={ListProduct} />
-      <Route isPrivate exact path="/product/:id" component={RegistrationProduct} />
-      <Route isPrivate exact path="/account/:id" component={RegistrationAccount} />
-      <Route exact isPrivate path="/venda/:id" component={Sales}/>
+      <Route isPrivate path="/product/:id" exact component={RegistrationProduct} />
+      <Route isPrivate path="/account/:id" exact component={RegistrationAccount} />
+      <Route isPrivate path="/venda/:id" exact component={Sales}/>
     </Switch>
   );
 }

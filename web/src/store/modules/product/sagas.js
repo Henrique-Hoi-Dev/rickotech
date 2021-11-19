@@ -12,36 +12,9 @@ import {
 
 export function* createProduct({ payload }) {
   try {
-    const { 
-      name, 
-      status, 
-      valor, 
-      categoria, 
-      avatar_id, 
-      data_registro, 
-      altura,
-      largura,
-      comprimento,
-      pese,
-      codigo_barra,
-      descricao } = payload.values;
-
-    const product = { 
-      name, 
-      status, 
-      valor, 
-      categoria, 
-      avatar_id, 
-      data_registro, 
-      altura,
-      largura,
-      comprimento,
-      pese,
-      codigo_barra,
-      descricao };
-
-    yield call(api.post, 'products/new', product);
+    yield call(api.post, 'products/new', payload.values);
     toast.success('Produto salvo com sucesso.');
+    history.push('/listProducts');
   } catch (err) {
     yield put(productFailure());
     toast.error('Erro em salvar produto.');

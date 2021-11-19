@@ -12,18 +12,20 @@ import { Container } from './styles';
 import {
   createAccountRequest,
   getByIdAccountRequest,
-  UpdateAccountRequest,
-} from '~/store/modules/account/actions';
+  resetFormulario,
+  UpdateAccountRequest } from '~/store/modules/account/actions';
 
 export default function RegistrationAccounts() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { accountList } = useSelector((state) => state.account);
+  const { form } = useSelector((state) => state.account);
   
   useEffect(() => {
     if (id) {
       dispatch(getByIdAccountRequest(id));
-    } 
+    } else {
+      dispatch(resetFormulario());
+    }
   }, [id, dispatch]);
 
   const handleSubmit = async (values) => {
@@ -47,14 +49,13 @@ export default function RegistrationAccounts() {
         <Formik
           onSubmit={handleSubmit}
           enableReinitialize={true}
-          initialValues={accountList}>
+          initialValues={form}>
             <Form className="form-input">
               <div id="container-input" className="header-title">
                 <div className="campo2">
                   <label htmlFor="name">Conta</label>
                   <Field 
                     name="name" 
-                    type="text" 
                     placeholder="Nome conta" />
 
                   <label htmlFor="data_vencimento">Data vencimento</label>

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Formik, Field, Form } from 'formik';
 import { toast } from 'react-toastify';
+import * as Yup from 'yup';
 
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,19 +9,24 @@ import {
   createProductRequest,
   getByIdProductRequest,
   UpdateProductRequest,
-  resetFormulario,
-} from '~/store/modules/product/actions';
+  resetFormulario } from '~/store/modules/product/actions';
 
 import Header from '~/components/HeaderListAndRegister';
 import AvatarInput from './Avatarinput';
 import { FcHighPriority } from 'react-icons/fc';
 import { Container } from './styles';
 
+const schema = Yup.object().shape({
+  name: Yup.string().required('Este compo é obrigatório.')
+  .max(100, 'No máximo 100 caracteres'),
+  codigo_barra: Yup.number().required('Este compo é obrigatório.'),
+  valor: Yup.number().required('Este compo é obrigatório.'),
+});
 
 export default function RegistrationProduct() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { productList } = useSelector((state) => state.product);
+  const { form } = useSelector((state) => state.product);
 
   useEffect(() => {
     if (id) {
@@ -42,7 +48,6 @@ export default function RegistrationProduct() {
         dispatch(UpdateProductRequest({ product_id: id, values: body }));
       } else {
         dispatch(createProductRequest(values));
-
         handleReset(resetForm);
       }
     } catch (error) {
@@ -78,72 +83,82 @@ export default function RegistrationProduct() {
       <div className="header-main">
         <Formik
           onSubmit={handleSubmit}
+          validationSchema={schema}
           enableReinitialize={true}
-          initialValues={productList} 
-          >           
-          <Form className="form-input">
+          initialValues={form} >
+          {(formProps) => { 
+          return (
+            <Form className="form-input" >
             <div id="container-input" className="header-title">
               <div className="campo2">
-                <Field name="name" type="text" placeholder="Nome Produto" />
-                <Field name="altura" type="text" placeholder="Altura" />
-                <Field name="largura" type="text" placeholder="Largura" />
+                <Field 
+                  id="name" 
+                  name="name" 
+                  placeholder="Nome Produto" />
+                <span>{formProps.errors.name}</span>
+                <Field 
+                  id="altura" 
+                  name="altura" 
+                  placeholder="Altura(M)" />
+                <Field 
+                  id="largura" 
+                  name="largura" 
+                  placeholder="Largura(M)" />
                 <Field
                   name="comprimento"
-                  type="text"
-                  placeholder="Comprimento"
-                />
+                  placeholder="Comprimento(M)" />
               </div>
 
               <div className="campo3">
-                <Field name="peso" type="text" placeholder="Peso(kg)" />
+                <Field 
+                  name="peso" 
+                  placeholder="Peso(kg)" />
                 <Field
                   name="valor"
                   type="number"
-                  placeholder="Preço($)"
-                  // onkeyup="currencyFormat"
-                />
+                  placeholder="Preço($)" />
+                <span>{formProps.errors.valor}</span>
                 <ul>
                   <AvatarInput name="avatar_id" />
                 </ul>
-                </div>
+              </div>
 
-                <div className="campo4">
-                  <Field 
-                    type="text" 
-                    placeholder="Categoria" 
-                    name="categoria" />
-                  <Field
-                    placeholder="Data do registro"
-                    type="date"
-                    name="data_registro" />
-                    <Field  component="select" name="status" >
-                      <option value="EM-ESTOQUE">Em estoque</option>
-                      <option value="VENDIDO">Vendido</option>
-                    </Field>                    
-                    <Field
-                      name="codigo_barra"
-                      type="text"
-                      placeholder="Código de barras"
-                    />
-                  </div>
+              <div className="campo4">
+                <Field 
+                  name="categoria"
+                  placeholder="Categoria" />
+                <Field
+                  placeholder="Data do registro"
+                  type="date"
+                  name="data_registro" />
+                <Field  component="select" name="status" >
+                  <option value="EM-ESTOQUE">Em estoque</option>
+                  <option value="VENDIDO">Vendido</option>
+                </Field>                    
+                <Field
+                  name="codigo_barra"
+                  placeholder="Código de barras" />
+                <span>{formProps.errors.codigo_barra}</span>
+              </div>
 
-                  <div className="campo5">
-                    <Field 
-                      as="textarea" 
-                      name="descricao" 
-                      type="text" />
-                  </div>
+              <div className="campo5">
+                <label htmlFor="descricao">Descrição Produto</label>
+                <Field 
+                  as="textarea" 
+                  name="descricao"/>
+              </div>
 
-                  <footer className="buttons-container">
-                    <p>
-                      <FcHighPriority />
-                      Importante! <br />
-                      Preencha todos os dados
-                    </p>
-                    <button type="submit">Salvar</button>
-                  </footer>
-                </div>
-              </Form>
+              <footer className="buttons-container">
+                <p>
+                  <FcHighPriority />
+                  Importante! <br />
+                  Preencha todos os dados
+                </p>
+                <button type="submit">Salvar</button>
+              </footer>
+            </div>
+          </Form>
+          )}}            
         </Formik>
       </div>
     </Container>

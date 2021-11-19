@@ -16,10 +16,10 @@ export const Container = styled.div`
     }
 
     img {
-      height: 100px;
+      height: 88px;
       width: 100px;
       border-radius: 10%;
-      border: 5px solid rgba(255, 255, 255, 0.3);
+      border: 2px solid #8945de;
       background: #fff;
     }
 

@@ -76,12 +76,12 @@ export default function Adress() {
     <h2>Endereço</h2>
     <label htmlFor="adress">
      <Form initialData={adresses} onSubmit={handleSubmit} >
-        <Input type="text" name="cep" placeholder="CEP" onBlur={(ev) => onBlurCep(ev)} />
-        <Input type="text" name="logradouro" placeholder="Logradouro" />
-        <Input type="text" name="complemento" placeholder="Complemento" />
-        <Input type="text" name="numero" placeholder="Número" />
-        <Input type="text" name="bairro" placeholder="Bairro" />
-        <Input type="text" name="cidade" placeholder="Cidade" />
+        <Input  name="cep" placeholder="CEP" onBlur={(ev) => onBlurCep(ev)} />
+        <Input  name="logradouro" placeholder="Logradouro" />
+        <Input  name="complemento" placeholder="Complemento" />
+        <Input  name="numero" placeholder="Número" />
+        <Input  name="bairro" placeholder="Bairro" />
+        <Input  name="cidade" placeholder="Cidade" />
         <Select options={estados} name="uf" placeholder="UF" />
         <hr/>
         <button className="adresses" type="submit">

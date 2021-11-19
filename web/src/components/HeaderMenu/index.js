@@ -54,9 +54,9 @@ export default function Home() {
         <ListItem >
          <AttachMoneyIcon /> <Link to="/caixa">Caixa</Link> 
         </ListItem >
-        <ListItem >
+        {/* <ListItem >
          <PointOfSaleIcon /> <Link to="/sales">Registre Venda</Link> 
-        </ListItem >
+        </ListItem > */}
         <ListItem >
          <ProductionQuantityLimitsIcon /> <Link to="/#">Registre Serviço</Link> 
         </ListItem >
@@ -193,8 +193,8 @@ export default function Home() {
                     },
                   },
                 }}
-                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                transformOrigin={{ horizontal: 'right',  }}
+                anchorOrigin={{ horizontal: 'right',  }}
               >
                 <MenuItem>
                   <Avatar />
