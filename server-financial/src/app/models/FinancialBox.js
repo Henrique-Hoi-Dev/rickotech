@@ -7,8 +7,8 @@ class FinancialBox extends Model {
         valor_sales_total: Sequelize.DOUBLE,
         valor_service_total: Sequelize.DOUBLE,
         valor_total: Sequelize.DOUBLE,
-        open_caixa: Sequelize.DATE,
-        close_caixa: Sequelize.DATE
+        open_caixa: Sequelize.DATEONLY,
+        close_caixa: Sequelize.DATEONLY
       },
       {
         sequelize,

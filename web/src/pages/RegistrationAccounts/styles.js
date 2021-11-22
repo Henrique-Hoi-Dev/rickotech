@@ -4,8 +4,6 @@ import { darken } from 'polished';
 export const Container = styled.div` 
   font-size: 0.8rem;
 
-  }
-
   .header-main {
     background: #353535;
     width: 100%;
@@ -78,19 +76,6 @@ export const Container = styled.div`
       margin-top: 0.5rem;
     }
 
-    textarea {
-      width: 100%;
-      min-height: 4rem;
-      margin-top: 0.8rem;
-      border-radius: 0.8rem;
-      background: #f8f8fc;
-      border: 1px solid #e6e6f0;
-      outline: 0;
-      resize: vertical;
-      padding: 1.2rem 1.6rem;
-      font: 1.2rem Archivo;
-      font-weight: bold;
-    }
     p {
       display: flex;
       align-items: center;
@@ -99,11 +84,6 @@ export const Container = styled.div`
       line-height: 2.4rem;
       color: #9c98a6;
     } 
-    
-    main {
-      margin: 3.2rem auto;
-      width: 90%;
-    }
 
     footer {
       padding: 2rem ;
@@ -152,4 +132,5 @@ export const Container = styled.div`
     .buttons-container {
       grid-area: button;
     }  
+  }
 `;

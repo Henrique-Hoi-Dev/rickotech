@@ -9,22 +9,22 @@ module.exports = {
       },
       valor_sales_total: {
         type: Sequelize.DOUBLE,
-        allowNull: false,
+        allowNull: true,
       },
       valor_service_total: {
         type: Sequelize.DOUBLE,
-        allowNull: false,
+        allowNull: true,
       },
       valor_total: {
         type: Sequelize.DOUBLE,
-        allowNull: false,
-      },
-      open_caixa: {
-        type: Sequelize.DATE,
         allowNull: true,
       },
+      open_caixa: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+      },
       close_caixa: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: true,
       },
       created_at: {

@@ -1,0 +1,56 @@
+version: '3.7'
+
+services:
+  nodejs-financial:
+    container_name: nodejs-financial
+    build:
+      context: ./server
+      dockerfile: Dockerfile-local
+    # command: sh -c "npm run migrate && npm run seed && npm start"
+    command: sh -c "npm run migrate && npm start"
+    volumes:
+      - .:/home/node/app
+      - /home/node/app/node_modules
+    depends_on:
+      - postgres-server
+    ports:
+      - '3333:3333'
+    networks:
+      - app-connect
+
+  nodejs-wallet:
+    container_name: nodejs-wallet
+    build:
+      context: ./server
+      dockerfile: Dockerfile-local
+    # command: sh -c "npm run migrate && npm run seed && npm start"
+    command: sh -c "npm run migrate && npm start"
+    volumes:
+      - .:/home/node/app
+      - /home/node/app/node_modules
+    depends_on:
+      - postgres-server
+    ports:
+      - '3434:3434'
+    networks:
+      - app-connect
+
+  postgres-server:
+    container_name: postgres-server
+    image: 'postgres'
+    restart: unless-stopped
+    volumes:
+      - postgres-server-data:/data
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    networks:
+      - app-connect
+
+volumes:
+  postgres-server-data:
+
+networks:
+  app-connect:
+    driver: bridge

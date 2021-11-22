@@ -39,7 +39,7 @@ function RoutesApp() {
       <Route isPrivate path="/listProducts" exact component={ListProduct} />
       <Route isPrivate path="/product/:id" exact component={RegistrationProduct} />
       <Route isPrivate path="/account/:id" exact component={RegistrationAccount} />
-      <Route isPrivate path="/venda/:id" exact component={Sales}/>
+      <Route isPrivate path="/sales/:id" exact component={Sales}/>
     </Switch>
   );
 }

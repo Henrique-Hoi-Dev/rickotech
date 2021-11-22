@@ -66,16 +66,16 @@ export default function RegistrationProduct() {
       );
   };
 
-  function currencyFormat(num) {
-    if (num) {
-      return (
-        'R$' +
-        parseFloat(num)
-          .toFixed(2)
-          .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-      );
-    }
-  }
+  // function currencyFormat(num) {
+  //   if (num) {
+  //     return (
+  //       'R$' +
+  //       parseFloat(num)
+  //         .toFixed(2)
+  //         .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+  //     );
+  //   }
+  // }
 
   return (
     <Container>
@@ -125,6 +125,7 @@ export default function RegistrationProduct() {
 
               <div className="campo4">
                 <Field 
+                  id="categoria"
                   name="categoria"
                   placeholder="Categoria" />
                 <Field

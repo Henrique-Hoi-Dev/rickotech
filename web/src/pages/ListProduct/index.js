@@ -89,7 +89,7 @@ const ProductList = ({ productList, handlerRemoveProduct }) => {
                   </td>
                   <td>
                     <button >
-                      <Link to={`/venda/${produto.id}`}>
+                      <Link to={`/sales/${produto.id}`}>
                         < FcSalesPerformance/>
                       </Link>
                     </button>

@@ -3,6 +3,7 @@ import { Form, Input, Select } from '@rocketseat/unform';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 import {
   createVendatRequest,
@@ -95,7 +96,11 @@ const handleReset = (resetForm) => {
           </div>
          <div className="but">
             <button type="submit">Confirmar venda</button>
-            <button type="submit" className="cancela">Cancelar venda</button>
+            <button className="cancela">
+              <Link to="/listProducts">
+                Cancelar venda
+              </Link>
+            </button>
           </div>
         </Form>
       </Container>      
