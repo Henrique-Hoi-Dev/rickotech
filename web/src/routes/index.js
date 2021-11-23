@@ -17,6 +17,8 @@ import ListCancelAccounts from '~/pages/ListCancelAccounts';
 import ListLateAccounts from '~/pages/ListLateAccounts';
 import RegistrationProduct from '~/pages/RegistrationProduct'
 import RegistrationAccount from '~/pages/RegistrationAccounts'
+import RegistrationServices from '~/pages/RegistreServices'
+import RegistrationPortion from '~/pages/RegistrationAccounts/RegistrationPortion'
 import ListProduct from '~/pages/ListProduct';
 
 function RoutesApp() {
@@ -30,15 +32,18 @@ function RoutesApp() {
       <Route isPrivate path="/sales" exact component={Sales} />
       <Route isPrivate path="/dashboard" exact component={Dashboard} />
       <Route isPrivate path="/registreAccount" exact component={RegistrationAccount} />
+      <Route isPrivate path="/registreProduct" exact component={RegistrationProduct} />
+      <Route isPrivate path="/registreServices" exact component={RegistrationServices} />
+      <Route isPrivate path="/registrePortion/:id" exact component={RegistrationPortion} />
       <Route isPrivate path="/listTodasAccounts" exact component={ListTodasAccounts} />
       <Route isPrivate path="/listPaidAccounts" exact component={ListPaidAccounts} />
       <Route isPrivate path="/listPendingAccouts" exact component={ListPendingAccounts} />
       <Route isPrivate path="/listaCancelAccounts" exact component={ListCancelAccounts} />
       <Route isPrivate path="/listaLateAccounts" exact component={ListLateAccounts} />
-      <Route isPrivate path="/registreProduct" exact component={RegistrationProduct} />
       <Route isPrivate path="/listProducts" exact component={ListProduct} />
       <Route isPrivate path="/product/:id" exact component={RegistrationProduct} />
       <Route isPrivate path="/account/:id" exact component={RegistrationAccount} />
+      <Route isPrivate path="/portion/:id" exact component={RegistrationPortion} />
       <Route isPrivate path="/sales/:id" exact component={Sales}/>
     </Switch>
   );

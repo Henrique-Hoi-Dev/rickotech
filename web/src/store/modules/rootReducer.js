@@ -6,5 +6,15 @@ import adress from './adress/reducer';
 import product from './product/reducer';
 import sales from './sales/reducer';
 import account from './account/reducer';
+import portion from './portion/reducer';
+import servicos from './servicos/reducer';
 
-export default combineReducers({ auth, user, adress, product, sales, account });
+export default combineReducers({ 
+  auth, 
+  user, 
+  adress, 
+  product, 
+  sales, 
+  account, 
+  portion, 
+  servicos });

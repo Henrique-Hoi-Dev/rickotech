@@ -136,7 +136,7 @@ const ListPaidAccounts = ({ accountList, handlerRemoveAccount, handlerRemovePort
                       <TableCell align="right">{moment(parcelas.data_vencimento).format('DD-MM-YYYY')}</TableCell>
                       <TableCell align="right">
                         <button>
-                          <Link to={`/product/${parcelas.id}`}>
+                          <Link to={`/portion/${parcelas.id}`}>
                             <BiEdit />
                           </Link>
                         </button>

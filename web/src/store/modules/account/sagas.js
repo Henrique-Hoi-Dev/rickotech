@@ -1,7 +1,7 @@
 import { takeLatest, call, all, put } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
-// import history from '~/services/history';
+import history from '~/services/history';
 import api from '~/services/api2';
 
 import {
@@ -19,6 +19,7 @@ export function* createAccount({ payload }) {
     yield call(api.post, '/account/new', payload.values);
 
     toast.success('Conta salva com sucesso.');
+    history.push('/listTodasAccounts')
   } catch (err) {
     yield put(accountFailure());
     toast.error('Error salvar conta.');

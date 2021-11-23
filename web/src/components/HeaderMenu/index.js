@@ -58,7 +58,7 @@ export default function Home() {
          <PointOfSaleIcon /> <Link to="/sales">Registre Venda</Link> 
         </ListItem > */}
         <ListItem >
-         <ProductionQuantityLimitsIcon /> <Link to="/#">Registre Serviço</Link> 
+         <ProductionQuantityLimitsIcon /> <Link to="/registreServices">Registre Serviço</Link> 
         </ListItem >
         <ListItem >
          <ProductionQuantityLimitsIcon /> <Link to="/registreProduct">Registre Produto</Link> 

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Formik, Field, Form } from 'formik';
 import { toast } from 'react-toastify';
 
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Header from '~/components/HeaderListAndRegister';
@@ -42,6 +42,10 @@ export default function RegistrationAccounts() {
     }
   };
 
+  const  renderButton = { 
+     display: id ? 'line-through' : 'none' 
+  }
+
   return (
     <Container>
       <Header title="Registro de contas"/>
@@ -56,13 +60,13 @@ export default function RegistrationAccounts() {
                   <label htmlFor="name">Conta</label>
                   <Field 
                     name="name" 
-                    placeholder="Nome conta" />
+                    placeholder="nome conta" />
 
                   <label htmlFor="data_vencimento">Data vencimento</label>
                   <Field 
                     name="data_vencimento" 
                     type="date" 
-                    placeholder="Data vencimento"
+                    placeholder="data vencimento"
                     />
                     
                   <label htmlFor="status">Status</label>
@@ -79,6 +83,11 @@ export default function RegistrationAccounts() {
                       Preencha todos os dados
                     </p>
                   <button type="submit">Salvar</button>
+                  <button>
+                    <Link style={renderButton} to={`/registrePortion/${id}`}>
+                      Criar parcelas
+                    </Link>
+                  </button>
                 </footer>
               </div>
             </Form>

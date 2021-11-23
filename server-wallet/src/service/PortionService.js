@@ -98,7 +98,7 @@ export default {
   },
   // atualiza parcela por Id
   async updatePortionId(req, res) {
-    let id = req.accounts_id;
+    let id = req.id;
     let body = res
 
     try {
@@ -106,7 +106,7 @@ export default {
         valor: Yup.string().required(),
       });
 
-      if (!(await schema.isValid(req.body))) {
+      if (!(await schema.isValid(body))) {
         return res.status(400).json({ error: 'Validation failed' });
       }
       const portion = await Portion.findByPk(id);

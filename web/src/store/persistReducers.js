@@ -6,7 +6,15 @@ export default (reducers) => {
     {
       key: 'vendas',
       storage,
-      whitelist: ['auth', 'user', 'adress', 'product', 'sales', 'account'],
+      whitelist: [
+        'auth', 
+        'user', 
+        'adress', 
+        'product', 
+        'sales', 
+        'account', 
+        'portion', 
+        'servicos'],
     },
     reducers
   );

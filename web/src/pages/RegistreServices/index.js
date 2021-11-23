@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Formik, Field, Form } from 'formik';
 import { toast } from 'react-toastify';
 
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Header from '~/components/HeaderListAndRegister';
@@ -10,19 +10,18 @@ import { FcHighPriority } from 'react-icons/fc';
 import { Container } from './styles';
 
 import {
-  createPortionRequest,
-  getByIdPortionRequest,
-  resetFormulario,
-  UpdatePortionRequest } from '~/store/modules/portion/actions';
+  createServicetRequest,
+  getByIdServiceRequest,
+  resetFormulario } from '~/store/modules/servicos/actions';
 
-export default function RegistrationPortion(props) {
+export default function RegistreServices() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const  { form }  = useSelector((state) => state.portion);
+  const { form } = useSelector((state) => state.account);
   
   useEffect(() => {
-    if (props.match.path === '/portion/:id') {
-      dispatch(getByIdPortionRequest(id));
+    if (id) {
+      dispatch(getByIdServiceRequest(id));
     } else {
       dispatch(resetFormulario());
     }
@@ -30,12 +29,12 @@ export default function RegistrationPortion(props) {
 
   const handleSubmit = async (values) => {
     try {
-      let body = JSON.parse(JSON.stringify(values));
+      // let body = JSON.parse(JSON.stringify(values));
 
-      if (form.numero_parcela) {
-        dispatch(UpdatePortionRequest({ id: id , values: body}));
+      if (id) {
+        // dispatch(UpdateAccountRequest({ account_id: id , values: body}));
       } else {
-        dispatch(createPortionRequest(values, id));
+        dispatch(createServicetRequest(values));
       }
     } catch (error) {
       toast.error('Error check data');
@@ -44,41 +43,44 @@ export default function RegistrationPortion(props) {
 
   return (
     <Container>
-      <Header title="Registre todas as parcelas"/>
+      <Header title="Registro de Serviços"/>
       <div className="header-main">
         <Formik
           onSubmit={handleSubmit}
           enableReinitialize={true}
-          initialValues={form} >
+          initialValues={form}
+          >
             <Form className="form-input">
               <div id="container-input" className="header-title">
                 <div className="campo2">
+                  <label htmlFor="name">Nome do Serviço</label>
+                  <Field 
+                    name="name" 
+                    placeholder="nome" />
+
                   <label htmlFor="valor">Valor</label>
                   <Field 
                     name="valor" 
                     placeholder="valor" />
-                  <label htmlFor="numero_parcela">Número Parcela</label>
+
+                  <label htmlFor="data_serviço">Dia do serviço feito</label>
                   <Field 
-                    name="numero_parcela" 
-                    placeholder="nome conta" />
-                  <label htmlFor="data_vencimento">Data vencimento</label>
-                  <Field 
-                    name="data_vencimento" 
+                    name="data_serviço" 
                     type="date" 
-                    placeholder="data vencimento" /> 
-                  <label htmlFor="pago">Status</label>
-                  <Field component="select" id="location" name="pago">
-                    <option value="false">Devendo</option>
-                    <option value="true">Pago</option>
-                  </Field>
+                    placeholder="data do serviço" />
                 </div>              
                 <footer className="buttons-container">
                     <p>
                       <FcHighPriority />
-                      Importante! <br />
-                      Preencha todos os dados
+                      Serviço só será registrado, só com o caixa aberto!<br/>
+                      Preencha todos os dados!
                     </p>
                   <button type="submit">Salvar</button>
+                  {/* <button>
+                    <Link to={`/registrePortion`}>
+                      Criar parcelas
+                    </Link>
+                  </button> */}
                 </footer>
               </div>
             </Form>
