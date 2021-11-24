@@ -8,10 +8,9 @@ export default  {
   async storeSales(req, res) {
     let sales = req
     let product_id = res.product_id
-    let financial_id = res.financial_id
 
     try {
-      let { name, valor, desconto, tipo_pagamento, tipo_parcela, 
+      let { financial_id, name, valor, desconto, tipo_pagamento, tipo_parcela, 
             parcela_valor, parcela_numero } = sales;
 
       const products = await Product.findByPk(product_id);

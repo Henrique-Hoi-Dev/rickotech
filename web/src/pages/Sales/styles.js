@@ -36,7 +36,7 @@ export const Container = styled.div`
     grid-template-rows: 1fr 1fr;
     grid-template-areas:
     'statos tipo-venda'
-    'final tipo-venda-1'
+    'tipo-venda-1 final'
     'but but';
 
     .statos {
@@ -46,7 +46,6 @@ export const Container = styled.div`
     }
     .tipo-venda {
       grid-area: tipo-venda;
-      max-height: 90px;
       display: flex;
       flex-direction: column;
     }
@@ -70,12 +69,25 @@ export const Container = styled.div`
         background: red;
       }
     }
-    h2 {
+    label {
       padding: 0.5rem;
-      font-weight: bold;
+      font: 700 1.4rem Archivo;
 
       color: #9c98a6;
       text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    p {
+      display: flex;
+      align-items: center;
+      font-size: 1.4rem;
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+      line-height: 2.4rem;
+      color: #9c98a6;
+    } 
+
+    svg {
+      margin-right: 1rem;
     }
   }
 
@@ -83,9 +95,7 @@ export const Container = styled.div`
     text-align: center;
     text-decoration: none;
     margin: 5px 0 0;
-    height: 3rem;
-    width: 15rem;
-    background: #8945de;
+    color: #ffff;
     font-weight: bold;
     margin-bottom: 1rem;
     border-radius: 4px;
@@ -98,9 +108,9 @@ export const Container = styled.div`
   }
 
   button {
-    margin: 5px 0 0;
+    margin: 5px 18px 0;
     height: 3rem;
-    width: 15rem;
+    width: 12rem;
     background: #8945de;
     font-weight: bold;
     margin-bottom: 1rem;
@@ -140,7 +150,7 @@ export const Container = styled.div`
 
   select {
     font: 1rem Archivo;
-    max-width: 15rem;
+    min-width: 15rem;
     border-radius: 0.5rem;
     height: 2.2rem;
     padding: 0 1rem;

@@ -50,7 +50,7 @@ routes.get('/product/:id', ProductController.getProductDetailsId);
 routes.delete('/product/:id', ProductController.deleteProductId);
 
 //sales
-routes.post('/sales/:product_id/:financial_id', SalesController.storeSales);
+routes.post('/sales/:product_id', SalesController.storeSales);
 routes.get('/saleses', SalesController.getSalesDetails);
 routes.put('/sales/:id', SalesController.updateSalesId);
 routes.get('/sales/:id', SalesController.getSalesDetailsId);

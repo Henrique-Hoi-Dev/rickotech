@@ -34,7 +34,7 @@ export function* findAllProduct() {
 
 export function* getByIdProduct({ payload }) {
   try {
-    const response = yield call(api.get, `/product/${payload.data}`);
+    const response = yield call(api.get, `/product/${payload.id}`);
 
     yield put(getByIdProductSuccess(response.data));
   } catch (err) {

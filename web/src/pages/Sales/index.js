@@ -1,51 +1,49 @@
 import React, { useEffect } from 'react';
-import { Form, Input, Select } from '@rocketseat/unform';
+import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
+import { Input } from '@rocketseat/unform';
+
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import { FcHighPriority } from 'react-icons/fc';
 
 import {
-  createVendatRequest,
+  createSalesRequest,
   getByIdVendaRequest,
-  UpdateVendaRequest,
+  UpdateSalesRequest,
   resetFormulario,
 } from '~/store/modules/sales/actions';
+import { getByIdProductRequest } from '~/store/modules/product/actions';
+import { findAllFinancialBoxRequest } from '~/store/modules/financialBox/actions';
 
 import { Container } from './styles';
 import Header from '~/components/HeaderListAndRegister';
-
-const tipoParcelamento = [
-  { id: 'Cartão de credito', title: 'Cartão de credito' },
-  { id: 'Boleto', title: 'Boleto' },
-];
-
-const tipoPagamento = [
-  { id: 'Avista', title: 'Avista' },
-  { id: 'Parcelado', title: 'Parcelado' },
-];
 
 export default function Sales() {
 const dispatch = useDispatch();
 const { id } = useParams();
 const { form } = useSelector((state) => state.sales);
+const productList = useSelector((state) => state.product.form);
+const { financialBoxList } = useSelector((state) => state.financialBox);
 
-  useEffect(() => {
-    if (id) {
-      dispatch(getByIdVendaRequest(id));
-    } else {
-      dispatch(resetFormulario());
-    }
-  }, [id, dispatch]);
+useEffect(() => {
+  dispatch(findAllFinancialBoxRequest());
+  if (id) {
+    dispatch(getByIdProductRequest(id));
+  } else {
+    dispatch(resetFormulario());
+  }
+}, [id, dispatch]);
   
 const handleSubmit = async (values, { resetForm }) => {
   try {
     let body = JSON.parse(JSON.stringify(values));
 
-    if (id) {
-      dispatch(UpdateVendaRequest({ id: id, values: body }));
+    if (productList.sales === [0]) {
+      dispatch(UpdateSalesRequest({ id: id, values: body }));
     } else {
-      dispatch(createVendatRequest(body));
+      dispatch(createSalesRequest(values, id));
 
       handleReset(resetForm);
     }
@@ -61,48 +59,93 @@ const handleReset = (resetForm) => {
   return (
     <>
     <Header title="Venda"/>
-      <Container>  
-        <Form initialData={form} onSubmit={handleSubmit}>
-          <div className="statos">
-            <h2>Nome</h2>
-            <Input name="produto_id" type="text" />
-            <h2>Desconto</h2>
-            <Input name="valor_desconto" type="number" />
-          </div>
-          <div className="tipo-venda">
-            <h2>Valor</h2>
-            <Input name="valor" type="number" />
+      <Container>
+        <Formik
+          onSubmit={handleSubmit}
+          enableReinitialize={true}
+          initialValues={form} > 
+          <Form >
+            <div className="statos">
+              <label htmlFor="name">Nome do Produto</label>
+              <Field name="name" component="select"  placeholder="nome" >
+                <option value="0" >selecione o nome</option>
+                <option value={productList.name} >{productList.name}</option>
+              </Field>
+              <label htmlFor="valor">Valor do Produto</label>
+              <Field name="valor" component="select" placeholder="valor" >
+                <option value="0" >selecione o valor</option>
+                <option value={productList.valor} >{productList.valor}</option>
+              </Field>
+            </div>
             
-          </div>
-          <div className="tipo-venda-1">
-            <h2>Tipo de venda</h2>
-              <Select
-                options={tipoPagamento}
-                name="tipo_pagamento"
-                type="text"
-              />
-            <h2>Valor total</h2>
-            <Input  name="valor_pendente" type="number" />
-          </div>
-          <div className="final">
-            <h2>Tipo de parcelamento</h2>
-            <Select
-              options={tipoParcelamento}
-              name="tipo_parcela"
-              type="text"
-            />
-            <h2>Valor parcelas</h2>
-            <Input  name="valor_parcela" type="number" />
-          </div>
-         <div className="but">
-            <button type="submit">Confirmar venda</button>
-            <button className="cancela">
-              <Link to="/listProducts">
-                Cancelar venda
-              </Link>
-            </button>
-          </div>
-        </Form>
+            {financialBoxList.map((caixa, i) => (
+            <div className="tipo-venda">
+              <label htmlFor="financial_id">Caixa</label>
+              <Field name="financial_id" component="select" placeholder="caixa">
+                <option value="0" >selecione um caixa</option>
+                <option value={caixa.id} >{caixa.open_caixa}</option>
+              </Field>
+              <label htmlFor="desconto">Valor do Produto</label>
+              <Field name="desconto" type="number" placeholder="valor"/> 
+            </div>
+            ))} 
+
+            <div className="tipo-venda-1">
+              <label htmlFor="tipo_pagamento">Tipo de Venda</label>
+              <Field name="tipo_pagamento" component="select" placeholder="venda">
+                <option value="0" >selecione um caixa</option>
+                <option value="AVISTA" >Avista</option>
+                <option value="PARCELADO">Parcelado</option>
+              </Field>
+              <label htmlFor="">Quantas Parcelas</label>
+              <Field 
+                name="parcela_numero" 
+                component="select"
+                placeholder="numero de parcela">
+                <option value="0" >selecio quantas vezes</option>
+                <option value="x1" >Parcela x1</option>
+                <option value="x2" >Parcela x2</option>
+                <option value="x3" >Parcela x3</option>
+                <option value="x4" >Parcela x4</option>
+                <option value="x5" >Parcela x5</option>
+                <option value="x6" >Parcela x6</option>
+                <option value="x7" >Parcela x7</option>
+                <option value="x8" >Parcela x8</option>
+                <option value="x9" >Parcela x9</option>
+                <option value="x10" >Parcela x10</option>
+                <option value="x11" >Parcela x11</option>
+                <option value="x12" >Parcela x12</option>
+              </Field>
+            </div>
+
+            <div className="final">
+              <label>Tipo de Parcelamento</label>
+              <Field name="tipo_parcela" component="select" placeholder="parcela">
+                <option value="0" >selecione um caixa</option>
+                <option value="PAGO" >Pago</option>
+                <option value="BOLETO" >Boleto</option>
+                <option value="CARTAO-CREDITO" >Cartão de credito</option>
+              </Field>
+              <label>Valor Parcelas</label>
+              <Field  name="parcela_valor" type="number" placeholder="valor"/>
+            </div>
+
+            <div className="but">
+              <button type="submit">Confirmar venda</button>
+              <button className="cancela">
+                <Link to="/listProducts">
+                  Cancelar venda
+                </Link>
+              </button>
+            </div>
+            <p>
+              <FcHighPriority />
+                Importante!<br/>
+                Preencha todos os dados!
+            </p>
+          </Form>
+        </Formik> 
+        
       </Container>      
     </>
   );

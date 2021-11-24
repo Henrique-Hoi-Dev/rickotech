@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Formik, Field, Form } from 'formik';
 import { toast } from 'react-toastify';
 
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Header from '~/components/HeaderListAndRegister';
@@ -13,13 +13,16 @@ import {
   createServicetRequest,
   getByIdServiceRequest,
   resetFormulario } from '~/store/modules/servicos/actions';
+import { findAllFinancialBoxRequest } from '~/store/modules/financialBox/actions';
 
 export default function RegistreServices() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { form } = useSelector((state) => state.account);
+  const { financialBoxList } = useSelector((state) => state.financialBox);
+  const { form } = useSelector((state) => state.servicos);
   
   useEffect(() => {
+    dispatch(findAllFinancialBoxRequest());
     if (id) {
       dispatch(getByIdServiceRequest(id));
     } else {
@@ -30,7 +33,6 @@ export default function RegistreServices() {
   const handleSubmit = async (values) => {
     try {
       // let body = JSON.parse(JSON.stringify(values));
-
       if (id) {
         // dispatch(UpdateAccountRequest({ account_id: id , values: body}));
       } else {
@@ -48,8 +50,7 @@ export default function RegistreServices() {
         <Formik
           onSubmit={handleSubmit}
           enableReinitialize={true}
-          initialValues={form}
-          >
+          initialValues={form} >
             <Form className="form-input">
               <div id="container-input" className="header-title">
                 <div className="campo2">
@@ -60,6 +61,7 @@ export default function RegistreServices() {
 
                   <label htmlFor="valor">Valor</label>
                   <Field 
+                    type="number"
                     name="valor" 
                     placeholder="valor" />
 
@@ -68,7 +70,16 @@ export default function RegistreServices() {
                     name="data_serviço" 
                     type="date" 
                     placeholder="data do serviço" />
-                </div>              
+                </div>
+                {financialBoxList.map((caixa, i) => (
+                <div className="campo" >
+                  <label htmlFor="id">Data abertura caixa</label>
+                  <Field  component="select" name="id" >
+                    <option value="0" >selecione um caixa</option>
+                    <option value={caixa.id} >{caixa.open_caixa}</option>
+                  </Field>   
+                </div> 
+                ))}    
                 <footer className="buttons-container">
                     <p>
                       <FcHighPriority />
@@ -76,11 +87,6 @@ export default function RegistreServices() {
                       Preencha todos os dados!
                     </p>
                   <button type="submit">Salvar</button>
-                  {/* <button>
-                    <Link to={`/registrePortion`}>
-                      Criar parcelas
-                    </Link>
-                  </button> */}
                 </footer>
               </div>
             </Form>

@@ -81,10 +81,7 @@ export const Container = styled.div`
   a {
     text-align: center;
     text-decoration: none;
-    margin: 5px 0 0;
-    height: 3rem;
-    width: 15rem;
-    background: #8945de;
+    color: #000;
     font-weight: bold;
     margin-bottom: 1rem;
     border-radius: 4px;
@@ -97,9 +94,9 @@ export const Container = styled.div`
   }
 
   button {
-    margin: 5px 0 0;
+    margin: 5px 18px 0;
     height: 3rem;
-    width: 15rem;
+    width: 12rem;
     background: #8945de;
     font-weight: bold;
     margin-bottom: 1rem;

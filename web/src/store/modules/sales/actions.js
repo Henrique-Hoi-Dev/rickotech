@@ -1,62 +1,76 @@
-export function createVendatRequest(values) {
+export function createSalesRequest(values, id) {
   return {
-    type: '@venda/CREATE_VENDA_REQUEST',
-    payload: { values },
+    type: '@sales/CREATE_SALES_REQUEST',
+    payload: { values, id },
   };
 }
 
-export function getByIdVendaRequest(data) {
+export function getByIdSalesRequest(id) {
   return {
-    type: '@venda/GET_BYID_VENDA_REQUEST',
+    type: '@sales/GET_BYID_SALES_REQUEST',
+    payload: { id },
+  };
+}
+
+export function getByIdSalesSuccess(data) {
+  return {
+    type: '@sales/GET_BYID_SALES_SUCCESS',
     payload: { data },
   };
 }
 
-export function getByIdVendaSuccess(data) {
+export function getByIdSalesFinancialBoxValorTotalRequest(id) {
   return {
-    type: '@venda/GET_BYID_VENDA_SUCCESS',
+    type: '@sales/GET_BYID_SALES_FINANCIALBOX_VALORTOTAL_REQUEST',
+    payload: { id },
+  };
+}
+
+export function getByIdSalesFinancialBoxValorTotalSuccess(data) {
+  return {
+    type: '@sales/GET_BYID_SALES_FINANCIALBOX_VALORTOTAL_SUCCESS',
     payload: { data },
   };
 }
 
-export function findAllVendaRequest(data) {
+export function findAllSalesRequest() {
   return {
-    type: '@venda/FINDALL_VENDA_REQUEST',
+    type: '@sales/FINDALL_SALES_REQUEST',
+    payload: { },
+  };
+}
+
+export function findAllSalesSuccess(data) {
+  return {
+    type: '@sales/FIND_ALL_SALES_SUCCESS',
     payload: { data },
   };
 }
 
-export function findAllVendaSuccess(data) {
+export function UpdateSalesRequest(data) {
   return {
-    type: '@venda/FIND_ALL_VENDA_SUCCESS',
+    type: '@sales/UPDATE_SALES_REQUEST',
     payload: { data },
   };
 }
 
-export function UpdateVendaRequest(data) {
+export function UpdateSalesSuccess(data) {
   return {
-    type: '@venda/UPDATE_VENDA_REQUEST',
+    type: '@sales/UPDATE_SALES_SUCCESS',
     payload: { data },
   };
 }
 
-export function UpdateVendaSuccess(data) {
+export function deleteSalesRequest(data) {
   return {
-    type: '@venda/UPDATE_VENDA_SUCCESS',
+    type: '@sales/DELETE_SALES_REQUEST',
     payload: { data },
   };
 }
 
-export function deleteVendaRequest(data) {
+export function salesFailure() {
   return {
-    type: '@venda/DELETE_VENDA_REQUEST',
-    payload: { data },
-  };
-}
-
-export function vendaFailure() {
-  return {
-    type: '@venda/VENDA_FAILURE',
+    type: '@sales/SALES_FAILURE',
   };
 }
 

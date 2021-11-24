@@ -5,16 +5,30 @@ export function createServicetRequest(values) {
   };
 }
 
-export function getByIdServiceRequest(data) {
+export function getByIdServiceRequest(id) {
   return {
     type: '@service/GET_BYID_SERVICE_REQUEST',
-    payload: { data },
+    payload: { id },
   };
 }
 
 export function getByIdServiceSuccess(data) {
   return {
     type: '@service/GET_BYID_SERVICE_SUCCESS',
+    payload: { data },
+  };
+}
+
+export function getByIdServiceFinancialBoxValorTotalRequest(id) {
+  return {
+    type: '@service/GET_BYID_SERVICE_FINANCIALBOX_VALORTOTAL_REQUEST',
+    payload: { id },
+  };
+}
+
+export function getByIdServiceFinancialBoxValorTotalSuccess(data) {
+  return {
+    type: '@service/GET_BYID_SERVICE_FINANCIALBOX_VALORTOTAL_SUCCESS',
     payload: { data },
   };
 }

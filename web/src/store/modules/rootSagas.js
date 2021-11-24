@@ -8,6 +8,7 @@ import sales from './sales/sagas';
 import account from './account/sagas';
 import portion from './portion/sagas';
 import servicos from './servicos/sagas';
+import financialBox from './financialBox/sagas';
 
 export default function* rootSaga() {
   return yield all([
@@ -18,6 +19,7 @@ export default function* rootSaga() {
     sales, 
     account, 
     portion, 
-    servicos
+    servicos,
+    financialBox
   ]);
 }

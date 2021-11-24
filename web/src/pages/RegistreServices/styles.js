@@ -13,56 +13,77 @@ export const Container = styled.div`
     border-radius: 0.8rem;
     margin: -3rem auto 3.2rem;
     padding-top: 3rem;
-    overflow: hidden;   
+    overflow: hidden; 
+  
+    #container-input {
+      max-width: 1100px;
 
-  input {
-    font: 1rem Archivo;
-    border-radius: 0.5rem;
-    height: 2.2rem;
-    padding: 0 1rem;
-    margin: 0 0 1rem;
-    border: 2px solid #8945de;
-    font-weight: bold;
-    color: #9c98a6;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 300px;
+      grid-template-areas:
+        'campo2 campo'
+        'button button'    
+    }
+    .campo2 {
+      grid-area: campo2;
+      margin-left: 70px;
+    }
+    .campo {
+      grid-area: campo;
+    }
+    .buttons-container {
+      grid-area: button;
+    }  
 
+    input {
+      font: 1rem Archivo;
+      border-radius: 0.5rem;
+      height: 2.2rem;
+      padding: 0 1rem;
+      margin: 0 0 1rem;
+      border: 2px solid #8945de;
+      font-weight: bold;
+      color: #9c98a6;
+
+    }
+
+    select {  
+      font: 1rem Archivo;
+      border-radius: 0.5rem;
+      width: 13.5rem;
+      height: 2.2rem;
+      padding: 0 1rem;
+      margin: 0 0 1rem;
+      border: 2px solid #8945de;
+      font-weight: bold;
+      color: #9c98a6;
+    }
+
+    .form-input {
+      border: 2;
+      padding: 0 2.4rem;
+      margin-top: 0.1rem;
+    }
   }
 
-  select {  
-    font: 1rem Archivo;
-    border-radius: 0.5rem;
-    width: 13.5rem;
-    height: 2.2rem;
-    padding: 0 1rem;
-    margin: 0 0 1rem;
-    border: 2px solid #8945de;
-    font-weight: bold;
-    color: #9c98a6;
-  }
+  button {
+    background: none;
+    border: 0;
+    color: #6842c2;
+    font: 700 1.6rem Archivo;
+    cursor: pointer;
+    transition: color 0.2s;
 
-  .form-input {
-    border: 2;
-    padding: 0 2.4rem;
-    margin-top: 0.1rem;
-   }
-  }
-
-    button {
-      background: none;
-      border: 0;
+    a {
       color: #6842c2;
-      font: 700 1.6rem Archivo;
-      cursor: pointer;
-      transition: color 0.2s;
+    }
 
-      a {
-        color: #6842c2;
-      }
-
-      &:hover {
-        color: ${darken(0.03, '#6842c2')};
-        transform: scale(1.1);
-        transition: all 0.5s;
-      }
+    &:hover {
+      color: ${darken(0.03, '#6842c2')};
+      transform: scale(1.1);
+      transition: all 0.5s;
+    }
   }
 
   .header-title {
@@ -111,24 +132,8 @@ export const Container = styled.div`
       grid-template-areas:
         'name name name'
     }
-
-    .name-campo {
-      grid-area: name;    
-    }
-
-    .campo2 {
+    .campo {
       grid-area: campo2;
-    }
-    .campo3 {
-      grid-area: campo3;
-
-      ul {
-        display: flex;
-        flex-direction: column;
-      }
-    }
-    .campo4 {
-      grid-area: campo4;
     }
     .campo5 {
       grid-area: campo5;

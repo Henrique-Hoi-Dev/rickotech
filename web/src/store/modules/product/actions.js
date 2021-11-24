@@ -19,10 +19,10 @@ export function findAllProductSuccess(data) {
   };
 }
 
-export function getByIdProductRequest(data) {
+export function getByIdProductRequest(id) {
   return {
     type: '@product/GET_BYID_PRODUCT_REQUEST',
-    payload: { data },
+    payload: { id },
   };
 }
 

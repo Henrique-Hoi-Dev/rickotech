@@ -8,6 +8,7 @@ import sales from './sales/reducer';
 import account from './account/reducer';
 import portion from './portion/reducer';
 import servicos from './servicos/reducer';
+import financialBox from './financialBox/reducer';
 
 export default combineReducers({ 
   auth, 
@@ -17,4 +18,5 @@ export default combineReducers({
   sales, 
   account, 
   portion, 
-  servicos });
+  servicos, 
+  financialBox });

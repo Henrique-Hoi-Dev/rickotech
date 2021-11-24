@@ -31,7 +31,6 @@ module.exports = {
       },
       desconto: {
         type: Sequelize.DOUBLE,
-        allowNull: true,
       },
       tipo_pagamento: {
         type: Sequelize.ENUM,
@@ -45,11 +44,9 @@ module.exports = {
       },
       parcela_valor: {
         type: Sequelize.DOUBLE,
-        allowNull: true,
       },
       parcela_numero: {
         type: Sequelize.STRING,
-        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,
