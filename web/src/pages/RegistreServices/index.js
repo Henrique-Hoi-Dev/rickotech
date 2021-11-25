@@ -72,7 +72,7 @@ export default function RegistreServices() {
                     placeholder="data do serviço" />
                 </div>
                 {financialBoxList.map((caixa, i) => (
-                <div className="campo" >
+                <div className="campo" key={i}>
                   <label htmlFor="id">Data abertura caixa</label>
                   <Field  component="select" name="id" >
                     <option value="0" >selecione um caixa</option>

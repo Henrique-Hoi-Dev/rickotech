@@ -81,9 +81,7 @@ const ProductList = ({ productList, handlerRemoveProduct }) => {
                     </button>
                   </td>
                   <td>
-                    <button
-                      onClick={(e) => handlerRemoveProduct(e, produto.id)}
-                    >
+                    <button onClick={(e) => handlerRemoveProduct(e, produto.id)}>
                       <FcEmptyTrash />
                     </button>
                   </td>

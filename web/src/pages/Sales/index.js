@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { Input } from '@rocketseat/unform';
 
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -10,7 +9,7 @@ import { FcHighPriority } from 'react-icons/fc';
 
 import {
   createSalesRequest,
-  getByIdVendaRequest,
+  // getByIdVendaRequest,
   UpdateSalesRequest,
   resetFormulario,
 } from '~/store/modules/sales/actions';
@@ -79,7 +78,7 @@ const handleReset = (resetForm) => {
             </div>
             
             {financialBoxList.map((caixa, i) => (
-            <div className="tipo-venda">
+            <div className="tipo-venda" key={i}>
               <label htmlFor="financial_id">Caixa</label>
               <Field name="financial_id" component="select" placeholder="caixa">
                 <option value="0" >selecione um caixa</option>

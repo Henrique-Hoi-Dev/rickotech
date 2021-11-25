@@ -24,7 +24,7 @@ export function* createSales({ payload }) {
 
 export function* findAllSales() {
   try {
-    const response = yield call(api.get, `/vendas`);
+    const response = yield call(api.get, '/saleses');
 
     yield put(findAllSalesSuccess(response.data));
   } catch (err) {
