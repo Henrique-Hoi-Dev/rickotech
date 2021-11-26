@@ -29,8 +29,8 @@ async storeProduct(req, res) {
 // e informação do avatar do produto
 async getProductDetails(req, res) {
     try {
-      const product = await Product.findAll({
-        attributes: [ 'id', 'status', 'name', 'valor', 'categoria','data_registro', 
+      const products = await Product.findAll({
+        attributes: [ 'id', 'name', 'valor', 'categoria','data_registro', 
                       'altura', 'largura', 'comprimento', 'peso',
                       'codigo_barra', 'descricao' ],
         include: [
@@ -47,7 +47,15 @@ async getProductDetails(req, res) {
         }
       ]  
     });
-    return product;
+
+    const valid = products.filter(function (result) {
+      console.log(result.dataValues.sales)
+      if (result.dataValues.sales === null) {
+        return result.dataValues;
+      }
+    });
+
+    return valid;
   } catch (error) {
   return res.status(400).json(error)
   }

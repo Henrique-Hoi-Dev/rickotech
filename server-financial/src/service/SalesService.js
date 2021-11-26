@@ -29,9 +29,16 @@ export default  {
       if (!financialBox) {
         return res.status(400).json({ menssage: 'Financial not found' });
       }
+      if (sales.desconto > 1) {
+        const porcent = (sales.valor / 100) 
+        const descont = (porcent * sales.desconto)
+        const valord =  sales.valor - descont
+        
+        return res.status(200).json({valord})
+      }
 
       const saleses = await Sales.create({ product_id, financial_id, name, valor, desconto, 
-          tipo_pagamento, tipo_parcela, parcela_valor, parcela_numero });
+            tipo_pagamento, tipo_parcela, parcela_valor, parcela_numero });
 
       return saleses;
     } catch (error) {

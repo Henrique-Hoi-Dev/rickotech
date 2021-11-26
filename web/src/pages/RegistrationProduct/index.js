@@ -66,17 +66,6 @@ export default function RegistrationProduct() {
       );
   };
 
-  // function currencyFormat(num) {
-  //   if (num) {
-  //     return (
-  //       'R$' +
-  //       parseFloat(num)
-  //         .toFixed(2)
-  //         .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-  //     );
-  //   }
-  // }
-
   return (
     <Container>
       <Header title="Registro de produtos"/>
@@ -131,11 +120,7 @@ export default function RegistrationProduct() {
                 <Field
                   placeholder="Data do registro"
                   type="date"
-                  name="data_registro" />
-                <Field  component="select" name="status" >
-                  <option value="EM-ESTOQUE">Em estoque</option>
-                  <option value="VENDIDO">Vendido</option>
-                </Field>                    
+                  name="data_registro" />                  
                 <Field
                   name="codigo_barra"
                   placeholder="Código de barras" />

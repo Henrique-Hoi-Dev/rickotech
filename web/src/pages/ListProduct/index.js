@@ -37,7 +37,7 @@ const ProductList = ({ productList, handlerRemoveProduct }) => {
 
   return (
     <Container>
-      <Header  title="Todos produtos"/>
+      <Header  title="Todos os produtos"/>
       <div className="header-main">
         <form className="form-table">
           <table className="table-list">
@@ -47,7 +47,6 @@ const ProductList = ({ productList, handlerRemoveProduct }) => {
                 <td>Valor</td>
                 <td>Data Registro</td>
                 <td>Categoria</td>
-                <td>status</td>
                 <td>Avatar</td>
                 <td>Editar</td>
                 <td>Excluir</td>
@@ -59,9 +58,8 @@ const ProductList = ({ productList, handlerRemoveProduct }) => {
                 <tr key={i} value={produto.id}>
                   <td>{produto.name}</td>
                   <td>{currencyFormat(produto.valor)}</td>
-                  <td>{moment(produto.data_registro).format('DD-MM-YYYY')}</td>
+                  <td>{moment(produto.data_registro).format('DD/MM/YYYY')}</td>
                   <td>{produto.categoria}</td>
-                  <td>{produto.status}</td>
                   <td className="avatar">
                     <img
                       src={

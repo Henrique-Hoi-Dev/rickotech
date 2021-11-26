@@ -3,7 +3,6 @@ import produce from 'immer';
 const INITIAL_STATE = {
   productList: [],
   form: {
-    status: 'EM-ESTOQUE',
     name: '',
     altura: '',
     largura: '',
@@ -21,7 +20,6 @@ export default function product(state = INITIAL_STATE, action) {
     switch (action.type) {
       case '@product/RESET_FORM': {
         draft.form = {
-          status: 'EM-ESTOQUE',
           name: '',
           altura: '',
           largura: '',

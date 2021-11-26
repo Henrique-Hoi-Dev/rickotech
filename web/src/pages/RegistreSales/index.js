@@ -84,8 +84,8 @@ const handleReset = (resetForm) => {
                 <option value="0" >selecione um caixa</option>
                 <option value={caixa.id} >{caixa.open_caixa}</option>
               </Field>
-              <label htmlFor="desconto">Valor do Produto</label>
-              <Field name="desconto" type="number" placeholder="valor"/> 
+              <label htmlFor="desconto">% Desconto</label>
+              <Field name="desconto" type="number" placeholder="%"/> 
             </div>
             ))} 
 

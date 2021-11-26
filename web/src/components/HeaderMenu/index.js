@@ -19,7 +19,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Logout from '@mui/icons-material/Logout';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
-// import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 import { TiThMenu } from 'react-icons/ti';
@@ -45,8 +44,7 @@ export default function Home() {
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
+      onKeyDown={toggleDrawer(anchor, false)}>
       <List>
         <ListItem >
          <DashboardIcon /> <Link to="/dashboard">Dashboard</Link> 
@@ -54,9 +52,6 @@ export default function Home() {
         <ListItem >
          <AttachMoneyIcon /> <Link to="/caixa">Caixa</Link> 
         </ListItem >
-        {/* <ListItem >
-         <PointOfSaleIcon /> <Link to="/sales">Registre Venda</Link> 
-        </ListItem > */}
         <ListItem >
          <ProductionQuantityLimitsIcon /> <Link to="/registreServices">Registre Serviço</Link> 
         </ListItem >
@@ -86,6 +81,9 @@ export default function Home() {
         </ListItem >
         <ListItem >
          <ListAltIcon /> <Link to="listaCancelAccounts">Dividendos Cancelados</Link> 
+        </ListItem >
+        <ListItem >
+         <ListAltIcon /> <Link to="/listSales">Vendas de Produtos</Link> 
         </ListItem >
       </List>
     </Box>

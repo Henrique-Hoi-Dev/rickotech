@@ -5,7 +5,6 @@ class Product extends Model {
     super.init(
       {
         avatar_id: Sequelize.INTEGER,
-        status: Sequelize.ENUM('EM-ESTOQUE', 'VENDIDO'),
         name: Sequelize.STRING,
         valor: Sequelize.DOUBLE,
         categoria: Sequelize.STRING,

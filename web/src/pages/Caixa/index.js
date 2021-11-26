@@ -30,7 +30,7 @@ const { totalSales } = useSelector((state) => state.sales.salesList);
     } else {
       dispatch(resetFormulario());
     }
-  }, [caixa[0].id, dispatch]);
+  }, [caixa, dispatch]);
   
 const handleSubmit = async (values, { resetForm }) => {
   try {

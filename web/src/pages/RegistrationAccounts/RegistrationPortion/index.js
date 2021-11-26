@@ -26,7 +26,7 @@ export default function RegistrationPortion(props) {
     } else {
       dispatch(resetFormulario());
     }
-  }, [props.match.path, dispatch]);
+  }, [props.match.path, id, dispatch]);
 
   const handleSubmit = async (values) => {
     try {

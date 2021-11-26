@@ -10,11 +10,6 @@ module.exports = {
       avatar_id: {
         type: Sequelize.INTEGER,
       },
-      status: {
-        type: Sequelize.ENUM,
-        values: ['EM-ESTOQUE','VENDIDO'],
-        defaultValue: 'EM-ESTOQUE',
-      },
       name: {
         type: Sequelize.STRING,
         allowNull: false,

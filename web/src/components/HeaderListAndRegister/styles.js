@@ -12,7 +12,7 @@ export const PageHeader = styled.div`
     justify-content: space-between;
     align-items: center;
     color: #ffffff;
-    padding: 1.6rem 0;
+    padding: 1rem 0;
     margin: 1rem auto -5rem;
 
     a {

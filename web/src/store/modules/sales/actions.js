@@ -61,10 +61,10 @@ export function UpdateSalesSuccess(data) {
   };
 }
 
-export function deleteSalesRequest(data) {
+export function deleteSalesRequest(id) {
   return {
     type: '@sales/DELETE_SALES_REQUEST',
-    payload: { data },
+    payload: { id },
   };
 }
 

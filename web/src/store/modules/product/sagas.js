@@ -13,6 +13,7 @@ import {
 export function* createProduct({ payload }) {
   try {
     yield call(api.post, 'products/new', payload.values);
+    
     toast.success('Produto salvo com sucesso.');
     history.push('/listProducts');
   } catch (err) {
@@ -27,7 +28,7 @@ export function* findAllProduct() {
 
     yield put(findAllProductSuccess(response.data));
   } catch (err) {
-    toast.error('Error searching products check data.');
+    toast.error('Error em buscas produtos.');
     yield put(productFailure());
   }
 }

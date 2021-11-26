@@ -73,12 +73,11 @@ export function* UpdateSales({ payload }) {
 
 export function* deleteSales({ payload }) {
   try {
-    yield call(api.delete, `/venda/${payload.data}`);
+    yield call(api.delete, `/sales/${payload.id}`);
 
-    const response = yield call(api.get, `/vendas`);
+    const response = yield call(api.get, '/saleses');
 
     yield put(findAllSalesSuccess(response.data));
-
     toast.success('Venda deletada');
   } catch (err) {
     toast.error('Erro em excluir venda');

@@ -79,7 +79,7 @@ const ListCancelAccounts = ({ accountList, handlerRemoveAccount, handlerRemovePo
           </TableCell>
           <TableCell component="th" scope="row">{row.name}
           </TableCell>
-          <TableCell align="right">{moment(row.data_vencimento).format('DD-MM-YYYY')}</TableCell>
+          <TableCell align="right">{moment(row.data_vencimento).format('DD/MM/YYYY')}</TableCell>
           <TableCell align="right" 
                     style={{ color: (row.status === 'pendente' && 'red') || 
                     (row.status === 'pago' && 'green') || 
@@ -133,7 +133,7 @@ const ListCancelAccounts = ({ accountList, handlerRemoveAccount, handlerRemovePo
                       {(parcelas.pago === true && 'Pago') || 
                        (parcelas.pago === false && 'Devendo')}
                       </TableCell>
-                      <TableCell align="right">{moment(parcelas.data_vencimento).format('DD-MM-YYYY')}</TableCell>
+                      <TableCell align="right">{moment(parcelas.data_vencimento).format('DD/MM/YYYY')}</TableCell>
                       <TableCell align="right">
                         <button>
                           <Link to={`/portion/${parcelas.id}`}>
