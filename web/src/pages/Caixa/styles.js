@@ -16,19 +16,6 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: stretch;
 
-  .titulo {
-    margin-bottom: 2rem;
-    display: flex;
-    justify-content: center;
-    h1 {
-      padding: 0.5rem;
-      font-weight: bold;
-
-      color: #9c98a6;
-      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-    }
-  }
-
   form {
     display: grid; 
     justify-items: center;
@@ -69,10 +56,10 @@ export const Container = styled.div`
         background: red;
       }
     }
-    h2 {
+    label {
       padding: 0.5rem;
       font-weight: bold;
-
+      font-size: 20px;
       color: #9c98a6;
       text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
     }

@@ -29,18 +29,20 @@ export default  {
       if (!financialBox) {
         return res.status(400).json({ menssage: 'Financial not found' });
       }
-      if (sales.desconto > 1) {
-        const porcent = (sales.valor / 100) 
-        const descont = (porcent * sales.desconto)
-        const valord =  sales.valor - descont
-        
-        return res.status(200).json({valord})
+
+      if (desconto >= 0) {
+        const porcent = (valor / 100) 
+        const descont = (porcent * desconto)
+        const valor_total = valor - descont 
+      
+        console.log(valor_total)
+      
+        const saleses = await Sales.create({product_id, financial_id, name, valor, 
+          desconto, valor_total, tipo_pagamento, tipo_parcela, parcela_valor, 
+          parcela_numero }); 
+
+        return saleses
       }
-
-      const saleses = await Sales.create({ product_id, financial_id, name, valor, desconto, 
-            tipo_pagamento, tipo_parcela, parcela_valor, parcela_numero });
-
-      return saleses;
     } catch (error) {
       return res.status(400).json(error);
     }
@@ -49,14 +51,15 @@ export default  {
   async getSalesDetails(req, res) {
     try {
       let sales = await Sales.findAll({
-        attributes: [ 'id', 'product_id', 'financial_id', 'name', 'valor', 'desconto', 'tipo_pagamento', 
-                      'tipo_parcela', 'parcela_valor', 'parcela_numero'],
+        attributes: [ 'id', 'product_id', 'financial_id', 'name', 'valor', 
+        'valor_total', 'desconto', 'tipo_pagamento', 'tipo_parcela', 
+        'parcela_valor', 'parcela_numero'],
           include: [
-            {
-              model: Product,
-              as: 'product',
-              attributes: [ 'name', 'status', 'valor' ],
-            },
+            // {
+            //   model: Product,
+            //   as: 'product',
+            //   attributes: [ 'name', 'status', 'valor' ],
+            // },
             {
               model: FinancialBox,
               as: 'financial',
@@ -76,15 +79,11 @@ export default  {
     try {
       let id = req.id
 
-      let sales = await Sales.findByPk(id, {
-        attributes: [ 'id', 'product_id', 'name', 'valor', 'desconto', 'tipo_pagamento',
-                      'tipo_parcela', 'parcela_valor', 'parcela_numero' ],
+      let salesId = await Sales.findByPk(id, {
+        attributes: [ 'id', 'product_id', 'financial_id', 'name', 'valor', 
+        'valor_total', 'desconto', 'tipo_pagamento', 'tipo_parcela', 
+        'parcela_valor', 'parcela_numero'],
         include: [
-          {
-            model: Product,
-            as: 'product',
-            attributes: [ 'name', 'status', 'valor' ],
-          },
           {
             model: FinancialBox,
             as: 'financial',
@@ -94,11 +93,7 @@ export default  {
         ],
       });
 
-      if (!sales) {
-        return res.status(400).json({ menssage: 'User not found' });
-      }
-
-      return sales;
+      return salesId;
     } catch (error) {
       return res.status(400).json(error);
     }
@@ -108,14 +103,14 @@ export default  {
     let financialId = req.financial_id 
     try {
       let saleses = await Sales.findAll({ where : { financial_id: financialId },
-        attributes: [ 'id', 'product_id', 'name', 'valor', 'desconto', 'tipo_pagamento',
-                      'tipo_parcela', 'parcela_valor', 'parcela_numero' ],
+        attributes: [ 'id', 'product_id', 'name', 'valor', 'valor_total', 'desconto', 
+        'tipo_pagamento', 'tipo_parcela', 'parcela_valor', 'parcela_numero' ],
           include: [
-            {
-              model: Product,
-              as: 'product',
-              attributes: [ 'name', 'status', 'valor' ],
-            },
+            // {
+            //   model: Product,
+            //   as: 'product',
+            //   attributes: [ 'name', 'status', 'valor' ],
+            // },
             {
               model: FinancialBox,
               as: 'financial',
@@ -128,7 +123,7 @@ export default  {
         return result.dataValues;
       });
       const venciSales = validSales.map(function (result) {
-      const valor = parseInt(result.dataValues.valor);
+      const valor = parseInt(result.dataValues.valor_total);
         return valor;
       });
       const totalSales = venciSales.reduce((acumulado, x) => {

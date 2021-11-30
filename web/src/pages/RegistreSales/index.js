@@ -14,7 +14,6 @@ import {
   resetFormulario,
 } from '~/store/modules/sales/actions';
 import { getByIdProductRequest } from '~/store/modules/product/actions';
-import { findAllFinancialBoxRequest } from '~/store/modules/financialBox/actions';
 
 import { Container } from './styles';
 import Header from '~/components/HeaderListAndRegister';
@@ -27,7 +26,6 @@ const productList = useSelector((state) => state.product.form);
 const { financialBoxList } = useSelector((state) => state.financialBox);
 
 useEffect(() => {
-  dispatch(findAllFinancialBoxRequest());
   if (id) {
     dispatch(getByIdProductRequest(id));
   } else {

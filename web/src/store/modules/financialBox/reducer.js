@@ -25,7 +25,7 @@ export default function financialBox(state = INITIAL_STATE, action) {
         break;
       }
       case '@financialBox/GET_BYID_FINANCIALBOX_SUCCESS': {
-        draft.financialBoxList = action.payload.data;
+        draft.form = action.payload.data;
         break;
       }
       case '@financialBox/FIND_ALL_FINANCIALBOX_SUCCESS': {

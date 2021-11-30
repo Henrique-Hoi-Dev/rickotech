@@ -9,6 +9,7 @@ class Sales extends Model {
         name: Sequelize.STRING,
         valor: Sequelize.DOUBLE,
         desconto: Sequelize.DOUBLE,
+        valor_total: Sequelize.DOUBLE,
         tipo_pagamento: Sequelize.ENUM('AVISTA', 'PARCELADO'),
         tipo_parcela: Sequelize.ENUM('PAGO', 'CARTAO-CREDITO', 'BOLETO'),
         parcela_valor: Sequelize.DOUBLE,

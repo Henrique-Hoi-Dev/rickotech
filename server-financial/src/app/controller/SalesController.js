@@ -5,20 +5,22 @@ class SalesController {
     let response;     
     try {
       response = await SalesService.storeSales(req.body, req.params);
-      return res.status(200).send(response);
+      return res.status(201).send(response);
         
     } catch (error) {
-      return res.status(400).json(error);
+      return res.status(401).json(error);
     }
   }
   async getSalesDetails(req, res) {
     let response;      
     try {
       response = await SalesService.getSalesDetails();
+      console.log(response)
+
       return res.status(200).send(response);
         
     } catch (error) {
-      return res.status(400).json({error: 'Erro no create uma venda'});
+      return res.status(400).json({error: 'Erro no busca todas as venda'});
     }
   }
   async getSalesDetailsId(req, res) {
@@ -38,7 +40,7 @@ class SalesController {
       return res.status(200).send(response);
         
     } catch (error) {
-      return res.status(400).json(error);
+      return res.status(400).json({error: 'Erro na busca valor total vendas'});
     }
   }
   async updateSalesId(req, res) {

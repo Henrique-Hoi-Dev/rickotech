@@ -5,11 +5,11 @@ const INITIAL_STATE = {
   form: {
     name: '',
     valor: '',
-    desconto: '0',
+    desconto: '',
     tipo_pagamento: 'AVISTA',
     tipo_parcela: 'PAGO',
-    parcela_valor: '0',
-    parcela_numero: '0'
+    parcela_valor: '',
+    parcela_numero: ''
   },
 };
 
@@ -20,11 +20,11 @@ export default function sales(state = INITIAL_STATE, action) {
         draft.form = {
           name: '',
           valor: '',
-          desconto: '0',
+          desconto: '',
           tipo_pagamento: 'AVISTA',
           tipo_parcela: 'PAGO',
-          parcela_valor: '0',
-          parcela_numero: '0'
+          parcela_valor: '',
+          parcela_numero: ''
         };
         break;
       }

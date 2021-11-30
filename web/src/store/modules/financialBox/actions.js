@@ -1,7 +1,7 @@
-export function createFinancialBoxRequest(values, id) {
+export function createFinancialBoxRequest(values) {
   return {
     type: '@financialBox/CREATE_FINANCIALBOX_REQUEST',
-    payload: { values, id },
+    payload: { values },
   };
 }
 
@@ -19,10 +19,10 @@ export function getByIdFinancialBoxSuccess(data) {
   };
 }
 
-export function findAllFinancialBoxRequest() {
+export function findAllFinancialBoxRequest(data) {
   return {
     type: '@financialBox/FIND_ALL_FINANCIALBOX_REQUEST',
-    payload: { },
+    payload: { data },
   };
 }
 

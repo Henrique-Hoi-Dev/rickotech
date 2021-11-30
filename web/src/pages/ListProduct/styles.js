@@ -42,14 +42,9 @@ export const Container = styled.div`
     }
 
     button {
-      display: flex;
-      justify-content: center;
-
       background: none;
       border: 0;
-      margin-left: 0.5rem;
-      color: #8945de;
-      font: 700 1.5rem Archivo;
+      font-size: 28px;
       cursor: pointer;
     }
   }
@@ -91,51 +86,6 @@ export const Container = styled.div`
   }
 
   @media screen and (max-width: 600px) {
-    table {
-      border: 0;
-    }
-
-    table caption {
-      font-size: 1.3em;
-    }
-
-    table thead {
-      border: none;
-      clip: rect(0 0 0 0);
-      height: 1px;
-      margin: -1px;
-      overflow: hidden;
-      padding: 0;
-      position: absolute;
-      width: 1px;
-    }
-
-    table tr {
-      border-bottom: 3px solid #ddd;
-      display: block;
-      margin-bottom: 0.625em;
-    }
-
-    table td {
-      border-bottom: 1px solid #ddd;
-      border-radius: 0.6rem;
-      display: block;
-      font-size: 1.2rem;
-      text-align: right;
-
-      display: flex;
-      justify-content: space-between;
-    }
-
-    table td::before {
-      content: attr(data-label);
-      float: left;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-
-    table td:last-child {
-      border-bottom: 0;
-    }
+    
   }
 `;

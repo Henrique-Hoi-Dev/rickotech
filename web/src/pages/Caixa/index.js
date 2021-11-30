@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 
 import {
   createFinancialBoxRequest,
-  findAllFinancialBoxRequest,
   UpdateFinancialBoxRequest,
-  resetFormulario,
-} from '~/store/modules/financialBox/actions';
+  findAllFinancialBoxRequest,
+  getByIdFinancialBoxRequest,
+  resetFormulario } from '~/store/modules/financialBox/actions';
 import { getByIdServiceFinancialBoxValorTotalRequest } from '~/store/modules/servicos/actions';
 import { getByIdSalesFinancialBoxValorTotalRequest } from '~/store/modules/sales/actions';
 
@@ -18,26 +18,32 @@ import Header from '~/components/HeaderListAndRegister';
 
 export default function Caixa() {
 const dispatch = useDispatch();
-const caixa = useSelector((state) => state.financialBox.financialBoxList);
+const id = useSelector((state) => state.financialBox.financialBoxList);
+const { form } = useSelector((state) => state.financialBox);
 const { totalService } = useSelector((state) => state.servicos.servicoList);
 const { totalSales } = useSelector((state) => state.sales.salesList);
+console.log(id)
 
   useEffect(() => {
-    dispatch(findAllFinancialBoxRequest());
-    if (caixa[0].id) {
-      dispatch(getByIdServiceFinancialBoxValorTotalRequest(caixa[0].id));
-      dispatch(getByIdSalesFinancialBoxValorTotalRequest(caixa[0].id));
+    function onLoad() {
+      // dispatch(findAllFinancialBoxRequest());
+    }
+    onLoad();
+    if (id) {
+      dispatch(getByIdFinancialBoxRequest(id));
+      dispatch(getByIdServiceFinancialBoxValorTotalRequest(id));
+      dispatch(getByIdSalesFinancialBoxValorTotalRequest(id));
     } else {
       dispatch(resetFormulario());
     }
-  }, [caixa, dispatch]);
+  }, [id, dispatch]);
   
 const handleSubmit = async (values, { resetForm }) => {
   try {
     let body = JSON.parse(JSON.stringify(values));
 
-    if (caixa[0]) {
-      dispatch(UpdateFinancialBoxRequest({ id: caixa[0].id, values: body }));
+    if (id) {
+      dispatch(UpdateFinancialBoxRequest({ id: id, values: body }));
     } else {
       dispatch(createFinancialBoxRequest(values));
 
@@ -58,19 +64,22 @@ const handleReset = (resetForm) => {
     <>
     <Header title="Caixa"/>
       <Container>  
-        <Form onSubmit={handleSubmit} initialData={caixa[0]} >
+        <Form 
+          onSubmit={handleSubmit} 
+          initialData={form} 
+        >
           <div className="statos">
-            <h2>Data Abertura Caixa</h2>
+            <label>Data Abertura Caixa</label>
             <Input name="open_caixa" type="date" />
-            <h2>Data Fechamento Caixa</h2>
+            <label>Data Fechamento Caixa</label>
             <Input name="close_caixa" type="date" />
           </div>
           <div className="tipo-venda">
-            <h2>Valor Total Vendas</h2>
+            <label>Valor Total Vendas</label>
             <Input name="valor_sales_total" value={totalSales} type="number" placeholder="valor"/>
-            <h2>Valor Total Serviços</h2>
+            <label>Valor Total Serviços</label>
             <Input name="valor_service_total" value={totalService} type="number" placeholder="valor"/>
-            <h2>Valor Total Caixa</h2>
+            <label>Valor Total Caixa</label>
             <Input name="valor_total" value={total} type="number" placeholder="valor"/>
           </div>
           <div className="but">

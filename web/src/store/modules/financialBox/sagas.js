@@ -12,8 +12,12 @@ import {
 } from './actions';
 
 export function* createFinancialBox({ payload }) {
+  console.log(payload)
   try {
-    yield call(api.post, '/financialBox/new', payload.values);
+    const { open_caixa } = payload.values
+    const sales = { open_caixa }
+
+    yield call(api.post, '/financialBox/new', sales);
 
     toast.success('Caixa salvo com sucesso.');
   } catch (err) {
@@ -45,7 +49,6 @@ export function* findAllFinancialBox() {
 }
 
 export function* UpdateFinancialBox({ payload }) {
-  console.log(payload)
   try {
     const response = yield call(api.put, `/financialBox/${payload.data.id}`, payload.data.values);
 

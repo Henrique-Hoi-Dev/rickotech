@@ -13,16 +13,14 @@ import {
   createServicetRequest,
   getByIdServiceRequest,
   resetFormulario } from '~/store/modules/servicos/actions';
-import { findAllFinancialBoxRequest } from '~/store/modules/financialBox/actions';
 
 export default function RegistreServices() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { financialBoxList } = useSelector((state) => state.financialBox);
   const { form } = useSelector((state) => state.servicos);
-  
+  const { financialBoxList } = useSelector((state) => state.financialBox);
+
   useEffect(() => {
-    dispatch(findAllFinancialBoxRequest());
     if (id) {
       dispatch(getByIdServiceRequest(id));
     } else {

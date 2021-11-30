@@ -32,6 +32,9 @@ module.exports = {
       desconto: {
         type: Sequelize.DOUBLE,
       },
+      valor_total: {
+        type: Sequelize.DOUBLE,
+      },
       tipo_pagamento: {
         type: Sequelize.ENUM,
         values: ['AVISTA','PARCELADO'],

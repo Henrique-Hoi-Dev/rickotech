@@ -42,14 +42,13 @@ async getProductDetails(req, res) {
         {
           model: Sales,
           as: 'sales',  
-          attributes: [ 'id', 'name', 'valor', 'desconto', 'tipo_pagamento', 
+          attributes: [ 'id', 'name', 'valor', 'valor_total', 'desconto', 'tipo_pagamento', 
                         'tipo_parcela', 'parcela_valor', 'parcela_numero' ]
         }
       ]  
     });
 
     const valid = products.filter(function (result) {
-      console.log(result.dataValues.sales)
       if (result.dataValues.sales === null) {
         return result.dataValues;
       }
@@ -73,7 +72,7 @@ async getProductDetailsId(req, res) {
         {
           model: Sales,
           as: 'sales',  
-          attributes: [ 'name', 'valor', 'desconto', 'tipo_pagamento', 
+          attributes: [ 'name', 'valor', 'valor_total', 'desconto', 'tipo_pagamento', 
                         'tipo_parcela', 'parcela_valor', 'parcela_numero' ]
         }
       ] 

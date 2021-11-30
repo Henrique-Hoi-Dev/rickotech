@@ -38,7 +38,7 @@ class ServiceController {
       return res.status(200).send(response);
         
     } catch (error) {
-      return res.status(400).json({error: 'Erro na busca!'});
+      return res.status(400).json({ error: 'Erro na busca valor total service!'});
     }
   }
   async deleteServiceId(req, res) {
