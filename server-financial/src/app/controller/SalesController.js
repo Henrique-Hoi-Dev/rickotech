@@ -4,7 +4,7 @@ class SalesController {
   async storeSales(req, res) {
     let response;     
     try {
-      response = await SalesService.storeSales(req.body, req.params);
+      response = await SalesService.store(req.body, req.params);
       return res.status(201).send(response);
         
     } catch (error) {
@@ -14,9 +14,7 @@ class SalesController {
   async getSalesDetails(req, res) {
     let response;      
     try {
-      response = await SalesService.getSalesDetails();
-      console.log(response)
-
+      response = await SalesService.index();
       return res.status(200).send(response);
         
     } catch (error) {
@@ -26,7 +24,7 @@ class SalesController {
   async getSalesDetailsId(req, res) {
     let response;      
     try {
-      response = await SalesService.getSalesDetailsId(req.params);
+      response = await SalesService.getId(req.params);
       return res.status(200).send(response);
         
     } catch (error) {
@@ -39,14 +37,14 @@ class SalesController {
       response = await SalesService.getsSalesDetailsTotalValorId(req.params);
       return res.status(200).send(response);
         
-    } catch (error) {
-      return res.status(400).json({error: 'Erro na busca valor total vendas'});
+    } catch {
+      return res.status(200).json([]);
     }
   }
   async updateSalesId(req, res) {
     let response;
     try {
-      response = await SalesService.updateSalestId(req.params, req.body);
+      response = await SalesService.update(req.params, req.body);
       return res.status(200).send(response);
         
     } catch (error) {
@@ -56,7 +54,7 @@ class SalesController {
   async deleteSalesId(req, res) {
     let response;     
     try {
-      response = await SalesService.deleteSalesId(req.params);
+      response = await SalesService.delete(req.params);
       return res.status(200).send(response);
         
     } catch (error) {

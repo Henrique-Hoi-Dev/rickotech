@@ -23,7 +23,7 @@ module.exports = {
         allowNull: false,
       },
       data_serviço: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: true,
       },
       created_at: {

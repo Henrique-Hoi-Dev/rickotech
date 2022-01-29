@@ -1,36 +1,56 @@
 import FinancialBox from "../app/models/FinancialBox";
-import Sales from "../app/models/Sales";
 import Service from "../app/models/Service";
+import Sales from "../app/models/Sales";
+import User from "../app/models/User";
 import httpStatus from 'http-status-codes';
 
 export default {
-  // create de um novo caixa 
-  async storeFinancialBox(req, res) {
-    let financial = req;
+  async store(req, res) {
     try {
-      const createFinancialBox = await FinancialBox.create(financial);
+      let { user_id } = res
+      const { 
+        open_caixa, 
+        close_caixa,
+        valor_open, 
+        valor_total, 
+        valor_service_total, 
+        valor_sales_total 
+      } = req
+
+      const createFinancialBox = await FinancialBox.create({
+        user_id, 
+        open_caixa,
+        valor_open, 
+        close_caixa, 
+        valor_total, 
+        valor_service_total, 
+        valor_sales_total 
+      });
 
       return createFinancialBox;
     } catch (error) {
       return res.status(400).json(error)
     }
   },
-  // busca todos os caixa
-  async getsFinancialBoxDetails(req, res) {
+  async index(req, res) {
     try {
       let financials = await FinancialBox.findAll({
-        attributes: [ 'id', 'valor_sales_total', 'valor_service_total', 
-                      'valor_total', 'open_caixa', 'close_caixa'],
+        order: [['open_caixa', 'DESC']],
         include: [
           {
-            model: Sales,
-            as: 'saleses',
-            attributes: [ 'id', 'valor' ], 
+            model: User,
+            as: 'user',
+            attributes: ['name', 'cargo']
           },
           {
             model: Service,
             as: 'service',
             attributes: [ 'name', 'id', 'valor' ],
+          },
+          {
+            model: Sales,
+            as: 'saleses',
+            attributes: [ 'id', 'financial_id', 'valor_product' ],
           }
         ]
       });
@@ -40,64 +60,125 @@ export default {
       return res.status(400).json(error)
     }
   },
-  // busca um caixa por Id, incluindo os serviços e vendas vinculadas 
-  async getsFinancialBoxDetailsId(req, res) {
-    let financialId = req.id
+  async getId(req, res) {
     try {
+      let financialId = req.id
+
       const financial = await FinancialBox.findByPk(financialId, {
-        attributes: [ 'id', 'valor_sales_total', 'valor_service_total', 
-                      'valor_total', 'open_caixa', 'close_caixa'],
+        attributes: [ 
+          'id', 
+          'open_caixa', 
+          'close_caixa',
+          'status',
+          'valor_open', 
+          'valor_sales_total', 
+          'valor_service_total',   
+          'valor_total', 
+        ],
         include: [
           {
-            model: Sales,
-            as: 'saleses',
-            attributes: [ 'id', 'valor' ], 
+            model: User,
+            as: 'user',
+            attributes: ['name', 'cargo']
           },
           {
             model: Service,
             as: 'service',
-            attributes: [ 'name', 'id', 'valor' ],
+            attributes: [ 'name', 'id', 'valor', 'financial_id' ],
+          },
+          {
+            model: Sales,
+            as: 'saleses',
+            attributes: [ 'id', 'financial_id', 'valor_product' ],
           }
         ]
       });
+      // busca valores total serviços
+      const services = await Service.findAll({ where: { financial_id: financialId }})
+      console.log(services.length)
+      if (services.length > 0) {
+        const validService = services.filter(function (result) {
+          return result.dataValues;
+        });
+        const valueService = validService.map(function (result) {
+          const valor = parseInt(result.dataValues.valor);
+          return valor
+        })
+        const totalService = valueService.reduce((acumulado, x) => {
+          return acumulado + x;
+        });
+
+        const valor_service_total = (totalService - 0)
+        const caixa = {valor_service_total }
+
+        await financial.update(caixa)
+      }
+
+      // busca valores total de vendas
+      const saleses = await Sales.findAll({ where: { financial_id: financialId }})
+      console.log(saleses.length)
+      if (saleses.length > 0) {
+        const validSales = saleses.filter(function (result) {
+          return result.dataValues;
+        });
+        const valueSales = validSales.map(function (result) {
+          const valor = parseInt(result.dataValues.valor_product);
+          return valor
+        })
+        const totalSales = valueSales.reduce((acumulado, x) => {
+          return acumulado + x;
+        });
+
+        const valor_sales_total = (totalSales - 0)
+        const caixa = { valor_sales_total }
+
+        await financial.update(caixa)
+      } 
+
       const financialBox = await FinancialBox.findAll({ where: { id: financialId }})
       const valid = financialBox.filter(function (result) {
         return result.dataValues;
       });
-      
       const valores = valid.map(function (result) {
         const valorSales = parseInt(result.dataValues.valor_sales_total);
+        const valorOpen = parseInt(result.dataValues.valor_open);
         const valorService = parseInt(result.dataValues.valor_service_total);
 
-        const totalvalores = valorSales + valorService
+        const totalvalores =  valorOpen + valorService + valorSales
 
         return totalvalores;
       });
       const total = valores.reduce((acumulado, x) => {
         return acumulado + x;
-      });
+      });      
+      console.log(total)
+      const valor_total = (total - 0)
+      const caixa = { valor_total }
 
-      return {financial, total}
+      await financial.update(caixa)
+
+      return financial
     } catch (error) {
       return res.status(400).json(error)
     }
   },
-  // atualizar os valores do caixa
-  async updateFinancialBoxId(req, res) {
-    let financial = req
-    let id = res.id
-
+  async update(req, res) {
     try {
-      const financialBox = await FinancialBox.findByPk(id);
-      const financialUpdated = await financialBox.update(financial);
+      const financialBox = await FinancialBox.findByPk(res.id);
 
-      return financialUpdated;
+      const { close_caixa, status } = req
+
+      await financialBox.update({
+        status, 
+        close_caixa  
+      });
+
+      return financialBox;
     } catch (error) {
       return res.status(400).json(error);
     }
   },
-  // esxlui um caixa por Id
-  async deleteFinancialBoxId(req, res) {
+  async delete(req, res) {
     let result = {}
     try {
       const id  = req.id;

@@ -52,7 +52,7 @@ const ListSales = ({ salesList, handlerRemoveSales }) => {
             <tbody>
               {[].concat(salesList).map((sales, i) => (
                 <tr key={i} value={sales.id}>
-                  <td>{sales.name}</td>
+                  <td>{sales.name_product}</td>
                   <td>{currencyFormat(sales.valor_total)}</td>
                   <td>{sales.desconto}%</td>
                   <td>{moment(sales.data_registro).format('DD/MM/YYYY')}</td>

@@ -1,27 +1,25 @@
 import { takeLatest, call, all, put } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
-// import history from '~/services/history';
 import api from '~/services/api';
 
 import {
   getByIdFinancialBoxSuccess,
-  UpdateFinancialBoxSuccess,
   findAllFinancialBoxSuccess, 
   financialBoxFailure
 } from './actions';
+import history from '~/services/history';
 
 export function* createFinancialBox({ payload }) {
-  console.log(payload)
   try {
-    const { open_caixa } = payload.values
-    const sales = { open_caixa }
+    const { open_caixa, valor_open } = payload.values
+    const financialBox = { open_caixa, valor_open }
 
-    yield call(api.post, '/financialBox/new', sales);
+    yield call(api.post, `/financialBox/${payload.id}`, financialBox);
 
-    toast.success('Caixa salvo com sucesso.');
+    toast.success('Caixa aberto com sucesso.');
   } catch (err) {
-    toast.error('Error salvar caixa.');
+    toast.error('Error no abrir o caixa.');
     yield put(financialBoxFailure());
   }
 }
@@ -50,12 +48,16 @@ export function* findAllFinancialBox() {
 
 export function* UpdateFinancialBox({ payload }) {
   try {
-    const response = yield call(api.put, `/financialBox/${payload.data.id}`, payload.data.values);
+    const { close_caixa, status } = payload.data
+    const fecharCaixa = { close_caixa, status }
 
-    yield put(UpdateFinancialBoxSuccess(response.data));
-    toast.success('Caixa editado com sucesso.');
+    const response = yield call(api.put, `/financialBox/${payload.id}`, fecharCaixa);
+
+    yield put(getByIdFinancialBoxSuccess(response.data));
+    toast.success('Caixa fechado com sucesso.');
+    history.push('/')
   } catch (err) {
-    toast.error('Error no editar caixa.');
+    toast.error('Error no fechar caixa.');
     yield put(financialBoxFailure());
   }
 }

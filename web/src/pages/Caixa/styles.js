@@ -3,7 +3,7 @@ import { darken } from 'polished';
 
 export const Container = styled.div`
   background: #353535;
-  max-width: 50rem;
+  max-width: 54rem;
   box-sizing: border-box;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
   border-radius: 0.8rem;
@@ -20,41 +20,30 @@ export const Container = styled.div`
     display: grid; 
     justify-items: center;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 274px 1fr;
+    grid-template-rows: 100px 1fr;
     grid-template-areas:
-    'statos tipo-venda'
+    'data valor-open'
     'but but';
 
-    .statos {
-      grid-area: statos;
+    .data {
+      grid-area: data;
       display: flex;
-      margin-bottom: 91px;
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
     }
-    .tipo-venda {
-      grid-area: tipo-venda;
+    .valor-open {
+      grid-area: valor-open;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-    }
-    .final{
-      grid-area: final;
-      display: flex;
-      flex-direction: column;
     }
     .but{
       grid-area: but;
       margin-top: 45px;
       display: flex;
       flex-direction: row;
-
-      .cancela {
-        margin-left: 15px;
-        background: red;
-      }
     }
     label {
       padding: 0.5rem;
@@ -62,21 +51,6 @@ export const Container = styled.div`
       font-size: 20px;
       color: #9c98a6;
       text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-    }
-  }
-
-  a {
-    text-align: center;
-    text-decoration: none;
-    color: #000;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    border-radius: 4px;
-    font-size: 16px;
-    transition: background 0.2s;
-
-    &:hover {
-      background: ${darken(0.03, '#8945de')};
     }
   }
 
@@ -88,7 +62,7 @@ export const Container = styled.div`
     font-weight: bold;
     margin-bottom: 1rem;
     border-radius: 4px;
-    font-size: 16px;
+    font-size: 17px;
     transition: background 0.2s;
 
     &:hover {
@@ -120,4 +94,43 @@ export const Container = styled.div`
       color: rgba(255, 255, 255, 0.7);
     }
   }
+`;
+
+export const List = styled.div`
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 0.8rem;
+
+  margin: -4rem auto 2rem;
+  padding: 3rem;
+  overflow: hidden;
+  display: flex;
+
+  flex-direction: column;
+  align-items: stretch;
+
+  .table-list {
+    width: 100%;
+    background: #353535;
+    border-radius: 0.8rem;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+
+    padding: 1.6rem;
+    font: 16px Archivo;
+    color: #9c98a6;
+    font-weight: bold;
+
+    td {
+      max-height: 5px;
+      border-bottom: 0.2rem solid #8945de;
+    } 
+
+    td,
+    th {
+      padding: 0.5rem;
+      text-align: center;
+    }
+  }
+
 `;

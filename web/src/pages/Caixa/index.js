@@ -1,98 +1,119 @@
 import React, { useEffect } from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { FcInfo } from 'react-icons/fc';
+import * as moment from 'moment';
 
 import {
   createFinancialBoxRequest,
-  UpdateFinancialBoxRequest,
   findAllFinancialBoxRequest,
-  getByIdFinancialBoxRequest,
   resetFormulario } from '~/store/modules/financialBox/actions';
-import { getByIdServiceFinancialBoxValorTotalRequest } from '~/store/modules/servicos/actions';
-import { getByIdSalesFinancialBoxValorTotalRequest } from '~/store/modules/sales/actions';
 
-import { Container } from './styles';
+import { Container, List } from './styles';
 import Header from '~/components/HeaderListAndRegister';
+import { connect } from 'react-redux';
 
-export default function Caixa() {
+const Caixa = ({ financialBoxList }) => {
 const dispatch = useDispatch();
-const id = useSelector((state) => state.financialBox.financialBoxList);
 const { form } = useSelector((state) => state.financialBox);
-const { totalService } = useSelector((state) => state.servicos.servicoList);
-const { totalSales } = useSelector((state) => state.sales.salesList);
-console.log(id)
+const { id } = useParams();
 
   useEffect(() => {
-    function onLoad() {
-      // dispatch(findAllFinancialBoxRequest());
-    }
-    onLoad();
     if (id) {
-      dispatch(getByIdFinancialBoxRequest(id));
-      dispatch(getByIdServiceFinancialBoxValorTotalRequest(id));
-      dispatch(getByIdSalesFinancialBoxValorTotalRequest(id));
-    } else {
+      dispatch(findAllFinancialBoxRequest());
       dispatch(resetFormulario());
-    }
+    } 
   }, [id, dispatch]);
   
-const handleSubmit = async (values, { resetForm }) => {
-  try {
-    let body = JSON.parse(JSON.stringify(values));
+  const handleSubmit = async (values, { resetForm }) => {
+    dispatch(createFinancialBoxRequest(id, values));
+    dispatch(findAllFinancialBoxRequest());
+    dispatch(resetFormulario());
+    handleReset(resetForm);
+  };
 
-    if (id) {
-      dispatch(UpdateFinancialBoxRequest({ id: id, values: body }));
-    } else {
-      dispatch(createFinancialBoxRequest(values));
+  const handleReset = (resetForm) => {
+    resetForm();
+  };
 
-      handleReset(resetForm);
+  function currencyFormat(num) {
+    if (num) {
+      return (
+        'R$' +
+        parseFloat(num)
+          .toFixed(2)
+          .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+      );
     }
-  } catch (error) {
-    toast.error('Error nos dados');
   }
-};
-
-const total = totalService + totalSales
-
-const handleReset = (resetForm) => {
-  resetForm({});
-};
 
   return (
     <>
     <Header title="Caixa"/>
       <Container>  
-        <Form 
-          onSubmit={handleSubmit} 
-          initialData={form} 
-        >
-          <div className="statos">
+        <Form onSubmit={handleSubmit} initialData={form} >
+          <div className="data">
             <label>Data Abertura Caixa</label>
             <Input name="open_caixa" type="date" />
-            <label>Data Fechamento Caixa</label>
-            <Input name="close_caixa" type="date" />
           </div>
-          <div className="tipo-venda">
-            <label>Valor Total Vendas</label>
-            <Input name="valor_sales_total" value={totalSales} type="number" placeholder="valor"/>
-            <label>Valor Total Serviços</label>
-            <Input name="valor_service_total" value={totalService} type="number" placeholder="valor"/>
-            <label>Valor Total Caixa</label>
-            <Input name="valor_total" value={total} type="number" placeholder="valor"/>
+          <div className="valor-open">
+            <label>Valor Abertura Caixa</label>
+            <Input name="valor_open" type="number" placeholder="valor"/>
           </div>
           <div className="but">
-            <button type="submit">Salvar</button>
-            <button>
-              <Link to="/#">
-                Cria um novo caixa
-              </Link>
-            </button>
+            <button type="submit">Abrir um novo caixa</button>
           </div>
         </Form>
-      </Container>      
+      </Container> 
+      <List>
+      <table className="table-list">
+            <thead>
+              <tr className="table-title">
+                <td>Funcionario</td>
+                <td>Data abertura</td>
+                <td>Data fechamento</td>
+                <td>Valor abertuta</td>
+                <td>Valor vendas</td>
+                <td>Valor serviços</td>
+                <td>Valor total</td>
+                <td>Status</td>
+                <td>Info</td>
+              </tr>
+            </thead>
+            <tbody>
+              {[].concat(financialBoxList).map((financial, i) => (
+                <tr key={i} value={financial.id}>
+                  <td>{financial.user.name}</td>
+                  <td>{moment(financial.open_caixa).format('DD/MM/YYYY')}</td>
+                  <td>{moment(financial.close_caixa).format('DD/MM/YYYY')}</td>
+                  <td>{currencyFormat(financial.valor_open)}</td>
+                  <td>{currencyFormat(financial.valor_sales_total)}</td>
+                  <td>{currencyFormat(financial.valor_service_total)}</td>
+                  <td>{currencyFormat(financial.valor_total)}</td>
+                  <td style={{ color: 
+                      (financial.status === true && 'red') || 
+                      (financial.status === false && 'green') }} >
+                      {(financial.status === true && 'Fechado') || 
+                       (financial.status === false && 'Aberto')}</td>
+                  <td>
+                    <Link to={`/caixaInfo/${financial.id}`}>
+                      <FcInfo/>
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+      </List>     
     </>
   );
 }
 
+const mapStateToProps = (state) => {
+  return {
+    financialBoxList: state.financialBox.financialBoxList ? state.financialBox.financialBoxList : [],
+  };
+};
+
+export default connect(mapStateToProps) (Caixa);

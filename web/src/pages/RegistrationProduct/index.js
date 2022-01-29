@@ -85,23 +85,9 @@ export default function RegistrationProduct() {
                   name="name" 
                   placeholder="Nome Produto" />
                 <span>{formProps.errors.name}</span>
-                <Field 
-                  id="altura" 
-                  name="altura" 
-                  placeholder="Altura(M)" />
-                <Field 
-                  id="largura" 
-                  name="largura" 
-                  placeholder="Largura(M)" />
-                <Field
-                  name="comprimento"
-                  placeholder="Comprimento(M)" />
               </div>
 
               <div className="campo3">
-                <Field 
-                  name="peso" 
-                  placeholder="Peso(kg)" />
                 <Field
                   name="valor"
                   type="number"
@@ -125,13 +111,6 @@ export default function RegistrationProduct() {
                   name="codigo_barra"
                   placeholder="Código de barras" />
                 <span>{formProps.errors.codigo_barra}</span>
-              </div>
-
-              <div className="campo5">
-                <label htmlFor="descricao">Descrição Produto</label>
-                <Field 
-                  as="textarea" 
-                  name="descricao"/>
               </div>
 
               <footer className="buttons-container">

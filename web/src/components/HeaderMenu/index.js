@@ -30,7 +30,7 @@ export default function Home() {
   const [state, setState] = React.useState({
     top: false,
   });
-
+  
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -50,7 +50,7 @@ export default function Home() {
          <DashboardIcon /> <Link to="/dashboard">Dashboard</Link> 
         </ListItem >
         <ListItem >
-         <AttachMoneyIcon /> <Link to="/caixa">Caixa</Link> 
+         <AttachMoneyIcon /> <Link to={`/caixa/${id}`}>Caixa</Link> 
         </ListItem >
         <ListItem >
          <ProductionQuantityLimitsIcon /> <Link to="/registreServices">Registre Serviço</Link> 
@@ -58,29 +58,11 @@ export default function Home() {
         <ListItem >
          <ProductionQuantityLimitsIcon /> <Link to="/registreProduct">Registre Produto</Link> 
         </ListItem >
-        <ListItem >
-         <ProductionQuantityLimitsIcon /> <Link to="/registreAccount">Registre Dividendo</Link> 
-        </ListItem >
       </List>
       <Divider />
       <List>
         <ListItem >
          <ListAltIcon /> <Link to="/listProducts">Todos Produtos</Link> 
-        </ListItem >
-        <ListItem >
-         <ListAltIcon /> <Link to="/listTodasAccounts">Todos Dividendos</Link> 
-        </ListItem >
-        <ListItem >
-         <ListAltIcon /> <Link to="/listPaidAccounts">Dividendos Pagos</Link> 
-        </ListItem >
-        <ListItem >
-         <ListAltIcon /> <Link to="/listPendingAccouts">Dividendos Pendentes</Link> 
-        </ListItem >
-        <ListItem >
-         <ListAltIcon /> <Link to="/listaLateAccounts">Dividendos Vencidos</Link> 
-        </ListItem >
-        <ListItem >
-         <ListAltIcon /> <Link to="listaCancelAccounts">Dividendos Cancelados</Link> 
         </ListItem >
         <ListItem >
          <ListAltIcon /> <Link to="/listSales">Vendas de Produtos</Link> 

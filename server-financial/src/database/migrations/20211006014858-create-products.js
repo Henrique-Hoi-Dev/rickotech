@@ -26,27 +26,7 @@ module.exports = {
         type: Sequelize.DATEONLY,
         allowNull: false,
       },
-      altura: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      largura: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      comprimento: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      peso: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       codigo_barra: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      descricao: {
         type: Sequelize.STRING,
         allowNull: false,
       },

@@ -6,8 +6,8 @@ class Sales extends Model {
       {
         product_id: Sequelize.INTEGER,
         financial_id: Sequelize.INTEGER,
-        name: Sequelize.STRING,
-        valor: Sequelize.DOUBLE,
+        name_product: Sequelize.STRING,
+        valor_product: Sequelize.DOUBLE,
         desconto: Sequelize.DOUBLE,
         valor_total: Sequelize.DOUBLE,
         tipo_pagamento: Sequelize.ENUM('AVISTA', 'PARCELADO'),
@@ -23,7 +23,7 @@ class Sales extends Model {
     return this;
   }
   static associate(models) {
-    this.belongsTo(models.Product, { foreignKey: 'product_id', as: 'product' });
+    this.belongsTo(models.Product, { foreignKey: 'product_id', as: 'products' });
     this.belongsTo(models.FinancialBox, { foreignKey: 'financial_id', as: 'financial' });
   }
 }

@@ -12,8 +12,6 @@ export default (reducers) => {
         'adress', 
         'product', 
         'sales', 
-        'account', 
-        'portion', 
         'servicos',
         'financialBox'],
     },

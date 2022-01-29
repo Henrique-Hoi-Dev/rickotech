@@ -5,8 +5,7 @@ import User from "../app/models/User";
 import httpStatus from 'http-status-codes';
 
 export default {
-  // create de um novo usuário
-  async storeUser(req, res) {
+  async store(req, res) {
     let user = req
 
     try {
@@ -33,8 +32,7 @@ export default {
       return res.status(400).json(error);
     }
   },
-  // busca todo os usuários
-  async getUserDetails(req, res) {
+  async index(req, res) {
     try {
       const users = await User.findAll({
         attributes: [ 'id', 'name', 'email', 'provider', 'cargo', 'cpf', 'data_nascimento', 
@@ -58,8 +56,7 @@ export default {
       return res.status(400).json(error)
     }
   },
-  // busca usuário por Id, incluindo informações do avatar e se possui endereço
-  async getUserDetailsId(req, res) {
+  async getId(req, res) {
     try {
       let user = await User.findByPk(req.id, {
         attributes: [ 'id', 'name', 'email', 'provider', 'cargo', 
@@ -83,8 +80,7 @@ export default {
       return res.status(400).json(error)
     }
   },
-  // atualiza usuário
-  async updateUserId(req, res) {   
+  async update(req, res) {   
     let users = req
     let userId = res.id
 
@@ -145,8 +141,7 @@ export default {
       return res.status(400).json(error);
     }
   },
-  // exclui usuário por Id
-  async deleteUserId(req, res) {
+  async delete(req, res) {
     let result = {}
     
     try {

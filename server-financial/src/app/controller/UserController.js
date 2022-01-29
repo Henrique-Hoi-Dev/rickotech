@@ -4,7 +4,7 @@ class UserController {
   async storeUser(req, res) {
     let response;     
     try {
-      response = await UserService.storeUser(req.body);
+      response = await UserService.store(req.body);
       return res.status(200).send(response);
         
     } catch (error) {
@@ -14,7 +14,7 @@ class UserController {
   async getUserDetails(req, res) {
     let response;      
     try {
-      response = await UserService.getUserDetails();
+      response = await UserService.index();
       return res.status(200).send(response);
         
     } catch (error) {
@@ -24,7 +24,7 @@ class UserController {
   async getUserDetailsId(req, res) {
     let response;      
     try {
-      response = await UserService.getUserDetailsId(req.params);
+      response = await UserService.getId(req.params);
       return res.status(200).send(response);
         
     } catch (error) {
@@ -34,7 +34,7 @@ class UserController {
   async updateUserId(req, res) {
     let response;
     try {
-      response = await UserService.updateUserId(req.body, req.params);
+      response = await UserService.update(req.body, req.params);
       return res.status(200).send(response);
         
     } catch (error) {
@@ -44,7 +44,7 @@ class UserController {
   async deleteUserId(req, res) {
     let response;     
     try {
-      response = await UserService.deleteUserId(req.params);
+      response = await UserService.delete(req.params);
       return res.status(200).send(response);
         
     } catch (error) {

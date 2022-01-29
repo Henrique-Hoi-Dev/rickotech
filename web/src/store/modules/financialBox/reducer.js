@@ -6,6 +6,7 @@ const INITIAL_STATE = {
     valor_sales_total: '',
     valor_service_total: '',
     valor_total: '',
+    valor_open: '',
     open_caixa: '',
     close_caixa: '',
   }
@@ -16,11 +17,8 @@ export default function financialBox(state = INITIAL_STATE, action) {
     switch (action.type) {
       case '@financialBox/RESET_FORM': {
         draft.form = {
-          valor_sales_total: '',
-          valor_service_total: '',
-          valor_total: '',
+          valor_open: '',
           open_caixa: '',
-          close_caixa: '',
         };
         break;
       }

@@ -4,14 +4,20 @@ import httpStatus from 'http-status-codes';
 import FinancialBox from "../app/models/FinancialBox";
 
 export default  {
-  // create uma nova venda 
-  async storeSales(req, res) {
+  async store(req, res) {
     let sales = req
     let product_id = res.product_id
 
     try {
-      let { financial_id, name, valor, desconto, tipo_pagamento, tipo_parcela, 
-            parcela_valor, parcela_numero } = sales;
+      let { 
+        financial_id, 
+        name_product, 
+        valor_product, 
+        desconto, 
+        tipo_pagamento, 
+        tipo_parcela, 
+        parcela_valor, 
+        parcela_numero } = sales;
 
       const products = await Product.findByPk(product_id);
       if (!products) {
@@ -31,15 +37,22 @@ export default  {
       }
 
       if (desconto >= 0) {
-        const porcent = (valor / 100) 
+        const porcent = (valor_product / 100) 
         const descont = (porcent * desconto)
-        const valor_total = valor - descont 
-      
-        console.log(valor_total)
-      
-        const saleses = await Sales.create({product_id, financial_id, name, valor, 
-          desconto, valor_total, tipo_pagamento, tipo_parcela, parcela_valor, 
-          parcela_numero }); 
+        const valor_total = valor_product - descont 
+            
+        const saleses = await Sales.create({
+          product_id, 
+          financial_id, 
+          name_product, 
+          valor_product, 
+          desconto, 
+          valor_total, 
+          tipo_pagamento, 
+          tipo_parcela, 
+          parcela_valor, 
+          parcela_numero 
+        }); 
 
         return saleses
       }
@@ -47,19 +60,15 @@ export default  {
       return res.status(400).json(error);
     }
   },
-  //busca todas as vendas, com os prudotos e caixa inclusos 
-  async getSalesDetails(req, res) {
+  async index(req, res) {
     try {
       let sales = await Sales.findAll({
-        attributes: [ 'id', 'product_id', 'financial_id', 'name', 'valor', 
-        'valor_total', 'desconto', 'tipo_pagamento', 'tipo_parcela', 
-        'parcela_valor', 'parcela_numero'],
           include: [
-            // {
-            //   model: Product,
-            //   as: 'product',
-            //   attributes: [ 'name', 'status', 'valor' ],
-            // },
+            {
+              model: Product,
+              as: 'products',
+              attributes: [ 'name', 'categoria', 'valor' ],
+            },
             {
               model: FinancialBox,
               as: 'financial',
@@ -74,15 +83,11 @@ export default  {
       return res.status(400).json(error);
     }
   },
-  // busca uma venda por Id, com os prudotos e caixa inclusos
-  async getSalesDetailsId(req, res) {
+  async getId(req, res) {
     try {
       let id = req.id
 
       let salesId = await Sales.findByPk(id, {
-        attributes: [ 'id', 'product_id', 'financial_id', 'name', 'valor', 
-        'valor_total', 'desconto', 'tipo_pagamento', 'tipo_parcela', 
-        'parcela_valor', 'parcela_numero'],
         include: [
           {
             model: FinancialBox,
@@ -100,17 +105,16 @@ export default  {
   },
   // busca uma  venda por caixa Id que esta vinculada, inclundo produto e dados do caixa e valor total 
   async getsSalesDetailsTotalValorId(req, res) {
-    let financialId = req.financial_id 
     try {
+      let financialId = req.financial_id 
+
       let saleses = await Sales.findAll({ where : { financial_id: financialId },
-        attributes: [ 'id', 'product_id', 'name', 'valor', 'valor_total', 'desconto', 
-        'tipo_pagamento', 'tipo_parcela', 'parcela_valor', 'parcela_numero' ],
           include: [
-            // {
-            //   model: Product,
-            //   as: 'product',
-            //   attributes: [ 'name', 'status', 'valor' ],
-            // },
+            {
+              model: Product,
+              as: 'product',
+              attributes: [ 'name', 'status', 'valor' ],
+            },
             {
               model: FinancialBox,
               as: 'financial',
@@ -119,6 +123,7 @@ export default  {
             }
           ],
       });
+
       const validSales = saleses.filter(function (result) {
         return result.dataValues;
       });
@@ -130,13 +135,12 @@ export default  {
         return acumulado + x;
       });
 
-      return {saleses, totalSales};
+      return {saleses, totalSales}
     } catch (error) {
       return res.status(400).json(error)
     }
   },
-  // faz atualização de um venda 
-  async updateSalestId(req, res) {
+  async update(req, res) {
     try {
       let id = req.id;
       let sale = res
@@ -149,8 +153,7 @@ export default  {
       return res.status(400).json(error);
     }
   },
-  // exclui uma venda por id
-  async deleteSalesId(req, res) {
+  async delete(req, res) {
     let result = {}
     try {
       const id  = req.id;

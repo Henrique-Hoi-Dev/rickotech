@@ -4,7 +4,7 @@ class ServiceController {
   async storeService(req, res) {
     let response;     
     try {
-      response = await ServiceService.storeService(req.body, req.params);
+      response = await ServiceService.store(req.body, req.params);
       return res.status(200).send(response);
         
     } catch (error) {
@@ -14,7 +14,7 @@ class ServiceController {
   async getsServiceDetails(req, res) {
     let response;      
     try {
-      response = await ServiceService.getsServiceDetails();
+      response = await ServiceService.index();
       return res.status(200).send(response);
         
     } catch (error) {
@@ -24,7 +24,7 @@ class ServiceController {
   async getsServiceDetailsId(req, res) {
     let response;      
     try {
-      response = await ServiceService.getsServiceDetailsId(req.params);
+      response = await ServiceService.getId(req.params);
       return res.status(200).send(response);
         
     } catch (error) {
@@ -37,14 +37,14 @@ class ServiceController {
       response = await ServiceService.getsServiceDetailsTotalValorId(req.params);
       return res.status(200).send(response);
         
-    } catch (error) {
-      return res.status(400).json({ error: 'Erro na busca valor total service!'});
+    } catch {
+      return res.status(200).json([]);
     }
   }
   async deleteServiceId(req, res) {
     let response;     
     try {
-      response = await ServiceService.deleteServiceId(req.params);
+      response = await ServiceService.delete(req.params);
       return res.status(200).send(response);
         
     } catch (error) {

@@ -1,14 +1,13 @@
 import * as Yup from 'yup';
 import File from "../app/models/File";
 import Product from "../app/models/Product";
-import Sales from "../app/models/Sales";
 import httpStatus from 'http-status-codes';
 
 export default {
-// create um novo produto, validando se á um produto com o mesmo nome ou codigo de barra
-async storeProduct(req, res) {
-  let product = req;
+async store(req, res) {
   try {
+    let product = req;
+
     const schema = Yup.object().shape({
       name: Yup.string().required().max(100),
       codigo_barra: Yup.string().required(),
@@ -25,42 +24,26 @@ async storeProduct(req, res) {
     return res.status(400).json(error.message);
   }
 },
-// busca todos os produtos, incluindo a informação se ele já possui uma venda
-// e informação do avatar do produto
-async getProductDetails(req, res) {
+async index(req, res) {
     try {
       const products = await Product.findAll({
         attributes: [ 'id', 'name', 'valor', 'categoria','data_registro', 
-                      'altura', 'largura', 'comprimento', 'peso',
-                      'codigo_barra', 'descricao' ],
+                      'codigo_barra' ],
         include: [
         {
           model: File,
           as: 'avatar',
           attributes: [ 'url', 'id', 'path' ]
         },
-        {
-          model: Sales,
-          as: 'sales',  
-          attributes: [ 'id', 'name', 'valor', 'valor_total', 'desconto', 'tipo_pagamento', 
-                        'tipo_parcela', 'parcela_valor', 'parcela_numero' ]
-        }
       ]  
     });
 
-    const valid = products.filter(function (result) {
-      if (result.dataValues.sales === null) {
-        return result.dataValues;
-      }
-    });
-
-    return valid;
+    return products;
   } catch (error) {
-  return res.status(400).json(error)
+    return res.status(400).json(error)
   }
 },
-// busca um produto por Id, incluindo informações do avatar e se á uma venda
-async getProductDetailsId(req, res) {
+async getId(req, res) {
   try {
     let product = await Product.findByPk(req.id, {
       include: [
@@ -69,20 +52,13 @@ async getProductDetailsId(req, res) {
           as: 'avatar',
           attributes: [ 'url', 'id', 'path' ]
         },
-        {
-          model: Sales,
-          as: 'sales',  
-          attributes: [ 'name', 'valor', 'valor_total', 'desconto', 'tipo_pagamento', 
-                        'tipo_parcela', 'parcela_valor', 'parcela_numero' ]
-        }
       ] 
     });
     return product;
   } catch (error) {
     return res.status(400).json(error)};
   },
-  // atualiza um produto
-  async updateProductId(req, res) {
+  async update(req, res) {
     try {
       let products = res
 
@@ -94,8 +70,7 @@ async getProductDetailsId(req, res) {
       return res.status(400).json(error);
     }
   },
-  // exclui um produto por Id
-  async deleteProductId(req, res) {
+  async delete(req, res) {
     let result = {}
     try {
       const id  = req.id;
@@ -107,7 +82,7 @@ async getProductDetailsId(req, res) {
       });
 
       if (!products) {
-        return res.status(400).json({ message: 'adress not found' });
+        return res.status(400).json({ message: 'product not found' });
       }
 
       result = {httpStatus: httpStatus.OK, status: "successful", responseData: products}      

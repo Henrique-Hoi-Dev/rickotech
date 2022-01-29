@@ -3,13 +3,11 @@ import FinancialBox from "../app/models/FinancialBox";
 import httpStatus from 'http-status-codes';
 
 export default {
-  // create de um serviço
-  async storeService(req, res) {
-    let service = req;
-    let financial_id = res.id
-
+  async store(req, res) {
     try {
-      let { name, valor, data_serviço } = service;
+      let financial_id = res.id
+
+      const { name, valor, data_serviço } = req;
 
       const financial = await FinancialBox.findByPk(financial_id);
 
@@ -24,11 +22,9 @@ export default {
       return res.status(400).json(error)
     }
   },
-  //busca todo os serviços registrados. Incluindo o caixa que o serviço faz parte
-  async getsServiceDetails(req, res) {
+  async index(req, res) {
     try {
       let services = await Service.findAll({
-        attributes: [ 'name', 'valor', 'data_serviço'],
         include: {
           model: FinancialBox,
           as: 'financial',
@@ -41,8 +37,7 @@ export default {
       return res.status(400).json(error)
     }
   },
-  // busca um serviço por Id. Incluindo o caixa que o serviço faz parte 
-  async getsServiceDetailsId(req, res) {
+  async getId(req, res) {
     let serviceId = req.id 
     try {
       let services = await Service.findByPk(serviceId, {
@@ -58,10 +53,10 @@ export default {
       return res.status(400).json(error)
     }
   },
-  // busca um todos os serviços que estão registrando em um Caixa Id e trazendo valo total
   async getsServiceDetailsTotalValorId(req, res) {
-    let financialId = req.financial_id 
     try {
+      let financialId = req.financial_id 
+
       let services = await Service.findAll({ where : { financial_id: financialId },
         attributes: [ 'name', 'valor', 'data_serviço'],
         include: {
@@ -70,6 +65,7 @@ export default {
           attributes: [ 'id', 'valor_service_total', 'open_caixa', 'close_caixa' ],
         },
       });
+
       const validService = services.filter(function (result) {
         return result.dataValues;
       });
@@ -80,14 +76,13 @@ export default {
       const totalService = venciService.reduce((acumulado, x) => {
         return acumulado + x;
       });
-
-      return {services, totalService};
+        
+      return {services, totalService} 
     } catch (error) {
       return res.status(400).json(error)
     }
   },
-  // exclui serviços 
-  async deleteServiceId(req, res) {
+  async delete(req, res) {
     let result = {}
     try {
       const id  = req.id;

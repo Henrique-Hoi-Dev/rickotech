@@ -7,17 +7,12 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      valor_sales_total: {
-        type: Sequelize.DOUBLE,
+      user_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'users', key: 'id' },
         allowNull: true,
-      },
-      valor_service_total: {
-        type: Sequelize.DOUBLE,
-        allowNull: true,
-      },
-      valor_total: {
-        type: Sequelize.DOUBLE,
-        allowNull: true,
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       open_caixa: {
         type: Sequelize.DATEONLY,
@@ -26,6 +21,30 @@ module.exports = {
       close_caixa: {
         type: Sequelize.DATEONLY,
         allowNull: true,
+      },
+      status: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
+      valor_open: {
+        type: Sequelize.DOUBLE,
+        allowNull: false,
+        defaultValue: 0
+      },
+      valor_sales_total: {
+        type: Sequelize.DOUBLE,
+        allowNull: true,
+        defaultValue: 0
+      },
+      valor_service_total: {
+        type: Sequelize.DOUBLE,
+        allowNull: true,
+        defaultValue: 0
+      },
+      valor_total: {
+        type: Sequelize.DOUBLE,
+        allowNull: true,
+        defaultValue: 0
       },
       created_at: {
         type: Sequelize.DATE,

@@ -21,11 +21,11 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      name: {
+      name_product: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      valor: {
+      valor_product: {
         type: Sequelize.DOUBLE,
         allowNull: false,
       },

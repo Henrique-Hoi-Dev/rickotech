@@ -3,8 +3,7 @@ import User from "../app/models/User";
 import httpStatus from 'http-status-codes';
 
 export default {
-  // create de um endereço de usuário
-  async storeAdress(req, res) {
+  async store(req, res) {
     let adresses = req;
     let user_id = res.user_id
 
@@ -25,8 +24,7 @@ export default {
       return res.status(400).json(error);
     }
   },
-  // atualiza o endereço do usuário
-  async updateAdressId(req, res) {
+  async update(req, res) {
     try {
       let adresses = res
 
@@ -38,8 +36,7 @@ export default {
       return res.status(400).json(error);
     }
   },
-  // exclui o endereço do usuário
-  async deleteAdress(req, res) {
+  async delete(req, res) {
     let result = {}
     try {
       const id  = req.id;

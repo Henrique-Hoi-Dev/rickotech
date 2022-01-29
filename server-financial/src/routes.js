@@ -22,7 +22,7 @@ routes.post('/users/register', UserController.storeUser);
 routes.post('/users/authenticate', SessionController.storeSession);
 
 //autenticação
-routes.use(authMiddleware);
+// routes.use(authMiddleware);
 
 //users
 routes.put('/user/:id', UserController.updateUserId);
@@ -42,32 +42,32 @@ routes.delete('/avatar/:id', FileController.deleteFileId);
 
 
 //products
-routes.post('/products/new', ProductController.storeProduct);
-routes.post('/product/avatar', ProductController.updateProductId);
-routes.put('/product/:id', ProductController.updateProductId);
-routes.get('/products', ProductController.getProductDetails);
-routes.get('/product/:id', ProductController.getProductDetailsId);
-routes.delete('/product/:id', ProductController.deleteProductId);
+routes.post('/product', ProductController.storeProduct)
+      .post('/product/avatar', ProductController.updateProductId)
+      .put('/product/:id', ProductController.updateProductId)
+      .get('/products', ProductController.getProductDetails)
+      .get('/product/:id', ProductController.getProductDetailsId)
+      .delete('/product/:id', ProductController.deleteProductId);
 
 //sales
-routes.post('/sales/:product_id', SalesController.storeSales);
-routes.get('/saleses', SalesController.getSalesDetails);
-routes.put('/sales/:id', SalesController.updateSalesId);
-routes.get('/sales/:id', SalesController.getSalesDetailsId);
-routes.get('/salesFinancial/:financial_id', SalesController.getsSalesDetailsTotalValorId);
-routes.delete('/sales/:id', SalesController.deleteSalesId);
+routes.post('/sales/:product_id', SalesController.storeSales)
+      .get('/saleses', SalesController.getSalesDetails)
+      .put('/sales/:id', SalesController.updateSalesId)
+      .get('/sales/:id', SalesController.getSalesDetailsId)
+      .get('/salesFinancial/:financial_id', SalesController.getsSalesDetailsTotalValorId)
+      .delete('/sales/:id', SalesController.deleteSalesId);
 
 //services
-routes.post('/service/:id', ServiceController.storeService);
-routes.get('/services', ServiceController.getsServiceDetails);
-routes.get('/service/:id', ServiceController.getsServiceDetailsId);
-routes.get('/serviceFinancial/:financial_id', ServiceController.getsServiceDetailsTotalValorId);
+routes.post('/service/:id', ServiceController.storeService)
+      .get('/services', ServiceController.getsServiceDetails)
+      .get('/service/:id', ServiceController.getsServiceDetailsId)
+      .get('/serviceFinancial/:financial_id', ServiceController.getsServiceDetailsTotalValorId);
 
 //financialBox 
-routes.post('/financialBox/new', FinancialBoxController.storeFinancialBox);
-routes.put('/financialBox/:id', FinancialBoxController.updateFinancialBoxId);
-routes.get('/financialBoxs', FinancialBoxController.getsFinancialBoxDetails);
-routes.get('/financialBox/:id', FinancialBoxController.getsFinancialBoxDetailsId);
-routes.delete('/financialBox/:id', FinancialBoxController.deleteFinancialBoxId);
+routes.post('/financialBox/:user_id', FinancialBoxController.storeFinancialBox)
+      .put('/financialBox/:id', FinancialBoxController.updateFinancialBoxId)
+      .get('/financialBoxs', FinancialBoxController.getsFinancialBoxDetails)
+      .get('/financialBox/:id', FinancialBoxController.getsFinancialBoxDetailsId)
+      .delete('/financialBox/:id', FinancialBoxController.deleteFinancialBoxId);
 
 export default routes;

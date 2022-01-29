@@ -33,6 +33,7 @@ class User extends Model {
   static associate(models) {
     this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
     this.hasOne(models.Adress, { foreignKey: 'user_id', as: 'adress' });
+    this.hasMany(models.FinancialBox, { foreignKey: 'user_id', as: 'financialBox' });
   }
 
   checkPassword(password) {
