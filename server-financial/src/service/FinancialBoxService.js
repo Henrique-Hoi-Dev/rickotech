@@ -35,7 +35,7 @@ export default {
   async index(req, res) {
     try {
       let financials = await FinancialBox.findAll({
-        order: [['open_caixa', 'DESC']],
+        order: [['id', 'DESC']],
         include: [
           {
             model: User,
@@ -176,27 +176,6 @@ export default {
       return financialBox;
     } catch (error) {
       return res.status(400).json(error);
-    }
-  },
-  async delete(req, res) {
-    let result = {}
-    try {
-      const id  = req.id;
-
-      const financial = await FinancialBox.destroy({
-        where: {
-          id: id,
-        },
-      });
-
-      if (!financial) {
-        return res.status(400).json({ message: 'adress not found' });
-      }
-
-      result = {httpStatus: httpStatus.OK, status: "successful", responseData: financial}      
-      return result
-    } catch (error) {
-      return res.status(400).json(error)
     }
   }
 }

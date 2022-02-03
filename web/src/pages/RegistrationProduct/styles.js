@@ -20,7 +20,7 @@ export const Container = styled.div`
 
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: 5px 230px 1fr;
+      grid-template-rows: 5px 130px 1fr;
       grid-template-areas:
         'name name name'
         'campo2  campo4 campo3'
@@ -89,6 +89,7 @@ export const Container = styled.div`
   button {
     background: none;
     border: 0;
+    margin-right: 137px;
     color: #6842c2;
     font: 700 1.6rem Archivo;
     cursor: pointer;

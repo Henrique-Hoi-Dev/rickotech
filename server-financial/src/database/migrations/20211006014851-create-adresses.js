@@ -16,31 +16,31 @@ module.exports = {
       },
       cep: {
         type: Sequelize.STRING,
-        unique: true,
+        allowNull: true,
       },
       logradouro: {
         type: Sequelize.STRING,
-        unique: true,
+        allowNull: true,
       },
       complemento: {
         type: Sequelize.STRING,
-        unique: true,
+        allowNull: true,
       },
       numero: {
         type: Sequelize.STRING,
-        unique: true,
+        allowNull: true,
       },
       bairro: {
         type: Sequelize.STRING,
-        unique: true,
+        allowNull: true,
       },
       cidade: {
         type: Sequelize.STRING,
-        unique: true,
+        allowNull: true,
       },
       uf: {
         type: Sequelize.STRING,
-        unique: true,
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,

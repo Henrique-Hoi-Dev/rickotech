@@ -85,6 +85,8 @@ export const Container = styled.div`
 
     &:hover {
       background: ${darken(0.03, '#8945de')};
+      transform: scale(1.1);
+      transition: all 0.5s;
     }
   }
 

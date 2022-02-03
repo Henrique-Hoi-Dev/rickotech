@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { Formik, Field, Form } from 'formik';
-import { toast } from 'react-toastify';
 
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Header from '~/components/HeaderListAndRegister';
+import * as moment from 'moment';
+
 import { FcHighPriority } from 'react-icons/fc';
 import { Container } from './styles';
 
@@ -28,17 +29,14 @@ export default function RegistreServices() {
     }
   }, [id, dispatch]);
 
-  const handleSubmit = async (values) => {
-    try {
-      // let body = JSON.parse(JSON.stringify(values));
-      if (id) {
-        // dispatch(UpdateAccountRequest({ account_id: id , values: body}));
-      } else {
-        dispatch(createServicetRequest(values));
-      }
-    } catch (error) {
-      toast.error('Error check data');
-    }
+  const handleSubmit = async (values, { resetForm }) => {
+      dispatch(createServicetRequest(values));
+
+      handleReset(resetForm);
+  };
+  
+  const handleReset = (resetForm) => {
+    resetForm({});
   };
 
   return (
@@ -62,22 +60,26 @@ export default function RegistreServices() {
                     type="number"
                     name="valor" 
                     placeholder="valor" />
+                </div>
 
+                <div className="campo" >
+                  <label htmlFor="id">Data abertura caixa</label>
+                  <Field  component="select" name="financial_id" >
+                    <option value="0">Selecione um caixa</option>
+                    {financialBoxList.map((caixa, i) => (
+                      <option key={i} value={caixa.id} >
+                      {moment(caixa.open_caixa).format('DD/MM/YYYY')} - {(caixa.status === false && 'Aberto')
+                      || (caixa.status === true && 'Fechado')}
+                      </option>
+                    ))}    
+                  </Field>   
                   <label htmlFor="data_serviço">Dia do serviço feito</label>
                   <Field 
                     name="data_serviço" 
                     type="date" 
                     placeholder="data do serviço" />
-                </div>
-                {financialBoxList.map((caixa, i) => (
-                <div className="campo" key={i}>
-                  <label htmlFor="id">Data abertura caixa</label>
-                  <Field  component="select" name="id" >
-                    <option value="0" >selecione um caixa</option>
-                    <option value={caixa.id} >{caixa.open_caixa}</option>
-                  </Field>   
                 </div> 
-                ))}    
+
                 <footer className="buttons-container">
                     <p>
                       <FcHighPriority />

@@ -8,7 +8,7 @@ class SalesController {
       return res.status(201).send(response);
         
     } catch (error) {
-      return res.status(401).json(error);
+      return res.status(400).json(error);
     }
   }
   async getSalesDetails(req, res) {
@@ -39,16 +39,6 @@ class SalesController {
         
     } catch {
       return res.status(200).json([]);
-    }
-  }
-  async updateSalesId(req, res) {
-    let response;
-    try {
-      response = await SalesService.update(req.params, req.body);
-      return res.status(200).send(response);
-        
-    } catch (error) {
-      return res.status(400).json(error);
     }
   }
   async deleteSalesId(req, res) {

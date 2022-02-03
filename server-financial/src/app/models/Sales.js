@@ -4,16 +4,13 @@ class Sales extends Model {
   static init(sequelize) {
     super.init(
       {
-        product_id: Sequelize.INTEGER,
         financial_id: Sequelize.INTEGER,
         name_product: Sequelize.STRING,
         valor_product: Sequelize.DOUBLE,
         desconto: Sequelize.DOUBLE,
         valor_total: Sequelize.DOUBLE,
+        status: Sequelize.BOOLEAN,
         tipo_pagamento: Sequelize.ENUM('AVISTA', 'PARCELADO'),
-        tipo_parcela: Sequelize.ENUM('PAGO', 'CARTAO-CREDITO', 'BOLETO'),
-        parcela_valor: Sequelize.DOUBLE,
-        parcela_numero: Sequelize.STRING,
       },
       {
         sequelize,
@@ -23,7 +20,7 @@ class Sales extends Model {
     return this;
   }
   static associate(models) {
-    this.belongsTo(models.Product, { foreignKey: 'product_id', as: 'products' });
+    this.hasMany(models.Product, { foreignKey: 'sales_id', as: 'products' });
     this.belongsTo(models.FinancialBox, { foreignKey: 'financial_id', as: 'financial' });
   }
 }

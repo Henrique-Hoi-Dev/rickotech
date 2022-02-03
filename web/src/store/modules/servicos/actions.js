@@ -19,6 +19,20 @@ export function getByIdServiceSuccess(data) {
   };
 }
 
+export function findAllServiceRequest() {
+  return {
+    type: '@service/FINDALL_SERVICE_REQUEST',
+    payload: { },
+  };
+}
+
+export function findAllServiceSuccess(data) {
+  return {
+    type: '@service/FIND_ALL_SERVICE_SUCCESS',
+    payload: { data },
+  };
+}
+
 export function getByIdServiceFinancialBoxValorTotalRequest(id) {
   return {
     type: '@service/GET_BYID_SERVICE_FINANCIALBOX_VALORTOTAL_REQUEST',

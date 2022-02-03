@@ -4,13 +4,12 @@ import httpStatus from 'http-status-codes';
 
 export default {
   async store(req, res) {
-    let adresses = req;
-    let user_id = res.user_id
-
     try {
-      let { cep, logradouro, complemento, numero, bairro, cidade, uf } = adresses;
+      let user_id = res.user_id
 
-      const user = await User.findByPk(user_id);
+      let { cep, logradouro, complemento, numero, bairro, cidade, uf } = req;
+
+      const user = await User.findByPk(res.user_id);
 
       if (!user) {
         return res.status(400).json({ error: 'User not found' });
@@ -24,12 +23,28 @@ export default {
       return res.status(400).json(error);
     }
   },
+  async getId(req, res) {
+    try {
+      let adressId = await Adress.findOne({ where: { user_id: req.id },
+        attributes: [
+          'id',
+          'cep',
+          'logradouro',
+          'complemento',
+          'numero',
+          'bairro',
+          'cidade',
+          'uf'
+        ]
+      });
+    return adressId;
+  } catch (error) {
+    return res.status(400).json(error)};
+  },
   async update(req, res) {
     try {
-      let adresses = res
-
       const adress = await Adress.findByPk(req.id);
-      let adressUpdated = await adress.update(adresses);
+      let adressUpdated = await adress.update(res);
 
       return adressUpdated;
     } catch (error) {

@@ -3,13 +3,13 @@ import produce from 'immer';
 const INITIAL_STATE = {
   salesList: [],
   form: {
-    name: '',
-    valor: '',
+    financial_id: undefined,
+    product_id: undefined,
+    name_product: '',
+    valor_product: '',
     desconto: '',
+    state: false,
     tipo_pagamento: 'AVISTA',
-    tipo_parcela: 'PAGO',
-    parcela_valor: '',
-    parcela_numero: ''
   },
 };
 
@@ -18,13 +18,13 @@ export default function sales(state = INITIAL_STATE, action) {
     switch (action.type) {
       case '@sales/RESET_FORM': {
         draft.form = {
-          name: '',
-          valor: '',
+          financial_id: undefined,
+          product_id: undefined,
+          name_product: '',
+          valor_product: '',
           desconto: '',
+          state: false,
           tipo_pagamento: 'AVISTA',
-          tipo_parcela: 'PAGO',
-          parcela_valor: '',
-          parcela_numero: ''
         };
         break;
       }
@@ -33,7 +33,7 @@ export default function sales(state = INITIAL_STATE, action) {
         break;
       }
       case '@sales/GET_BYID_SALES_SUCCESS': {
-        draft.salesList = action.payload.data;
+        draft.form = action.payload.data;
         break;
       }
       case '@sales/GET_BYID_SALES_FINANCIALBOX_VALORTOTAL_SUCCESS': {

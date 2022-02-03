@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import api from '~/services/api';
 
 import { updateProfileSuccess } from './actions';
+import history from '~/services/history';
 
 export function* updateProfile({ payload }) {
   try {
@@ -29,6 +30,7 @@ export function* updateProfile({ payload }) {
 
     toast.success('Perfil atualizado com sucesso!');
     yield put(updateProfileSuccess(response.data));
+    history.push('/')
   } catch (err) {
     toast.error('Erro ao atualizar perfil, confira seus dados!');
   }

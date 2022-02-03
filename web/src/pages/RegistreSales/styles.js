@@ -30,13 +30,19 @@ export const Container = styled.div`
   }
 
   form {
+    border-radius: 11px;
+    padding: 42px;
+    background-color: #4d4c4c;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 50%);
+
     display: grid; 
     justify-items: center;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr;
     grid-template-areas:
     'statos tipo-venda'
-    'tipo-venda-1 final'
+    'tipo-venda-1 tipo-venda-2'
     'but but';
 
     .statos {
@@ -53,9 +59,10 @@ export const Container = styled.div`
       grid-area: tipo-venda-1;
       display: flex;
       flex-direction: column;
+      justify-content: flex-start;
     }
-    .final{
-      grid-area: final;
+    .tipo-venda-2{
+      grid-area: tipo-venda-2;
       display: flex;
       flex-direction: column;
     }
@@ -94,17 +101,12 @@ export const Container = styled.div`
   a {
     text-align: center;
     text-decoration: none;
-    margin: 5px 0 0;
     color: #ffff;
     font-weight: bold;
     margin-bottom: 1rem;
     border-radius: 4px;
     font-size: 16px;
     transition: background 0.2s;
-
-    &:hover {
-      background: ${darken(0.03, '#8945de')};
-    }
   }
 
   button {

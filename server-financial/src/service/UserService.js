@@ -120,7 +120,14 @@ export default {
       await user.update(users);
 
       const result = await User.findByPk(userId, {
-        attributes: ['id', 'name', 'email', 'cargo', 'cpf', 'data_nascimento' ],
+        attributes: [
+          'id', 
+          'name', 
+          'email', 
+          'cargo', 
+          'cpf', 
+          'data_nascimento' 
+        ],
         include: [
           {
             model: File,

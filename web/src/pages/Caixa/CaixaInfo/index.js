@@ -13,9 +13,10 @@ import {
 import { Container } from "./styles";
 
 export default function CaixaInfo() {
-  const dispatch = useDispatch();
-  const { form } = useSelector((state) => state.financialBox);
+  const dispatch = useDispatch(); 
   const userId = useSelector((state) => state.user.profile.id);
+
+  const { form } = useSelector((state) => state.financialBox);
   const { id } = useParams();
 
   useEffect(() => {
@@ -38,12 +39,6 @@ export default function CaixaInfo() {
       );
     }
   }
-  const renderData = { 
-    display: form.status === false ? 'line-through' : 'none' 
-  }
-  const  renderDataInfo = { 
-    display: form.status === true ? 'line-through' : 'none' 
-  } 
 
   return (
     <>
@@ -56,8 +51,19 @@ export default function CaixaInfo() {
                 <label htmlFor="open_caixa">Data abertura caixa</label>
                 <span>{moment(form.open_caixa).format('DD/MM/YYYY')}</span>
                 <label htmlFor="close_caixa">Data fechamento caixa</label>
-                <Input style={renderData} name="close_caixa" type="date"/>
-                <span style={renderDataInfo}>{moment(form.close_caixa).format('DD/MM/YYYY')}</span>
+                <Input 
+                style={{ 
+                  display: (form.status === true && 'none') || 
+                  (form.status === false && 'line-through') }}
+                  name="close_caixa" 
+                  type="date"
+                />
+                <span 
+                style={{ 
+                  display: (form.status === false && 'none') ||
+                  (form.status === true && 'line-through')
+                }}
+                >{moment(form.close_caixa).format('DD/MM/YYYY')}</span>
                 <label htmlFor="valor_total">Valor total</label>
                 <span>{currencyFormat(form.valor_total || '0')}</span>
               </div>

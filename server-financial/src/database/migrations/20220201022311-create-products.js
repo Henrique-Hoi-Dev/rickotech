@@ -10,6 +10,13 @@ module.exports = {
       avatar_id: {
         type: Sequelize.INTEGER,
       },
+      sales_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'sales' , key: 'id' },
+        allowNull: true,
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
       name: {
         type: Sequelize.STRING,
         allowNull: false,

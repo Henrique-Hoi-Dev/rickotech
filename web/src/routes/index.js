@@ -15,6 +15,7 @@ import RegistrationProduct from '~/pages/RegistrationProduct'
 import RegistrationServices from '~/pages/RegistreServices'
 import ListProduct from '~/pages/ListProduct';
 import ListSales from '~/pages/ListSales';
+import ListService from '~/pages/ListService';
 
 function RoutesApp() {
   return (
@@ -31,6 +32,7 @@ function RoutesApp() {
       <Route isPrivate path="/registreServices" exact component={RegistrationServices} />
       <Route isPrivate path="/listProducts" exact component={ListProduct} />
       <Route isPrivate path="/listSales" exact component={ListSales} />
+      <Route isPrivate path="/listServico" exact component={ListService} />
       <Route isPrivate path="/product/:id" exact component={RegistrationProduct} />
       <Route isPrivate path="/sales/:id" exact component={Sales}/>
     </Switch>

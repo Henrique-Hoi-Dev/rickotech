@@ -2,8 +2,10 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   .header-main {
+    display: flex;
+    justify-content: center;
+
     background: #353535;
-    width: 100%;
     max-width: 50rem;
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
@@ -13,6 +15,13 @@ export const Container = styled.div`
     overflow: hidden; 
   
     .form {
+      border-radius: 11px;
+      padding: 42px;
+      background-color: #4d4c4c;
+      box-sizing: border-box;
+      box-shadow: 0px 4px 4px rgb(0 0 0 / 50%);
+      margin-bottom: 37px;
+
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 268px 1fr;

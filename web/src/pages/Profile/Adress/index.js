@@ -1,22 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Input, Select } from '@rocketseat/unform';
 import { useParams } from 'react-router';
 
 import { Container } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { createAdressRequest, updateAdressRequest } from '~/store/modules/adress/actions';
+import { 
+  createAdressRequest,
+  updateAdressRequest,
+  getByIdAdresstRequest } from '~/store/modules/adress/actions';
 
 export default function Adress() {
   const dispatch = useDispatch();
-  const adresses = useSelector((state) => state.adress.adresses);
+  const { form } = useSelector((state) => state.adress);
   const { id } = useParams();
+  console.log(form)
 
-  function handleSubmit(adress) {
+  useEffect(() => {
+    if (id) {
+      dispatch(getByIdAdresstRequest(id));
+    }   
+  }, [id, dispatch]);
+
+  function handleSubmit(values) {
     try {
-      if(adresses === null) {
-        dispatch(createAdressRequest(adress, id));
+      if(form.length <= 0) {
+        dispatch(createAdressRequest(values, id));
       } else {
-        dispatch(updateAdressRequest(adress, adresses.id)); 
+        dispatch(updateAdressRequest(values, form.id)); 
       }
     } catch {
       return 
@@ -75,7 +85,7 @@ export default function Adress() {
    <Container>
     <h2>Endereço</h2>
     <label htmlFor="adress">
-     <Form initialData={adresses} onSubmit={handleSubmit} >
+     <Form initialData={form} onSubmit={handleSubmit} >
         <Input  name="cep" placeholder="CEP" onBlur={(ev) => onBlurCep(ev)} />
         <Input  name="logradouro" placeholder="Logradouro" />
         <Input  name="complemento" placeholder="Complemento" />

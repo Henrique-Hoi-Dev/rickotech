@@ -5,32 +5,15 @@ import FinancialBox from "../app/models/FinancialBox";
 
 export default  {
   async store(req, res) {
-    let sales = req
-    let product_id = res.product_id
-
     try {
       let { 
         financial_id, 
         name_product, 
         valor_product, 
         desconto, 
-        tipo_pagamento, 
-        tipo_parcela, 
-        parcela_valor, 
-        parcela_numero } = sales;
+        status,
+        tipo_pagamento } = req;
 
-      const products = await Product.findByPk(product_id);
-      if (!products) {
-        return res.status(401).json({ menssage: 'Product not found' });
-      }
-
-      const SalesProductExist = await Sales.findOne({
-        where: { product_id: product_id },
-      });
-      if (SalesProductExist) {
-        return res.status(400).json({ message: 'Já existe uma venda.' });
-      }
-      
       const financialBox = await FinancialBox.findByPk(financial_id);
       if (!financialBox) {
         return res.status(400).json({ menssage: 'Financial not found' });
@@ -40,21 +23,32 @@ export default  {
         const porcent = (valor_product / 100) 
         const descont = (porcent * desconto)
         const valor_total = valor_product - descont 
-            
-        const saleses = await Sales.create({
-          product_id, 
-          financial_id, 
-          name_product, 
-          valor_product, 
-          desconto, 
-          valor_total, 
-          tipo_pagamento, 
-          tipo_parcela, 
-          parcela_valor, 
-          parcela_numero 
-        }); 
+        
+        if (status === true) {
+          const saleses = await Sales.create({
+            financial_id, 
+            name_product, 
+            valor_product, 
+            desconto, 
+            status,
+            valor_total, 
+            tipo_pagamento
+          }); 
+  
+          const { id } = saleses
+  
+          const salesProduct = await Product.findByPk(req.product_id)
+          await salesProduct.update({ sales_id: id })
+  
+          return saleses
+        }
 
-        return saleses
+        if (status === false) { 
+          const salesProduct = await Product.findByPk(req.product_id)
+          const salesUp = await salesProduct.update({ sales_id: req.sales_id })
+
+          return salesUp
+        }
       }
     } catch (error) {
       return res.status(400).json(error);
@@ -63,6 +57,14 @@ export default  {
   async index(req, res) {
     try {
       let sales = await Sales.findAll({
+          attributes: [ 
+            'id', 
+            'name_product', 
+            'valor_product', 
+            'desconto', 
+            'valor_total',
+            'status' 
+          ],
           include: [
             {
               model: Product,
@@ -88,7 +90,20 @@ export default  {
       let id = req.id
 
       let salesId = await Sales.findByPk(id, {
+        attributes: [ 
+          'id', 
+          'name_product', 
+          'valor_product', 
+          'desconto', 
+          'valor_total',
+          'status' 
+        ],
         include: [
+          {
+            model: Product,
+            as: 'products',
+            attributes: [ 'id', 'name', 'categoria', 'valor' ],
+          },
           {
             model: FinancialBox,
             as: 'financial',
@@ -138,19 +153,6 @@ export default  {
       return {saleses, totalSales}
     } catch (error) {
       return res.status(400).json(error)
-    }
-  },
-  async update(req, res) {
-    try {
-      let id = req.id;
-      let sale = res
-
-      const sales = await Sales.findByPk(id);
-      const updated = await sales.update(sale);
-
-      return updated;
-    } catch (error) {
-      return res.status(400).json(error);
     }
   },
   async delete(req, res) {

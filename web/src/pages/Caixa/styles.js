@@ -107,10 +107,11 @@ export const List = styled.div`
   display: flex;
 
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
 
   .table-list {
     width: 100%;
+    max-width: 65rem;
     background: #353535;
     border-radius: 0.8rem;
     box-sizing: border-box;

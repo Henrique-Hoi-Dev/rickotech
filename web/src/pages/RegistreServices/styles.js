@@ -20,7 +20,7 @@ export const Container = styled.div`
 
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: 300px;
+      grid-template-rows: 195px;
       grid-template-areas:
         'campo2 campo'
         'button button'    
@@ -40,6 +40,7 @@ export const Container = styled.div`
       font: 1rem Archivo;
       border-radius: 0.5rem;
       height: 2.2rem;
+      width: 13.5rem;
       padding: 0 1rem;
       margin: 0 0 1rem;
       border: 2px solid #8945de;
@@ -87,6 +88,12 @@ export const Container = styled.div`
   }
 
   .header-title {
+    border-radius: 11px;
+    padding: 42px;
+    background-color: #4d4c4c;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 50%);
+    margin-bottom: 37px;
 
 
     label {

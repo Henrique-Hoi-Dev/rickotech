@@ -7,13 +7,6 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      product_id: {
-        type: Sequelize.INTEGER,
-        references: { model: 'products' , key: 'id' },
-        allowNull: true,
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-      },
       financial_id: {
         type: Sequelize.INTEGER,
         references: { model: 'financial_boxes' , key: 'id' },
@@ -35,21 +28,14 @@ module.exports = {
       valor_total: {
         type: Sequelize.DOUBLE,
       },
+      status: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
       tipo_pagamento: {
         type: Sequelize.ENUM,
         values: ['AVISTA','PARCELADO'],
         defaultValue: 'AVISTA',
-      },
-      tipo_parcela: {
-        type: Sequelize.ENUM,
-        values: ['PAGO', 'CARTAO-CREDITO', 'BOLETO'],
-        defaultValue: 'PAGO',
-      },
-      parcela_valor: {
-        type: Sequelize.DOUBLE,
-      },
-      parcela_numero: {
-        type: Sequelize.STRING,
       },
       created_at: {
         type: Sequelize.DATE,

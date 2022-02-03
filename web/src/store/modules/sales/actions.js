@@ -1,7 +1,7 @@
-export function createSalesRequest(values, id) {
+export function createSalesRequest(values) {
   return {
     type: '@sales/CREATE_SALES_REQUEST',
-    payload: { values, id },
+    payload: { values },
   };
 }
 
@@ -50,13 +50,6 @@ export function findAllSalesSuccess(data) {
 export function UpdateSalesRequest(data) {
   return {
     type: '@sales/UPDATE_SALES_REQUEST',
-    payload: { data },
-  };
-}
-
-export function UpdateSalesSuccess(data) {
-  return {
-    type: '@sales/UPDATE_SALES_SUCCESS',
     payload: { data },
   };
 }

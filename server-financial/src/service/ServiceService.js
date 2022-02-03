@@ -4,10 +4,12 @@ import httpStatus from 'http-status-codes';
 
 export default {
   async store(req, res) {
+    console.log(req, res)
+
     try {
       let financial_id = res.id
 
-      const { name, valor, data_serviço } = req;
+      const { name, valor, data_servico } = req;
 
       const financial = await FinancialBox.findByPk(financial_id);
 
@@ -15,7 +17,7 @@ export default {
         return res.status(400).json({ menssage: 'caixa not found' });
       }
 
-      const services = await Service.create({ financial_id, name, valor, data_serviço });
+      const services = await Service.create({ financial_id, name, valor, data_servico });
 
       return services;
     } catch (error) {
@@ -25,6 +27,7 @@ export default {
   async index(req, res) {
     try {
       let services = await Service.findAll({
+        attributes: [ 'name', 'valor', 'data_servico'],
         include: {
           model: FinancialBox,
           as: 'financial',
@@ -41,7 +44,7 @@ export default {
     let serviceId = req.id 
     try {
       let services = await Service.findByPk(serviceId, {
-        attributes: [ 'name', 'valor', 'data_serviço'],
+        attributes: [ 'name', 'valor', 'data_servico'],
         include: {
           model: FinancialBox,
           as: 'financial',
@@ -58,7 +61,7 @@ export default {
       let financialId = req.financial_id 
 
       let services = await Service.findAll({ where : { financial_id: financialId },
-        attributes: [ 'name', 'valor', 'data_serviço'],
+        attributes: [ 'name', 'valor', 'data_servico'],
         include: {
           model: FinancialBox,
           as: 'financial',
@@ -94,7 +97,7 @@ export default {
       });
 
       if (!service) {
-        return res.status(400).json({ message: 'adress not found' });
+        return res.status(400).json(error);
       }
 
       result = {httpStatus: httpStatus.OK, status: "successful", responseData: service}      

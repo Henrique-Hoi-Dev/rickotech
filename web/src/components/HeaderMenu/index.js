@@ -53,19 +53,22 @@ export default function Home() {
          <AttachMoneyIcon /> <Link to={`/caixa/${id}`}>Caixa</Link> 
         </ListItem >
         <ListItem >
-         <ProductionQuantityLimitsIcon /> <Link to="/registreServices">Registre Serviço</Link> 
+         <ProductionQuantityLimitsIcon /> <Link to="/registreServices">Registre serviço</Link> 
         </ListItem >
         <ListItem >
-         <ProductionQuantityLimitsIcon /> <Link to="/registreProduct">Registre Produto</Link> 
+         <ProductionQuantityLimitsIcon /> <Link to="/registreProduct">Registre produto</Link> 
         </ListItem >
       </List>
       <Divider />
       <List>
         <ListItem >
-         <ListAltIcon /> <Link to="/listProducts">Todos Produtos</Link> 
+         <ListAltIcon /> <Link to="/listProducts">Todos os produtos</Link> 
         </ListItem >
         <ListItem >
-         <ListAltIcon /> <Link to="/listSales">Vendas de Produtos</Link> 
+         <ListAltIcon /> <Link to="/listSales">Todas as vendas</Link> 
+        </ListItem >
+        <ListItem >
+         <ListAltIcon /> <Link to="/listServico">Todas os serviços</Link> 
         </ListItem >
       </List>
     </Box>

@@ -40,13 +40,6 @@ export function UpdateFinancialBoxRequest(id, data) {
   };
 }
 
-export function UpdateFinancialBoxSuccess(data) {
-  return {
-    type: '@financialBox/UPDATE_FINANCIALBOX_SUCCESS',
-    payload: { data },
-  };
-}
-
 export function deleteFinancialBoxRequest(id) {
   return {
     type: '@financialBox/DELETE_FINANCIALBOX_REQUEST',

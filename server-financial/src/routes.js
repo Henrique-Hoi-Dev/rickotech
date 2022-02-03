@@ -25,15 +25,16 @@ routes.post('/users/authenticate', SessionController.storeSession);
 // routes.use(authMiddleware);
 
 //users
-routes.put('/user/:id', UserController.updateUserId);
-routes.get('/users', UserController.getUserDetails);
-routes.get('/user/:id', UserController.getUserDetailsId);
-routes.delete('/user/:id', UserController.deleteUserId);
+routes.put('/user/:id', UserController.updateUserId)
+      .get('/users', UserController.getUserDetails)
+      .get('/user/:id', UserController.getUserDetailsId)
+      .delete('/user/:id', UserController.deleteUserId);
 
 //adress 
 routes.post('/adress/:user_id', AdressController.storeAdress)
-routes.put('/adress/:id', AdressController.updateAdressId)
-routes.delete('/adress/:id', AdressController.deleteAdress)
+      .put('/adress/:id', AdressController.updateAdressId)
+      .get('/adress/:id', AdressController.getAdressDetailsId)
+      .delete('/adress/:id', AdressController.deleteAdress);
 
 //avatar
 routes.post('/files', upload.single('file'), FileController.store);
@@ -50,9 +51,8 @@ routes.post('/product', ProductController.storeProduct)
       .delete('/product/:id', ProductController.deleteProductId);
 
 //sales
-routes.post('/sales/:product_id', SalesController.storeSales)
+routes.post('/sales', SalesController.storeSales)
       .get('/saleses', SalesController.getSalesDetails)
-      .put('/sales/:id', SalesController.updateSalesId)
       .get('/sales/:id', SalesController.getSalesDetailsId)
       .get('/salesFinancial/:financial_id', SalesController.getsSalesDetailsTotalValorId)
       .delete('/sales/:id', SalesController.deleteSalesId);
@@ -68,6 +68,5 @@ routes.post('/financialBox/:user_id', FinancialBoxController.storeFinancialBox)
       .put('/financialBox/:id', FinancialBoxController.updateFinancialBoxId)
       .get('/financialBoxs', FinancialBoxController.getsFinancialBoxDetails)
       .get('/financialBox/:id', FinancialBoxController.getsFinancialBoxDetailsId)
-      .delete('/financialBox/:id', FinancialBoxController.deleteFinancialBoxId);
 
 export default routes;

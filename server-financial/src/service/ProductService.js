@@ -27,8 +27,14 @@ async store(req, res) {
 async index(req, res) {
     try {
       const products = await Product.findAll({
-        attributes: [ 'id', 'name', 'valor', 'categoria','data_registro', 
-                      'codigo_barra' ],
+        attributes: [ 
+          'id', 
+          'name', 
+          'valor', 
+          'categoria',
+          'data_registro', 
+          'codigo_barra' 
+        ],
         include: [
         {
           model: File,
@@ -46,6 +52,14 @@ async index(req, res) {
 async getId(req, res) {
   try {
     let product = await Product.findByPk(req.id, {
+      attributes: [ 
+        'id', 
+        'name', 
+        'valor', 
+        'categoria',
+        'data_registro', 
+        'codigo_barra' 
+      ],
       include: [
         {
           model: File,
@@ -60,10 +74,8 @@ async getId(req, res) {
   },
   async update(req, res) {
     try {
-      let products = res
-
       const product = await Product.findByPk(req.id);
-      let productUpdated = await product.update(products);
+      let productUpdated = await product.update(res);
 
       return productUpdated;
     } catch (error) {

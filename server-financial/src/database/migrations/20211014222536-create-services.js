@@ -22,7 +22,7 @@ module.exports = {
         type: Sequelize.DOUBLE,
         allowNull: false,
       },
-      data_serviço: {
+      data_servico: {
         type: Sequelize.DATEONLY,
         allowNull: true,
       },

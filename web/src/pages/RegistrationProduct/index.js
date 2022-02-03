@@ -85,6 +85,10 @@ export default function RegistrationProduct() {
                   name="name" 
                   placeholder="Nome Produto" />
                 <span>{formProps.errors.name}</span>
+                <Field 
+                  id="categoria"
+                  name="categoria"
+                  placeholder="Categoria" />
               </div>
 
               <div className="campo3">
@@ -99,10 +103,6 @@ export default function RegistrationProduct() {
               </div>
 
               <div className="campo4">
-                <Field 
-                  id="categoria"
-                  name="categoria"
-                  placeholder="Categoria" />
                 <Field
                   placeholder="Data do registro"
                   type="date"

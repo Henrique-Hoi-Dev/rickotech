@@ -41,15 +41,5 @@ class FinancialBoxController {
       return res.status(400).json(error);
     }
   }
-  async deleteFinancialBoxId(req, res) {
-    let response;     
-    try {
-      response = await FinancialBoxService.delete(req.params);
-      return res.status(200).send(response);
-        
-    } catch (error) {
-      return res.status(400).json(error);
-    }
-  }
 }
 export default new FinancialBoxController();

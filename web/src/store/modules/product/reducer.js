@@ -4,13 +4,8 @@ const INITIAL_STATE = {
   productList: [],
   form: {
     name: '',
-    altura: '',
-    largura: '',
-    comprimento: '',
     codigo_barra: '',
-    peso: '',
     valor: '',
-    descricao: '',
     data_registro: ''
   },
 };
@@ -21,11 +16,7 @@ export default function product(state = INITIAL_STATE, action) {
       case '@product/RESET_FORM': {
         draft.form = {
           name: '',
-          altura: '',
-          largura: '',
-          comprimento: '',
           codigo_barra: '',
-          peso: '',
           valor: '',
           descricao: '',
           data_registro: ''

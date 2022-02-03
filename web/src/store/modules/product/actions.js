@@ -40,13 +40,6 @@ export function UpdateProductRequest(data) {
   };
 }
 
-export function UpdateProductSuccess(data) {
-  return {
-    type: '@product/UPDATE_PRODUCT_SUCCESS',
-    payload: { data },
-  };
-}
-
 export function deleteProductRequest(data) {
   return {
     type: '@product/DELETE_PRODUCT_REQUEST',

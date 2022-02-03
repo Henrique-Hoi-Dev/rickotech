@@ -12,7 +12,7 @@ import {
 
 export function* createSales({ payload }) {
   try {
-    yield call(api.post, `/sales/${payload.id}`, payload.values);
+    yield call(api.post, '/sales', payload.values);
 
     toast.success('Venda realizada com sucesso.');
     history.push('/listProducts');
