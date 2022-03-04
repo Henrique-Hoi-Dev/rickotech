@@ -11,20 +11,20 @@ class FileController {
     });
     return res.json(file);
   }
-  async getFileDetails(req, res) {
+  async getId(req, res) {
     let response;      
     try {
-      response = await FileService.getFileDetailsId();
+      response = await FileService.getId();
       return res.status(200).send(response);
         
     } catch (error) {
       return res.status(400).json(error);
     }
   }
-  async deleteFileId(req, res) {
+  async delete(req, res) {
     let response;     
     try {
-      response = await FileService.deleteFileId(req.params);
+      response = await FileService.delete(req.params);
       return res.status(200).send(response);
         
     } catch (error) {

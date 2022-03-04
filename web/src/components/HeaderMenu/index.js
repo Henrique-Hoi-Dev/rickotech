@@ -65,9 +65,6 @@ export default function Home() {
          <ListAltIcon /> <Link to="/listProducts">Todos os produtos</Link> 
         </ListItem >
         <ListItem >
-         <ListAltIcon /> <Link to="/listSales">Todas as vendas</Link> 
-        </ListItem >
-        <ListItem >
          <ListAltIcon /> <Link to="/listServico">Todas os serviços</Link> 
         </ListItem >
       </List>

@@ -16,7 +16,7 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
-      data_nascimento: {
+      date_birth: {
         type: Sequelize.STRING,
         allowNull: true,
       },
@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      cargo: {
+      company_position: {
         type: Sequelize.ENUM,
         values: ['COLABORADOR', 'CEO', 'DIRETOR', 'GERENTE'],
         defaultValue: null,
@@ -34,11 +34,6 @@ module.exports = {
       },
       password_hash: {
         type: Sequelize.STRING,
-        allowNull: false,
-      },
-      provider: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
         allowNull: false,
       },
       created_at: {

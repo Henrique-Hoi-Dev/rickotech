@@ -1,8 +1,7 @@
 import FinancialBox from "../app/models/FinancialBox";
 import Service from "../app/models/Service";
-import Sales from "../app/models/Sales";
+import Sales from "../app/models/Order";
 import User from "../app/models/User";
-import httpStatus from 'http-status-codes';
 
 export default {
   async store(req, res) {
@@ -40,17 +39,17 @@ export default {
           {
             model: User,
             as: 'user',
-            attributes: ['name', 'cargo']
+            attributes: [ 'id', 'name' ]
           },
           {
             model: Service,
             as: 'service',
-            attributes: [ 'name', 'id', 'valor' ],
+            attributes: [ 'id', 'name', 'price' ],
           },
           {
             model: Sales,
-            as: 'saleses',
-            attributes: [ 'id', 'financial_id', 'valor_product' ],
+            as: 'order',
+            attributes: [ 'id', 'financial_id', 'price_product' ],
           }
         ]
       });
@@ -70,67 +69,64 @@ export default {
           'open_caixa', 
           'close_caixa',
           'status',
-          'valor_open', 
-          'valor_sales_total', 
-          'valor_service_total',   
-          'valor_total', 
+          'value_open', 
+          'value_total_sales', 
+          'value_total_service',   
+          'value_total', 
         ],
         include: [
           {
             model: User,
             as: 'user',
-            attributes: ['name', 'cargo']
+            attributes: [ 'id', 'name', 'company_position']
           },
           {
             model: Service,
             as: 'service',
-            attributes: [ 'name', 'id', 'valor', 'financial_id' ],
+            attributes: [ 'id', 'name', 'price', 'financial_id' ],
           },
           {
             model: Sales,
-            as: 'saleses',
-            attributes: [ 'id', 'financial_id', 'valor_product' ],
+            as: 'order',
+            attributes: [ 'id', 'financial_id', 'price_product' ],
           }
         ]
       });
       // busca valores total serviços
       const services = await Service.findAll({ where: { financial_id: financialId }})
-      console.log(services.length)
       if (services.length > 0) {
         const validService = services.filter(function (result) {
           return result.dataValues;
         });
         const valueService = validService.map(function (result) {
-          const valor = parseInt(result.dataValues.valor);
+          const valor = parseInt(result.dataValues.price);
           return valor
         })
         const totalService = valueService.reduce((acumulado, x) => {
           return acumulado + x;
         });
 
-        const valor_service_total = (totalService - 0)
-        const caixa = {valor_service_total }
+        const value_total_service = (totalService - 0)
+        const caixa = {value_total_service }
 
         await financial.update(caixa)
       }
-
       // busca valores total de vendas
       const saleses = await Sales.findAll({ where: { financial_id: financialId }})
-      console.log(saleses.length)
       if (saleses.length > 0) {
         const validSales = saleses.filter(function (result) {
           return result.dataValues;
         });
         const valueSales = validSales.map(function (result) {
-          const valor = parseInt(result.dataValues.valor_product);
+          const valor = parseInt(result.dataValues.price_product);
           return valor
         })
         const totalSales = valueSales.reduce((acumulado, x) => {
           return acumulado + x;
         });
 
-        const valor_sales_total = (totalSales - 0)
-        const caixa = { valor_sales_total }
+        const value_total_sales = (totalSales - 0)
+        const caixa = { value_total_sales }
 
         await financial.update(caixa)
       } 
@@ -140,9 +136,9 @@ export default {
         return result.dataValues;
       });
       const valores = valid.map(function (result) {
-        const valorSales = parseInt(result.dataValues.valor_sales_total);
-        const valorOpen = parseInt(result.dataValues.valor_open);
-        const valorService = parseInt(result.dataValues.valor_service_total);
+        const valorSales = parseInt(result.dataValues.value_total_sales);
+        const valorOpen = parseInt(result.dataValues.value_open);
+        const valorService = parseInt(result.dataValues.value_total_service);
 
         const totalvalores =  valorOpen + valorService + valorSales
 
@@ -151,9 +147,9 @@ export default {
       const total = valores.reduce((acumulado, x) => {
         return acumulado + x;
       });      
-      console.log(total)
-      const valor_total = (total - 0)
-      const caixa = { valor_total }
+
+      const value_total = (total || 0 )
+      const caixa = { value_total }
 
       await financial.update(caixa)
 

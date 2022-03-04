@@ -6,8 +6,8 @@ class Service extends Model {
       {
         financial_id: Sequelize.INTEGER,
         name: Sequelize.DECIMAL,
-        valor: Sequelize.DECIMAL,
-        data_servico: Sequelize.DATEONLY
+        price: Sequelize.DECIMAL,
+        date_service: Sequelize.DATEONLY
       },
       {
         sequelize,

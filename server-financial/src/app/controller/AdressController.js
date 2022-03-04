@@ -1,7 +1,7 @@
 import AdressService from "../../service/AdressService";
 
 class AdressController {
-  async storeAdress(req, res) {
+  async store(req, res) {
     let response;     
     try {
       response = await AdressService.store(req.body, req.params);
@@ -11,7 +11,7 @@ class AdressController {
       return res.status(400).json(error);
     }
   }
-  async getAdressDetailsId(req, res) {
+  async getId(req, res) {
     let response;      
     try {
       response = await AdressService.getId(req.params);
@@ -21,7 +21,7 @@ class AdressController {
       return res.status(400).json(error);
     }
   }
-  async updateAdressId(req, res) {
+  async update(req, res) {
     let response;
     try {
       response = await AdressService.update(req.params, req.body);
@@ -31,7 +31,7 @@ class AdressController {
       return res.status(400).json(error);
     }
   }
-  async deleteAdress(req, res) {
+  async delete(req, res) {
     let response;     
     try {
       response = await AdressService.delete(req.params);

@@ -26,22 +26,22 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false
       },
-      valor_open: {
+      value_open: {
         type: Sequelize.DOUBLE,
         allowNull: false,
         defaultValue: 0
       },
-      valor_sales_total: {
+      value_total_sales: {
         type: Sequelize.DOUBLE,
         allowNull: true,
         defaultValue: 0
       },
-      valor_service_total: {
+      value_total_service: {
         type: Sequelize.DOUBLE,
         allowNull: true,
         defaultValue: 0
       },
-      valor_total: {
+      value_total: {
         type: Sequelize.DOUBLE,
         allowNull: true,
         defaultValue: 0

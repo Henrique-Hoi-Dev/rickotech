@@ -2,16 +2,14 @@ import File from "../app/models/File";
 import httpStatus from 'http-status-codes';
 
 export default {
-  // busca o avatar do usuário por file Id 
-  async getFileDetailsId(req, res) {
+  async getId(req, res) {
     try {
       let product = await File.findAll()
       return product;
     } catch (error) {
       return res.status(400).json(error)};
     },
-  // exclui um registro do avatar do usuário
-  async deleteFileId(req, res) {
+  async delete(req, res) {
     let result = {}
     try {
       const id  = req.id;

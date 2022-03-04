@@ -6,18 +6,19 @@ import httpStatus from 'http-status-codes';
 export default {
 async store(req, res) {
   try {
-    let product = req;
+    const { name, price, category, quantity, description } = req
+    const body = { name, price, category, quantity, description }
 
     const schema = Yup.object().shape({
       name: Yup.string().required().max(100),
-      codigo_barra: Yup.string().required(),
+      price: Yup.number().required(),
     });
 
-    if (!(await schema.isValid(product))) {
+    if (!(await schema.isValid(body))) {
       return res.status(400).json({ message: 'Falha na validação' });
     }
 
-    const products = await Product.create(product);
+    const products = await Product.create(body);
 
     return products;
   } catch (error) {
@@ -30,10 +31,10 @@ async index(req, res) {
         attributes: [ 
           'id', 
           'name', 
-          'valor', 
-          'categoria',
-          'data_registro', 
-          'codigo_barra' 
+          'price', 
+          'category',
+          'quantity', 
+          'description' 
         ],
         include: [
         {
@@ -55,10 +56,10 @@ async getId(req, res) {
       attributes: [ 
         'id', 
         'name', 
-        'valor', 
-        'categoria',
-        'data_registro', 
-        'codigo_barra' 
+        'price', 
+        'category',
+        'quantity', 
+        'description' 
       ],
       include: [
         {

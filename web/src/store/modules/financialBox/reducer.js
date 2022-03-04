@@ -3,12 +3,12 @@ import produce from 'immer';
 const INITIAL_STATE = {
   financialBoxList: [],
   form: {
-    valor_sales_total: '',
-    valor_service_total: '',
-    valor_total: '',
-    valor_open: '',
     open_caixa: '',
     close_caixa: '',
+    value_total_sales: '',
+    value_total_service: '',
+    value_total: '',
+    value_open: '',
   }
 };
 
@@ -17,7 +17,7 @@ export default function financialBox(state = INITIAL_STATE, action) {
     switch (action.type) {
       case '@financialBox/RESET_FORM': {
         draft.form = {
-          valor_open: '',
+          value_open: '',
           open_caixa: '',
         };
         break;

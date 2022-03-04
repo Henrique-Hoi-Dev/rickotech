@@ -1,6 +1,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('sales', {
+    return queryInterface.createTable('orders', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -14,28 +14,41 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
+      seller_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'users' , key: 'id' },
+        allowNull: true,
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      product_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'products' , key: 'id' },
+        allowNull: true,
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
       name_product: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      valor_product: {
+      price_product: {
         type: Sequelize.DOUBLE,
         allowNull: false,
       },
-      desconto: {
+      discount: {
         type: Sequelize.DOUBLE,
       },
-      valor_total: {
+      price_total: {
+        type: Sequelize.DOUBLE,
+      },
+      quantity: {
         type: Sequelize.DOUBLE,
       },
       status: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
-      },
-      tipo_pagamento: {
         type: Sequelize.ENUM,
-        values: ['AVISTA','PARCELADO'],
-        defaultValue: 'AVISTA',
+        values: ['open','closed', 'sold'],
+        defaultValue: 'open',
       },
       created_at: {
         type: Sequelize.DATE,
@@ -49,6 +62,6 @@ module.exports = {
   },
 
   down: (queryInterface) => {
-    return queryInterface.dropTable('sales');
+    return queryInterface.dropTable('orders');
   },
 };

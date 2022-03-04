@@ -18,11 +18,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      valor: {
+      price: {
         type: Sequelize.DOUBLE,
         allowNull: false,
       },
-      data_servico: {
+      date_service: {
         type: Sequelize.DATEONLY,
         allowNull: true,
       },

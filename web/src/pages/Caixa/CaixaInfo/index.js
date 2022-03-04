@@ -64,17 +64,17 @@ export default function CaixaInfo() {
                   (form.status === true && 'line-through')
                 }}
                 >{moment(form.close_caixa).format('DD/MM/YYYY')}</span>
-                <label htmlFor="valor_total">Valor total</label>
-                <span>{currencyFormat(form.valor_total || '0')}</span>
+                <label htmlFor="value_total">Valor total</label>
+                <span>{currencyFormat(form.value_total || [0])}</span>
               </div>
 
               <div className="info2">
-                <label htmlFor="valor_open">Valor abertura</label>
-                <span>{currencyFormat(form.valor_open || '0')}</span>
-                <label htmlFor="valor_sales_total">Valor total vendas</label>
-                <span>{currencyFormat(form.valor_sales_total || '0')}</span>
-                <label htmlFor="valor_service_total">Valor total serviços</label>
-                <span>{currencyFormat(form.valor_service_total || '0')}</span>
+                <label htmlFor="value_open">Valor abertura</label>
+                <span>{currencyFormat(form.value_open || [0])}</span>
+                <label htmlFor="value_total_sales">Valor total vendas</label>
+                <span>{currencyFormat(form.value_total_sales || [0])}</span>
+                <label htmlFor="value_total_service">Valor total serviços</label>
+                <span>{currencyFormat(form.value_total_service || [0])}</span>
                 <div className="check">
                   <Input name="status" type="checkbox" value={true} />          
                   {/* <label htmlFor="status">Fechamento caixa</label> */}
@@ -82,7 +82,13 @@ export default function CaixaInfo() {
               </div>
 
               <div className="button">
-                <button type="submit">Fechar caixa</button>
+                <div className="button-close"
+                  style={{ 
+                    display: (form.status === true && 'none') ||
+                    (form.status === false && 'line-through') }}>
+                      
+                  <button type="submit">Fechar caixa</button>
+                </div>
                   <Link to={`/caixa/${userId}`}>
                     <button>
                       Lista caixa

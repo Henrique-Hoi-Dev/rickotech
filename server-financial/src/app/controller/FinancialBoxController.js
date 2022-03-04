@@ -1,44 +1,44 @@
 import FinancialBoxService from '../../service/FinancialBoxService'
 
 class FinancialBoxController {
-  async storeFinancialBox(req, res) {
+  async store(req, res) {
     let response;     
     try {
       response = await FinancialBoxService.store(req.body, req.params);
       return res.status(200).send(response);
         
     } catch (error) {
-      return res.status(400).json(error);
+      return res.status(400).json({ error: 'Error in creating box!' });
     }
   }
-  async getsFinancialBoxDetails(req, res) {
+  async index(req, res) {
     let response;      
     try {
       response = await FinancialBoxService.index();
       return res.status(200).send(response);
         
-    } catch (error) {
-      return res.status(400).json(error);
+    } catch {
+      return res.status(200).json([]);
     }
   }
-  async getsFinancialBoxDetailsId(req, res) {
+  async getId(req, res) {
     let response;      
     try {
       response = await FinancialBoxService.getId(req.params);
       return res.status(200).send(response);
         
-    } catch (error) {
-      return res.status(400).json({error: 'erro na busca'});
+    } catch {
+      return res.status(200).json([]);
     }
   }
-  async updateFinancialBoxId(req, res) {
+  async update(req, res) {
     let response;
     try {
       response = await FinancialBoxService.update(req.body, req.params);
       return res.status(200).send(response);
         
-    } catch (error) {
-      return res.status(400).json(error);
+    } catch {
+      return res.status(200).json([]);
     }
   }
 }

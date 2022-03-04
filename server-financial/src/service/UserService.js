@@ -6,9 +6,9 @@ import httpStatus from 'http-status-codes';
 
 export default {
   async store(req, res) {
-    let user = req
-
     try {
+      let user = req
+      
       const schema = Yup.object().shape({
         name: Yup.string().required(),
         email: Yup.string().email().required(),
@@ -24,9 +24,10 @@ export default {
       if (userExist) {
         return res.status(400).json({ error: 'Esse email de usuário já existe.'});
       }
-  
+
       const users = await User.create(user);
-  
+      console.log(users)
+
       return users;
     } catch (error)  {
       return res.status(400).json(error);

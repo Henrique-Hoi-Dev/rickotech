@@ -9,13 +9,13 @@ import Profile from '~/pages/Profile';
 import Adress from '~/pages/Profile/Adress';
 import Caixa from '~/pages/Caixa';
 import CaixaInfo from '~/pages/Caixa/CaixaInfo';
-import Sales from '~/pages/RegistreSales';
+import Sales from '~/pages/Sales';
 import Dashboard from '~/pages/Dashboard';
-import RegistrationProduct from '~/pages/RegistrationProduct'
-import RegistrationServices from '~/pages/RegistreServices'
-import ListProduct from '~/pages/ListProduct';
-import ListSales from '~/pages/ListSales';
-import ListService from '~/pages/ListService';
+import RegistrationProduct from '~/pages/Product'
+import RegistrationServices from '~/pages/Works'
+import ListProduct from '~/pages/Product/ListProduct';
+import ListSales from '~/pages/Sales/ListSales';
+import ListService from '~/pages/Works/ListWorks';
 
 function RoutesApp() {
   return (

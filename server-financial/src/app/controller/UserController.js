@@ -1,54 +1,54 @@
 import UserService from '../../service/UserService';
 
 class UserController {
-  async storeUser(req, res) {
+  async store(req, res) {
     let response;     
     try {
       response = await UserService.store(req.body);
       return res.status(200).send(response);
         
     } catch (error) {
-      return res.status(400).json(error);
+      return res.status(400).json({ error: 'Error creating user!'});
     }
   }
-  async getUserDetails(req, res) {
+  async index(req, res) {
     let response;      
     try {
       response = await UserService.index();
       return res.status(200).send(response);
         
-    } catch (error) {
-      return res.status(400).json(error);
+    } catch {
+      return res.status(200).json([]);
     }
   }
-  async getUserDetailsId(req, res) {
+  async getId(req, res) {
     let response;      
     try {
       response = await UserService.getId(req.params);
       return res.status(200).send(response);
         
-    } catch (error) {
-      return res.status(400).json(error);
+    } catch {
+      return res.status(200).json([]);
     }
   }
-  async updateUserId(req, res) {
+  async update(req, res) {
     let response;
     try {
       response = await UserService.update(req.body, req.params);
       return res.status(200).send(response);
         
-    } catch (error) {
-      return res.status(400).json(error);
+    } catch {
+      return res.status(200).json([]);
     }
   }
-  async deleteUserId(req, res) {
+  async delete(req, res) {
     let response;     
     try {
       response = await UserService.delete(req.params);
       return res.status(200).send(response);
         
-    } catch (error) {
-      return res.status(400).json({error: "Erro no excluir"});
+    } catch {
+      return res.status(200).json([]);
     }
   }
 }

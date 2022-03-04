@@ -36,6 +36,7 @@ export const Container = styled.div`
     }
     .info2 {
       grid-area: info2;
+      margin-left: 50px;
 
       .check {
         display: flex;
@@ -50,8 +51,7 @@ export const Container = styled.div`
       grid-area: button;
       display: flex;
       justify-content: center;
-      margin-bottom: 14px
-
+      margin-bottom: 14px;
     }
 
     label {
@@ -73,7 +73,7 @@ export const Container = styled.div`
      }
 
      input {
-      min-width: 15rem;
+      width: 13rem;
       background: rgba(0, 0, 0, 0.1);
       padding: 0 15px;
       font: 1rem Archivo;

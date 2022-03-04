@@ -12,8 +12,8 @@ import history from '~/services/history';
 
 export function* createFinancialBox({ payload }) {
   try {
-    const { open_caixa, valor_open } = payload.values
-    const financialBox = { open_caixa, valor_open }
+    const { open_caixa, value_open } = payload.values
+    const financialBox = { open_caixa, value_open }
 
     yield call(api.post, `/financialBox/${payload.id}`, financialBox);
 

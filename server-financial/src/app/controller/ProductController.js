@@ -1,54 +1,54 @@
 import ProductsService from '../../service/ProductService'
 
 class ProductController {
-  async storeProduct(req, res) {
+  async store(req, res) {
     let response;     
     try {
       response = await ProductsService.store(req.body);
       return res.status(201).send(response);
         
     } catch (error) {
-      return res.status(400).json(error);
+      return res.status(400).json({error: 'Error validated'});
     }
   }
-  async getProductDetails(req, res) {
+  async index(req, res) {
     let response;      
     try {
       response = await ProductsService.index();
       return res.status(200).send(response);
         
-    } catch (error) {
-      return res.status(400).json(error);
+    } catch {
+      return res.status(200).json([]);
     }
   }
-  async getProductDetailsId(req, res) {
+  async getId(req, res) {
     let response;      
     try {
       response = await ProductsService.getId(req.params);
       return res.status(200).send(response);
         
-    } catch (error) {
-      return res.status(400).json(error);
+    } catch {
+      return res.status(200).json([]);
     }
   }
-  async updateProductId(req, res) {
+  async update(req, res) {
     let response;
     try {
       response = await ProductsService.update(req.params, req.body);
       return res.status(200).send(response);
         
-    } catch (error) {
-      return res.status(400).json(error);
+    } catch {
+      return res.status(200).json([]);
     }
   }
-  async deleteProductId(req, res) {
+  async delete(req, res) {
     let response;     
     try {
       response = await ProductsService.delete(req.params);
       return res.status(200).send(response);
         
-    } catch (error) {
-      return res.status(400).json(error);
+    } catch {
+      return res.status(200).json([]);
     }
   }
 }

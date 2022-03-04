@@ -3,13 +3,13 @@ import File from '../app/models/File';
 import Product from '../app/models/Product';
 import User from '../app/models/User';
 import Adress from '../app/models/Adress';
-import Sales from '../app/models/Sales';
+import Order from '../app/models/Order';
 import FinancialBox from '../app/models/FinancialBox';
 import Service from '../app/models/Service';
 
 import databaseConfig from '../config/database';
 
-const models = [ User, Adress, Product, File, Sales, FinancialBox, Service ];
+const models = [ User, Adress, Product, File, Order, FinancialBox, Service ];
 
 class Database {
   constructor() {

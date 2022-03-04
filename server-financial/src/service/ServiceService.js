@@ -4,8 +4,6 @@ import httpStatus from 'http-status-codes';
 
 export default {
   async store(req, res) {
-    console.log(req, res)
-
     try {
       let financial_id = res.id
 

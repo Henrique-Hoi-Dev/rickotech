@@ -57,9 +57,9 @@ const { id } = useParams();
             <label>Data Abertura Caixa</label>
             <Input name="open_caixa" type="date" />
           </div>
-          <div className="valor-open">
+          <div className="value-open">
             <label>Valor Abertura Caixa</label>
-            <Input name="valor_open" type="number" placeholder="valor"/>
+            <Input name="value_open" type="number" placeholder="valor"/>
           </div>
           <div className="but">
             <button type="submit">Abrir um novo caixa</button>
@@ -87,10 +87,10 @@ const { id } = useParams();
                   <td>{financial.user.name}</td>
                   <td>{moment(financial.open_caixa).format('DD/MM/YYYY')}</td>
                   <td>{moment(financial.close_caixa).format('DD/MM/YYYY')}</td>
-                  <td>{currencyFormat(financial.valor_open)}</td>
-                  <td>{currencyFormat(financial.valor_sales_total)}</td>
-                  <td>{currencyFormat(financial.valor_service_total)}</td>
-                  <td>{currencyFormat(financial.valor_total)}</td>
+                  <td>{currencyFormat(financial.value_open || [0])}</td>
+                  <td>{currencyFormat(financial.value_total_sales || [0])}</td>
+                  <td>{currencyFormat(financial.value_total_service || [0])}</td>
+                  <td>{currencyFormat(financial.value_total || [0])}</td>
                   <td style={{ color: 
                       (financial.status === true && 'red') || 
                       (financial.status === false && 'green') }} >

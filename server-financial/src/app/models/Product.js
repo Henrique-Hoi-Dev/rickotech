@@ -5,12 +5,12 @@ class Product extends Model {
     super.init(
       {
         avatar_id: Sequelize.INTEGER,
-        sales_id: Sequelize.INTEGER,
+
         name: Sequelize.STRING,
-        valor: Sequelize.DOUBLE,
-        categoria: Sequelize.STRING,
-        data_registro: Sequelize.DATEONLY,
-        codigo_barra: Sequelize.STRING,
+        price: Sequelize.DOUBLE,
+        quantity: Sequelize.DOUBLE,
+        description: Sequelize.STRING,
+        category: Sequelize.STRING,
       },
       {
         sequelize,
@@ -21,7 +21,7 @@ class Product extends Model {
   }
   static associate(models) {
     this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
-    this.belongsTo(models.Sales, { foreignKey: 'sales_id', as: 'sales' });
+    this.hasMany(models.Order, { foreignKey: 'product_id', as: 'order' });
   }
 }
 

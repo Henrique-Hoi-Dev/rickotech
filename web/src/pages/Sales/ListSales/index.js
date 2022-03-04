@@ -3,13 +3,12 @@ import { connect, useDispatch } from 'react-redux';
 import * as moment from 'moment';
 
 import { Container } from './styles';
-import Header from '../../components/HeaderListAndRegister';
 import { FcEmptyTrash } from 'react-icons/fc';
 
 import {
   findAllSalesRequest,
   deleteSalesRequest,
-} from '../../store/modules/sales/actions';
+} from '../../../store/modules/sales/actions';
 
 const ListSales = ({ salesList, handlerRemoveSales }) => {
   const dispatch = useDispatch();
@@ -35,18 +34,16 @@ const ListSales = ({ salesList, handlerRemoveSales }) => {
 
   return (
     <Container>
-      <Header  title="Todos as vendas"/>
       <div className="header-main">
         <form className="form-table">
           <table className="table-list">
             <thead>
               <tr className="table-title">
-                <td>Produto Nome</td>
-                <td>Produto Valor</td>
+                <td>Nome Produto</td>
+                <td>Valor Produto</td>
                 <td>Desconto</td>
                 <td>Data da Venda</td>
                 <td>Tipo Pagamento</td>
-                <td>Excluir</td>
               </tr>
             </thead>
             <tbody>

@@ -19,8 +19,8 @@ import { Container } from './styles';
 const schema = Yup.object().shape({
   name: Yup.string().required('Este compo é obrigatório.')
   .max(100, 'No máximo 100 caracteres'),
-  codigo_barra: Yup.number().required('Este compo é obrigatório.'),
-  valor: Yup.number().required('Este compo é obrigatório.'),
+  quantity: Yup.number().required('Este compo é obrigatório.'),
+  price: Yup.number().required('Este compo é obrigatório.'),
 });
 
 export default function RegistrationProduct() {
@@ -86,17 +86,16 @@ export default function RegistrationProduct() {
                   placeholder="Nome Produto" />
                 <span>{formProps.errors.name}</span>
                 <Field 
-                  id="categoria"
-                  name="categoria"
+                  name="category"
                   placeholder="Categoria" />
               </div>
 
               <div className="campo3">
                 <Field
-                  name="valor"
+                  name="price"
                   type="number"
                   placeholder="Preço($)" />
-                <span>{formProps.errors.valor}</span>
+                <span>{formProps.errors.price}</span>
                 <ul>
                   <AvatarInput name="avatar_id" />
                 </ul>
@@ -104,13 +103,12 @@ export default function RegistrationProduct() {
 
               <div className="campo4">
                 <Field
-                  placeholder="Data do registro"
-                  type="date"
-                  name="data_registro" />                  
+                  placeholder="quantidade"
+                  name="quantity" />                  
                 <Field
-                  name="codigo_barra"
-                  placeholder="Código de barras" />
-                <span>{formProps.errors.codigo_barra}</span>
+                  name="description"
+                  placeholder="descrição produto" />
+                <span>{formProps.errors.description}</span>
               </div>
 
               <footer className="buttons-container">

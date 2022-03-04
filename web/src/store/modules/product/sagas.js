@@ -12,9 +12,9 @@ import {
 
 export function* createProduct({ payload }) {
   try {
-    yield call(api.post, 'products/new', payload.values);
+    yield call(api.post, '/product', payload.values);
     
-    toast.success('Produto salvo com sucesso.');
+    toast.success('Produto criado com sucesso.');
     history.push('/listProducts');
   } catch (err) {
     yield put(productFailure());

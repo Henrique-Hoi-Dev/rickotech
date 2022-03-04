@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import * as moment from 'moment';
 
 import { Container } from './styles';
-import Header from '../../components/HeaderListAndRegister';
+import Header from '../../../components/HeaderListAndRegister';
 import { FcEmptyTrash, FcSalesPerformance } from 'react-icons/fc';
 import { BiEdit } from 'react-icons/bi';
 
@@ -11,7 +10,7 @@ import { Link } from 'react-router-dom';
 import {
   findAllProductRequest,
   deleteProductRequest,
-} from '../../store/modules/product/actions';
+} from '../../../store/modules/product/actions';
 
 const ProductList = ({ productList, handlerRemoveProduct }) => {
   const dispatch = useDispatch();
@@ -45,21 +44,18 @@ const ProductList = ({ productList, handlerRemoveProduct }) => {
               <tr className="table-title">
                 <td>Nome</td>
                 <td>Valor</td>
-                <td>Data Registro</td>
                 <td>Categoria</td>
+                <td>Quantidade</td>
                 <td>Avatar</td>
-                <td>Editar</td>
-                <td>Excluir</td>
-                <td>Vender</td>
               </tr>
             </thead>
             <tbody>
               {[].concat(productList).map((produto, i) => (
                 <tr key={i} value={produto.id}>
                   <td>{produto.name}</td>
-                  <td>{currencyFormat(produto.valor)}</td>
-                  <td>{moment(produto.data_registro).format('DD/MM/YYYY')}</td>
-                  <td>{produto.categoria}</td>
+                  <td>{currencyFormat(produto.price)}</td>
+                  <td>{produto.category}</td>
+                  <td>{produto.quantity}</td>
                   <td className="avatar">
                     <img
                       src={

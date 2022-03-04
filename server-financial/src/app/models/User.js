@@ -9,10 +9,9 @@ class User extends Model {
         email: Sequelize.STRING,
         password: Sequelize.VIRTUAL,
         password_hash: Sequelize.STRING,
-        provider: Sequelize.BOOLEAN,
-        cargo: Sequelize.ENUM('COLABORADOR', 'CEO', 'DIRETOR', 'GERENTE'),
+        company_position: Sequelize.ENUM('COLABORADOR', 'CEO', 'DIRETOR', 'GERENTE'),
         cpf: Sequelize.STRING,
-        data_nascimento: Sequelize.STRING,
+        date_birth : Sequelize.STRING,
         avatar_id: Sequelize.INTEGER,
       },
       {

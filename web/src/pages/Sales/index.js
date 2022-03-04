@@ -70,10 +70,10 @@ const handleReset = (resetForm) => {
                 <option value={productList.name} >{productList.name}</option>
               </Field>
               <label htmlFor="valor">Valor do Produto</label>
-              <Field name="valor" component="select" placeholder="valor" >
+              <Field name="price" component="select" placeholder="valor" >
                 <option value="0" >selecione o valor</option>
                 <option value={productList.valor}>
-                  {productList.valor}
+                  {productList.price}
                 </option>
               </Field>
             </div>
@@ -105,8 +105,8 @@ const handleReset = (resetForm) => {
               <label htmlFor="tipo_pagamento">Status de Venda</label>
               <Field name="status" component="select" >
                 <option value="0" >selecione uma opção</option>
-                <option value="true" >Compra em Aberto</option>
-                <option value="false">Finalizado</option>
+                <option value={true} >Compra em Aberto</option>
+                <option value={false}>Finalizado</option>
               </Field>
             </div>
 

@@ -3,9 +3,9 @@ import { connect, useDispatch } from 'react-redux';
 import * as moment from 'moment';
 
 import { Container } from './styles';
-import Header from '../../components/HeaderListAndRegister';
+import Header from '../../../components/HeaderListAndRegister';
 
-import { findAllServiceRequest } from '../../store/modules/servicos/actions';
+import { findAllServiceRequest } from '../../../store/modules/servicos/actions';
 
 const ListSales = ({ servicoList, handlerRemoveSales }) => {
   const dispatch = useDispatch();

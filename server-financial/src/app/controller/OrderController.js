@@ -1,30 +1,30 @@
-import SalesService from '../../service/SalesService';
+import OrderService from '../../service/OrderService';
 
-class SalesController {
-  async storeSales(req, res) {
+class OrderController {
+  async store(req, res) {
     let response;     
     try {
-      response = await SalesService.store(req.body, req.params);
+      response = await OrderService.store(req.body, req.params);
       return res.status(201).send(response);
         
     } catch (error) {
       return res.status(400).json(error);
     }
   }
-  async getSalesDetails(req, res) {
+  async index(req, res) {
     let response;      
     try {
-      response = await SalesService.index();
+      response = await OrderService.index();
       return res.status(200).send(response);
         
     } catch (error) {
-      return res.status(400).json({error: 'Erro no busca todas as venda'});
+      return res.status(200).json([]);
     }
   }
-  async getSalesDetailsId(req, res) {
+  async getId(req, res) {
     let response;      
     try {
-      response = await SalesService.getId(req.params);
+      response = await OrderService.getId(req.params);
       return res.status(200).send(response);
         
     } catch (error) {
@@ -34,17 +34,17 @@ class SalesController {
   async getsSalesDetailsTotalValorId(req, res) {
     let response;      
     try {
-      response = await SalesService.getsSalesDetailsTotalValorId(req.params);
+      response = await OrderService.getsSalesDetailsTotalValorId(req.params);
       return res.status(200).send(response);
         
     } catch {
       return res.status(200).json([]);
     }
   }
-  async deleteSalesId(req, res) {
+  async delete(req, res) {
     let response;     
     try {
-      response = await SalesService.delete(req.params);
+      response = await OrderService.delete(req.params);
       return res.status(200).send(response);
         
     } catch (error) {
@@ -52,4 +52,4 @@ class SalesController {
     }
   }
 }
-export default new SalesController();
+export default new OrderController();

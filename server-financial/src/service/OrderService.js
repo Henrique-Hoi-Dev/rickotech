@@ -1,5 +1,5 @@
 import Product from "../app/models/Product";
-import Sales from "../app/models/Sales";
+import Order from "../app/models/Order";
 import httpStatus from 'http-status-codes';
 import FinancialBox from "../app/models/FinancialBox";
 
@@ -12,7 +12,8 @@ export default  {
         valor_product, 
         desconto, 
         status,
-        tipo_pagamento } = req;
+        tipo_pagamento 
+      } = req;
 
       const financialBox = await FinancialBox.findByPk(financial_id);
       if (!financialBox) {
@@ -25,7 +26,7 @@ export default  {
         const valor_total = valor_product - descont 
         
         if (status === true) {
-          const saleses = await Sales.create({
+          const saleses = await Order.create({
             financial_id, 
             name_product, 
             valor_product, 
@@ -56,7 +57,7 @@ export default  {
   },
   async index(req, res) {
     try {
-      let sales = await Sales.findAll({
+      let sales = await Order.findAll({
           attributes: [ 
             'id', 
             'name_product', 
@@ -123,7 +124,7 @@ export default  {
     try {
       let financialId = req.financial_id 
 
-      let saleses = await Sales.findAll({ where : { financial_id: financialId },
+      let saleses = await Order.findAll({ where : { financial_id: financialId },
           include: [
             {
               model: Product,
@@ -160,7 +161,7 @@ export default  {
     try {
       const id  = req.id;
 
-      const saleses = await Sales.destroy({
+      const saleses = await Order.destroy({
         where: {
           id: id,
         },

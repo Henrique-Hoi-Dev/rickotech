@@ -15,7 +15,6 @@ export function* createSales({ payload }) {
     yield call(api.post, '/sales', payload.values);
 
     toast.success('Venda realizada com sucesso.');
-    history.push('/listProducts');
   } catch (err) {
     toast.error('Error na venda!');
     yield put(salesFailure());
