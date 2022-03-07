@@ -34,10 +34,10 @@ export default function Profile() {
         <Input name="cpf" placeholder="CPF" />
         <Input
           type="date"
-          name="data_nascimento"
+          name="date_birth"
           placeholder="Data de Nacimento"
         />
-        <Select name="cargo" options={cargos} placeholder="Cargos" />
+        <Select name="company_position" options={cargos} placeholder="Cargos" />
         <hr />
         <h2>Mudar para nova senha</h2>
         <Input type="password" name="oldPassword" placeholder="Sua Senha" />

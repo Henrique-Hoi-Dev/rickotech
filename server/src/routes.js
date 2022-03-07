@@ -51,17 +51,15 @@ routes.post('/product', ProductController.store)
       .delete('/product/:id', ProductController.delete);
 
 //order
-routes.post('/sales', OrderController.store)
+routes.post('/sales/:product_id', OrderController.store)
       .get('/saleses', OrderController.index)
       .get('/sales/:id', OrderController.getId)
-      .get('/salesFinancial/:financial_id', OrderController.getsSalesDetailsTotalValorId)
       .delete('/sales/:id', OrderController.delete);
 
 //services
 routes.post('/service/:id', ServiceController.store)
       .get('/services', ServiceController.index)
       .get('/service/:id', ServiceController.getId)
-      .get('/serviceFinancial/:financial_id', ServiceController.getsServiceDetailsTotalValorId);
 
 //financialBox 
 routes.post('/financialBox/:user_id', FinancialBoxController.store)

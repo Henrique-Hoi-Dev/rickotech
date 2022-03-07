@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import * as moment from 'moment';
 
 import { Container } from './styles';
 import { FcEmptyTrash } from 'react-icons/fc';
@@ -40,20 +39,20 @@ const ListSales = ({ salesList, handlerRemoveSales }) => {
             <thead>
               <tr className="table-title">
                 <td>Nome Produto</td>
+                <td>Quantidade</td>
                 <td>Valor Produto</td>
                 <td>Desconto</td>
-                <td>Data da Venda</td>
-                <td>Tipo Pagamento</td>
+                <td>Status Venda</td>
               </tr>
             </thead>
             <tbody>
               {[].concat(salesList).map((sales, i) => (
                 <tr key={i} value={sales.id}>
                   <td>{sales.name_product}</td>
-                  <td>{currencyFormat(sales.valor_total)}</td>
-                  <td>{sales.desconto}%</td>
-                  <td>{moment(sales.data_registro).format('DD/MM/YYYY')}</td>
-                  <td>{sales.tipo_pagamento}</td>
+                  <td>{sales.product_quantity}</td>
+                  <td>{currencyFormat(sales.price_total || [0])}</td>
+                  <td>{sales.discount}%</td>
+                  <td>{sales.status}</td>
                   <td>
                     <button onClick={(e) => handlerRemoveSales(e, sales.id)}>
                       <FcEmptyTrash />
@@ -71,7 +70,7 @@ const ListSales = ({ salesList, handlerRemoveSales }) => {
 
 const mapStateToProps = (state) => {
   return {
-    salesList: state.sales.salesList ? state.sales.salesList : [],
+    salesList: state.sales.salesList.responseData ? state.sales.salesList.responseData : [],
   };
 };
 

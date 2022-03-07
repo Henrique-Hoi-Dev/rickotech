@@ -42,7 +42,7 @@ module.exports = {
       price_total: {
         type: Sequelize.DOUBLE,
       },
-      quantity: {
+      product_quantity: {
         type: Sequelize.DOUBLE,
       },
       status: {

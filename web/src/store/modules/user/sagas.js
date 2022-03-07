@@ -12,18 +12,18 @@ export function* updateProfile({ payload }) {
       name, 
       email, 
       avatar_id, 
-      cargo, 
+      company_position, 
       cpf, 
-      data_nascimento, 
+      date_birth, 
       ...rest } = payload.data;
 
     const profile = { 
       name, 
       email, 
       avatar_id, 
-      cargo,
+      company_position,
       cpf, 
-      data_nascimento, 
+      date_birth, 
       ...(rest.oldPassword ? rest : {}),};
                       
     const response = yield call(api.put, `/user/${payload.id}`, profile);

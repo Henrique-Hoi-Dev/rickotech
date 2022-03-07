@@ -4,104 +4,67 @@ import httpStatus from 'http-status-codes';
 
 export default {
   async store(req, res) {
-    try {
-      let financial_id = res.id
+    let result = {}
+    
+    let financial_id = res.id
 
-      const { name, valor, data_servico } = req;
+    const { name, price, date_service } = req;
 
-      const financial = await FinancialBox.findByPk(financial_id);
+    const financial = await FinancialBox.findByPk(financial_id);
 
-      if (!financial) {
-        return res.status(400).json({ menssage: 'caixa not found' });
-      }
-
-      const services = await Service.create({ financial_id, name, valor, data_servico });
-
-      return services;
-    } catch (error) {
-      return res.status(400).json(error)
+    if (!financial) {
+      return res.status(400).json({ menssage: 'caixa not found' });
     }
+
+    const services = await Service.create({ financial_id, name, price, date_service });
+
+    result = {httpStatus: httpStatus.OK, status: "Success", responseData: services}    
+    return result
   },
   async index(req, res) {
-    try {
-      let services = await Service.findAll({
-        attributes: [ 'name', 'valor', 'data_servico'],
-        include: {
-          model: FinancialBox,
-          as: 'financial',
-          attributes: [ 'id', 'valor_service_total', 'open_caixa', 'close_caixa' ],
-        },
-      });
+    let result = {}
+    let services = await Service.findAll({
+      attributes: [ 'id', 'name', 'price', 'date_service'],
+      include: {
+        model: FinancialBox,
+        as: 'financial',
+        attributes: [ 'id', 'value_total_service', 'open_caixa', 'close_caixa' ],
+      },
+    });
 
-      return services;
-    } catch (error) {
-      return res.status(400).json(error)
-    }
+    result = {httpStatus: httpStatus.OK, status: "Success", responseData: services}    
+    return result
   },
   async getId(req, res) {
+    let result = {}
     let serviceId = req.id 
-    try {
-      let services = await Service.findByPk(serviceId, {
-        attributes: [ 'name', 'valor', 'data_servico'],
-        include: {
-          model: FinancialBox,
-          as: 'financial',
-          attributes: [ 'id', 'valor_service_total', 'open_caixa', 'close_caixa' ],
-        },
-      });
-      return services;
-    } catch (error) {
-      return res.status(400).json(error)
-    }
-  },
-  async getsServiceDetailsTotalValorId(req, res) {
-    try {
-      let financialId = req.financial_id 
+    let services = await Service.findByPk(serviceId, {
+      attributes: [ 'id', 'name', 'price', 'date_service'],
+      include: {
+        model: FinancialBox,
+        as: 'financial',
+        attributes: [ 'id', 'value_total_service', 'open_caixa', 'close_caixa' ],
+      },
+    });
 
-      let services = await Service.findAll({ where : { financial_id: financialId },
-        attributes: [ 'name', 'valor', 'data_servico'],
-        include: {
-          model: FinancialBox,
-          as: 'financial',
-          attributes: [ 'id', 'valor_service_total', 'open_caixa', 'close_caixa' ],
-        },
-      });
-
-      const validService = services.filter(function (result) {
-        return result.dataValues;
-      });
-      const venciService = validService.map(function (result) {
-      const valor = parseInt(result.dataValues.valor);
-        return valor;
-      });
-      const totalService = venciService.reduce((acumulado, x) => {
-        return acumulado + x;
-      });
-        
-      return {services, totalService} 
-    } catch (error) {
-      return res.status(400).json(error)
-    }
+    result = {httpStatus: httpStatus.OK, status: "Success", responseData: services}    
+    return result
   },
   async delete(req, res) {
     let result = {}
-    try {
-      const id  = req.id;
+    const id  = req.id;
 
-      const service = await Service.destroy({
-        where: {
-          id: id,
-        },
-      });
+    const service = await Service.destroy({
+      where: {
+        id: id,
+      },
+    });
 
-      if (!service) {
-        return res.status(400).json(error);
-      }
-
-      result = {httpStatus: httpStatus.OK, status: "successful", responseData: service}      
-      return result
-    } catch (error) {
-      return res.status(400).json(error)
+    if (!service) {
+      return res.status(400).json(error);
     }
+
+    result = {httpStatus: httpStatus.OK, status: "successful", responseData: service}      
+    return result
   }
 }

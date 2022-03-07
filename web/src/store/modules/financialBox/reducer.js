@@ -3,12 +3,9 @@ import produce from 'immer';
 const INITIAL_STATE = {
   financialBoxList: [],
   form: {
-    open_caixa: '',
     close_caixa: '',
-    value_total_sales: '',
-    value_total_service: '',
-    value_total: '',
     value_open: '',
+    open_caixa: '',
   }
 };
 

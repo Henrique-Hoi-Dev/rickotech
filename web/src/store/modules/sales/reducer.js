@@ -6,10 +6,10 @@ const INITIAL_STATE = {
     financial_id: undefined,
     product_id: undefined,
     name_product: '',
-    valor_product: '',
-    desconto: '',
-    state: false,
-    tipo_pagamento: 'AVISTA',
+    price_product: '',
+    quantity: '',
+    discount: '',
+    status: 'open',
   },
 };
 
@@ -21,10 +21,10 @@ export default function sales(state = INITIAL_STATE, action) {
           financial_id: undefined,
           product_id: undefined,
           name_product: '',
-          valor_product: '',
-          desconto: '',
-          state: false,
-          tipo_pagamento: 'AVISTA',
+          price_product: '',
+          quantity: '',
+          discount: '',
+          status: 'open',
         };
         break;
       }

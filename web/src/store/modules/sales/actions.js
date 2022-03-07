@@ -1,7 +1,7 @@
-export function createSalesRequest(values) {
+export function createSalesRequest(values, id) {
   return {
     type: '@sales/CREATE_SALES_REQUEST',
-    payload: { values },
+    payload: { values, id },
   };
 }
 

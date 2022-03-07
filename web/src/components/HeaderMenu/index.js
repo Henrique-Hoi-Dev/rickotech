@@ -25,7 +25,7 @@ import { TiThMenu } from 'react-icons/ti';
 import { Container, Header, Perfil } from './styles';
 
 export default function Home() {
-  const { name, cargo, avatar, id } = useSelector((state) => state.user.profile);
+  const { name, company_position, avatar, id } = useSelector((state) => state.user.profile);
 
   const [state, setState] = React.useState({
     top: false,
@@ -131,7 +131,7 @@ export default function Home() {
             <h4>Profissional:</h4>
             <strong>{name}</strong>
             <h4>Cargo:</h4>
-            <strong>{cargo ? cargo : 'sem cargo'}</strong>
+            <strong>{company_position ? company_position : 'sem cargo'}</strong>
         
           </nav>
                <img onClick={handleClick} 

@@ -5,53 +5,52 @@ import httpStatus from 'http-status-codes';
 
 export default {
 async store(req, res) {
-  try {
-    const { name, price, category, quantity, description } = req
-    const body = { name, price, category, quantity, description }
+  let result = {}
 
-    const schema = Yup.object().shape({
-      name: Yup.string().required().max(100),
-      price: Yup.number().required(),
-    });
+  const { name, price, category, quantity, description } = req
+  const body = { name, price, category, quantity, description }
 
-    if (!(await schema.isValid(body))) {
-      return res.status(400).json({ message: 'Falha na validação' });
-    }
+  const schema = Yup.object().shape({
+    name: Yup.string().required().max(100),
+    price: Yup.number().required(),
+  });
 
-    const products = await Product.create(body);
-
-    return products;
-  } catch (error) {
-    return res.status(400).json(error.message);
+  if (!(await schema.isValid(body))) {
+    return res.status(400).json({ message: 'Falha na validação' });
   }
+
+  const products = await Product.create(body);
+
+  result = {httpStatus: httpStatus.OK, status: "Success", responseData: products}    
+  return result
 },
 async index(req, res) {
-    try {
-      const products = await Product.findAll({
-        attributes: [ 
-          'id', 
-          'name', 
-          'price', 
-          'category',
-          'quantity', 
-          'description' 
-        ],
-        include: [
-        {
-          model: File,
-          as: 'avatar',
-          attributes: [ 'url', 'id', 'path' ]
-        },
-      ]  
-    });
+    let result = {}
 
-    return products;
-  } catch (error) {
-    return res.status(400).json(error)
-  }
+    const products = await Product.findAll({
+      attributes: [ 
+        'id', 
+        'name', 
+        'price', 
+        'category',
+        'quantity', 
+        'description' 
+      ],
+      include: [
+      {
+        model: File,
+        as: 'avatar',
+        attributes: [ 'url', 'id', 'path' ]
+      },
+    ]  
+  });
+
+  result = {httpStatus: httpStatus.OK, status: "Success", responseData: products}    
+  return result
 },
 async getId(req, res) {
-  try {
+    let result = {}
+
     let product = await Product.findByPk(req.id, {
       attributes: [ 
         'id', 
@@ -69,39 +68,34 @@ async getId(req, res) {
         },
       ] 
     });
-    return product;
-  } catch (error) {
-    return res.status(400).json(error)};
+
+    result = {httpStatus: httpStatus.OK, status: "Success", responseData: product}    
+    return result
   },
   async update(req, res) {
-    try {
-      const product = await Product.findByPk(req.id);
-      let productUpdated = await product.update(res);
+    let result = {}
 
-      return productUpdated;
-    } catch (error) {
-      return res.status(400).json(error);
-    }
+    const product = await Product.findByPk(req.id);
+    let productUpdated = await product.update(res);
+
+    result = {httpStatus: httpStatus.OK, status: "Success", responseData: productUpdated}    
+    return result
   },
   async delete(req, res) {
     let result = {}
-    try {
-      const id  = req.id;
+    const id  = req.id;
 
-      const products = await Product.destroy({
-        where: {
-          id: id,
-        },
-      });
+    const products = await Product.destroy({
+      where: {
+        id: id,
+      },
+    });
 
-      if (!products) {
-        return res.status(400).json({ message: 'product not found' });
-      }
-
-      result = {httpStatus: httpStatus.OK, status: "successful", responseData: products}      
-      return result
-    } catch (error) {
-      return res.status(400).json(error.message);
+    if (!products) {
+      return res.status(400).json({ message: 'product not found' });
     }
+
+    result = {httpStatus: httpStatus.OK, status: "successful", responseData: products}      
+    return result
   }
 }

@@ -9,9 +9,9 @@ class Order extends Model {
         product_id: Sequelize.INTEGER,
         name_product: Sequelize.STRING,
         price_product: Sequelize.DOUBLE,
+        product_quantity: Sequelize.DOUBLE,
         discount: Sequelize.DOUBLE,
         price_total: Sequelize.DOUBLE,
-        quantity: Sequelize.DOUBLE,
         status: Sequelize.ENUM( 'open', 'closed', 'sold' )
       },
       {

@@ -2,22 +2,23 @@ import { takeLatest, call, all, put } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import api from '~/services/api';
+import history from '~/services/history';
 
 import {
   getByIdFinancialBoxSuccess,
   findAllFinancialBoxSuccess, 
   financialBoxFailure
 } from './actions';
-import history from '~/services/history';
 
 export function* createFinancialBox({ payload }) {
   try {
     const { open_caixa, value_open } = payload.values
     const financialBox = { open_caixa, value_open }
 
-    yield call(api.post, `/financialBox/${payload.id}`, financialBox);
+    const response = yield call(api.post, `/financialBox/${payload.id}`, financialBox);
 
     toast.success('Caixa aberto com sucesso.');
+    history.push(`/caixaInfo/${response.data.id}`)
   } catch (err) {
     toast.error('Error no abrir o caixa.');
     yield put(financialBoxFailure());

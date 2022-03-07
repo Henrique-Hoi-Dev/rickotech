@@ -46,8 +46,8 @@ const ListSales = ({ servicoList, handlerRemoveSales }) => {
               {[].concat(servicoList).map((servico, i) => (
                 <tr key={i} value={servico.id}>
                   <td>{servico.name}</td>
-                  <td>{currencyFormat(servico.valor)}</td>
-                  <td>{moment(servico.data_serviço).format('DD/MM/YYYY')}</td>
+                  <td>{currencyFormat(servico.price)}</td>
+                  <td>{moment(servico.date_service).format('DD/MM/YYYY')}</td>
                 </tr>
               ))}
             </tbody>
@@ -60,7 +60,7 @@ const ListSales = ({ servicoList, handlerRemoveSales }) => {
 
 const mapStateToProps = (state) => {
   return {
-    servicoList: state.servicos.servicoList ? state.servicos.servicoList : [],
+    servicoList: state.servicos.servicoList.responseData ? state.servicos.servicoList.responseData : [],
   };
 };
 

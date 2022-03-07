@@ -11,8 +11,9 @@ import {
   getByIdSalesFinancialBoxValorTotalSuccess } from './actions';
 
 export function* createSales({ payload }) {
+  console.log(payload)
   try {
-    yield call(api.post, '/sales', payload.values);
+    yield call(api.post, `/sales/${payload.id}`, payload.values);
 
     toast.success('Venda realizada com sucesso.');
   } catch (err) {

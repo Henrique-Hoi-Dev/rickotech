@@ -3,53 +3,23 @@ import OrderService from '../../service/OrderService';
 class OrderController {
   async store(req, res) {
     let response;     
-    try {
-      response = await OrderService.store(req.body, req.params);
-      return res.status(201).send(response);
-        
-    } catch (error) {
-      return res.status(400).json(error);
-    }
+    response = await OrderService.store(req.body, req.params);
+    return res.send(response);
   }
   async index(req, res) {
     let response;      
-    try {
-      response = await OrderService.index();
-      return res.status(200).send(response);
-        
-    } catch (error) {
-      return res.status(200).json([]);
-    }
+    response = await OrderService.index();
+    return res.send(response);
   }
   async getId(req, res) {
     let response;      
-    try {
-      response = await OrderService.getId(req.params);
-      return res.status(200).send(response);
-        
-    } catch (error) {
-      return res.status(400).json(error);
-    }
-  }
-  async getsSalesDetailsTotalValorId(req, res) {
-    let response;      
-    try {
-      response = await OrderService.getsSalesDetailsTotalValorId(req.params);
-      return res.status(200).send(response);
-        
-    } catch {
-      return res.status(200).json([]);
-    }
+    response = await OrderService.getId(req.params);
+    return res.send(response);
   }
   async delete(req, res) {
     let response;     
-    try {
-      response = await OrderService.delete(req.params);
-      return res.status(200).send(response);
-        
-    } catch (error) {
-      return res.status(400).json(error);
-    }
+    response = await OrderService.delete(req.params);
+    return res.send(response);
   }
 }
 export default new OrderController();

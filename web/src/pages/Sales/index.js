@@ -64,15 +64,15 @@ const handleReset = (resetForm) => {
           initialValues={form} > 
           <Form >
             <div className="statos">
-              <label htmlFor="name">Nome do Produto</label>
-              <Field name="name" component="select"  placeholder="nome" >
+              <label htmlFor="name_product">Nome do Produto</label>
+              <Field name="name_product" component="select"  placeholder="nome" >
                 <option value="0" >selecione o nome</option>
                 <option value={productList.name} >{productList.name}</option>
               </Field>
-              <label htmlFor="valor">Valor do Produto</label>
-              <Field name="price" component="select" placeholder="valor" >
+              <label htmlFor="price_product">Valor do Produto</label>
+              <Field name="price_product" component="select" placeholder="valor" >
                 <option value="0" >selecione o valor</option>
-                <option value={productList.valor}>
+                <option value={productList.price}>
                   {productList.price}
                 </option>
               </Field>
@@ -89,24 +89,21 @@ const handleReset = (resetForm) => {
                       </option>
                     ))}    
                   </Field>
-              <label htmlFor="desconto">% Desconto</label>
-              <Field name="desconto" type="number" /> 
+              <label htmlFor="discount">% Desconto</label>
+              <Field name="discount" type="number" /> 
             </div>
 
             <div className="tipo-venda-1">
-              <label htmlFor="tipo_pagamento">Tipo de Venda</label>
-              <Field name="tipo_pagamento" component="select" >
-                <option value="0" >selecione um caixa</option>
-                <option value="AVISTA" >Avista</option>
-                <option value="PARCELADO">Parcelado</option>
-              </Field>
+          <label htmlFor="tipo_pagamento">Quantidade</label>
+              <Field name="quantity" type="number" />
             </div>
             <div className="tipo-venda-2">
               <label htmlFor="tipo_pagamento">Status de Venda</label>
               <Field name="status" component="select" >
                 <option value="0" >selecione uma opção</option>
-                <option value={true} >Compra em Aberto</option>
-                <option value={false}>Finalizado</option>
+                <option value="open" >Em Aberto</option>
+                <option value="closed">Fechado</option>
+                <option value="sold">Vendido</option>
               </Field>
             </div>
 
