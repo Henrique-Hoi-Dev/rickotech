@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { Container } from './styles';
 import { FcEmptyTrash } from 'react-icons/fc';
+import { BiEdit } from 'react-icons/bi';
 
 import {
   findAllSalesRequest,
@@ -13,10 +15,7 @@ const ListSales = ({ salesList, handlerRemoveSales }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    function onLoad() {
       dispatch(findAllSalesRequest());
-    }
-    onLoad();
   }, [dispatch]);
 
   //formatção do preço do produto
@@ -38,6 +37,7 @@ const ListSales = ({ salesList, handlerRemoveSales }) => {
           <table className="table-list">
             <thead>
               <tr className="table-title">
+                <td>Vendedor</td>
                 <td>Nome Produto</td>
                 <td>Quantidade</td>
                 <td>Valor Produto</td>
@@ -48,11 +48,28 @@ const ListSales = ({ salesList, handlerRemoveSales }) => {
             <tbody>
               {[].concat(salesList).map((sales, i) => (
                 <tr key={i} value={sales.id}>
+                  <td>{sales.user.name}</td>
                   <td>{sales.name_product}</td>
-                  <td>{sales.product_quantity}</td>
+                  <td>{sales.product_quantity || [0]}</td>
                   <td>{currencyFormat(sales.price_total || [0])}</td>
                   <td>{sales.discount}%</td>
-                  <td>{sales.status}</td>
+                  <td style={{ borderRadius: '8px', color: '#fff',
+                               backgroundColor: (sales.status === 'open' && 'green') ||
+                                                (sales.status === 'closed' && 'red') || 
+                                                (sales.status === 'sold' && 'orange') }}
+                      >
+                      {(sales.status === 'open' && 'Em Aberto') || 
+                       (sales.status === 'closed' && 'Fechado') || 
+                       (sales.status === 'sold' && 'Vendido')}</td>
+                  <td>
+                    <button style={{ 
+                      display: (sales.status === 'sold' && 'none') ||
+                      (sales.status === 'open' && 'closed' && 'line-through')}}>
+                      <Link to={`/editSales/${sales.id}`}>
+                        < BiEdit/>
+                      </Link>
+                    </button>
+                  </td>
                   <td>
                     <button onClick={(e) => handlerRemoveSales(e, sales.id)}>
                       <FcEmptyTrash />

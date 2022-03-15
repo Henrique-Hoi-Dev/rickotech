@@ -14,12 +14,14 @@ import {
   createServicetRequest,
   getByIdServiceRequest,
   resetFormulario } from '~/store/modules/servicos/actions';
+  
+import Footer from '~/components/Footer';
 
 export default function RegistreServices() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { form } = useSelector((state) => state.servicos);
-  const { financialBoxList } = useSelector((state) => state.financialBox);
+  const { responseData } = useSelector((state) => state.financialBox.financialBoxList);
 
   useEffect(() => {
     if (id) {
@@ -51,22 +53,17 @@ export default function RegistreServices() {
               <div id="container-input" className="header-title">
                 <div className="campo2">
                   <label htmlFor="name">Nome do Serviço</label>
-                  <Field 
-                    name="name" 
-                    placeholder="nome" />
+                  <Field  name="name" />
 
                   <label htmlFor="valor">Valor</label>
-                  <Field 
-                    type="number"
-                    name="valor" 
-                    placeholder="valor" />
+                  <Field type="number" name="price" />
                 </div>
 
                 <div className="campo" >
                   <label htmlFor="id">Data abertura caixa</label>
                   <Field  component="select" name="financial_id" >
                     <option value="0">Selecione um caixa</option>
-                    {financialBoxList.map((caixa, i) => (
+                    {responseData.map((caixa, i) => (
                       <option key={i} value={caixa.id} >
                       {moment(caixa.open_caixa).format('DD/MM/YYYY')} - {(caixa.status === false && 'Aberto')
                       || (caixa.status === true && 'Fechado')}
@@ -74,10 +71,7 @@ export default function RegistreServices() {
                     ))}    
                   </Field>   
                   <label htmlFor="data_serviço">Dia do serviço feito</label>
-                  <Field 
-                    name="data_serviço" 
-                    type="date" 
-                    placeholder="data do serviço" />
+                  <Field name="date_service" type="date" />
                 </div> 
 
                 <footer className="buttons-container">
@@ -92,6 +86,7 @@ export default function RegistreServices() {
             </Form>
         </Formik>
       </div>
+      <Footer/>
     </Container>
   );
 }

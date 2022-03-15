@@ -11,7 +11,7 @@ export const Container = styled.div`
     box-sizing: border-box;
     box-shadow: 8px 7px 4px rgb(0 0 0 / 50%);
     border-radius: 0.8rem;
-    margin: -3rem auto 3.2rem;
+    margin: -3rem auto 7.2rem;
     padding-top: 3rem;
     overflow: hidden;
     
@@ -20,7 +20,7 @@ export const Container = styled.div`
 
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: 5px 130px 1fr;
+      grid-template-rows: 5px 200px 1fr;
       grid-template-areas:
         'name name name'
         'campo2  campo4 campo3'
@@ -84,6 +84,9 @@ export const Container = styled.div`
       padding: 0 2.4rem;
       margin-top: 0.1rem;
     }
+  }
+  .footer {
+    margin-top: 5rem;
   }
 
   button {

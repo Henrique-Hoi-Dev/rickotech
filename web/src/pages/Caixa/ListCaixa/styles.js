@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   box-sizing: border-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
   border-radius: 0.8rem;
 
   margin: -4rem auto 2rem;

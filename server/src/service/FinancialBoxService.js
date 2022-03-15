@@ -2,6 +2,7 @@ import FinancialBox from "../app/models/FinancialBox";
 import Service from "../app/models/Service";
 import Sales from "../app/models/Order";
 import User from "../app/models/User";
+import httpStatus from 'http-status-codes';
 
 export default {
   async store(req, res) {
@@ -20,6 +21,8 @@ export default {
     return result
   },
   async index(req, res) {
+    let result = {}
+
     let financials = await FinancialBox.findAll({
       order: [['id', 'DESC']],
       attributes: [ 

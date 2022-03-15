@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 
 import history from '~/services/history';
 import api from '~/services/api';
-import api2 from '~/services/api2';
 
 import { signInSuccess, signFailure } from './actions';
 
@@ -55,7 +54,6 @@ export function setToken({ payload }) {
 
   if (token) {
     api.defaults.headers.Authorization = `Bearer ${token} `;
-    api2.defaults.headers.Authorization = `Bearer ${token}`;
   }
 }
 

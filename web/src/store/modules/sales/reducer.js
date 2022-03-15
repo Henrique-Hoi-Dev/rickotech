@@ -7,7 +7,7 @@ const INITIAL_STATE = {
     product_id: undefined,
     name_product: '',
     price_product: '',
-    quantity: '',
+    product_quantity: '',
     discount: '',
     status: 'open',
   },
@@ -22,7 +22,7 @@ export default function sales(state = INITIAL_STATE, action) {
           product_id: undefined,
           name_product: '',
           price_product: '',
-          quantity: '',
+          product_quantity: '',
           discount: '',
           status: 'open',
         };
@@ -34,10 +34,6 @@ export default function sales(state = INITIAL_STATE, action) {
       }
       case '@sales/GET_BYID_SALES_SUCCESS': {
         draft.form = action.payload.data;
-        break;
-      }
-      case '@sales/GET_BYID_SALES_FINANCIALBOX_VALORTOTAL_SUCCESS': {
-        draft.salesList = action.payload.data;
         break;
       }
       default:

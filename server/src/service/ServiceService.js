@@ -13,7 +13,7 @@ export default {
     const financial = await FinancialBox.findByPk(financial_id);
 
     if (!financial) {
-      return res.status(400).json({ menssage: 'caixa not found' });
+      return result = {httpStatus: httpStatus.NOT_FOUND, status: "caixa not found", responseData: services}
     }
 
     const services = await Service.create({ financial_id, name, price, date_service });

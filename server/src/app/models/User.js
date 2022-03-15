@@ -33,6 +33,7 @@ class User extends Model {
     this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
     this.hasOne(models.Adress, { foreignKey: 'user_id', as: 'adress' });
     this.hasMany(models.FinancialBox, { foreignKey: 'user_id', as: 'financialBox' });
+    this.hasMany(models.Order, { foreignKey: 'seller_id', as: 'order' });
   }
 
   checkPassword(password) {

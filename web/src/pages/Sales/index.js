@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { FcHighPriority } from 'react-icons/fc';
@@ -11,19 +10,23 @@ import * as moment from 'moment';
 
 import {
   createSalesRequest,
-  UpdateSalesRequest,
   resetFormulario } from '~/store/modules/sales/actions';
 import { getByIdProductRequest } from '~/store/modules/product/actions';
 import { findAllFinancialBoxRequest } from '~/store/modules/financialBox/actions';
 
 import { Container } from './styles';
+
 import Header from '~/components/HeaderListAndRegister';
+import Footer from '~/components/Footer';
 
 const RegistreSales = ({ financialBoxList }) => {
 const dispatch = useDispatch();
 const { id } = useParams();
 const { form } = useSelector((state) => state.sales);
 const productList = useSelector((state) => state.product.form);
+
+const { card } = useSelector((state) => state.financialBox);
+const [setPreview] = useState(card);
 
 useEffect(() => {
   if (id) {
@@ -36,17 +39,13 @@ useEffect(() => {
   
 const handleSubmit = async (values, { resetForm }) => {
   try {
-    let body = JSON.parse(JSON.stringify(values));
+    dispatch(createSalesRequest(values, id));
+    dispatch(resetFormulario());
+    setPreview(card)
+    handleReset(resetForm);
 
-    if (productList.sales === [0]) {
-      dispatch(UpdateSalesRequest({ id: id, values: body }));
-    } else {
-      dispatch(createSalesRequest(values, id));
-
-      handleReset(resetForm);
-    }
   } catch (error) {
-    toast.error('Error nos dados');
+    // toast.error('Error nos dados');
   }
 };
 
@@ -65,37 +64,35 @@ const handleReset = (resetForm) => {
           <Form >
             <div className="statos">
               <label htmlFor="name_product">Nome do Produto</label>
-              <Field name="name_product" component="select"  placeholder="nome" >
+              <Field name="name_product" component="select" >
                 <option value="0" >selecione o nome</option>
                 <option value={productList.name} >{productList.name}</option>
               </Field>
               <label htmlFor="price_product">Valor do Produto</label>
-              <Field name="price_product" component="select" placeholder="valor" >
+              <Field name="price_product" component="select" >
                 <option value="0" >selecione o valor</option>
-                <option value={productList.price}>
-                  {productList.price}
-                </option>
+                <option value={productList.price}>{productList.price}</option>
               </Field>
             </div>
             
             <div className="tipo-venda">
               <label htmlFor="financial_id">Caixa</label>
-              <Field  component="select" name="financial_id" >
-                    <option value="0">Selecione um caixa</option>
-                    {financialBoxList.map((caixa, i) => (
-                      <option key={i} value={caixa.id} >
-                      {moment(caixa.open_caixa).format('DD/MM/YYYY')} - {(caixa.status === false && 'Aberto')
-                      || (caixa.status === true && 'Fechado')}
-                      </option>
-                    ))}    
-                  </Field>
+              <Field component="select" name="financial_id" >
+                <option value="0">Selecione um caixa</option>
+                {financialBoxList.map((caixa, i) => (
+                <option key={i} value={caixa.id} >
+                {moment(caixa.open_caixa).format('DD/MM/YYYY')} - {(caixa.status === false && 'Aberto')
+                || (caixa.status === true && 'Fechado')}
+                </option>
+                ))}    
+              </Field>
               <label htmlFor="discount">% Desconto</label>
-              <Field name="discount" type="number" /> 
+              <Field name="discount"  />  
             </div>
 
             <div className="tipo-venda-1">
-          <label htmlFor="tipo_pagamento">Quantidade</label>
-              <Field name="quantity" type="number" />
+              <label htmlFor="product_quantity">Quantidade</label>
+              <Field name="product_quantity" />
             </div>
             <div className="tipo-venda-2">
               <label htmlFor="tipo_pagamento">Status de Venda</label>
@@ -122,15 +119,15 @@ const handleReset = (resetForm) => {
             </p>
           </Form>
         </Formik> 
-        
-      </Container>      
+      </Container> 
+      <Footer/>               
     </>
   );
 }
 
 const mapStateToProps = (state) => {
   return {
-    financialBoxList: state.financialBox.financialBoxList ? state.financialBox.financialBoxList : [],
+    financialBoxList: state.financialBox.financialBoxList.responseData ? state.financialBox.financialBoxList.responseData : [],
   };
 };
 

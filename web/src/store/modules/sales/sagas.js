@@ -7,15 +7,34 @@ import api from '~/services/api';
 import {
   salesFailure,
   findAllSalesSuccess,
-  getByIdSalesSuccess,
-  getByIdSalesFinancialBoxValorTotalSuccess } from './actions';
+  getByIdSalesSuccess } from './actions';
 
 export function* createSales({ payload }) {
-  console.log(payload)
   try {
-    yield call(api.post, `/sales/${payload.id}`, payload.values);
+    const { 
+      financial_id,
+      name_product, 
+      price_product, 
+      product_quantity, 
+      discount, 
+      status } = payload.values
+      
+    const { product_id } = payload
+
+    const sales = { 
+      financial_id,
+      product_id, 
+      name_product, 
+      price_product, 
+      product_quantity, 
+      discount, 
+      status 
+     } 
+
+    yield call(api.post, '/sales', sales);
 
     toast.success('Venda realizada com sucesso.');
+    history.push('/dashboard');
   } catch (err) {
     toast.error('Error na venda!');
     yield put(salesFailure());
@@ -33,20 +52,9 @@ export function* findAllSales() {
   }
 }
 
-export function* getByIdSalesFinancialBoxValorTotal({ payload }) {
-  try {
-    const response = yield call(api.get, `/salesFinancial/${payload.id}`);
-
-    yield put(getByIdSalesFinancialBoxValorTotalSuccess(response.data));
-  } catch (err) {
-    toast.error('Error em buscar vendas.');
-    yield put(salesFailure());
-  }
-}
-
 export function* getByIdSales({ payload }) {
   try {
-    const response = yield call(api.get, `/venda/${payload.data}`);
+    const response = yield call(api.get, `/sales/${payload.id}`);
 
     yield put(getByIdSalesSuccess(response.data));
   } catch (err) {
@@ -57,14 +65,14 @@ export function* getByIdSales({ payload }) {
 
 export function* UpdateSales({ payload }) {
   try {
-    yield call(api.put, `/venda/${payload.data.id}`, payload.data.values);
+    yield call(api.post, `/sales/${payload.data.id}`, payload.data.values);
 
-    const response = yield call(api.get, `/vendas`);
+    const response = yield call(api.get, '/saleses');
 
     yield put(findAllSalesSuccess(response.data));
 
     toast.success('Editado com sucesso.');
-    history.push('/list');
+    history.push('/dashboard');
   } catch (err) {
     toast.error('Error no editar venda.');
     yield put(salesFailure());
@@ -89,8 +97,6 @@ export default all([
   takeLatest('@sales/CREATE_SALES_REQUEST', createSales),
   takeLatest('@sales/FINDALL_SALES_REQUEST', findAllSales),
   takeLatest('@sales/GET_BYID_SALES_REQUEST', getByIdSales),
-  takeLatest('@sales/GET_BYID_SALES_FINANCIALBOX_VALORTOTAL_REQUEST', 
-  getByIdSalesFinancialBoxValorTotal),
   takeLatest('@sales/UPDATE_SALES_REQUEST', UpdateSales),
   takeLatest('@sales/DELETE_SALES_REQUEST', deleteSales),
 ]);

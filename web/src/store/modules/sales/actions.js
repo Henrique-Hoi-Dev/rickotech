@@ -1,7 +1,7 @@
-export function createSalesRequest(values, id) {
+export function createSalesRequest(values, product_id) {
   return {
     type: '@sales/CREATE_SALES_REQUEST',
-    payload: { values, id },
+    payload: { values, product_id },
   };
 }
 
@@ -15,20 +15,6 @@ export function getByIdSalesRequest(id) {
 export function getByIdSalesSuccess(data) {
   return {
     type: '@sales/GET_BYID_SALES_SUCCESS',
-    payload: { data },
-  };
-}
-
-export function getByIdSalesFinancialBoxValorTotalRequest(id) {
-  return {
-    type: '@sales/GET_BYID_SALES_FINANCIALBOX_VALORTOTAL_REQUEST',
-    payload: { id },
-  };
-}
-
-export function getByIdSalesFinancialBoxValorTotalSuccess(data) {
-  return {
-    type: '@sales/GET_BYID_SALES_FINANCIALBOX_VALORTOTAL_SUCCESS',
     payload: { data },
   };
 }

@@ -33,24 +33,10 @@ export function findAllServiceSuccess(data) {
   };
 }
 
-export function getByIdServiceFinancialBoxValorTotalRequest(id) {
-  return {
-    type: '@service/GET_BYID_SERVICE_FINANCIALBOX_VALORTOTAL_REQUEST',
-    payload: { id },
-  };
-}
-
-export function getByIdServiceFinancialBoxValorTotalSuccess(data) {
-  return {
-    type: '@service/GET_BYID_SERVICE_FINANCIALBOX_VALORTOTAL_SUCCESS',
-    payload: { data },
-  };
-}
-
-export function deleteServiceRequest(data) {
+export function deleteServiceRequest(id) {
   return {
     type: '@service/DELETE_SERVICE_REQUEST',
-    payload: { data },
+    payload: { id },
   };
 }
 

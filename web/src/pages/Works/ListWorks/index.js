@@ -3,11 +3,15 @@ import { connect, useDispatch } from 'react-redux';
 import * as moment from 'moment';
 
 import { Container } from './styles';
+import { FcEmptyTrash } from 'react-icons/fc';
+
 import Header from '../../../components/HeaderListAndRegister';
+import Footer from '~/components/Footer';
 
-import { findAllServiceRequest } from '../../../store/modules/servicos/actions';
+import { findAllServiceRequest, 
+          deleteServiceRequest } from '../../../store/modules/servicos/actions';
 
-const ListSales = ({ servicoList, handlerRemoveSales }) => {
+const ListSales = ({ servicoList, handlerRemoveService }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -48,12 +52,18 @@ const ListSales = ({ servicoList, handlerRemoveSales }) => {
                   <td>{servico.name}</td>
                   <td>{currencyFormat(servico.price)}</td>
                   <td>{moment(servico.date_service).format('DD/MM/YYYY')}</td>
+                  <td>
+                    <button onClick={(e) => handlerRemoveService(e, servico.id)}>
+                      <FcEmptyTrash />
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </form>
       </div>
+      <Footer />
     </Container>
   );
 };
@@ -64,4 +74,18 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(ListSales);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handlerRemoveService: async (e, id) => {
+      e.preventDefault();
+      const confirm = window.confirm(
+        'Tem certeza que deseja desfazer essa serviço?'
+      );
+      if (confirm) {
+        dispatch(deleteServiceRequest(id));
+      }
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListSales);

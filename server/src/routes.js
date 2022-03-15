@@ -11,6 +11,7 @@ import OrderController from './app/controller/OrderController';
 import AdressController from './app/controller/AdressController';
 import ServiceController from './app/controller/ServiceController';
 import FinancialBoxController from './app/controller/FinancialBoxController';
+import CardController from './app/controller/CardController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -20,6 +21,7 @@ const upload = multer(multerConfig);
 //cadastro
 routes.post('/users/register', UserController.store);
 routes.post('/users/authenticate', SessionController.storeSession);
+routes.get('/card', CardController.index)
 
 //autenticação
 // routes.use(authMiddleware);
@@ -51,15 +53,17 @@ routes.post('/product', ProductController.store)
       .delete('/product/:id', ProductController.delete);
 
 //order
-routes.post('/sales/:product_id', OrderController.store)
+routes.post('/sales', OrderController.store)
       .get('/saleses', OrderController.index)
       .get('/sales/:id', OrderController.getId)
+      .post('/sales/:id', OrderController.store)
       .delete('/sales/:id', OrderController.delete);
 
 //services
 routes.post('/service/:id', ServiceController.store)
       .get('/services', ServiceController.index)
       .get('/service/:id', ServiceController.getId)
+      .delete('/service/:id', ServiceController.delete)
 
 //financialBox 
 routes.post('/financialBox/:user_id', FinancialBoxController.store)

@@ -78,7 +78,7 @@ const { id } = useParams();
 
 const mapStateToProps = (state) => {
   return {
-    financialBoxList: state.financialBox.financialBoxList ? state.financialBox.financialBoxList : [],
+    financialBoxList: state.financialBox.financialBoxList.responseData ? state.financialBox.financialBoxList.responseData : [],
   };
 };
 

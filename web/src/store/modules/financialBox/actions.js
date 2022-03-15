@@ -19,6 +19,20 @@ export function getByIdFinancialBoxSuccess(data) {
   };
 }
 
+export function getCardRequest(data) {
+  return {
+    type: '@financialBox/GET_CARD_REQUEST',
+    payload: { data },
+  };
+}
+
+export function getCardSuccess(data) {
+  return {
+    type: '@financialBox/GET_CARD_SUCCESS',
+    payload: { data },
+  };
+}
+
 export function findAllFinancialBoxRequest(data) {
   return {
     type: '@financialBox/FIND_ALL_FINANCIALBOX_REQUEST',

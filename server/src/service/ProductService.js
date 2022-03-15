@@ -16,7 +16,7 @@ async store(req, res) {
   });
 
   if (!(await schema.isValid(body))) {
-    return res.status(400).json({ message: 'Falha na validação' });
+    return result = {httpStatus: httpStatus.NOT_FOUND, status: "validation failed", responseData: []} 
   }
 
   const products = await Product.create(body);
@@ -25,8 +25,6 @@ async store(req, res) {
   return result
 },
 async index(req, res) {
-    let result = {}
-
     const products = await Product.findAll({
       attributes: [ 
         'id', 
@@ -45,12 +43,9 @@ async index(req, res) {
     ]  
   });
 
-  result = {httpStatus: httpStatus.OK, status: "Success", responseData: products}    
-  return result
+  return products
 },
 async getId(req, res) {
-    let result = {}
-
     let product = await Product.findByPk(req.id, {
       attributes: [ 
         'id', 
@@ -69,8 +64,7 @@ async getId(req, res) {
       ] 
     });
 
-    result = {httpStatus: httpStatus.OK, status: "Success", responseData: product}    
-    return result
+    return product
   },
   async update(req, res) {
     let result = {}

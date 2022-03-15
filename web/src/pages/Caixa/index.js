@@ -11,6 +11,7 @@ import { Container } from './styles';
 
 import Header from '~/components/HeaderListAndRegister';
 import ListCaixa from './ListCaixa';
+import Footer from '~/components/Footer';
 
 export default function Caixa() {
 const dispatch = useDispatch();
@@ -45,6 +46,7 @@ const { id } = useParams();
         </Form>
       </Container>  
       <ListCaixa />
+      <Footer/>
     </>
   );
 }

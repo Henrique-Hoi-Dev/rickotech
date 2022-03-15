@@ -2,20 +2,43 @@ import Product from "../app/models/Product";
 import Order from "../app/models/Order";
 import httpStatus from 'http-status-codes';
 import FinancialBox from "../app/models/FinancialBox";
+import User from "../app/models/User";
 
 export default  {
   async store(req, res) {
     let result = {}
-    let { 
-      financial_id, 
-      name_product, 
-      price_product, 
-      discount,
-      product_quantity, 
-      status 
-    } = req;
 
-    let product_id = res.product_id
+    let sales_id = res.id
+
+    if (sales_id) {
+      const orders = await Order.findByPk(sales_id);
+
+      const { status, product_quantity, discount, product_id } = req
+      
+      const product = await Product.findByPk(product_id)
+
+      const price_product = (product.dataValues.price * product_quantity)
+      
+      const porcent = (price_product / 100) 
+      const descont = (porcent * discount)
+      const price_total = price_product - descont 
+  
+      await orders.update({ status, product_quantity, price_product, discount, price_total });
+
+      if (status === 'sold' ) {
+        const productQuantity = await Product.findOne({ where: { id: product_id }})
+        const proQuantity = productQuantity.dataValues.quantity - product_quantity
+  
+        const quantity = proQuantity
+  
+        await productQuantity.update({quantity}) 
+      }
+
+      result = {httpStatus: httpStatus.OK, status: "Edit sucess!", responseData: orders}    
+      return result
+    }
+
+    let { financial_id, product_id, name_product, price_product, discount, product_quantity, status } = req;
 
     const financialBox = await FinancialBox.findOne({ where: { id: financial_id }});
     if (!financialBox) {
@@ -43,7 +66,7 @@ export default  {
       const descont = (porcent * discount)
       const price_total = priceProduct - descont 
       const price_product = priceProduct
-      
+
       const saleses = await Order.create({
         financial_id,
         product_id, 
@@ -56,22 +79,7 @@ export default  {
         price_total, 
       }); 
 
-      const productQuantity = await Product.findOne({ where: { id: product_id }})
-      const proQuantity = productQuantity.dataValues.quantity - product_quantity
-
-      const quantity = proQuantity
-
-      await productQuantity.update({quantity})
-
       return saleses
-      
-
-      // if (status === "closed" || "sold") { 
-      //   const salesProduct = await Product.findByPk(req.product_id)
-      //   const salesUp = await Order.create({ sales_id: req.sales_id })
-
-      //   return salesUp
-      // }
     }
   },
   async index(req, res) {
@@ -93,6 +101,11 @@ export default  {
             model: Product,
             as: 'products',
             attributes: [ 'id', 'name', 'category', 'price' ],
+          },
+          {
+            model: User,
+            as: 'user',
+            attributes: [ 'id', 'name' ]
           },
           {
             model: FinancialBox,
@@ -133,6 +146,11 @@ export default  {
           attributes: [ 'id', 'name', 'category', 'price' ],
         },
         {
+          model: User,
+          as: 'user',
+          attributes: [ 'id', 'name' ]
+        },
+        {
           model: FinancialBox,
           as: 'financial',
           attributes: [ 
@@ -153,6 +171,7 @@ export default  {
   async delete(req, res) {
     let result = {}
     const id  = req.id;
+    const order = await Order.findByPk(id)
 
     const saleses = await Order.destroy({
       where: {
@@ -160,11 +179,16 @@ export default  {
       },
     });
 
-    if (!saleses) {
-      return res.status(400).json({ message: 'adress not found' });
+    if (!saleses || !order) {
+      return result = {httpStatus: httpStatus.NOT_FOUND, status: "Sales not found", responseData: []} 
     }
 
-    result = {httpStatus: httpStatus.OK, status: "successful", responseData: saleses}      
+    const productQuantity = await Product.findOne({ where: { id: order.dataValues.product_id }})
+      const quantity = productQuantity.dataValues.quantity + order.dataValues.product_quantity
+
+      const devolProduct = await productQuantity.update({quantity}) 
+
+    result = {httpStatus: httpStatus.OK, status: "successful", responseData: devolProduct}      
     return result
   }
 }

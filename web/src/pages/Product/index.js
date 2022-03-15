@@ -12,7 +12,9 @@ import {
   resetFormulario } from '~/store/modules/product/actions';
 
 import Header from '~/components/HeaderListAndRegister';
+import Footer from '~/components/Footer';
 import AvatarInput from './Avatarinput';
+
 import { FcHighPriority } from 'react-icons/fc';
 import { Container } from './styles';
 
@@ -80,21 +82,16 @@ export default function RegistrationProduct() {
             <Form className="form-input" >
             <div id="container-input" className="header-title">
               <div className="campo2">
-                <Field 
-                  id="name" 
-                  name="name" 
-                  placeholder="Nome Produto" />
+                <label htmlFor="Nome Produto">Nome</label>
+                <Field name="name" />
                 <span>{formProps.errors.name}</span>
-                <Field 
-                  name="category"
-                  placeholder="Categoria" />
+                <label htmlFor="categoty">Categoria</label>
+                <Field name="category" />
               </div>
 
               <div className="campo3">
-                <Field
-                  name="price"
-                  type="number"
-                  placeholder="Preço($)" />
+                <label htmlFor="valor">Valor</label>
+                <Field name="price" type="number" />
                 <span>{formProps.errors.price}</span>
                 <ul>
                   <AvatarInput name="avatar_id" />
@@ -102,12 +99,10 @@ export default function RegistrationProduct() {
               </div>
 
               <div className="campo4">
-                <Field
-                  placeholder="quantidade"
-                  name="quantity" />                  
-                <Field
-                  name="description"
-                  placeholder="descrição produto" />
+                <label htmlFor="quantidade">Quantidade</label>
+                <Field name="quantity" />  
+                <label htmlFor="decricao">Descrição</label>                
+                <Field name="description" />
                 <span>{formProps.errors.description}</span>
               </div>
 
@@ -124,6 +119,7 @@ export default function RegistrationProduct() {
           )}}            
         </Formik>
       </div>
+      <Footer/>
     </Container>
   );
 }

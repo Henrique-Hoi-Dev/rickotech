@@ -5,8 +5,8 @@ class Service extends Model {
     super.init(
       {
         financial_id: Sequelize.INTEGER,
-        name: Sequelize.DECIMAL,
-        price: Sequelize.DECIMAL,
+        name: Sequelize.STRING,
+        price: Sequelize.DOUBLE,
         date_service: Sequelize.DATEONLY
       },
       {
