@@ -8,7 +8,7 @@ const INITIAL_STATE = {
     name_product: '',
     price_product: '',
     product_quantity: '',
-    discount: '',
+    discount: 0,
     status: 'open',
   },
 };
@@ -23,7 +23,7 @@ export default function sales(state = INITIAL_STATE, action) {
           name_product: '',
           price_product: '',
           product_quantity: '',
-          discount: '',
+          discount: 0,
           status: 'open',
         };
         break;

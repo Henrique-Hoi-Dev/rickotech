@@ -92,7 +92,7 @@ export default function Adress() {
         <Input  name="numero" placeholder="Número" />
         <Input  name="bairro" placeholder="Bairro" />
         <Input  name="cidade" placeholder="Cidade" />
-        <Select options={estados} name="uf" placeholder="UF" />
+        <Select name="uf" options={estados} placeholder="UF" />
         <hr/>
         <button className="adresses" type="submit">
           Atulizar seu endereço

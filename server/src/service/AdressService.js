@@ -30,8 +30,6 @@ export default {
     return result
   },
   async getId(req, res) {
-    let result = {}
-
     let adressId = await Adress.findOne({ where: { user_id: req.id },
       attributes: [
         'id',
@@ -44,9 +42,7 @@ export default {
         'uf'
       ]
     });
-
-    result = {httpStatus: httpStatus.OK, status: "successful", responseData: adressId}      
-    return result
+    return adressId
   },
   async update(req, res) {
     let result = {}

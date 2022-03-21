@@ -25,7 +25,8 @@ export default function SignUp() {
 
   return (
     <>
-      <Form schema={schema} onSubmit={handleSubmit}>
+      <Form schema={schema} onSubmit={handleSubmit} className='animate__animated animate__bounce'>
+        <h2>Registro usuário</h2>
         <Input name="name" placeholder="Seu nome completo" />
         <Input name="email" type="email" placeholder="Seu e-mail" />
         <Input name="password" type="password" placeholder="Sua senha" />

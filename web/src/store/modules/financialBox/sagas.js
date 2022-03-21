@@ -19,7 +19,7 @@ export function* createFinancialBox({ payload }) {
     const response = yield call(api.post, `/financialBox/${payload.id}`, financialBox);
 
     toast.success('Caixa aberto com sucesso.');
-    history.push(`/caixaInfo/${response.data.id}`)
+    history.push(`/caixaInfo/${response.data.responseData.id}`)
   } catch (err) {
     toast.error('Error no abrir o caixa.');
     yield put(financialBoxFailure());

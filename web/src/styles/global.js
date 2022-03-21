@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 import 'react-toastify/dist/ReactToastify.css';
+import 'animate.css';
 
 export default createGlobalStyle`
   * {
@@ -14,50 +15,44 @@ export default createGlobalStyle`
     height: 100%;
     overflow-x: hidden;
 
-
     ::-webkit-scrollbar {
       width: 1px;
       height: 10px;
     }
-    
   }
 
   body {
     -webkit-font-smoothing: antialiased !important;
     background-color: #4D4C4C;
 
-    .makeStyles-card-14, .makeStyles-card-62, .makeStyles-card-26 {
-      background: #333!important;
-    }
-    
-    .makeStyles-cardTitle-10 {
-      color: #fff;
-    }
     .MuiMenuItem-root {
       &:hover {
         transform: scale(1.1);
         transition: all 0.5s;
       }
     }
+
     .MuiTableCell-head {
       font-weight: bold;
       color: #9c98a6;
     }
+
     .MuiTypography {
       font-weight: bold;
       color: #9c98a6;
     }
+
     .MuiTypography-h6 {
       font-weight: bold;
       color: #9c98a6;
     }
+
     .MuiTableCell-root {
       font-weight: 700;
     }
+
     .MuiPaper-root  {
-      /* width: 160px;
-      height: 120px; */
-      margin-top: 30px;
+      margin-top: -15px;
       background-color: #353535;
       font-weight: bold!important;
       color: #9c98a6;
@@ -66,12 +61,15 @@ export default createGlobalStyle`
       .css-2s90m6-MuiAvatar-root {
         background: none;
       }
+
       .css-cveggr-MuiListItemIcon-root {
         min-width: 40px;
       }
+
       .css-i4bv87-MuiSvgIcon-root{
         margin-right: 20px;
       }
+
       .css-1p823my-MuiListItem-root {
         &:hover {
           transform: scale(1.1);

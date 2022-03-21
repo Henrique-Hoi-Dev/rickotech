@@ -106,17 +106,17 @@ export default function Home() {
   });
 
   const classes = useStyles();
-
+  
   return (
     <Container>
       <Header>
-        <div>
+        <div >
           {['left'].map((anchor) => (
-            <React.Fragment key={anchor}>
+            <React.Fragment key={anchor} >
               <Button onClick={toggleDrawer(anchor, true)}>
                 <TiThMenu size={50} color="#4D4C4C" onClick={toggleDrawer(true)} />
               </Button>
-              <Drawer
+              <Drawer 
                 anchor={anchor}
                 open={state[anchor]}
                 onClose={toggleDrawer(anchor, false)}
@@ -126,13 +126,12 @@ export default function Home() {
             </React.Fragment>
           ))}
         </div>
-        <Perfil>
+        <Perfil >
           <nav>
             <h4>Profissional:</h4>
             <strong>{name}</strong>
             <h4>Cargo:</h4>
             <strong>{company_position ? company_position : 'sem cargo'}</strong>
-        
           </nav>
                <img onClick={handleClick} 
                 src={
@@ -173,8 +172,9 @@ export default function Home() {
                     },
                   },
                 }}
-                transformOrigin={{ horizontal: 'right',  }}
-                anchorOrigin={{ horizontal: 'right',  }}
+                getContentAnchorEl={null}
+                transformOrigin={{ horizontal: 'right', vertical: 'top', }}
+                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
               >
                 <MenuItem>
                   <Avatar />

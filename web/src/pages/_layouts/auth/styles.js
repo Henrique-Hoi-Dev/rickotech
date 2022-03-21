@@ -1,53 +1,49 @@
 import styled from 'styled-components';
-import { darken } from 'polished';
+import login from '../../../assets/login.jpg'
 
 export const Wrapper = styled.div`
-  background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
-  background-size: cover;
+  height: 100%;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-image: url(${login});
+
+  background-size: contain;
   background-repeat: no-repeat;
+`;
+
+export const Content = styled.div`
+  width: 55%;
   height: 100%;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-`;
-
-export const Content = styled.div`
-  width: 400px;
-  height: auto;
 
   padding: 2rem;
   text-align: center;
-
-  border-radius: 0.8rem;
-  background: rgba(0, 0, 0, 0.5);
-
-  img {
-    width: 150px;
-    height: 200px;
-  }
+  background: #333;
 
   form {
     display: flex;
+    align-items: center;
     flex-direction: column;
     margin-top: 2rem;
   }
 
-  label {
+  h2 {
     color: #fff;
-
-    align-self: flex-start;
     margin: 0 0 1rem;
   }
 
   input {
-    width: 100%;
+    width: 60%;
     background: #f8f8fc;
     border: 1px solid #e6e6f0;
     font: 1rem Archivo;
 
-    border-radius: 0.2rem;
+    border-radius: 0.1rem;
     height: 2.2rem;
     padding: 0 1rem;
     margin: 0 0 1rem;
@@ -55,22 +51,22 @@ export const Content = styled.div`
 
   span {
     color: #ff0000;
-    align-self: flex-start;
     margin: 0 0 1rem;
   }
 
   button {
-    margin: 5px 0 0;
+    width: 60%;
     height: 44px;
-    background: #6842c2;
+    margin: 5px 0 0;
+    background: #8945de;
     font-weight: bold;
     border-radius: 4px;
     font-size: 16px;
     transition: background 0.3s;
 
-    &:hover {
-      color: ${darken(0.03, '#fff')};
-      background: ${darken(0.03, '#6842c2')};
+    &:hover {      
+      transform: scale(1.1);
+      transition: all 0.5s;
     }
   }
 
@@ -84,6 +80,8 @@ export const Content = styled.div`
 
     &:hover {
       opacity: 2;
+      transform: scale(1.1);
+      transition: all 0.5s;
     }
   }
 
@@ -95,7 +93,7 @@ export const Content = styled.div`
     }
 
     input {
-      width: 100%;
+      width: 60%;
       background: #f8f8fc;
       border: 1px solid #e6e6f0;
       font: 1rem Archivo;
@@ -108,7 +106,6 @@ export const Content = styled.div`
 
     span {
       color: #ff0000;
-      align-self: flex-start;
       margin: 0 0 10px;
       font-weight: bold;
     }
@@ -116,15 +113,14 @@ export const Content = styled.div`
     button {
       margin: 5px 0 0;
       height: 44px;
-      background: #8398c9;
       font-weight: bold;
       border: 0;
       border-radius: 4px;
       font-size: 16px;
-      transition: background 0.2s;
 
       &:hover {
-        background: ${darken(0.03, '#8398c9')};
+        transform: scale(1.1);
+        transition: all 0.5s;
       }
     }
 

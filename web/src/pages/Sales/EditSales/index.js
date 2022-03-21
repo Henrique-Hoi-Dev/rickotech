@@ -3,7 +3,6 @@ import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 
 import {
@@ -19,7 +18,7 @@ import Footer from '~/components/Footer';
 export default function EditSales() {
 const dispatch = useDispatch();
 const { id } = useParams();
-const { responseData } = useSelector((state) => state.sales.form);
+const { form } = useSelector((state) => state.sales);
 
 const { card } = useSelector((state) => state.financialBox);
 const [setPreview] = useState(card);
@@ -42,7 +41,7 @@ const handleSubmit = async (values, { resetForm }) => {
     handleReset(resetForm);
 
   } catch (error) {
-    toast.error('Error nos dados');
+    // toast.error('Error nos dados');
   }
 };
 
@@ -57,10 +56,10 @@ const handleReset = (resetForm) => {
         <Formik
           onSubmit={handleSubmit}
           enableReinitialize={true}
-          initialValues={responseData} > 
+          initialValues={form} > 
           <Form >
             <div className="statos">        
-              <label htmlFor="tipo_pagamento">Status de Venda</label>
+              <label htmlFor="status">Status de Venda</label>
               <Field name="status" component="select" >
                 <option value="0" >selecione uma opção</option>
                 <option value="open" >Em Aberto</option>

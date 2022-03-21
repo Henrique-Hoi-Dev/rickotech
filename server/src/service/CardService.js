@@ -12,32 +12,33 @@ export default {
       const valorTotal = res.dataValues.price * res.dataValues.quantity
       return valorTotal
     })
-    const totalProduct = priceTotalProduct.reduce((acumulado, x) => {
-      return acumulado + x;
-    });
+    const totalProduct = priceTotalProduct.reduce(function(previousValue, currentValue) {
+      return Number(previousValue) + Number(currentValue);
+    }, 0 && priceTotalProduct)
 
     const quantityProduct = products.map(function (res) {
       return parseInt(res.dataValues.quantity)
     })
-    const totalQuantityProduct = quantityProduct.reduce((acumulado, x) => {
-      return acumulado + x;
-    });
+    const totalQuantityProduct = quantityProduct.reduce(function(previousValue, currentValue) {
+      return Number(previousValue) + Number(currentValue);
+    }, 0 && quantityProduct)
 
     const valorService = services.map(function (result) {
       return parseInt(result.dataValues.price);
     })
-    const totalService = valorService.reduce((acumulado, x) => {
-      return acumulado + x;
-    });
-
+    const totalService = valorService.reduce(function(previousValue, currentValue) {
+      return Number(previousValue) + Number(currentValue);
+    }, 0 && valorService)
+    
     const valorOrder = order.map(function (result) {
+      if (result.dataValues.status === 'sold')
       return parseInt(result.dataValues.price_total);
     })
-    const totalOrder = valorOrder.reduce((acumulado, x) => {
-      return acumulado + x;
-    });
-    
 
-    return { totalProduct, totalQuantityProduct, totalService, totalOrder }
+    const totalOrder = valorOrder.reduce(function(previousValue, currentValue) {
+      return Number(previousValue) + Number(currentValue);
+    }, 0 && valorOrder)
+
+    return {totalService, totalQuantityProduct, totalProduct, totalOrder}
   }
 }

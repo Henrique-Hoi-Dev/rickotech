@@ -4,9 +4,9 @@ const INITIAL_STATE = {
   financialBoxList: [],
   card: [],
   form: {
+    open_caixa: '',
     close_caixa: '',
     value_open: '',
-    open_caixa: '',
   }
 };
 

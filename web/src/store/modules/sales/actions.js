@@ -55,6 +55,6 @@ export function salesFailure() {
 
 export function resetFormulario() {
   return {
-    type: '@product/RESET_FORM',
+    type: '@sales/RESET_FORM',
   };
 }

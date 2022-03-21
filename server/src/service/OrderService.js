@@ -125,7 +125,6 @@ export default  {
     return result
   },
   async getId(req, res) {
-    let result = {}
     let id = req.id
 
     let salesId = await Order.findByPk(id, {
@@ -165,8 +164,7 @@ export default  {
       ],
     });
 
-    result = {httpStatus: httpStatus.OK, status: "Success", responseData: salesId}    
-    return result
+    return salesId
   },
   async delete(req, res) {
     let result = {}

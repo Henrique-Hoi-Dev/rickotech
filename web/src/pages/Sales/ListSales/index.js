@@ -11,6 +11,7 @@ import {
   deleteSalesRequest,
 } from '../../../store/modules/sales/actions';
 
+
 const ListSales = ({ salesList, handlerRemoveSales }) => {
   const dispatch = useDispatch();
 
@@ -91,7 +92,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, state) => {
   return {
     handlerRemoveSales: async (e, id) => {
       e.preventDefault();

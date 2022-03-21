@@ -23,8 +23,8 @@ export default function SignIn() {
   }
   return (
     <>
-      <label>Login usuário</label>
-      <Form schema={schema} onSubmit={handleSubmit}>
+      <Form schema={schema} onSubmit={handleSubmit} className='animate__animated animate__bounce'>
+        <h2>Login usuário</h2>
         <Input name="email" type="email" placeholder="Seu e-mail" />
         <Input name="password" type="password" placeholder="Sua senha" />
 

@@ -20,20 +20,20 @@ import ListService from '~/pages/Works/ListWorks';
 function RoutesApp() {
   return (
     <Switch>
-      <Route path="/" exact component={SignIn} />
-      <Route path="/register" exact component={SignUp} />
-      <Route isPrivate path="/perfil/:id" exact component={Profile} />
-      <Route isPrivate path="/adress/:id" exact component={Adress} />
-      <Route isPrivate path="/caixa/:id" exact component={Caixa} />
-      <Route isPrivate path="/caixaInfo/:id" exact component={CaixaInfo} />
-      <Route isPrivate path="/sales/:id" exact component={Sales} />
-      <Route isPrivate path="/editSales/:id" exact component={EditSales} />
-      <Route isPrivate path="/dashboard" exact component={Dashboard} />
-      <Route isPrivate path="/registreProduct" exact component={RegistrationProduct} />
-      <Route isPrivate path="/registreServices" exact component={RegistrationServices} />
-      <Route isPrivate path="/listProducts" exact component={ListProduct} />
-      <Route isPrivate path="/listServico" exact component={ListService} />
-      <Route isPrivate path="/product/:id" exact component={RegistrationProduct} />
+      <Route path="/" exact component={props => <SignIn {...props} />} />
+      <Route path="/register" exact component={props => <SignUp {...props} />} />
+      <Route isPrivate path="/perfil/:id" exact component={props => <Profile {...props} />} />
+      <Route isPrivate path="/adress/:id" exact component={props => <Adress {...props} />} />
+      <Route isPrivate path="/caixa/:id" exact component={props => <Caixa {...props} />} />
+      <Route isPrivate path="/caixaInfo/:id" exact component={props => <CaixaInfo {...props} />} />
+      <Route isPrivate path="/sales/:id" exact component={props => <Sales {...props} />} />
+      <Route isPrivate path="/editSales/:id" exact component={props => <EditSales {...props} />} />
+      <Route isPrivate path="/dashboard" exact component={props => <Dashboard {...props} />} />
+      <Route isPrivate path="/registreProduct" exact component={props => <RegistrationProduct {...props} />} />
+      <Route isPrivate path="/registreServices" exact component={props => <RegistrationServices {...props} />} />
+      <Route isPrivate path="/listProducts" exact component={props => <ListProduct {...props} />} />
+      <Route isPrivate path="/listServico" exact component={props => <ListService {...props} />} />
+      <Route isPrivate path="/product/:id" exact component={props => <RegistrationProduct {...props} />} />
     </Switch>
   );
 }

@@ -20,7 +20,7 @@ export default {
     result = {httpStatus: httpStatus.OK, status: "successful", responseData: createFinancialBox}      
     return result
   },
-  async index(req, res) {
+  async index() {
     let result = {}
 
     let financials = await FinancialBox.findAll({
@@ -153,6 +153,8 @@ export default {
     return financial
   },
   async update(req, res) {
+    let result = {}
+    
     const financialBox = await FinancialBox.findByPk(res.id);
 
     const { close_caixa, status } = req
