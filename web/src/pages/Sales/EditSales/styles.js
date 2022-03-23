@@ -10,7 +10,6 @@ export const Container = styled.div`
 
   margin: -3rem auto 2rem;
   padding: 3rem;
-  overflow: hidden;
   display: flex;
 
   flex-direction: column;
@@ -47,11 +46,13 @@ export const Container = styled.div`
 
     .statos {
       grid-area: statos;
+      margin: 10px;
       display: flex;
       flex-direction: column;
     }
     .tipo-venda {
       grid-area: tipo-venda;
+      margin: 10px;
       display: flex;
       flex-direction: column;
     }

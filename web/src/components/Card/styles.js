@@ -9,7 +9,7 @@ export const Container = styled.div`
     margin: 12px;
     padding: 15px;
 
-    color:  #9c98a6;
+    color:  #8945de;
 
     border-radius: 8px;
 
@@ -19,9 +19,35 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    svg {
+      font-size: 2rem;
+      margin-bottom: 7px;
+    }
+
+    hr {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.2);
+    }
     
-    strong {
-      margin-top: 10px;
+    .value {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      color:  #9c98a6;
+
+      h2 {
+        margin: 10px;
+      }
+      
+      strong {
+        margin-top: 10px;
+        margin-left: 14px;
+        font-weight: bold;
+        font-size: 16px;
+        color: #ffff;
+      }
     }
   }
 `

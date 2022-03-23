@@ -17,15 +17,15 @@ import { findAllFinancialBoxRequest } from '~/store/modules/financialBox/actions
 import { Container } from './styles';
 
 import Header from '~/components/HeaderListAndRegister';
-import { toast } from 'react-toastify';
 
 const RegistreSales = ({ financialBoxList }) => {
 const dispatch = useDispatch();
 const { id } = useParams();
 const { form } = useSelector((state) => state.sales);
+const { card } = useSelector((state) => state.financialBox);
+
 const productId = useSelector((state) => state.product.form);
 
-const { card } = useSelector((state) => state.financialBox);
 const [setPreview] = useState(card);
 
 useEffect(() => {
@@ -37,14 +37,10 @@ useEffect(() => {
 }, [id, dispatch]);
   
 const handleSubmit = async (values, { resetForm }) => {
-  try {
-    dispatch(createSalesRequest(values, id));
-    dispatch(resetFormulario());
-    setPreview(card)
-    handleReset(resetForm);
-  } catch (error) {
-    toast.error('Error nos dados');
-  }
+  dispatch(createSalesRequest(values, id));
+  dispatch(resetFormulario());
+  setPreview(card)
+  handleReset(resetForm);
 };
 
 const handleReset = (resetForm) => {
@@ -77,7 +73,7 @@ const handleReset = (resetForm) => {
               <label htmlFor="financial_id">Caixa</label>
               <Field component="select" name="financial_id" >
                 <option value="0">Selecione um caixa</option>
-                {financialBoxList.map((caixa, i) => (
+                {[].concat(financialBoxList).map((caixa, i) => (
                 <option key={i} value={caixa.id || ''} >
                 {moment(caixa.open_caixa).format('DD/MM/YYYY')} - {(caixa.status === false && 'Aberto')
                 || (caixa.status === true && 'Fechado')}

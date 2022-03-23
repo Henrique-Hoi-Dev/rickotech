@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Formik, Field, Form } from 'formik';
 
 import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 
 import Header from '~/components/HeaderListAndRegister';
 import * as moment from 'moment';
@@ -15,11 +15,10 @@ import {
   getByIdServiceRequest,
   resetFormulario } from '~/store/modules/servicos/actions';
   
-export default function RegistreServices() {
+const RegistreServices = ({ financialBoxList }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { form } = useSelector((state) => state.servicos);
-  const { responseData } = useSelector((state) => state.financialBox.financialBoxList);
 
   useEffect(() => {
     if (id) {
@@ -58,13 +57,13 @@ export default function RegistreServices() {
                 </div>
 
                 <div className="campo" >
-                  <label htmlFor="id">Data abertura caixa</label>
+                  <label htmlFor="id">Caixa</label>
                   <Field  component="select" name="financial_id" >
                     <option value="0">Selecione um caixa</option>
-                    {responseData.map((caixa, i) => (
+                    {[].concat(financialBoxList).map((caixa, i) => (
                       <option key={i} value={caixa.id} >
-                      {moment(caixa.open_caixa).format('DD/MM/YYYY')} - {(caixa.status === false && 'Aberto')
-                      || (caixa.status === true && 'Fechado')}
+                      {moment(caixa.open_caixa).format('DD/MM/YYYY')} - 
+                      {(caixa.status === false && 'Aberto')}
                       </option>
                     ))}    
                   </Field>   
@@ -87,3 +86,11 @@ export default function RegistreServices() {
     </Container>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    financialBoxList: state.financialBox.financialBoxList.responseData ? state.financialBox.financialBoxList.responseData : [],
+  };
+};
+
+export default connect(mapStateToProps) (RegistreServices)

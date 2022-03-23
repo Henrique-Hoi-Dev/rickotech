@@ -13,7 +13,6 @@ import { getByIdSalesRequest } from '~/store/modules/sales/actions';
 import { Container } from './styles';
 
 import Header from '~/components/HeaderListAndRegister';
-import Footer from '~/components/Footer';
 
 export default function EditSales() {
 const dispatch = useDispatch();
@@ -32,17 +31,12 @@ useEffect(() => {
 }, [id, dispatch]);
   
 const handleSubmit = async (values, { resetForm }) => {
-  try {
-    let body = JSON.parse(JSON.stringify(values));
+  let body = JSON.parse(JSON.stringify(values));
 
-    dispatch(UpdateSalesRequest({ id: id, values: body }));
-    dispatch(resetFormulario(id));
-    setPreview(card)
-    handleReset(resetForm);
-
-  } catch (error) {
-    // toast.error('Error nos dados');
-  }
+  dispatch(UpdateSalesRequest({ id: id, values: body }));
+  dispatch(resetFormulario(id));
+  setPreview(card)
+  handleReset(resetForm);
 };
 
 const handleReset = (resetForm) => {
@@ -92,7 +86,6 @@ const handleReset = (resetForm) => {
           </Form>
         </Formik> 
       </Container> 
-      <Footer/>               
     </>
   );
 }

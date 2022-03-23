@@ -6,12 +6,12 @@ import { Container } from './styles'
 
 import InventoryIcon from '@mui/icons-material/Inventory';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import PaidIcon from '@mui/icons-material/Paid';
 
 export default function Card() {
   const dispatch = useDispatch();
 
   const { card } = useSelector((state) => state.financialBox);
-  console.log(card)
 
   useEffect(() => {
       dispatch(getCardRequest())
@@ -31,32 +31,36 @@ export default function Card() {
   return (
     <Container>
       <div className="cards">
-         <AttachMoneyIcon />
+         <PaidIcon />
+         <hr />
          <div className="value">     
-            <h2>Total vendas</h2>    
-            <strong>{currencyFormat(card.totalOrder)}</strong>
+            <h2>Valor vendas</h2>    
+            <strong>{currencyFormat(card.totalOrder || [0])}</strong>
           </div>
       </div>
       <div className="cards">
         <AttachMoneyIcon />
+        <hr />
         <div className="value">
-          <h2>Total produtos</h2>
-          <strong>{currencyFormat(card.totalProduct)}</strong>
+          <h2>Valor produtos</h2>
+          <strong>{currencyFormat(card.totalProduct || [0])}</strong>
         </div>
         
       </div>
       <div className="cards">
         <InventoryIcon />
+        <hr />
         <div className="value">
-          <h2>Total produtos em estoque</h2>
+          <h2>Produtos em estoque</h2>
           <strong>{card.totalQuantityProduct}</strong>
         </div>
       </div>
       <div className="cards">           
         <AttachMoneyIcon />
+        <hr />
         <div className="value">
-          <h2>Total serviços</h2>
-          <strong>{currencyFormat(card.totalService)}</strong>
+          <h2>Valor serviços</h2>
+          <strong>{currencyFormat(card.totalService || [0])}</strong>
         </div>
       </div>
     </Container>

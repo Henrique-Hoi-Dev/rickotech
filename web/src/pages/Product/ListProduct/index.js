@@ -12,6 +12,8 @@ import {
   deleteProductRequest,
 } from '../../../store/modules/product/actions';
 
+import img from '../../../assets/empty.png'
+
 const ProductList = ({ productList, handlerRemoveProduct }) => {
   const dispatch = useDispatch();
 
@@ -61,7 +63,7 @@ const ProductList = ({ productList, handlerRemoveProduct }) => {
                       src={
                         produto.avatar
                           ? produto.avatar.url
-                          : 'https://faculty.iiit.ac.in/~indranil.chakrabarty/images/empty.png'
+                          : (img)
                       }
                       alt="avatar"
                       className="avatar"

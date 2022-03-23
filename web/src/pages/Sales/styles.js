@@ -10,7 +10,6 @@ export const Container = styled.div`
 
   margin: -3rem auto 2rem;
   padding: 3rem;
-  overflow: hidden;
   display: flex;
 
   flex-direction: column;
