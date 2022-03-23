@@ -10,7 +10,6 @@ export const Container = styled.div`
 
   margin: -3rem auto 2rem;
   padding: 3rem;
-  overflow: hidden;
   display: flex;
 
   flex-direction: column;
@@ -30,18 +29,18 @@ export const Container = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: flex-start;
+      align-items: center;
     }
     .valor-open {
       grid-area: valor-open;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
     }
     .but{
       grid-area: but;
-      margin-top: 45px;
+      margin-top: 10px;
       display: flex;
       flex-direction: row;
     }
@@ -85,7 +84,7 @@ export const Container = styled.div`
     border-radius: 0.5rem;
     height: 2.2rem;
     padding: 0 1rem;
-    margin: 0 0 1rem;
+    margin: 0 10px 1rem;
     border: 2px solid #8945de;
     font-weight: bold;
     color: #9c98a6;

@@ -17,7 +17,6 @@ import { findAllFinancialBoxRequest } from '~/store/modules/financialBox/actions
 import { Container } from './styles';
 
 import Header from '~/components/HeaderListAndRegister';
-import Footer from '~/components/Footer';
 import { toast } from 'react-toastify';
 
 const RegistreSales = ({ financialBoxList }) => {
@@ -119,7 +118,6 @@ const handleReset = (resetForm) => {
           </Form>
         </Formik> 
       </Container> 
-      <Footer/>               
     </>
   );
 }

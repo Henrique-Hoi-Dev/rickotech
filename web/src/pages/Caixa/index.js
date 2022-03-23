@@ -11,7 +11,6 @@ import { Container } from './styles';
 
 import Header from '~/components/HeaderListAndRegister';
 import ListCaixa from './ListCaixa';
-import Footer from '~/components/Footer';
 
 export default function Caixa() {
 const dispatch = useDispatch();
@@ -38,7 +37,7 @@ const { id } = useParams();
           </div>
           <div className="valor-open">
             <label>Valor Abertura Caixa</label>
-            <Input name="value_open" type="number" placeholder="valor"/>
+            <Input name="value_open" type="number"/>
           </div>
           <div className="but">
             <button type="submit">Abrir um novo caixa</button>
@@ -46,7 +45,6 @@ const { id } = useParams();
         </Form>
       </Container>  
       <ListCaixa />
-      <Footer/>
     </>
   );
 }

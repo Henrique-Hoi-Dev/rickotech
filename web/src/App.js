@@ -13,7 +13,6 @@ import Routes from './routes';
 import GlobalStyle from './styles/global';
 
 import 'assets/css/material-dashboard-react.css?v=1.9.0';
-import '@coreui/coreui/dist/css/coreui.min.css'
 
 function App() {
   return (

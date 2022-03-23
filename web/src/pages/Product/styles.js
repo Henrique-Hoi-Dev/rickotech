@@ -7,7 +7,7 @@ export const Container = styled.div`
   .header-main {
     background: #353535;
     width: 100%;
-    max-width: 50rem;
+    max-width: 54rem;
     box-sizing: border-box;
     box-shadow: 8px 7px 4px rgb(0 0 0 / 50%);
     border-radius: 0.8rem;
@@ -106,6 +106,13 @@ export const Container = styled.div`
   }
 
   .header-title {
+    border-radius: 11px;
+    padding: 42px;
+    background-color: #4d4c4c;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 50%);
+    margin-bottom: 37px;
+
     label {
       font: 700 1.4rem Archivo;
       color: #8945de;

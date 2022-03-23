@@ -11,7 +11,6 @@ import {
   UpdateFinancialBoxRequest } from "~/store/modules/financialBox/actions";
 
 import { Container } from "./styles";
-import Footer from "~/components/Footer";
 
 export default function CaixaInfo() {
   const dispatch = useDispatch(); 
@@ -99,7 +98,6 @@ export default function CaixaInfo() {
             </div>
           </div>
         </Form>
-        <Footer />
       </Container>
     </>
   )

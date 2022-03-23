@@ -15,8 +15,6 @@ import {
   getByIdServiceRequest,
   resetFormulario } from '~/store/modules/servicos/actions';
   
-import Footer from '~/components/Footer';
-
 export default function RegistreServices() {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -86,7 +84,6 @@ export default function RegistreServices() {
             </Form>
         </Formik>
       </div>
-      <Footer/>
     </Container>
   );
 }

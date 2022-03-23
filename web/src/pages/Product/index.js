@@ -12,7 +12,6 @@ import {
   resetFormulario } from '~/store/modules/product/actions';
 
 import Header from '~/components/HeaderListAndRegister';
-import Footer from '~/components/Footer';
 import AvatarInput from './Avatarinput';
 
 import { FcHighPriority } from 'react-icons/fc';
@@ -119,7 +118,6 @@ export default function RegistrationProduct() {
           )}}            
         </Formik>
       </div>
-      <Footer/>
     </Container>
   );
 }

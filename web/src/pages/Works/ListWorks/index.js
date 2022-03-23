@@ -6,7 +6,6 @@ import { Container } from './styles';
 import { FcEmptyTrash } from 'react-icons/fc';
 
 import Header from '../../../components/HeaderListAndRegister';
-import Footer from '~/components/Footer';
 
 import { findAllServiceRequest, 
           deleteServiceRequest } from '../../../store/modules/servicos/actions';
@@ -63,7 +62,6 @@ const ListSales = ({ servicoList, handlerRemoveService }) => {
           </table>
         </form>
       </div>
-      <Footer />
     </Container>
   );
 };

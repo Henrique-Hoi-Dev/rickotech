@@ -32,6 +32,10 @@ export default createGlobalStyle`
       }
     }
 
+    .css-1hskriy {
+      margin-top: 40px;
+    }
+
     .MuiTableCell-head {
       font-weight: bold;
       color: #9c98a6;

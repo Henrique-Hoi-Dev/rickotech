@@ -1,8 +1,7 @@
 import React from 'react';
 
 import ListSales from '../Sales/ListSales';
-import Footer from '~/components/Footer';
-import Card from './Card';
+import Card from '~/components/Card';
 
 import { Container } from './styles'
 
@@ -12,7 +11,6 @@ export default function Dashboard() {
       <Container> 
         <Card />
         <ListSales />
-        <Footer />
       </Container>
   );
 }
