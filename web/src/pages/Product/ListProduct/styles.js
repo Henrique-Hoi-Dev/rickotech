@@ -63,7 +63,7 @@ export const Container = styled.div`
 
     td,
     th {
-      padding: 0.5rem;
+      padding: 0.2rem;
       text-align: center;
     }
 
@@ -77,8 +77,8 @@ export const Container = styled.div`
     }
 
     .avatar {
-      width: 3.5rem;
-      height: 3.5rem;
+      width: 4rem;
+      height: 4rem;
       img {
         border-radius: 10%; 
       }  

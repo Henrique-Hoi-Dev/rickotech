@@ -31,12 +31,13 @@ export default function Card() {
   return (
     <Container>
       <div className="cards">
-         <PaidIcon />
-         <hr />
-         <div className="value">     
-            <h2>Valor vendas</h2>    
-            <strong>{currencyFormat(card.totalOrder || [0])}</strong>
-          </div>
+        <PaidIcon />
+        <hr />
+        <div className="value">     
+          <h2>Valor vendas</h2>    
+          <strong>{currencyFormat(card.totalOrder || [0])}</strong>
+        </div>
+        <hr />
       </div>
       <div className="cards">
         <AttachMoneyIcon />
@@ -45,7 +46,7 @@ export default function Card() {
           <h2>Valor produtos</h2>
           <strong>{currencyFormat(card.totalProduct || [0])}</strong>
         </div>
-        
+        <hr />
       </div>
       <div className="cards">
         <InventoryIcon />
@@ -54,6 +55,7 @@ export default function Card() {
           <h2>Produtos em estoque</h2>
           <strong>{card.totalQuantityProduct}</strong>
         </div>
+        <hr />
       </div>
       <div className="cards">           
         <AttachMoneyIcon />
@@ -62,6 +64,7 @@ export default function Card() {
           <h2>Valor serviços</h2>
           <strong>{currencyFormat(card.totalService || [0])}</strong>
         </div>
+        <hr />
       </div>
     </Container>
   )

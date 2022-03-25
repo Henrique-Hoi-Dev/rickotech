@@ -73,10 +73,10 @@ const handleReset = (resetForm) => {
               <label htmlFor="financial_id">Caixa</label>
               <Field component="select" name="financial_id" >
                 <option value="0">Selecione um caixa</option>
-                {[].concat(financialBoxList).map((caixa, i) => (
+                {[].concat(financialBoxList[0]).map((caixa, i) => (
                 <option key={i} value={caixa.id || ''} >
-                {moment(caixa.open_caixa).format('DD/MM/YYYY')} - {(caixa.status === false && 'Aberto')
-                || (caixa.status === true && 'Fechado')}
+                {moment(caixa.open_caixa).format('DD/MM/YYYY')} /
+                {(caixa.status === false && 'Aberto')}
                 </option>
                 ))}    
               </Field>

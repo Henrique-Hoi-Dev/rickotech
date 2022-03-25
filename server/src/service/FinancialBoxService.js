@@ -33,7 +33,7 @@ export default {
         'value_open', 
         'value_total_sales', 
         'value_total_service',   
-        'value_total', 
+        'value_total'
       ],
       include: [
         {
@@ -44,12 +44,12 @@ export default {
         {
           model: Service,
           as: 'service',
-          attributes: [ 'id', 'name', 'price' ],
+          attributes: [ 'id', 'name', 'price' ]
         },
         {
           model: Sales,
           as: 'order',
-          attributes: [ 'id', 'financial_id', 'price_product' ],
+          attributes: [ 'id', 'financial_id', 'price_product' ]
         }
       ]
     });
@@ -69,7 +69,7 @@ export default {
         'value_open', 
         'value_total_sales', 
         'value_total_service',   
-        'value_total', 
+        'value_total'
       ],
       include: [
         {
@@ -80,54 +80,53 @@ export default {
         {
           model: Service,
           as: 'service',
-          attributes: [ 'id', 'name', 'price', 'financial_id' ],
+          attributes: [ 'id', 'name', 'price', 'financial_id' ]
         },
         {
           model: Sales,
           as: 'order',
-          attributes: [ 'id', 'financial_id', 'price_product' ],
+          attributes: [ 'id', 'financial_id', 'price_product' ]
         }
       ]
     });
+
     // busca valores total serviços
     const services = await Service.findAll({ where: { financial_id: financialId }})
-    if (services.length > 0) {
-      const validService = services.filter(function (result) {
-        return result.dataValues;
-      });
-      const valueService = validService.map(function (result) {
-        const valor = parseInt(result.dataValues.price);
-        return valor
-      })
-      const totalService = valueService.reduce((acumulado, x) => {
-        return acumulado + x;
-      });
+    const validService = services.filter(function (result) {
+      return result.dataValues;
+    });
+    const valueService = validService.map(function (result) {
+      const valor = parseInt(result.dataValues.price);
+      return valor
+    })
+    const totalService = valueService.reduce(function(previousValue, currentValue) {
+      return Number(previousValue) + Number(currentValue);
+    }, 0 && valueService)
 
-      const value_total_service = (totalService - 0)
-      const caixa = {value_total_service }
+    const value_total_service = (totalService - 0)
+    const caixaService = {value_total_service }
 
-      await financial.update(caixa)
-    }
+    await financial.update(caixaService)
+
     // busca valores total de vendas
     const saleses = await Sales.findAll({ where: { financial_id: financialId }})
-    if (saleses.length > 0) {
-      const validSales = saleses.filter(function (result) {
-        return result.dataValues;
-      });
-      const valueSales = validSales.map(function (result) {
-        const valor = parseInt(result.dataValues.price_total);
-        return valor
-      })
-      const totalSales = valueSales.reduce((acumulado, x) => {
-        return acumulado + x;
-      });
+    const validSales = saleses.filter(function (result) {
+      return result.dataValues;
+    });
+    const valueSales = validSales.map(function (result) {
+      const valor = parseInt(result.dataValues.price_total);
+      return valor
+    })
+    const totalSales = valueSales.reduce(function(previousValue, currentValue) {
+      return Number(previousValue) + Number(currentValue);
+    }, 0 && valueSales)
 
-      const value_total_sales = (totalSales - 0)
-      const caixa = { value_total_sales }
+    const value_total_sales = (totalSales - 0)
+    const caixaSales = { value_total_sales }
 
-      await financial.update(caixa)
-    } 
+    await financial.update(caixaSales)
 
+    // caixa total
     const financialBox = await FinancialBox.findAll({ where: { id: financialId }})
     const valid = financialBox.filter(function (result) {
       return result.dataValues;
@@ -141,9 +140,9 @@ export default {
 
       return totalvalores;
     });
-    const total = valores.reduce((acumulado, x) => {
-      return acumulado + x;
-    });      
+    const total = valores.reduce(function(previousValue, currentValue) {
+      return Number(previousValue) + Number(currentValue);
+    }, 0 && valores)      
 
     const value_total = (total || 0 )
     const caixa = { value_total }

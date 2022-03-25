@@ -42,8 +42,8 @@ export const Container = styled.div`
       }
       
       strong {
-        margin-top: 10px;
         margin-left: 14px;
+        margin-bottom: 10px;
         font-weight: bold;
         font-size: 16px;
         color: #ffff;

@@ -13,7 +13,6 @@ export default function Adress() {
   const dispatch = useDispatch();
   const { form } = useSelector((state) => state.adress);
   const { id } = useParams();
-  console.log(form)
 
   useEffect(() => {
     if (id) {

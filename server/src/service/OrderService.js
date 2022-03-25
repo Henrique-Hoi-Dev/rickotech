@@ -3,6 +3,7 @@ import Order from "../app/models/Order";
 import httpStatus from 'http-status-codes';
 import FinancialBox from "../app/models/FinancialBox";
 import User from "../app/models/User";
+import File from "../app/models/File";
 
 export default  {
   async store(req, res) {
@@ -101,6 +102,11 @@ export default  {
             model: Product,
             as: 'products',
             attributes: [ 'id', 'name', 'category', 'price' ],
+            include: [{
+              model: File, 
+              as: 'avatar',
+              attributes: [ 'url', 'id', 'path' ] 
+            }]
           },
           {
             model: User,

@@ -1,5 +1,7 @@
 import Service from "../app/models/Service";
 import FinancialBox from "../app/models/FinancialBox";
+import User from "../app/models/User";
+
 import httpStatus from 'http-status-codes';
 
 export default {
@@ -29,6 +31,11 @@ export default {
         model: FinancialBox,
         as: 'financial',
         attributes: [ 'id', 'value_total_service', 'open_caixa', 'close_caixa' ],
+        include: [{
+          model: User,
+          as: 'user',
+          attributes: [ 'id', 'name']
+        }]
       },
     });
 
@@ -43,7 +50,7 @@ export default {
       include: {
         model: FinancialBox,
         as: 'financial',
-        attributes: [ 'id', 'value_total_service', 'open_caixa', 'close_caixa' ],
+        attributes: [ 'id', 'value_total_service', 'open_caixa', 'close_caixa' ]
       },
     });
 

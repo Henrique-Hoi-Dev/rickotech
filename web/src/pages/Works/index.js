@@ -60,7 +60,7 @@ const RegistreServices = ({ financialBoxList }) => {
                   <label htmlFor="id">Caixa</label>
                   <Field  component="select" name="financial_id" >
                     <option value="0">Selecione um caixa</option>
-                    {[].concat(financialBoxList).map((caixa, i) => (
+                    {[].concat(financialBoxList[0]).map((caixa, i) => (
                       <option key={i} value={caixa.id} >
                       {moment(caixa.open_caixa).format('DD/MM/YYYY')} - 
                       {(caixa.status === false && 'Aberto')}
@@ -74,7 +74,6 @@ const RegistreServices = ({ financialBoxList }) => {
                 <footer className="buttons-container">
                     <p>
                       <FcHighPriority />
-                      Serviço só será registrado, só com o caixa aberto!<br/>
                       Preencha todos os dados!
                     </p>
                   <button type="submit">Salvar</button>

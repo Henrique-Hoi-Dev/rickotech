@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import * as moment from 'moment';
 
 import { Container } from './styles';
@@ -12,6 +12,10 @@ import { findAllServiceRequest,
 
 const ListSales = ({ servicoList, handlerRemoveService }) => {
   const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.user.profile);
+
+  console.log(servicoList, user)
 
   useEffect(() => {
     function onLoad() {
@@ -40,6 +44,7 @@ const ListSales = ({ servicoList, handlerRemoveService }) => {
           <table className="table-list">
             <thead>
               <tr className="table-title">
+                <td>Funcionário</td>
                 <td>Tipo de serviço</td>
                 <td>Valor serviço</td>
                 <td>Data do serviço</td>
@@ -47,7 +52,13 @@ const ListSales = ({ servicoList, handlerRemoveService }) => {
             </thead>
             <tbody>
               {[].concat(servicoList).map((servico, i) => (
-                <tr key={i} value={servico.id}>
+                <tr 
+                key={i} 
+                value={servico.id} 
+                style={{ display: (servico.financial.user.id === user.id && 'line-through') || 
+                (servico.financial.user.id && 'none')}}
+                >
+                  <td>{servico.financial.user.name}</td>
                   <td>{servico.name}</td>
                   <td>{currencyFormat(servico.price)}</td>
                   <td>{moment(servico.date_service).format('DD/MM/YYYY')}</td>

@@ -61,6 +61,7 @@ export default createGlobalStyle`
       font-weight: bold!important;
       color: #9c98a6;
       border-radius: 10px;
+      overflow: initial;
 
       .css-2s90m6-MuiAvatar-root {
         background: none;

@@ -4,7 +4,6 @@ import httpStatus from 'http-status-codes';
 
 export default {
   async store(req, res) {
-    let result = {}
     let user_id = res.user_id
 
     let { cep, logradouro, complemento, numero, bairro, cidade, uf } = req;
@@ -26,8 +25,7 @@ export default {
       user_id  
     });
 
-    result = {httpStatus: httpStatus.OK, status: "successful", responseData: adress}      
-    return result
+    return adress
   },
   async getId(req, res) {
     let adressId = await Adress.findOne({ where: { user_id: req.id },

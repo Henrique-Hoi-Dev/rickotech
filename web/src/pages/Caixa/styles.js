@@ -9,11 +9,26 @@ export const Container = styled.div`
   border-radius: 0.8rem;
 
   margin: -3rem auto 2rem;
-  padding: 3rem;
+  padding: 2rem;
   display: flex;
 
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
+
+  h2 {
+    font-weight: bold;
+    font-size: 30px;
+    color: #9c98a6;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+
+    margin-bottom: 29px;
+  }
+
+  span {
+    color: red;
+    font-weight: bold;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+  }
 
   form {
     display: grid; 
@@ -77,7 +92,6 @@ export const Container = styled.div`
   }
 
   input {
-    min-width: 15rem;
     background: rgba(0, 0, 0, 0.1);
     padding: 0 15px;
     font: 1rem Archivo;

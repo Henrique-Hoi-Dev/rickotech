@@ -19,7 +19,7 @@ export function* createService({ payload }) {
     yield call(api.post, `/service/${financialId}`, servicos);
 
     toast.success('Serviço registrado com sucesso.');
-    history.push('/')
+    history.push('/listServico')
   } catch (err) {
     toast.error('Error registro serviço.');
     yield put(serviceFailure());

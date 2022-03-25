@@ -31,11 +31,14 @@ export default {
     }, 0 && valorService)
     
     const valorOrder = order.map(function (result) {
-      if (result.dataValues.status === 'sold')
-      return parseInt(result.dataValues.price_total);
+      if (result.dataValues.status === 'sold') {
+        return result.dataValues.price_total;
+      }
     })
-
-    const totalOrder = valorOrder.reduce(function(previousValue, currentValue) {
+    const filValor = valorOrder.filter(function (i) {
+      return i
+    })
+    const totalOrder = filValor.reduce(function(previousValue, currentValue) {
       return Number(previousValue) + Number(currentValue);
     }, 0 && valorOrder)
 

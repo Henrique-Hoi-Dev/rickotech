@@ -27,13 +27,13 @@ export default {
           {
             model: File,
             as: 'avatar',
-            attributes: ['id', 'path', 'url'],
+            attributes: ['id', 'path', 'url']
           },
           {
             model: Adress,
             as: 'adress',
             attributes:  [ 'id', 'cep', 'logradouro', 'complemento', 
-                            'numero', 'bairro', 'cidade', 'uf' ],
+                            'numero', 'bairro', 'cidade', 'uf' ]
           }
         ],
       });

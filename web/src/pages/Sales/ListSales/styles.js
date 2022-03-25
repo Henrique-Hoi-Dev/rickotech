@@ -50,8 +50,16 @@ export const Container = styled.div`
 
     td,
     th {
-      padding: 0.5rem;
+      padding: 0.2rem;
       text-align: center;
+    }
+
+    .avatar {
+      width: 4rem;
+      height: 4rem;
+      img {
+        border-radius: 10%; 
+      }  
     }
   }
 

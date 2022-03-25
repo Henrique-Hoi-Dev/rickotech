@@ -13,7 +13,8 @@ export default (reducers) => {
         'product', 
         'sales', 
         'servicos',
-        'financialBox'],
+        'financialBox'
+      ],
     },
     reducers
   );

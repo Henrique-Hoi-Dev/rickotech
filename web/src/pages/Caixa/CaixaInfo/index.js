@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +17,10 @@ export default function CaixaInfo() {
   const userId = useSelector((state) => state.user.profile.id);
 
   const { form } = useSelector((state) => state.financialBox);
+  const { responseData } = useSelector((state) => state.financialBox.financialBoxList);
   const { id } = useParams();
+
+  const [setPreview] = useState(responseData);
 
   useEffect(() => {
     if (id) {
@@ -27,6 +30,7 @@ export default function CaixaInfo() {
 
   const handleSubmit = async (values) => {
       dispatch(UpdateFinancialBoxRequest(id, values));
+      setPreview(responseData)
   };
 
   function currencyFormat(num) {
