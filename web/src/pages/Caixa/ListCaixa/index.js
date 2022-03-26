@@ -12,11 +12,10 @@ import { Container } from './styles';
 const ListCaixa = ({ financialBoxList }) => {
 const dispatch = useDispatch();
 const { id } = useParams();
-console.log(financialBoxList)
 
   useEffect(() => {
     if (id) {
-      dispatch(findAllFinancialBoxRequest());
+      dispatch(findAllFinancialBoxRequest(id));
     } 
   }, [id, dispatch]);
 
@@ -32,56 +31,57 @@ console.log(financialBoxList)
   }
 
   return (
-    <>
-      <Container>  
-        <table className="table-list">
-            <thead>
-              <tr className="table-title">
-                <td>Funcionario</td>
-                <td>Data abertura</td>
-                <td>Data fechamento</td>
-                <td>Valor abertuta</td>
-                <td>Valor vendas</td>
-                <td>Valor serviços</td>
-                <td>Valor total</td>
-                <td>Status</td>
-                <td>Info</td>
+    <Container>  
+      <table className="table-list">
+          <thead>
+            <tr className="table-title">
+              <td>Funcionario</td>
+              <td>Data abertura</td>
+              <td>Data fechamento</td>
+              <td>Valor abertuta</td>
+              <td>Valor vendas</td>
+              <td>Valor serviços</td>
+              <td>Valor total</td>
+              <td>Status</td>
+              <td>Info</td>
+            </tr>
+          </thead>
+          <tbody>
+            {[].concat(financialBoxList).map((financial, i) => (
+              <tr key={i} value={financial.id} >
+                <td>{financial.user.name}</td>
+                <td>{moment(financial.open_caixa).format('DD/MM/YYYY')}</td>
+                <td>
+                  {(financial.close_caixa === null) ? 'Em espera...' :
+                  moment(financial.close_caixa).format('DD/MM/YYYY')}
+                </td>
+                <td>{currencyFormat(financial.value_open || [0])}</td>
+                <td>{currencyFormat(financial.value_total_sales || [0])}</td>
+                <td>{currencyFormat(financial.value_total_service || [0])}</td>
+                <td>{currencyFormat(financial.value_total || [0])}</td>
+                <td 
+                  style={{ color: (financial.status === true && 'red') || 
+                  (financial.status === false && 'green') }} 
+                >
+                  {(financial.status === true && 'Fechado') || 
+                  (financial.status === false && 'Em aberto')}
+                </td>
+                <td>
+                  <Link to={`/caixaInfo/${financial.id}`}>
+                    <FcInfo/>
+                  </Link>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {[].concat(financialBoxList).map((financial, i) => (
-                <tr key={i} value={financial.id}>
-                  <td>{financial.user.name}</td>
-                  <td>{moment(financial.open_caixa).format('DD/MM/YYYY')}</td>
-                  <td>
-                    {(financial.close_caixa === null) ? 'Em espera...' : moment(financial.close_caixa).format('DD/MM/YYYY')}
-                  </td>
-                  <td>{currencyFormat(financial.value_open || [0])}</td>
-                  <td>{currencyFormat(financial.value_total_sales || [0])}</td>
-                  <td>{currencyFormat(financial.value_total_service || [0])}</td>
-                  <td>{currencyFormat(financial.value_total || [0])}</td>
-                  <td style={{ color: 
-                      (financial.status === true && 'red') || 
-                      (financial.status === false && 'green') }} >
-                      {(financial.status === true && 'Fechado') || 
-                       (financial.status === false && 'Em aberto')}</td>
-                  <td>
-                    <Link to={`/caixaInfo/${financial.id}`}>
-                      <FcInfo/>
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </Container>  
-    </>
+            ))}
+          </tbody>
+        </table>
+      </Container>  
   );
 }
 
 const mapStateToProps = (state) => {
   return {
-    financialBoxList: state.financialBox.financialBoxList.responseData ? state.financialBox.financialBoxList.responseData : [],
+    financialBoxList: state.financialBox.financialBoxList ? state.financialBox.financialBoxList : [],
   };
 };
 

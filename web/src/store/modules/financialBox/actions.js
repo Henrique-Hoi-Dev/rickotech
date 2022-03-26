@@ -11,7 +11,6 @@ export function getByIdFinancialBoxRequest(id) {
     payload: { id },
   };
 }
-
 export function getByIdFinancialBoxSuccess(data) {
   return {
     type: '@financialBox/GET_BYID_FINANCIALBOX_SUCCESS',
@@ -25,7 +24,6 @@ export function getCardRequest(data) {
     payload: { data },
   };
 }
-
 export function getCardSuccess(data) {
   return {
     type: '@financialBox/GET_CARD_SUCCESS',
@@ -33,16 +31,28 @@ export function getCardSuccess(data) {
   };
 }
 
-export function findAllFinancialBoxRequest(data) {
+export function findAllFinancialBoxRequest(id) {
   return {
     type: '@financialBox/FIND_ALL_FINANCIALBOX_REQUEST',
+    payload: { id },
+  };
+}
+export function findAllFinancialBoxSuccess(data) {
+  return {
+    type: '@financialBox/FIND_ALL_FINANCIALBOX_SUCCESS',
     payload: { data },
   };
 }
 
-export function findAllFinancialBoxSuccess(data) {
+export function findAllOpenRequest(id) {
   return {
-    type: '@financialBox/FIND_ALL_FINANCIALBOX_SUCCESS',
+    type: '@financialBox/FIND_OPEN_REQUEST',
+    payload: { id },
+  };
+}
+export function findAllOpenSuccess(data) {
+  return {
+    type: '@financialBox/FIND_OPEN_SUCCESS',
     payload: { data },
   };
 }

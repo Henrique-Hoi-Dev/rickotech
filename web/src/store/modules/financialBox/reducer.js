@@ -2,6 +2,7 @@ import produce from 'immer';
 
 const INITIAL_STATE = {
   financialBoxList: [],
+  financialBoxListOpen: [],
   card: [],
   form: {
     open_caixa: '',
@@ -30,6 +31,10 @@ export default function financialBox(state = INITIAL_STATE, action) {
       }
       case '@financialBox/FIND_ALL_FINANCIALBOX_SUCCESS': {
         draft.financialBoxList = action.payload.data;
+        break;
+      }
+      case '@financialBox/FIND_OPEN_SUCCESS': {
+        draft.financialBoxListOpen = action.payload.data;
         break;
       }
       default:

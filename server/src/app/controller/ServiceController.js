@@ -8,7 +8,7 @@ class ServiceController {
   }
   async index(req, res) {
     let response;      
-    response = await ServiceService.index();
+    response = await ServiceService.index(req.params);
     return res.status(200).send(response);
   }
   async getId(req, res) {

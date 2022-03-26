@@ -54,21 +54,22 @@ routes.post('/product', ProductController.store)
 
 //order
 routes.post('/sales', OrderController.store)
-      .get('/saleses', OrderController.index)
-      .get('/sales/:id', OrderController.getId)
       .post('/sales/:id', OrderController.store)
+      .get('/saleses/:id', OrderController.index)
+      .get('/sales/:id', OrderController.getId)
       .delete('/sales/:id', OrderController.delete);
 
 //services
 routes.post('/service/:id', ServiceController.store)
-      .get('/services', ServiceController.index)
+      .get('/services/:id', ServiceController.index)
       .get('/service/:id', ServiceController.getId)
       .delete('/service/:id', ServiceController.delete)
 
 //financialBox 
 routes.post('/financialBox/:user_id', FinancialBoxController.store)
       .put('/financialBox/:id', FinancialBoxController.update)
-      .get('/financialBoxs', FinancialBoxController.index)
+      .get('/financialBoxs/:id', FinancialBoxController.index)
+      .get('/financialBoxsOpen/:id', FinancialBoxController.open)
       .get('/financialBox/:id', FinancialBoxController.getId)
 
 export default routes;

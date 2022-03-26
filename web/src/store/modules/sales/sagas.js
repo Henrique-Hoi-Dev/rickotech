@@ -31,9 +31,12 @@ export function* createSales({ payload }) {
       status 
      } 
 
-    yield call(api.post, '/sales', sales);
-
-    toast.success('Venda realizada com sucesso.');
+    const res = yield call(api.post, '/sales', sales);
+    if (res.data.httpStatus === 404) {
+      toast.info('Não há produto em estoque.');
+      return history.push('/listProducts');
+    }
+    toast.success('Pedido venda realizada com sucesso.');
     history.push('/dashboard');
   } catch (err) {
     toast.error('Error na venda!');
@@ -41,9 +44,9 @@ export function* createSales({ payload }) {
   }
 }
 
-export function* findAllSales() {
+export function* findAllSales({ payload }) {
   try {
-    const response = yield call(api.get, '/saleses');
+    const response = yield call(api.get, `/saleses/${payload.id}`);
 
     yield put(findAllSalesSuccess(response.data));
   } catch (err) {
@@ -65,12 +68,14 @@ export function* getByIdSales({ payload }) {
 
 export function* UpdateSales({ payload }) {
   try {
-    yield call(api.post, `/sales/${payload.data.id}`, payload.data.values);
-
-    const response = yield call(api.get, '/saleses');
+    const res = yield call(api.post, `/sales/${payload.data.id}`, payload.data.values);
+    if (res.data.httpStatus === 404) {
+      toast.info('Não há produto.');
+      return history.push('/dashboard');
+    }
+    const response = yield call(api.get, `/saleses/${res.data.responseData.seller_id}`);
 
     yield put(findAllSalesSuccess(response.data));
-
     toast.success('Editado com sucesso.');
     history.push('/dashboard');
   } catch (err) {
@@ -81,9 +86,9 @@ export function* UpdateSales({ payload }) {
 
 export function* deleteSales({ payload }) {
   try {
-    yield call(api.delete, `/sales/${payload.id}`);
+    const res = yield call(api.delete, `/sales/${payload.id}`);
 
-    const response = yield call(api.get, '/saleses');
+    const response = yield call(api.get, `/saleses/${res.data.responseData}`);
 
     yield put(findAllSalesSuccess(response.data));
     toast.success('Venda deletada');

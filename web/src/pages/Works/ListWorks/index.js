@@ -15,14 +15,12 @@ const ListSales = ({ servicoList, handlerRemoveService }) => {
 
   const user = useSelector((state) => state.user.profile);
 
-  console.log(servicoList, user)
-
   useEffect(() => {
     function onLoad() {
-      dispatch(findAllServiceRequest());
+      dispatch(findAllServiceRequest(user.id));
     }
     onLoad();
-  }, [dispatch]);
+  }, [dispatch, user]);
 
   //formatção do preço do produto
   function currencyFormat(num) {
@@ -52,13 +50,8 @@ const ListSales = ({ servicoList, handlerRemoveService }) => {
             </thead>
             <tbody>
               {[].concat(servicoList).map((servico, i) => (
-                <tr 
-                key={i} 
-                value={servico.id} 
-                style={{ display: (servico.financial.user.id === user.id && 'line-through') || 
-                (servico.financial.user.id && 'none')}}
-                >
-                  <td>{servico.financial.user.name}</td>
+                <tr key={i} value={servico.id} >
+                  <td>{servico.user.name}</td>
                   <td>{servico.name}</td>
                   <td>{currencyFormat(servico.price)}</td>
                   <td>{moment(servico.date_service).format('DD/MM/YYYY')}</td>
@@ -79,7 +72,7 @@ const ListSales = ({ servicoList, handlerRemoveService }) => {
 
 const mapStateToProps = (state) => {
   return {
-    servicoList: state.servicos.servicoList.responseData ? state.servicos.servicoList.responseData : [],
+    servicoList: state.servicos.servicoList ? state.servicos.servicoList : [],
   };
 };
 

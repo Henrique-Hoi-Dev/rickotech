@@ -8,7 +8,12 @@ class FinancialBoxController {
   }
   async index(req, res) {
     let response;      
-    response = await FinancialBoxService.index();
+    response = await FinancialBoxService.index(req.params);
+    return res.send(response);
+  }
+  async open(req, res) {
+    let response;      
+    response = await FinancialBoxService.open(req.params);
     return res.send(response);
   }
   async getId(req, res) {

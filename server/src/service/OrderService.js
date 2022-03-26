@@ -17,7 +17,7 @@ export default  {
       const { status, product_quantity, discount, product_id } = req
       
       const product = await Product.findByPk(product_id)
-
+  
       const price_product = (product.dataValues.price * product_quantity)
       
       const porcent = (price_product / 100) 
@@ -28,6 +28,14 @@ export default  {
 
       if (status === 'sold' ) {
         const productQuantity = await Product.findOne({ where: { id: product_id }})
+        if (product.dataValues.quantity < product_quantity) {
+          const status = 'open'
+
+          await orders.update({status}) 
+
+          result = {httpStatus: httpStatus.NOT_FOUND, status: "Product not found", responseData: []}    
+          return result 
+        }
         const proQuantity = productQuantity.dataValues.quantity - product_quantity
   
         const quantity = proQuantity
@@ -48,7 +56,7 @@ export default  {
     }
 
     const existProduct = await Product.findOne({ where: { id: product_id}})
-    if (existProduct.dataValues.quantity <= [0]) {
+    if (existProduct.dataValues.quantity < product_quantity) {
       result = {httpStatus: httpStatus.NOT_FOUND, status: "Product not exist", responseData: []}    
       return result
     }
@@ -84,9 +92,8 @@ export default  {
     }
   },
   async index(req, res) {
-    let result = {}
-
     let sales = await Order.findAll({
+        where: { seller_id: req.id },
         attributes: [ 
           'id', 
           'product_id',
@@ -122,13 +129,12 @@ export default  {
               'value_total_service', 
               'value_total', 
               'open_caixa', 
-              'close_caixa'],
+              'close_caixa']
           }
         ],
     });
 
-    result = {httpStatus: httpStatus.OK, status: "Success", responseData: sales}    
-    return result
+    return sales
   },
   async getId(req, res) {
     let id = req.id
@@ -190,9 +196,11 @@ export default  {
     const productQuantity = await Product.findOne({ where: { id: order.dataValues.product_id }})
       const quantity = productQuantity.dataValues.quantity + order.dataValues.product_quantity
 
-      const devolProduct = await productQuantity.update({quantity}) 
+      await productQuantity.update({quantity}) 
 
-    result = {httpStatus: httpStatus.OK, status: "successful", responseData: devolProduct}      
+      const user = order.dataValues.seller_id
+
+    result = {httpStatus: httpStatus.OK, status: "successful", responseData: user}      
     return result
   }
 }

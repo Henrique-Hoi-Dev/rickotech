@@ -19,10 +19,10 @@ export function getByIdServiceSuccess(data) {
   };
 }
 
-export function findAllServiceRequest() {
+export function findAllServiceRequest(id) {
   return {
     type: '@service/FINDALL_SERVICE_REQUEST',
-    payload: { },
+    payload: { id },
   };
 }
 

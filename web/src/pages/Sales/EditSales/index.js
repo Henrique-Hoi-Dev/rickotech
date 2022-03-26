@@ -5,9 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-import {
-  UpdateSalesRequest,
-  resetFormulario } from '~/store/modules/sales/actions';
+import { UpdateSalesRequest } from '~/store/modules/sales/actions';
 import { getByIdSalesRequest } from '~/store/modules/sales/actions';
 
 import { Container } from './styles';
@@ -23,19 +21,14 @@ const { card } = useSelector((state) => state.financialBox);
 const [setPreview] = useState(card);
 
 useEffect(() => {
-  if (id) {
-    dispatch(getByIdSalesRequest(id));
-  } else {
-    dispatch(resetFormulario());
-  }
+  dispatch(getByIdSalesRequest(id));
 }, [id, dispatch]);
   
 const handleSubmit = async (values, { resetForm }) => {
   let body = JSON.parse(JSON.stringify(values));
 
   dispatch(UpdateSalesRequest({ id: id, values: body }));
-  dispatch(resetFormulario(id));
-  setPreview(card)
+  dispatch(setPreview(card))
   handleReset(resetForm);
 };
 
@@ -77,7 +70,7 @@ const handleReset = (resetForm) => {
 
             <div className="but">
               <button type="submit">Confirmar venda</button>
-                <Link to="/listProducts">
+                <Link to="/dashboard">
                   <button className="cancela">
                     Cancelar venda
                   </button>

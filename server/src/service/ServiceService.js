@@ -5,12 +5,10 @@ import User from "../app/models/User";
 import httpStatus from 'http-status-codes';
 
 export default {
-  async store(req, res) {
-    let result = {}
-    
+  async store(req, res) {    
     let financial_id = res.id
 
-    const { name, price, date_service } = req;
+    const { employee_id, name, price, date_service } = req;
 
     const financial = await FinancialBox.findByPk(financial_id);
 
@@ -18,29 +16,29 @@ export default {
       return result = {httpStatus: httpStatus.NOT_FOUND, status: "caixa not found", responseData: services}
     }
 
-    const services = await Service.create({ financial_id, name, price, date_service });
+    const services = await Service.create({ financial_id, employee_id, name, price, date_service });
 
-    result = {httpStatus: httpStatus.OK, status: "Success", responseData: services}    
-    return result
+    return services
   },
   async index(req, res) {
-    let result = {}
-    let services = await Service.findAll({
+    const services = await Service.findAll({
+      where: { employee_id: req.id },
       attributes: [ 'id', 'name', 'price', 'date_service'],
-      include: {
-        model: FinancialBox,
-        as: 'financial',
-        attributes: [ 'id', 'value_total_service', 'open_caixa', 'close_caixa' ],
-        include: [{
+      include: [
+        {
+          model: FinancialBox,
+          as: 'financial',
+          attributes: [ 'id', 'value_total_service', 'open_caixa', 'close_caixa' ]
+        },
+        {
           model: User,
           as: 'user',
-          attributes: [ 'id', 'name']
-        }]
-      },
+          attributes: [ 'id', 'name' ]
+        }
+     ],
     });
 
-    result = {httpStatus: httpStatus.OK, status: "Success", responseData: services}    
-    return result
+    return services
   },
   async getId(req, res) {
     let result = {}

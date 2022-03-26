@@ -7,6 +7,7 @@ import history from '~/services/history';
 import {
   getByIdFinancialBoxSuccess,
   findAllFinancialBoxSuccess,
+  findAllOpenSuccess,
   getCardSuccess, 
   financialBoxFailure
 } from './actions';
@@ -48,11 +49,22 @@ export function* getByCard() {
   }
 }
 
-export function* findAllFinancialBox() {
+export function* findAllFinancialBox({ payload }) {
   try {
-    const response = yield call(api.get, '/financialBoxs');
+    const response = yield call(api.get, `/financialBoxs/${payload.id}`);
 
     yield put(findAllFinancialBoxSuccess(response.data));
+  } catch (err) {
+    toast.error('Error encontrar caixas.');
+    yield put(financialBoxFailure());
+  }
+}
+
+export function* findOpen({ payload }) {
+  try {
+    const response = yield call(api.get, `/financialBoxsOpen/${payload.id}`);
+
+    yield put(findAllOpenSuccess(response.data));
   } catch (err) {
     toast.error('Error encontrar caixas.');
     yield put(financialBoxFailure());
@@ -80,5 +92,6 @@ export default all([
   takeLatest('@financialBox/GET_BYID_FINANCIALBOX_REQUEST', getByIdFinancialBox),
   takeLatest('@financialBox/GET_CARD_REQUEST', getByCard),
   takeLatest('@financialBox/FIND_ALL_FINANCIALBOX_REQUEST', findAllFinancialBox),
+  takeLatest('@financialBox/FIND_OPEN_REQUEST', findOpen),
   takeLatest('@financialBox/UPDATE_FINANCIALBOX_REQUEST', UpdateFinancialBox),
 ]);

@@ -37,9 +37,9 @@ export function* getByIdService({ payload }) {
   }
 }
 
-export function* findAllService() {
+export function* findAllService({ payload }) {
   try {
-    const response = yield call(api.get, `/services`);
+    const response = yield call(api.get, `/services/${payload.id}`);
 
     yield put(findAllServiceSuccess(response.data));
   } catch (err) {

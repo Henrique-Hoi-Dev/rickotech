@@ -19,10 +19,10 @@ export function getByIdSalesSuccess(data) {
   };
 }
 
-export function findAllSalesRequest() {
+export function findAllSalesRequest(id) {
   return {
     type: '@sales/FINDALL_SALES_REQUEST',
-    payload: { },
+    payload: { id },
   };
 }
 

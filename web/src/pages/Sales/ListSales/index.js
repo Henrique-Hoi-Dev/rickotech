@@ -19,8 +19,8 @@ const ListSales = ({ salesList, handlerRemoveSales }) => {
   const user = useSelector((state) => state.user.profile);
 
   useEffect(() => {
-      dispatch(findAllSalesRequest());
-  }, [dispatch]);
+      dispatch(findAllSalesRequest(user.id));
+  }, [dispatch, user]);
 
   //formatção do preço do produto
   function currencyFormat(num) {
@@ -52,12 +52,7 @@ const ListSales = ({ salesList, handlerRemoveSales }) => {
             </thead>
             <tbody>
               {[].concat(salesList).map((sales, i) => (
-                <tr 
-                key={i} 
-                value={sales.id} 
-                style={{ display: (sales.user.id === user.id && 'line-through') || 
-                (sales.id && 'none')}}
-                >
+                <tr key={i} value={sales.id} >
                   <td>{sales.user.name}</td>
                   <td>{sales.name_product}</td>
                   <td>{sales.product_quantity || [0]}</td>
@@ -107,7 +102,7 @@ const ListSales = ({ salesList, handlerRemoveSales }) => {
 
 const mapStateToProps = (state) => {
   return {
-    salesList: state.sales.salesList.responseData ? state.sales.salesList.responseData : [],
+    salesList: state.sales.salesList ? state.sales.salesList : [],
   };
 };
 

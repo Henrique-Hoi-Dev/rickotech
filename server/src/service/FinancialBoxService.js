@@ -20,10 +20,9 @@ export default {
     result = {httpStatus: httpStatus.OK, status: "successful", responseData: createFinancialBox}      
     return result
   },
-  async index() {
-    let result = {}
-
-    let financials = await FinancialBox.findAll({
+  async index(req, res) {
+    let financials = await FinancialBox.findAll({ 
+      where: { user_id: req.id},
       order: [['id', 'DESC']],
       attributes: [ 
         'id', 
@@ -39,7 +38,7 @@ export default {
         {
           model: User,
           as: 'user',
-          attributes: [ 'id', 'name', 'company_position' ]
+          attributes: [ 'id', 'name' ]
         },
         {
           model: Service,
@@ -54,8 +53,48 @@ export default {
       ]
     });
 
-    result = {httpStatus: httpStatus.OK, status: "successful", responseData: financials}      
-    return result
+    return financials
+  },
+  async open(req, res) {
+    let financials = await FinancialBox.findAll({ 
+      where: { user_id: req.id},
+      order: [['id', 'DESC']],
+      attributes: [ 
+        'id', 
+        'open_caixa', 
+        'close_caixa',
+        'status',
+        'value_open', 
+        'value_total_sales', 
+        'value_total_service',   
+        'value_total'
+      ],
+      include: [
+        {
+          model: User,
+          as: 'user',
+          attributes: [ 'id', 'name' ]
+        },
+        {
+          model: Service,
+          as: 'service',
+          attributes: [ 'id', 'name', 'price' ]
+        },
+        {
+          model: Sales,
+          as: 'order',
+          attributes: [ 'id', 'financial_id', 'price_product' ]
+        }
+      ]
+    });
+
+    const open = financials.filter(function (res) {
+      if (res.dataValues.status === false) {
+        return res.dataValues
+      }
+    })
+    
+    return open
   },
   async getId(req, res) {
     let financialId = req.id
@@ -75,7 +114,7 @@ export default {
         {
           model: User,
           as: 'user',
-          attributes: [ 'id', 'name', 'company_position']
+          attributes: [ 'id', 'name' ]
         },
         {
           model: Service,

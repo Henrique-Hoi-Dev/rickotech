@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Formik, Field, Form } from 'formik';
 
-import { useParams } from 'react-router-dom';
 import { connect, useDispatch, useSelector } from 'react-redux';
 
 import Header from '~/components/HeaderListAndRegister';
@@ -12,20 +11,17 @@ import { Container } from './styles';
 
 import {
   createServicetRequest,
-  getByIdServiceRequest,
   resetFormulario } from '~/store/modules/servicos/actions';
+import { findAllOpenRequest } from '~/store/modules/financialBox/actions';
   
-const RegistreServices = ({ financialBoxList }) => {
+const RegistreServices = ({ financialBoxListOpen }) => {
   const dispatch = useDispatch();
-  const { id } = useParams();
   const { form } = useSelector((state) => state.servicos);
+  const { id } = useSelector((state) => state.user.profile);
 
   useEffect(() => {
-    if (id) {
-      dispatch(getByIdServiceRequest(id));
-    } else {
-      dispatch(resetFormulario());
-    }
+    dispatch(findAllOpenRequest(id));
+    dispatch(resetFormulario());
   }, [id, dispatch]);
 
   const handleSubmit = async (values, { resetForm }) => {
@@ -60,9 +56,9 @@ const RegistreServices = ({ financialBoxList }) => {
                   <label htmlFor="id">Caixa</label>
                   <Field  component="select" name="financial_id" >
                     <option value="0">Selecione um caixa</option>
-                    {[].concat(financialBoxList[0]).map((caixa, i) => (
+                    {[].concat(financialBoxListOpen).map((caixa, i) => (
                       <option key={i} value={caixa.id} >
-                      {moment(caixa.open_caixa).format('DD/MM/YYYY')} - 
+                      {moment(caixa.open_caixa).format('DD/MM/YYYY') === false}  
                       {(caixa.status === false && 'Aberto')}
                       </option>
                     ))}    
@@ -88,7 +84,7 @@ const RegistreServices = ({ financialBoxList }) => {
 
 const mapStateToProps = (state) => {
   return {
-    financialBoxList: state.financialBox.financialBoxList.responseData ? state.financialBox.financialBoxList.responseData : [],
+    financialBoxListOpen: state.financialBox.financialBoxListOpen ? state.financialBox.financialBoxListOpen : [],
   };
 };
 

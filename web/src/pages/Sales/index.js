@@ -12,18 +12,19 @@ import {
   createSalesRequest,
   resetFormulario } from '~/store/modules/sales/actions';
 import { getByIdProductRequest } from '~/store/modules/product/actions';
-import { findAllFinancialBoxRequest } from '~/store/modules/financialBox/actions';
+import { findAllOpenRequest } from '~/store/modules/financialBox/actions';
 
 import { Container } from './styles';
 
 import Header from '~/components/HeaderListAndRegister';
 
-const RegistreSales = ({ financialBoxList }) => {
+const RegistreSales = ({ financialBoxListOpen }) => {
 const dispatch = useDispatch();
 const { id } = useParams();
 const { form } = useSelector((state) => state.sales);
 const { card } = useSelector((state) => state.financialBox);
 
+const user = useSelector((state) => state.user.profile);
 const productId = useSelector((state) => state.product.form);
 
 const [setPreview] = useState(card);
@@ -31,15 +32,15 @@ const [setPreview] = useState(card);
 useEffect(() => {
   if (id) {
     dispatch(getByIdProductRequest(id));
-    dispatch(findAllFinancialBoxRequest());
+    dispatch(findAllOpenRequest(user.id));
     dispatch(resetFormulario());
   }
-}, [id, dispatch]);
+}, [id, dispatch, user]);
   
 const handleSubmit = async (values, { resetForm }) => {
   dispatch(createSalesRequest(values, id));
   dispatch(resetFormulario());
-  setPreview(card)
+  dispatch(setPreview(card))
   handleReset(resetForm);
 };
 
@@ -73,7 +74,7 @@ const handleReset = (resetForm) => {
               <label htmlFor="financial_id">Caixa</label>
               <Field component="select" name="financial_id" >
                 <option value="0">Selecione um caixa</option>
-                {[].concat(financialBoxList[0]).map((caixa, i) => (
+                {[].concat(financialBoxListOpen).map((caixa, i) => (
                 <option key={i} value={caixa.id || ''} >
                 {moment(caixa.open_caixa).format('DD/MM/YYYY')} /
                 {(caixa.status === false && 'Aberto')}
@@ -120,7 +121,7 @@ const handleReset = (resetForm) => {
 
 const mapStateToProps = (state) => {
   return {
-    financialBoxList: state.financialBox.financialBoxList.responseData ? state.financialBox.financialBoxList.responseData : [],
+    financialBoxListOpen: state.financialBox.financialBoxListOpen ? state.financialBox.financialBoxListOpen : [],
   };
 };
 

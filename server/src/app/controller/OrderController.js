@@ -8,7 +8,7 @@ class OrderController {
   }
   async index(req, res) {
     let response;      
-    response = await OrderService.index();
+    response = await OrderService.index(req.params);
     return res.send(response);
   }
   async getId(req, res) {
