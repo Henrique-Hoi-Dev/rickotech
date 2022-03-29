@@ -11,12 +11,11 @@ import history from '~/services/history';
 
 export function* createService({ payload }) {
   try {
-    const { name, price, date_service } = payload.values
-    const servicos = { name, price, date_service }
+    const employee_id = payload.id
+    const { name, price, date_service, financial_id } = payload.values
+    const servicos = { name, price, date_service, employee_id }
 
-    const financialId = payload.values.financial_id
-
-    yield call(api.post, `/service/${financialId}`, servicos);
+    yield call(api.post, `/service/${financial_id}`, servicos);
 
     toast.success('Serviço registrado com sucesso.');
     history.push('/listServico')
@@ -50,9 +49,9 @@ export function* findAllService({ payload }) {
 
 export function* deleteService({ payload }) {
   try {
-    yield call(api.delete, `/service/${payload.id}`);
+    const res = yield call(api.delete, `/service/${payload.id}`);
 
-    const response = yield call(api.get, '/services');
+    const response = yield call(api.get, `/services/${res.data.responseData}`);
 
     yield put(findAllServiceSuccess(response.data));
     toast.success('Serviço deletado');

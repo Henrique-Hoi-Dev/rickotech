@@ -52,8 +52,14 @@ export default {
         }
       ]
     });
-
-    return financials
+    
+    const closed = financials.filter(function (res) {
+      if (res.dataValues.status === true) {
+        return res.dataValues
+      }
+    })
+    
+    return closed
   },
   async open(req, res) {
     let financials = await FinancialBox.findAll({ 

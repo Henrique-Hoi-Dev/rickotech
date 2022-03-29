@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Header from "~/components/HeaderListAndRegister";
 import { Form, Input } from '@rocketseat/unform';
+
 import * as moment from 'moment';
+
+import { toast } from 'react-toastify';
 
 import { 
   getByIdFinancialBoxRequest, 
@@ -12,15 +14,14 @@ import {
 
 import { Container } from "./styles";
 
+import Header from "~/components/HeaderListAndRegister";
+
 export default function CaixaInfo() {
   const dispatch = useDispatch(); 
   const userId = useSelector((state) => state.user.profile.id);
 
   const { form } = useSelector((state) => state.financialBox);
-  const { responseData } = useSelector((state) => state.financialBox.financialBoxList);
   const { id } = useParams();
-
-  const [setPreview] = useState(responseData);
 
   useEffect(() => {
     if (id) {
@@ -29,8 +30,14 @@ export default function CaixaInfo() {
   }, [id, dispatch]);
 
   const handleSubmit = async (values) => {
-      dispatch(UpdateFinancialBoxRequest(id, values));
-      setPreview(responseData)
+    const { close_caixa } = values
+    const body = { status: true, close_caixa}
+
+    try {
+      dispatch(UpdateFinancialBoxRequest( id, body ));
+    } catch {
+      toast.error('Error check data');
+    } 
   };
 
   function currencyFormat(num) {
@@ -56,11 +63,10 @@ export default function CaixaInfo() {
                 <span>{moment(form.open_caixa).format('DD/MM/YYYY')}</span>
                 <label htmlFor="close_caixa">Data fechamento caixa</label>
                 <Input 
-                style={{ 
-                  display: (form.status === true && 'none') || 
-                  (form.status === false && 'line-through') }}
+                  type={"date"}
                   name="close_caixa" 
-                  type="date"
+                  style={{ display: (form.status === true && 'none') || 
+                  (form.status === false && 'line-through') }}        
                 />
                 <span 
                 style={{ 
@@ -80,8 +86,7 @@ export default function CaixaInfo() {
                 <label htmlFor="value_total_service">Valor total serviços</label>
                 <span>{currencyFormat(form.value_total_service || [0])}</span>
                 <div className="check">
-                  <Input name="status" type="checkbox" value={true} />          
-                  {/* <label htmlFor="status">Fechamento caixa</label> */}
+                  <Input name="status" type={"checkbox"} />          
                 </div>
               </div>
 

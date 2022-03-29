@@ -17,9 +17,13 @@ class OrderController {
     return res.send(response);
   }
   async delete(req, res) {
-    let response;     
-    response = await OrderService.delete(req.params);
-    return res.send(response);
+    try {
+      let response;     
+      response = await OrderService.delete(req.params);
+      return res.status(200).send(response);
+    } catch {
+      return res.status(200).json([])
+    } 
   }
 }
 export default new OrderController();

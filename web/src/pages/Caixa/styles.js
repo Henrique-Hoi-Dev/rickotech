@@ -26,7 +26,6 @@ export const Container = styled.div`
 
   span {
     color: red;
-    font-weight: bold;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
   }
 
@@ -37,7 +36,8 @@ export const Container = styled.div`
     grid-template-rows: 100px 1fr;
     grid-template-areas:
     'data valor-open'
-    'but but';
+    'but but'
+    'erro erro';
 
     .data {
       grid-area: data;
@@ -57,7 +57,11 @@ export const Container = styled.div`
       grid-area: but;
       margin-top: 10px;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
+      align-items: center;
+    }
+    .erro {
+      grid-area: erro;
     }
     label {
       padding: 0.5rem;

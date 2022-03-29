@@ -19,6 +19,10 @@ export function* createFinancialBox({ payload }) {
 
     const response = yield call(api.post, `/financialBox/${payload.id}`, financialBox);
 
+    const responseList = yield call(api.get, `/financialBoxsOpen/${payload.id}`);
+
+    yield put(findAllOpenSuccess(responseList.data));
+
     toast.success('Caixa aberto com sucesso.');
     history.push(`/caixaInfo/${response.data.responseData.id}`)
   } catch (err) {
@@ -76,11 +80,13 @@ export function* UpdateFinancialBox({ payload }) {
     const { close_caixa, status } = payload.data
     const fecharCaixa = { close_caixa, status }
 
-    const response = yield call(api.put, `/financialBox/${payload.id}`, fecharCaixa);
+    const res = yield call(api.put, `/financialBox/${payload.id}`, fecharCaixa);
 
-    yield put(getByIdFinancialBoxSuccess(response.data));
+    const response = yield call(api.get, `/financialBoxsOpen/${res.data.responseData.user_id}`);
+
+    yield put(findAllOpenSuccess(response.data));
     toast.success('Caixa fechado com sucesso.');
-    history.push('/')
+    history.push(`/caixa/${res.data.responseData.user_id}`)
   } catch (err) {
     toast.error('Error no fechar caixa.');
     yield put(financialBoxFailure());

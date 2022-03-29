@@ -8,6 +8,7 @@ import {
   salesFailure,
   findAllSalesSuccess,
   getByIdSalesSuccess } from './actions';
+import { getCardSuccess } from '../financialBox/actions';
 
 export function* createSales({ payload }) {
   try {
@@ -36,6 +37,9 @@ export function* createSales({ payload }) {
       toast.info('Não há produto em estoque.');
       return history.push('/listProducts');
     }
+    const response = yield call(api.get, `/saleses/${res.data.seller_id}`);
+    yield put(findAllSalesSuccess(response.data));
+
     toast.success('Pedido venda realizada com sucesso.');
     history.push('/dashboard');
   } catch (err) {
@@ -74,8 +78,11 @@ export function* UpdateSales({ payload }) {
       return history.push('/dashboard');
     }
     const response = yield call(api.get, `/saleses/${res.data.responseData.seller_id}`);
+    const responseCard = yield call(api.get, '/card');
 
+    yield put(getCardSuccess(responseCard.data));
     yield put(findAllSalesSuccess(response.data));
+
     toast.success('Editado com sucesso.');
     history.push('/dashboard');
   } catch (err) {
@@ -89,8 +96,11 @@ export function* deleteSales({ payload }) {
     const res = yield call(api.delete, `/sales/${payload.id}`);
 
     const response = yield call(api.get, `/saleses/${res.data.responseData}`);
+    const responseCard = yield call(api.get, '/card');
 
+    yield put(getCardSuccess(responseCard.data));
     yield put(findAllSalesSuccess(response.data));
+
     toast.success('Venda deletada');
   } catch (err) {
     toast.error('Erro em excluir venda');

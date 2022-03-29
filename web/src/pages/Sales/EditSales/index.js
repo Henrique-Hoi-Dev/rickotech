@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -17,9 +17,6 @@ const dispatch = useDispatch();
 const { id } = useParams();
 const { form } = useSelector((state) => state.sales);
 
-const { card } = useSelector((state) => state.financialBox);
-const [setPreview] = useState(card);
-
 useEffect(() => {
   dispatch(getByIdSalesRequest(id));
 }, [id, dispatch]);
@@ -28,7 +25,6 @@ const handleSubmit = async (values, { resetForm }) => {
   let body = JSON.parse(JSON.stringify(values));
 
   dispatch(UpdateSalesRequest({ id: id, values: body }));
-  dispatch(setPreview(card))
   handleReset(resetForm);
 };
 

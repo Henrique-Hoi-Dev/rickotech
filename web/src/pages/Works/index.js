@@ -25,7 +25,7 @@ const RegistreServices = ({ financialBoxListOpen }) => {
   }, [id, dispatch]);
 
   const handleSubmit = async (values, { resetForm }) => {
-      dispatch(createServicetRequest(values));
+      dispatch(createServicetRequest(values, id));
 
       handleReset(resetForm);
   };

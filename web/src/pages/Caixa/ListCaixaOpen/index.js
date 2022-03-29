@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { FcInfo } from 'react-icons/fc';
 import * as moment from 'moment';
 
-import { findAllFinancialBoxRequest } from '~/store/modules/financialBox/actions';
+import { findAllOpenRequest } from '~/store/modules/financialBox/actions';
 import { connect } from 'react-redux';
 
 import { Container } from './styles';
@@ -15,7 +15,7 @@ const { id } = useParams();
 
   useEffect(() => {
     if (id) {
-      dispatch(findAllFinancialBoxRequest(id));
+      dispatch(findAllOpenRequest(id));
     } 
   }, [id, dispatch]);
 
@@ -32,7 +32,7 @@ const { id } = useParams();
 
   return (
     <Container>  
-      <h2>Histórico do caixa</h2>
+      <h2>Caixa em aberto</h2>
       <table className="table-list">
           <thead>
             <tr className="table-title">
@@ -82,7 +82,7 @@ const { id } = useParams();
 
 const mapStateToProps = (state) => {
   return {
-    financialBoxList: state.financialBox.financialBoxList ? state.financialBox.financialBoxList : [],
+    financialBoxList: state.financialBox.financialBoxListOpen ? state.financialBox.financialBoxListOpen : [],
   };
 };
 

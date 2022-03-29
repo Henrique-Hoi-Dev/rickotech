@@ -23,7 +23,7 @@ export default {
   async index(req, res) {
     const services = await Service.findAll({
       where: { employee_id: req.id },
-      attributes: [ 'id', 'name', 'price', 'date_service'],
+      attributes: [ 'id', 'name', 'price', 'date_service', 'employee_id'],
       include: [
         {
           model: FinancialBox,
@@ -44,7 +44,7 @@ export default {
     let result = {}
     let serviceId = req.id 
     let services = await Service.findByPk(serviceId, {
-      attributes: [ 'id', 'name', 'price', 'date_service'],
+      attributes: [ 'id', 'name', 'price', 'date_service', 'employee_id'],
       include: {
         model: FinancialBox,
         as: 'financial',
@@ -59,6 +59,10 @@ export default {
     let result = {}
     const id  = req.id;
 
+    const user = await Service.findByPk(id)
+
+    const UserId = user.employee_id
+
     const service = await Service.destroy({
       where: {
         id: id,
@@ -69,7 +73,7 @@ export default {
       return res.status(400).json(error);
     }
 
-    result = {httpStatus: httpStatus.OK, status: "successful", responseData: service}      
+    result = {httpStatus: httpStatus.OK, status: "successful", responseData: UserId}      
     return result
   }
 }

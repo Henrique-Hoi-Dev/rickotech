@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -22,12 +22,9 @@ const RegistreSales = ({ financialBoxListOpen }) => {
 const dispatch = useDispatch();
 const { id } = useParams();
 const { form } = useSelector((state) => state.sales);
-const { card } = useSelector((state) => state.financialBox);
 
 const user = useSelector((state) => state.user.profile);
 const productId = useSelector((state) => state.product.form);
-
-const [setPreview] = useState(card);
 
 useEffect(() => {
   if (id) {
@@ -40,7 +37,6 @@ useEffect(() => {
 const handleSubmit = async (values, { resetForm }) => {
   dispatch(createSalesRequest(values, id));
   dispatch(resetFormulario());
-  dispatch(setPreview(card))
   handleReset(resetForm);
 };
 

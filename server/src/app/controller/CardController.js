@@ -7,7 +7,7 @@ class CardController {
       response = await CardService.index();
       return res.status(200).send(response);
     } catch {
-      return res.status(200).send([])
+      return res.status(200).json([])
     }
   }
 }

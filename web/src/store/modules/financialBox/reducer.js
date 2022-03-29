@@ -5,9 +5,13 @@ const INITIAL_STATE = {
   financialBoxListOpen: [],
   card: [],
   form: {
+    status: true,
     open_caixa: '',
     close_caixa: '',
     value_open: '',
+    value_total: '',
+    value_total_sales: '',
+    value_total_service: '',
   }
 };
 
