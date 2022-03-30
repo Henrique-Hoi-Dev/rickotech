@@ -35,7 +35,7 @@ class FinancialBoxController {
       response = await FinancialBoxService.getId(req.params);
       return res.status(200).send(response);
     } catch (error) {
-      return res.status(400).json()
+      return res.status(400).json(error)
     }
   }
   async update(req, res) {

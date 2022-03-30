@@ -1,7 +1,7 @@
-export function createServicetRequest(values) {
+export function createServicetRequest(values, id) {
   return {
     type: '@service/CREATE_SERVICE_REQUEST',
-    payload: { values },
+    payload: { values, id },
   };
 }
 

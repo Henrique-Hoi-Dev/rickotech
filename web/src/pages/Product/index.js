@@ -84,8 +84,17 @@ export default function RegistrationProduct() {
                 <label htmlFor="Nome Produto">Nome</label>
                 <Field name="name" />
                 <span>{formProps.errors.name}</span>
-                <label htmlFor="categoty">Categoria</label>
-                <Field name="category" />
+                <label htmlFor="categoty">Tipo de categoria</label>
+                <Field  component="select" name="categoty" >
+                  <option value="0">Selecione</option>
+                  <option value="iphone" >iPhone</option>
+                  <option value="samsung" >Samsung</option>
+                  <option value="perfume" >Perfume</option>
+                  <option value="apple-airpods" >Apple AirPods</option>
+                  <option value="carregador" >Carregador</option>
+                  <option value="apple-watch" >Apple Watch</option>
+                  <option value="smartwatch" >Smartwatch</option>
+                </Field>  
               </div>
 
               <div className="campo3">
@@ -100,8 +109,13 @@ export default function RegistrationProduct() {
               <div className="campo4">
                 <label htmlFor="quantidade">Quantidade</label>
                 <Field name="quantity" />  
-                <label htmlFor="decricao">Descrição</label>                
-                <Field name="description" />
+                <label htmlFor="decricao">Tipo de descrição</label>                
+                <Field  component="select" name="description" >
+                  <option value="0">Selecione</option>
+                  <option value="novo" >Novo</option>
+                  <option value="semi novo" >Seminovo</option>
+                  <option value="usado" >Usado</option>
+                </Field> 
                 <span>{formProps.errors.description}</span>
               </div>
 

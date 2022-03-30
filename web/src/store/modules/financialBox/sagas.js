@@ -83,7 +83,9 @@ export function* UpdateFinancialBox({ payload }) {
     const res = yield call(api.put, `/financialBox/${payload.id}`, fecharCaixa);
 
     const response = yield call(api.get, `/financialBoxsOpen/${res.data.responseData.user_id}`);
+    const responseGet = yield call(api.get, `/financialBox/${payload.id}`);
 
+    yield put(getByIdFinancialBoxSuccess(responseGet.data));
     yield put(findAllOpenSuccess(response.data));
     toast.success('Caixa fechado com sucesso.');
     history.push(`/caixa/${res.data.responseData.user_id}`)

@@ -19,7 +19,6 @@ import ListCaixaOpen from './ListCaixaOpen';
 const Caixa = ({ financialBoxList }) => {
 const dispatch = useDispatch();
 const { id } = useParams();
-console.log(financialBoxList)
 
 useEffect(() => {
   if (id) {

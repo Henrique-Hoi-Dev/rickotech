@@ -12,7 +12,11 @@ function HeaderListAndRegister(props) {
         <Link to="/dashboard">
           <img src={backIcon} alt="voltar" height="40px" />
         </Link>
-        <img src={logo} alt="voltar" height="100px" />
+        <div className="img">
+          <Link to={'/'}>
+            <img src={logo} alt="voltar" height="100px" /> 
+          </Link>
+        </div>
       </div>
 
       <div className="header-content">
