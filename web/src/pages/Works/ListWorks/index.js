@@ -36,7 +36,7 @@ const ListSales = ({ servicoList, handlerRemoveService }) => {
 
   return (
     <Container>
-      <Header  title="Todos os serviços"/>
+      <Header  title="Serviços"/>
       <div className="header-main">
         <form className="form-table">
           <table className="table-list">

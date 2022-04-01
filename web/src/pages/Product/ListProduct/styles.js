@@ -3,16 +3,15 @@ import { darken } from 'polished';
 
 export const Container = styled.div`
   width: 100vw;
-  height: 100vh;
 
   .header-main {
     background: #353535;
-    max-width: 70rem;
+    max-width: 63rem;
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
     border-radius: 0.8rem;
     margin: -3rem auto 3.2rem;
-    padding-top: 3rem;
+    padding-top: 1rem;
     overflow: hidden;
 
     h1 {
@@ -24,7 +23,10 @@ export const Container = styled.div`
   }
 
   .form-table {
-    padding: 0 2.4rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2.4rem;
 
     table {
       background-color: #4d4c4c;

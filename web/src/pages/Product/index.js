@@ -113,7 +113,7 @@ export default function RegistrationProduct() {
                 <Field  component="select" name="description" >
                   <option value="0">Selecione</option>
                   <option value="novo" >Novo</option>
-                  <option value="semi novo" >Seminovo</option>
+                  <option value="seminovo" >Seminovo</option>
                   <option value="usado" >Usado</option>
                 </Field> 
                 <span>{formProps.errors.description}</span>
