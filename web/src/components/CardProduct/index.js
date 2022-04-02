@@ -1,7 +1,6 @@
 import React from "react";
 
-import { FcEmptyTrash, FcSalesPerformance } from 'react-icons/fc';
-import { BiEdit } from 'react-icons/bi';
+import { FcEmptyTrash, FcSalesPerformance, FcEditImage } from 'react-icons/fc';
 
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -65,7 +64,7 @@ export default function CardProduct(props) {
           <hr />
           <button>
             <Link to={`/product/${props.id}`}>
-              <BiEdit />
+              <FcEditImage />
             </Link>
           </button>
           <button >

@@ -34,13 +34,14 @@ export const Container = styled.div`
     }
     .area-4 {
       grid-area: area-4;
+      text-align: center;
     }
     .area-5 {
       grid-area: area-5;
+      text-align: center;
 
       button {
-        margin-top: 15px;
-        margin-left: 35px;
+        margin: 9px 19px -4px 19px;
       }
     }
     
