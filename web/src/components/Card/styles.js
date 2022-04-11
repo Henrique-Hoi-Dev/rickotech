@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 
   .cards {
     min-width: 300px;
@@ -49,5 +50,10 @@ export const Container = styled.div`
         color: #ffff;
       }
     }
+  }
+  @media (max-width: 800px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 `

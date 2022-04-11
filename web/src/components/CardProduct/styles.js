@@ -28,6 +28,7 @@ export const Container = styled.div`
     }
     .area-2 {
       grid-area: area-2;
+      text-align: center;
     }
     .area-3 {
       grid-area: area-3;
@@ -61,7 +62,7 @@ export const Container = styled.div`
       justify-content: center;
 
       img {
-        border-radius: 10%; 
+        border-radius: 3%; 
         width: 230px;
         height: 200px;
 
@@ -80,13 +81,8 @@ export const Container = styled.div`
         height: 1px;
         background: rgba(255, 255, 255, 0.2);
       }
-
-      h2 {
-        margin: 10px;
-      }
       
       strong {
-        margin-left: 11px;
         margin-bottom: 6px;
         font-weight: bold;
         font-size: 16px;

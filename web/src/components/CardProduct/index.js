@@ -47,7 +47,15 @@ export default function CardProduct(props) {
         <div className="area-2">
           <hr />
           <h2>Categoria</h2>    
-          <strong>{props.categoria}</strong>
+          <strong>
+            {(props.categoria === 'iphone' && 'iPhone')} 
+            {(props.categoria === 'samsung' && 'Samsung')}
+            {(props.categoria === 'perfume' && 'Perfume')}
+            {(props.categoria === 'apple-airpods' && 'Apple AirPods')}
+            {(props.categoria === 'carregador' && 'Carregador')}
+            {(props.categoria === 'apple-watch' && 'Apple Watch')}
+            {(props.categoria === 'smartwatch' && 'Smartwatch')}
+          </strong>
         </div>
         <div className="area-3">
           <hr />     

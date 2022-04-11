@@ -12,7 +12,8 @@ class Order extends Model {
         product_quantity: Sequelize.DOUBLE,
         discount: Sequelize.DOUBLE,
         price_total: Sequelize.DOUBLE,
-        status: Sequelize.ENUM( 'open', 'closed', 'sold' )
+        status: Sequelize.ENUM(['open', 'closed', 'sold']),
+        mode_payment: Sequelize.ENUM(['incash', 'portion'])
       },
       {
         sequelize,

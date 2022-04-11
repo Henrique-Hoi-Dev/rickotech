@@ -42,13 +42,16 @@ module.exports = {
       price_total: {
         type: Sequelize.DOUBLE,
       },
+      status: {
+        type: Sequelize.ENUM(['open','closed', 'sold']),
+        defaultValue: 'open',
+      },
       product_quantity: {
         type: Sequelize.DOUBLE,
       },
-      status: {
-        type: Sequelize.ENUM,
-        values: ['open','closed', 'sold'],
-        defaultValue: 'open',
+      mode_payment: {
+        type: Sequelize.ENUM(['incash','portion']),
+        defaultValue: 'incash',
       },
       created_at: {
         type: Sequelize.DATE,

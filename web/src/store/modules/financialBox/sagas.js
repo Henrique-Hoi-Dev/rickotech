@@ -79,7 +79,9 @@ export function* UpdateFinancialBox({ payload }) {
   try {
     const { close_caixa, status } = payload.data
     const fecharCaixa = { close_caixa, status }
-
+    if (close_caixa === '') {
+      toast.info('Falta data de fechamento.');
+    }
     const res = yield call(api.put, `/financialBox/${payload.id}`, fecharCaixa);
 
     const response = yield call(api.get, `/financialBoxsOpen/${res.data.responseData.user_id}`);

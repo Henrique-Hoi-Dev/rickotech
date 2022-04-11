@@ -77,14 +77,20 @@ export function* UpdateSales({ payload }) {
       toast.info('Não há produto.');
       return history.push('/dashboard');
     }
+    
     const response = yield call(api.get, `/saleses/${res.data.responseData.seller_id}`);
     const responseCard = yield call(api.get, '/card');
 
     yield put(getCardSuccess(responseCard.data));
     yield put(findAllSalesSuccess(response.data));
-
-    toast.success('Editado com sucesso.');
-    history.push('/dashboard');
+    if (res.data.responseData.status === 'open' || 'closed') {
+      toast.success('Editado com sucesso.');
+      history.push('/dashboard');
+    }
+    if (res.data.responseData.status === 'sold') {
+      toast.success('Venda realizada com sucesso.');
+      history.push('/dashboard');
+    }
   } catch (err) {
     toast.error('Error no editar venda.');
     yield put(salesFailure());

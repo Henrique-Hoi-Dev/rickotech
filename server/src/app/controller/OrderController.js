@@ -2,19 +2,31 @@ import OrderService from '../../service/OrderService';
 
 class OrderController {
   async store(req, res) {
-    let response;     
-    response = await OrderService.store(req.body, req.params);
-    return res.send(response);
+    try {
+      let response;     
+      response = await OrderService.store(req.body, req.params);
+      return res.status(200).send(response);
+    } catch (error) {
+      return res.status(400).json(error);
+    }
   }
   async index(req, res) {
-    let response;      
-    response = await OrderService.index(req.params);
-    return res.send(response);
+    try {
+      let response;      
+      response = await OrderService.index(req.params);
+      return res.status(200).send(response);
+    } catch (error) {
+      return res.status(400).json(error);
+    }
   }
   async getId(req, res) {
-    let response;      
-    response = await OrderService.getId(req.params);
-    return res.send(response);
+    try {
+      let response;      
+      response = await OrderService.getId(req.params);
+      return res.status(200).send(response);
+    } catch (error) {
+      return res.status(400).json(error);
+    }
   }
   async delete(req, res) {
     try {

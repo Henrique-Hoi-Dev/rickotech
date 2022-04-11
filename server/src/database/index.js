@@ -9,7 +9,15 @@ import Service from '../app/models/Service';
 
 import databaseConfig from '../config/database';
 
-const models = [ User, Adress, Product, File, Order, FinancialBox, Service ];
+const models = [ 
+  User, 
+  Adress, 
+  Product, 
+  File, 
+  Order, 
+  FinancialBox, 
+  Service
+];
 
 class Database {
   constructor() {

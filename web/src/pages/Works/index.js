@@ -58,7 +58,7 @@ const RegistreServices = ({ financialBoxListOpen }) => {
                     <option value="0">Selecione um caixa</option>
                     {[].concat(financialBoxListOpen).map((caixa, i) => (
                       <option key={i} value={caixa.id} >
-                      {moment(caixa.open_caixa).format('DD/MM/YYYY') === false}  
+                      {moment(caixa.open_caixa).format('DD/MM/YYYY')} / 
                       {(caixa.status === false && 'Aberto')}
                       </option>
                     ))}    

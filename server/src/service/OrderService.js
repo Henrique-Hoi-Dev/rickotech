@@ -17,6 +17,13 @@ export default  {
       const { status, product_quantity, discount, product_id } = req
       
       const product = await Product.findByPk(product_id)
+
+      if (status === 'open' || 'sold') {
+        if (product.dataValues.quantity < product_quantity) {
+          result = {httpStatus: httpStatus.NOT_FOUND, status: "Product not found", responseData: []}    
+          return result 
+        }
+      }
   
       const price_product = (product.dataValues.price * product_quantity)
       
@@ -26,7 +33,7 @@ export default  {
   
       await orders.update({ status, product_quantity, price_product, discount, price_total });
 
-      if (status === 'sold' ) {
+      if (status === 'sold') {
         const productQuantity = await Product.findOne({ where: { id: product_id }})
         if (product.dataValues.quantity < product_quantity) {
           const status = 'open'

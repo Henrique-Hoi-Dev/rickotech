@@ -63,6 +63,16 @@ export const Container = styled.div`
     }
   }
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 800px) {
+    .header-main {
+      background: none;
+      box-shadow: none;
+      
+      .form-table {
+        table {
+          background: #353535;
+        }
+      }
+    }
   }
 `;

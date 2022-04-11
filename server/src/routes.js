@@ -43,7 +43,6 @@ routes.post('/files', upload.single('file'), FileController.store);
 routes.get('/avatar', FileController.getId);
 routes.delete('/avatar/:id', FileController.delete);
 
-
 //products
 routes.post('/product', ProductController.store)
       .post('/product/avatar', ProductController.update)

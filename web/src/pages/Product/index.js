@@ -84,13 +84,13 @@ export default function RegistrationProduct() {
                 <label htmlFor="Nome Produto">Nome</label>
                 <Field name="name" />
                 <span>{formProps.errors.name}</span>
-                <label htmlFor="categoty">Tipo de categoria</label>
-                <Field  component="select" name="categoty" >
+                <label htmlFor="category">Tipo de categoria</label>
+                <Field  component="select" name="category" >
                   <option value="0">Selecione</option>
-                  <option value="iphone" >iPhone</option>
-                  <option value="samsung" >Samsung</option>
-                  <option value="perfume" >Perfume</option>
-                  <option value="apple-airpods" >Apple AirPods</option>
+                  <option value="iphone">iPhone</option>
+                  <option value="samsung">Samsung</option>
+                  <option value="perfume">Perfume</option>
+                  <option value="apple-airpods">Apple AirPods</option>
                   <option value="carregador" >Carregador</option>
                   <option value="apple-watch" >Apple Watch</option>
                   <option value="smartwatch" >Smartwatch</option>
