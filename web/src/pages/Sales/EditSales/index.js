@@ -10,7 +10,7 @@ import { getByIdSalesRequest } from '~/store/modules/sales/actions';
 
 import { Container } from './styles';
 
-import Header from '~/components/HeaderListAndRegister';
+import Header from '~/components/Header';
 
 export default function EditSales() {
 const dispatch = useDispatch();

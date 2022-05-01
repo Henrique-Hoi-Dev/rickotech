@@ -1,15 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { FcEmptyTrash, FcSalesPerformance, FcEditImage } from 'react-icons/fc';
 
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { Container } from './styles'
 import { deleteProductRequest } from "~/store/modules/product/actions";
+import ModalSales from "./modalSales/modalSales";
+import ModalRegistrationProduct from "./modalRegistrationProduct/modalRegistrationProduct";
 
 export default function CardProduct(props) {
   const dispatch = useDispatch();
+
+  const [showModal, setModalShow] = useState(false)
+  const [showModalProduct, setModalShowProduct] = useState(false)
+  const [productId, setproductId] = useState('')
+
+  useEffect(() => {
+    if (productId) {
+      const inter = setInterval(() => {
+        setproductId('')
+      }, 1000);
+
+      return () => clearInterval(inter)
+    }
+  }, [productId, setproductId]);
 
   function currencyFormat(num) {
     if (num) {
@@ -20,6 +35,10 @@ export default function CardProduct(props) {
           .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
       );
     }
+  }
+  function capitalizeFirst(str) {
+    var subst = str.toLowerCase().replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+    return subst;
   }
 
   function handlerRemoveProduct (e, id) {
@@ -48,13 +67,7 @@ export default function CardProduct(props) {
           <hr />
           <h2>Categoria</h2>    
           <strong>
-            {(props.categoria === 'iphone' && 'iPhone')} 
-            {(props.categoria === 'samsung' && 'Samsung')}
-            {(props.categoria === 'perfume' && 'Perfume')}
-            {(props.categoria === 'apple-airpods' && 'Apple AirPods')}
-            {(props.categoria === 'carregador' && 'Carregador')}
-            {(props.categoria === 'apple-watch' && 'Apple Watch')}
-            {(props.categoria === 'smartwatch' && 'Smartwatch')}
+            {capitalizeFirst(props.categoria)} 
           </strong>
         </div>
         <div className="area-3">
@@ -70,21 +83,27 @@ export default function CardProduct(props) {
         </div>
         <div className="area-5">
           <hr />
-          <button>
-            <Link to={`/product/${props.id}`}>
-              <FcEditImage />
-            </Link>
-          </button>
-          <button >
-            <Link to={`/sales/${props.id}`}>
-              < FcSalesPerformance/>
-            </Link>
-          </button>
-          <button onClick={(e) => handlerRemoveProduct(e, props.id)}>
-            <FcEmptyTrash />
-          </button>
+          <FcEditImage style={{ cursor: "pointer" }}
+            onClick={() => setModalShowProduct(!showModalProduct) || setproductId(props.id)}
+          />
+          <FcSalesPerformance style={{ cursor: "pointer" }}
+            onClick={() => setModalShow(!showModal) || setproductId(props.id)}
+          />
+          <FcEmptyTrash style={{ cursor: "pointer" }}
+            onClick={(e) => handlerRemoveProduct(e, props.id)}
+          />
         </div>
       </div>
+      <ModalSales 
+        showModal={showModal}
+        setShowModal={setModalShow}
+        ids={productId}
+      />
+      <ModalRegistrationProduct 
+        setShowModal={setModalShowProduct}
+        showModal={showModalProduct}
+        ids={productId}
+      /> 
     </Container>
   )
 }

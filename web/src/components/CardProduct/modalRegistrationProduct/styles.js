@@ -5,15 +5,6 @@ export const Container = styled.div`
   font-size: 0.8rem;
 
   .header-main {
-    background: #353535;
-    width: 100%;
-    max-width: 54rem;
-    box-sizing: border-box;
-    box-shadow: 8px 7px 4px rgb(0 0 0 / 50%);
-    border-radius: 0.8rem;
-    margin: -3rem auto 7.2rem;
-    padding-top: 3rem;
-    overflow: hidden;
     
     #container-input {
       max-width: 1100px;
@@ -24,7 +15,6 @@ export const Container = styled.div`
       grid-template-areas:
         'name name name'
         'campo2  campo4 campo3'
-        'campo5 campo5 campo5'
         'button button button';
     }
 
@@ -45,9 +35,6 @@ export const Container = styled.div`
     }
     .campo4 {
       grid-area: campo4;
-    }
-    .campo5 {
-      grid-area: campo5;
     }
     .buttons-container {
       grid-area: button;
@@ -82,7 +69,16 @@ export const Container = styled.div`
 
     .form-input {
       padding: 0 2.4rem;
-      margin-top: 0.1rem;
+      margin-left: 1rem;
+
+      svg {
+        background-color: #8945de;
+
+        &:hover {
+          transform: scale(1.1);
+          transition: all 0.5s;
+        }
+      }
     }
   }
   .footer {
@@ -90,16 +86,18 @@ export const Container = styled.div`
   }
 
   button {
-    background: none;
-    border: 0;
-    margin-right: 137px;
-    color: #6842c2;
-    font: 700 1.6rem Archivo;
-    cursor: pointer;
-    transition: color 0.2s;
+    margin: 5px 18px 0;
+    height: 3rem;
+    width: 12rem;
+    background: #8945de;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background 0.2s;
 
     &:hover {
-      color: ${darken(0.03, '#6842c2')};
+      background: ${darken(0.03, '#8945de')};
       transform: scale(1.1);
       transition: all 0.5s;
     }
@@ -107,11 +105,7 @@ export const Container = styled.div`
 
   .header-title {
     border-radius: 11px;
-    padding: 42px;
-    background-color: #4d4c4c;
-    box-sizing: border-box;
-    box-shadow: 0px 4px 4px rgb(0 0 0 / 50%);
-    margin-bottom: 37px;
+    margin: 30px;
 
     label {
       font: 700 1.4rem Archivo;
@@ -131,20 +125,6 @@ export const Container = styled.div`
       font-weight: bold;
     }
 
-    textarea {
-      width: 100%;
-      min-height: 4rem;
-      cursor: pointer;
-      margin-top: 0.8rem;
-      border-radius: 0.8rem;
-      background: #f8f8fc;
-      border: 1px solid #e6e6f0;
-      outline: 0;
-      resize: vertical;
-      padding: 1.2rem 1.6rem;
-      font: 1.2rem Archivo;
-      font-weight: bold;
-    }
     p {
       display: flex;
       align-items: center;
@@ -167,6 +147,7 @@ export const Container = styled.div`
 
       svg {
         margin-right: 1rem;
+        background-color: #4D4C4C!important;
       }
     }
   }  

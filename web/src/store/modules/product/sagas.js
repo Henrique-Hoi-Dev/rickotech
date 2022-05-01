@@ -1,21 +1,26 @@
 import { takeLatest, call, all, put } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
-import history from '~/services/history';
 import api from '~/services/api';
 
 import {
   productFailure,
   findAllProductSuccess,
   getByIdProductSuccess,
+  resetFormularioProduct
 } from './actions';
 
 export function* createProduct({ payload }) {
   try {
     yield call(api.post, '/product', payload.values);
-    
+
     toast.success('Produto criado com sucesso.');
-    history.push('/listProducts');
+    yield put(resetFormularioProduct());
+
+    const response = yield call(api.get, `/products`);
+
+    yield put(findAllProductSuccess(response.data));
+
   } catch (err) {
     yield put(productFailure());
     toast.error('Erro em salvar produto.');
@@ -51,9 +56,9 @@ export function* UpdateProduct({ payload }) {
     const response = yield call(api.get, `/products`);
 
     yield put(findAllProductSuccess(response.data));
-
+    yield put(resetFormularioProduct());
+    
     toast.success('Editado com sucesso.');
-    history.push('/listProducts');
   } catch (err) {
     toast.error('Error editing products checking data.');
     yield put(productFailure());

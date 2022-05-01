@@ -53,7 +53,7 @@ export function productFailure() {
   };
 }
 
-export function resetFormulario() {
+export function resetFormularioProduct() {
   return {
     type: '@product/RESET_FORM',
   };

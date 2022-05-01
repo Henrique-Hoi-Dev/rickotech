@@ -3,14 +3,13 @@ import { useField } from '@rocketseat/unform';
 import api from '~/services/api';
 import { useSelector } from 'react-redux';
 import { Container } from './styles';
-import { useParams } from 'react-router-dom';
+import img from '../../../assets/empty.png'
 
-export default function AvatarInput() {
+export default function AvatarInput({id}) {
   const { defaultValue, registerField } = useField('avatar');
   const { avatar } = useSelector((state) => state.product.form);
   const [file, setFile] = useState(defaultValue && defaultValue.id);
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
-  const { id } = useParams();
   const ref = useRef();
 
   useEffect(() => {
@@ -45,10 +44,7 @@ export default function AvatarInput() {
       <label htmlFor="avatar">
         <img
           id="avatar-img"
-          src={
-            preview ||
-            'https://i.pinimg.com/474x/a6/70/05/a67005e9bf90bc529088205650784bba.jpg'
-          }
+          src={preview ||(img)}
           alt="Imagem do Produto"
         />
         <input

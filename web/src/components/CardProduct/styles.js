@@ -41,8 +41,8 @@ export const Container = styled.div`
       grid-area: area-5;
       text-align: center;
 
-      button {
-        margin: 9px 19px -4px 19px;
+      svg {
+        margin: 9px 19px 9px 19px;
       }
     }
     

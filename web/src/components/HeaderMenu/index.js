@@ -55,17 +55,14 @@ export default function Home() {
         <ListItem >
          <ProductionQuantityLimitsIcon /> <Link to="/registreServices">Registre serviço</Link> 
         </ListItem >
-        <ListItem >
-         <ProductionQuantityLimitsIcon /> <Link to="/registreProduct">Registre produto</Link> 
-        </ListItem >
       </List>
       <Divider />
       <List>
         <ListItem >
-         <ListAltIcon /> <Link to="/listProducts">Todos os produtos</Link> 
+         <ListAltIcon /> <Link to="/listProducts">Produtos</Link> 
         </ListItem >
         <ListItem >
-         <ListAltIcon /> <Link to="/listServico">Todas os serviços</Link> 
+         <ListAltIcon /> <Link to="/listServico">Serviços</Link> 
         </ListItem >
       </List>
     </Box>

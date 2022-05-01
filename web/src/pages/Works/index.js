@@ -3,7 +3,7 @@ import { Formik, Field, Form } from 'formik';
 
 import { connect, useDispatch, useSelector } from 'react-redux';
 
-import Header from '~/components/HeaderListAndRegister';
+import Header from '~/components/Header';
 import * as moment from 'moment';
 
 import { FcHighPriority } from 'react-icons/fc';

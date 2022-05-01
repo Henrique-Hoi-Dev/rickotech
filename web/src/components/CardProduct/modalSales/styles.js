@@ -2,23 +2,20 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-  background: #353535;
   max-width: 50rem;
   box-sizing: border-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
   border-radius: 0.8rem;
 
-  margin: -3rem auto 2rem;
-  padding: 3rem;
   display: flex;
 
   flex-direction: column;
   align-items: stretch;
+  margin-left: 28px;
 
   .titulo {
-    margin-bottom: 2rem;
     display: flex;
     justify-content: center;
+
     h1 {
       padding: 0.5rem;
       font-weight: bold;
@@ -30,10 +27,7 @@ export const Container = styled.div`
 
   form {
     border-radius: 11px;
-    padding: 42px;
-    background-color: #4d4c4c;
-    box-sizing: border-box;
-    box-shadow: 0px 4px 4px rgb(0 0 0 / 50%);
+    padding: 25px;
 
     display: grid; 
     justify-items: center;
