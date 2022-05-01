@@ -5,7 +5,7 @@ import * as moment from 'moment';
 import { Container } from './styles';
 import { FcEmptyTrash } from 'react-icons/fc';
 
-import Header from '../../../components/HeaderListAndRegister';
+import Header from '../../../components/Header';
 
 import { findAllServiceRequest, 
           deleteServiceRequest } from '../../../store/modules/servicos/actions';

@@ -56,7 +56,6 @@ export default createGlobalStyle`
     }
 
     .MuiPaper-root  {
-      margin-top: -15px;
       background-color: #353535;
       font-weight: bold!important;
       color: #9c98a6;
@@ -76,6 +75,8 @@ export default createGlobalStyle`
       }
 
       .css-1p823my-MuiListItem-root {
+        margin-left: 25px;
+
         &:hover {
           transform: scale(1.1);
           transition: all 0.5s;

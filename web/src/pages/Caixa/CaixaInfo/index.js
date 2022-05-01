@@ -14,7 +14,7 @@ import {
 
 import { Container } from "./styles";
 
-import Header from "~/components/HeaderListAndRegister";
+import Header from "~/components/Header";
 
 export default function CaixaInfo() {
   const dispatch = useDispatch(); 

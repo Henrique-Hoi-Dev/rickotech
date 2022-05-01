@@ -5,7 +5,7 @@ import { PageHeader } from './styles';
 import backIcon from '../../assets/back.svg';
 import logo from '../../assets/logo-logo.png';
 
-function HeaderListAndRegister(props) {
+function Header(props) {
   return (
     <PageHeader>
       <div className="header">
@@ -26,4 +26,4 @@ function HeaderListAndRegister(props) {
   );
 }
 
-export default HeaderListAndRegister;
+export default Header;

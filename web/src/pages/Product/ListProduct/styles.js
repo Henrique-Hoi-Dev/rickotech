@@ -14,6 +14,21 @@ export const Container = styled.div`
     padding-top: 1rem;
     overflow: hidden;
 
+    .more {
+      display: flex;
+      justify-content: flex-end;
+      margin-right: 20px;
+      color: #8945de;
+
+      svg {
+        &:hover {
+          color: ${darken(0.03, '#6842c2')};
+          transform: scale(1.1);
+          transition: all 0.5s;
+        }
+      }
+    }
+
     h1 {
       margin: 3rem;
       color: #6a6180;
@@ -26,7 +41,7 @@ export const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 2.4rem;
+    margin-bottom: 50px;
 
     table {
       background-color: #4d4c4c;

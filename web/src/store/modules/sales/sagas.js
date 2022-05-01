@@ -7,7 +7,8 @@ import api from '~/services/api';
 import {
   salesFailure,
   findAllSalesSuccess,
-  getByIdSalesSuccess } from './actions';
+  getByIdSalesSuccess, 
+  resetFormulario } from './actions';
 import { getCardSuccess } from '../financialBox/actions';
 
 export function* createSales({ payload }) {
@@ -39,11 +40,13 @@ export function* createSales({ payload }) {
     }
     const response = yield call(api.get, `/saleses/${res.data.seller_id}`);
     yield put(findAllSalesSuccess(response.data));
+    yield put(resetFormulario());
 
-    toast.success('Pedido venda realizada com sucesso.');
+    toast.success('Pedido de venda realizada com sucesso!');
     history.push('/dashboard');
   } catch (err) {
     toast.error('Error na venda!');
+    yield put(resetFormulario());
     yield put(salesFailure());
   }
 }
@@ -74,7 +77,7 @@ export function* UpdateSales({ payload }) {
   try {
     const res = yield call(api.post, `/sales/${payload.data.id}`, payload.data.values);
     if (res.data.httpStatus === 404) {
-      toast.info('Não há produto.');
+      toast.info('Não há produto!');
       return history.push('/dashboard');
     }
     
@@ -88,7 +91,7 @@ export function* UpdateSales({ payload }) {
       history.push('/dashboard');
     }
     if (res.data.responseData.status === 'sold') {
-      toast.success('Venda realizada com sucesso.');
+      toast.success('Venda realizada com sucesso!');
       history.push('/dashboard');
     }
   } catch (err) {
