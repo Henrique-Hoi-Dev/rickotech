@@ -33,10 +33,10 @@ export function findAllSalesSuccess(data) {
   };
 }
 
-export function UpdateSalesRequest(data) {
+export function UpdateSalesRequest(values, id) {
   return {
     type: '@sales/UPDATE_SALES_REQUEST',
-    payload: { data },
+    payload: { values, id },
   };
 }
 
@@ -56,5 +56,10 @@ export function salesFailure() {
 export function resetFormulario() {
   return {
     type: '@sales/RESET_FORM',
+  };
+}
+export function resetFormularioSales() {
+  return {
+    type: '@sales/RESET_FORM_SALES',
   };
 }

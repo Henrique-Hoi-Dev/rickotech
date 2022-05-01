@@ -20,7 +20,9 @@ export default function CardProduct(props) {
     if (productId) {
       const inter = setInterval(() => {
         setproductId('')
-      }, 1000);
+        setModalShowProduct(false)
+        setModalShow(false)
+      }, 60 * 1000);
 
       return () => clearInterval(inter)
     }
@@ -65,9 +67,9 @@ export default function CardProduct(props) {
         </div>
         <div className="area-2">
           <hr />
-          <h2>Categoria</h2>    
+          <h2>Descrição</h2>    
           <strong>
-            {capitalizeFirst(props.categoria)} 
+            {capitalizeFirst(props.description)} 
           </strong>
         </div>
         <div className="area-3">

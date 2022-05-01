@@ -14,7 +14,7 @@ export function* createProduct({ payload }) {
   try {
     yield call(api.post, '/product', payload.values);
 
-    toast.success('Produto criado com sucesso.');
+    toast.success('Produto registrato com sucesso!');
     yield put(resetFormularioProduct());
 
     const response = yield call(api.get, `/products`);
@@ -23,7 +23,7 @@ export function* createProduct({ payload }) {
 
   } catch (err) {
     yield put(productFailure());
-    toast.error('Erro em salvar produto.');
+    toast.error('Erro em registrar produto.');
   }
 }
 
@@ -33,7 +33,7 @@ export function* findAllProduct() {
 
     yield put(findAllProductSuccess(response.data));
   } catch (err) {
-    toast.error('Error em buscas produtos.');
+    toast.error('Error em buscar todos os produtos.');
     yield put(productFailure());
   }
 }
@@ -44,7 +44,7 @@ export function* getByIdProduct({ payload }) {
 
     yield put(getByIdProductSuccess(response.data));
   } catch (err) {
-    toast.error('Error searching products check data.');
+    toast.error('Error em buscar produto!');
     yield put(productFailure());
   }
 }
@@ -58,9 +58,9 @@ export function* UpdateProduct({ payload }) {
     yield put(findAllProductSuccess(response.data));
     yield put(resetFormularioProduct());
     
-    toast.success('Editado com sucesso.');
+    toast.success('Editado com sucesso!');
   } catch (err) {
-    toast.error('Error editing products checking data.');
+    toast.error('Error em editar produto.');
     yield put(productFailure());
   }
 }
@@ -73,7 +73,7 @@ export function* deleteProduct({ payload }) {
 
     yield put(findAllProductSuccess(response.data));
 
-    toast.success('Produto deletado');
+    toast.success('Produto excluído');
   } catch (err) {
     toast.error('Erro em excluir produto');
     yield put(productFailure());

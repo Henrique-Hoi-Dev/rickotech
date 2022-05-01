@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 
-import { findAllProductRequest  } from '../../../store/modules/product/actions';
+import { findAllProductRequest  } from '../../store/modules/product/actions';
 
-import Header from '../../../components/Header';
-import CardProduct from '../../../components/CardProduct';
-import ModalRegistrationProduct from '../../../components/CardProduct/modalRegistrationProduct/modalRegistrationProduct'
+import Header from '../../components/Header';
+import CardProduct from '../../components/CardProduct';
+import ModalRegistrationProduct from '../../components/CardProduct/modalRegistrationProduct/modalRegistrationProduct'
 import AddCircleSharpIcon from '@mui/icons-material/AddCircleSharp';
 
-import img from '../../../assets/empty.png'
+import img from '../../assets/empty.png'
 
 import { Container } from './styles';
 
@@ -49,7 +49,7 @@ const ProductList = ({ productList }) => {
               key={i}
               id={produto.id} 
               name={produto.name}
-              categoria={produto.category}
+              description={produto.description}
               valor={produto.price}
               quantidade={produto.quantity} 
               img={produto.avatar

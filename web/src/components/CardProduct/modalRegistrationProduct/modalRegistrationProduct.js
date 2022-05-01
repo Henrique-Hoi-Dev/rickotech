@@ -28,7 +28,7 @@ export default function RegistrationProduct({ showModal, setShowModal, ids }) {
   const dispatch = useDispatch();
 
   const { form } = useSelector((state) => state.product);
-
+  console.log(form)
   useEffect(() => {
     if (ids) {
       dispatch(getByIdProductRequest(ids));

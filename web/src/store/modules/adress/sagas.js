@@ -10,7 +10,7 @@ export function* createAdress({ payload }) {
   try {
     yield call(api.post, `/adress/${payload.id}`, payload.values);
 
-    toast.success('Endereço salvo com sucesso.');
+    toast.success('Endereço salvo com sucesso!');
     history.push(`/perfil/${payload.id}`);
   } catch (err) {
     yield put(adressFailure());
@@ -48,7 +48,7 @@ export function* updateAdress({ payload }) {
     yield put(getByIdAdressSuccess(response.data));
     history.push(`/perfil/${response.data.user_id}`);
   } catch (err) {
-    toast.error('Error atualizado endereço.');
+    toast.error('Error em atualizado endereço.');
     yield put(adressFailure());
   }
 }
