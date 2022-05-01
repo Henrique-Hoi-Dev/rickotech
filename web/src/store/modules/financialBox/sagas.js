@@ -23,10 +23,10 @@ export function* createFinancialBox({ payload }) {
 
     yield put(findAllOpenSuccess(responseList.data));
 
-    toast.success('Caixa aberto com sucesso.');
+    toast.success('Caixa aberto com sucesso!');
     history.push(`/caixaInfo/${response.data.responseData.id}`)
   } catch (err) {
-    toast.error('Error no abrir o caixa.');
+    toast.error('Error ao abrir um novo caixa.');
     yield put(financialBoxFailure());
   }
 }
@@ -37,7 +37,7 @@ export function* getByIdFinancialBox({ payload }) {
 
     yield put(getByIdFinancialBoxSuccess(response.data));
   } catch (err) {
-    toast.error('Error no encontrar caixa.');
+    toast.error('Error em buscar caixa.');
     yield put(financialBoxFailure());
   }
 }
@@ -48,7 +48,7 @@ export function* getByCard() {
 
     yield put(getCardSuccess(response.data));
   } catch (err) {
-    toast.error('Error no encontrar cards.');
+    toast.error('Error em buscar cards.');
     yield put(financialBoxFailure());
   }
 }
@@ -59,7 +59,7 @@ export function* findAllFinancialBox({ payload }) {
 
     yield put(findAllFinancialBoxSuccess(response.data));
   } catch (err) {
-    toast.error('Error encontrar caixas.');
+    toast.error('Error em buscar todos os caixas.');
     yield put(financialBoxFailure());
   }
 }
@@ -70,7 +70,7 @@ export function* findOpen({ payload }) {
 
     yield put(findAllOpenSuccess(response.data));
   } catch (err) {
-    toast.error('Error encontrar caixas.');
+    toast.error('Error em buscar todos os caixas aberto.');
     yield put(financialBoxFailure());
   }
 }
@@ -79,9 +79,11 @@ export function* UpdateFinancialBox({ payload }) {
   try {
     const { close_caixa, status } = payload.data
     const fecharCaixa = { close_caixa, status }
+
     if (close_caixa === '') {
-      toast.info('Falta data de fechamento.');
+      toast.info('Falta data para fechamento!');
     }
+
     const res = yield call(api.put, `/financialBox/${payload.id}`, fecharCaixa);
 
     const response = yield call(api.get, `/financialBoxsOpen/${res.data.responseData.user_id}`);
@@ -89,7 +91,8 @@ export function* UpdateFinancialBox({ payload }) {
 
     yield put(getByIdFinancialBoxSuccess(responseGet.data));
     yield put(findAllOpenSuccess(response.data));
-    toast.success('Caixa fechado com sucesso.');
+
+    toast.success('Caixa fechado com sucesso!');
     history.push(`/caixa/${res.data.responseData.user_id}`)
   } catch (err) {
     toast.error('Error no fechar caixa.');

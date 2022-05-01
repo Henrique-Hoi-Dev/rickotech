@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import { Container } from './styles';
 import { FcEmptyTrash } from 'react-icons/fc';
-import { BiEdit } from 'react-icons/bi';
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 
 import {
   findAllSalesRequest,
@@ -12,14 +11,31 @@ import {
 } from '../../../store/modules/sales/actions';
 
 import img from '../../../assets/empty.png'
+import ModalSales from '../modalSales/modalSales';
 
 const ListSales = ({ salesList, handlerRemoveSales }) => {
   const dispatch = useDispatch();
 
+  const [showModal, setShowModal] = useState(false)
+  const [salesId, setSalesId] = useState('')
+
   const user = useSelector((state) => state.user.profile);
 
   useEffect(() => {
+    if (salesId) {
+      const inter = setInterval(() => {
+        setSalesId('')
+        setShowModal(false);
+      }, 60 * 1000);
+
+      return () => clearInterval(inter)
+    }
+  }, [salesId, setSalesId]);
+
+  useEffect(() => {
+    if(user.id) {
       dispatch(findAllSalesRequest(user.id));
+    }
   }, [dispatch, user]);
 
   //formatção do preço do produto
@@ -36,6 +52,11 @@ const ListSales = ({ salesList, handlerRemoveSales }) => {
 
   return (
     <Container>
+      <ModalSales 
+        showModal={showModal}
+        setShowModal={setShowModal}
+        ids={salesId}
+      />
       <div className="header-main">
         <form className="form-table">
           <table className="table-list">
@@ -79,16 +100,12 @@ const ListSales = ({ salesList, handlerRemoveSales }) => {
                   </td>
                   <td style={{ display: (sales.status === 'sold' && 'none') ||
                       (sales.status === 'open' && 'closed' && 'line-through')}}>
-                    <button>
-                      <Link to={`/editSales/${sales.id}`}>
-                        < BiEdit/>
-                      </Link>
-                    </button>
+                    <ProductionQuantityLimitsIcon 
+                      onClick={() => setShowModal(!showModal) || setSalesId(sales.id)}
+                    />
                   </td>
                   <td>
-                    <button onClick={(e) => handlerRemoveSales(e, sales.id)}>
-                      <FcEmptyTrash />
-                    </button>
+                    <FcEmptyTrash onClick={(e) => handlerRemoveSales(e, sales.id)}/>
                   </td>
                 </tr>
               ))}

@@ -28,7 +28,7 @@ export const Container = styled.div`
       }
     }
 
-    button {
+    svg {
       background: none;
       border: 0;
       font-size: 28px;

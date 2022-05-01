@@ -150,36 +150,9 @@ export default  {
       attributes: [ 
         'id', 
         'product_id',
-        'name_product', 
-        'price_product', 
         'discount',
         'product_quantity', 
-        'price_total',
         'status'  
-      ],
-      include: [
-        {
-          model: Product,
-          as: 'products',
-          attributes: [ 'id', 'name', 'category', 'price' ],
-        },
-        {
-          model: User,
-          as: 'user',
-          attributes: [ 'id', 'name' ]
-        },
-        {
-          model: FinancialBox,
-          as: 'financial',
-          attributes: [ 
-            'id', 
-            'value_total_sales', 
-            'value_total_service', 
-            'value_total', 
-            'open_caixa', 
-            'close_caixa'
-          ],
-        }
       ],
     });
 

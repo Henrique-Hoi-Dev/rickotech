@@ -17,10 +17,10 @@ export function* createService({ payload }) {
 
     yield call(api.post, `/service/${financial_id}`, servicos);
 
-    toast.success('Serviço registrado com sucesso.');
+    toast.success('Serviço registrado com sucesso!');
     history.push('/listServico')
   } catch (err) {
-    toast.error('Error registro serviço.');
+    toast.error('Error em registrar serviço.');
     yield put(serviceFailure());
   }
 }
@@ -42,7 +42,7 @@ export function* findAllService({ payload }) {
 
     yield put(findAllServiceSuccess(response.data));
   } catch (err) {
-    toast.error('Erro em buscar serviço');
+    toast.error('Erro em buscar todos os serviços');
     yield put(serviceFailure());
   }
 }
@@ -54,7 +54,7 @@ export function* deleteService({ payload }) {
     const response = yield call(api.get, `/services/${res.data.responseData}`);
 
     yield put(findAllServiceSuccess(response.data));
-    toast.success('Serviço deletado');
+    toast.success('Serviço excluído');
   } catch (err) {
     toast.error('Erro em excluir serviços');
     yield put(serviceFailure());

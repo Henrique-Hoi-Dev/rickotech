@@ -11,6 +11,12 @@ const INITIAL_STATE = {
     discount: 0,
     status: 'open',
   },
+  formSales: {
+    product_id: '',
+    product_quantity: '',
+    discount: '',
+    status: '',
+  }
 };
 
 export default function sales(state = INITIAL_STATE, action) {
@@ -28,12 +34,21 @@ export default function sales(state = INITIAL_STATE, action) {
         };
         break;
       }
+      case '@sales/RESET_FORM_SALES': {
+        draft.formSales = {
+          product_id: '',
+          product_quantity: '',
+          discount: '',
+          status: '',
+        };
+        break;
+      }
       case '@sales/FIND_ALL_SALES_SUCCESS': {
         draft.salesList = action.payload.data;
         break;
       }
       case '@sales/GET_BYID_SALES_SUCCESS': {
-        draft.form = action.payload.data;
+        draft.formSales = action.payload.data;
         break;
       }
       default:
