@@ -49,18 +49,23 @@ const ModalSales = ({ showModal, setShowModal, ids }) => {
         onClose={onCloseSales}
         maxWidth={"700px!important"}
       >
+
         <Container>
-          <CloseIcon 
-            sx={{ 
-              width: "1.5em", 
-              height: "1.5em", 
-              marginTop: "20px",
-              cursor: "pointer", 
-              boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.5)",
-              borderRadius: "50%" 
-            }} 
-            onClick={onCloseSales}
-          />
+          <div className="header">
+            <CloseIcon 
+              sx={{ 
+                width: "1.5em", 
+                height: "1.5em", 
+                marginTop: "20px",
+                cursor: "pointer", 
+                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.5)",
+                borderRadius: "50%" 
+              }} 
+              onClick={onCloseSales}
+            />
+            <h1>Registro Venda</h1>
+          </div>
+          
           <Formik
             onSubmit={handleSubmit}
             enableReinitialize={true}

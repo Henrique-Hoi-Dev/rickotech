@@ -1,9 +1,9 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   width: 100vw;
-  height: 100vh;
-
+  
   .header-main {
     background: #353535;
     max-width: 70rem;
@@ -13,6 +13,21 @@ export const Container = styled.div`
     margin: -3rem auto 3.2rem;
     padding-top: 3rem;
     overflow: hidden;
+
+    .more {
+      display: flex;
+      justify-content: flex-end;
+      margin: -30px 30px 20px;
+      color: #8945de;
+
+        svg {
+          &:hover {
+            color: ${darken(0.03, '#6842c2')};
+            transform: scale(1.1);
+            transition: all 0.5s;
+          }
+        }
+      }
   }
 
   .form-table {
@@ -29,9 +44,7 @@ export const Container = styled.div`
       }
     }
 
-    button {
-      background: none;
-      border: 0;
+    svg {
       font-size: 28px;
       cursor: pointer;
     }

@@ -3,21 +3,27 @@ import { connect, useDispatch, useSelector } from 'react-redux';
 
 import { Container } from './styles';
 import { FcEmptyTrash } from 'react-icons/fc';
+
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
+import MouseOverPopover from '~/components/MouseOverPopover';
 
-import {
-  findAllSalesRequest,
-  deleteSalesRequest,
-} from '../../../store/modules/sales/actions';
-
-import img from '../../../assets/empty.png'
 import ModalSales from '../modalSales/modalSales';
 
-const ListSales = ({ salesList, handlerRemoveSales }) => {
+import { currencyFormat } from '~/util/mask';
+
+import { findAllSalesRequest } from '../../../store/modules/sales/actions';
+
+import img from '../../../assets/empty.png'
+import ModalDelete from '../modalDelete/modalDelete';
+
+const ListSales = ({ salesList }) => {
   const dispatch = useDispatch();
 
   const [showModal, setShowModal] = useState(false)
+  const [showModalDelete, setModalShowDelete] = useState(false)
+
   const [salesId, setSalesId] = useState('')
+  const [DeleteId, setDeleteId] = useState('')
 
   const user = useSelector((state) => state.user.profile);
 
@@ -25,8 +31,7 @@ const ListSales = ({ salesList, handlerRemoveSales }) => {
     if (salesId) {
       const inter = setInterval(() => {
         setSalesId('')
-        setShowModal(false);
-      }, 60 * 1000);
+      }, 500);
 
       return () => clearInterval(inter)
     }
@@ -38,25 +43,8 @@ const ListSales = ({ salesList, handlerRemoveSales }) => {
     }
   }, [dispatch, user]);
 
-  //formatção do preço do produto
-  function currencyFormat(num) {
-    if (num) {
-      return (
-        'R$' +
-        parseFloat(num)
-          .toFixed(2)
-          .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-      );
-    }
-  }
-
   return (
     <Container>
-      <ModalSales 
-        showModal={showModal}
-        setShowModal={setShowModal}
-        ids={salesId}
-      />
       <div className="header-main">
         <form className="form-table">
           <table className="table-list">
@@ -100,12 +88,20 @@ const ListSales = ({ salesList, handlerRemoveSales }) => {
                   </td>
                   <td style={{ display: (sales.status === 'sold' && 'none') ||
                       (sales.status === 'open' && 'closed' && 'line-through')}}>
-                    <ProductionQuantityLimitsIcon 
-                      onClick={() => setShowModal(!showModal) || setSalesId(sales.id)}
+                    <MouseOverPopover 
+                      children={
+                        <ProductionQuantityLimitsIcon 
+                          onClick={() => setShowModal(!showModal) || setSalesId(sales.id)}
+                        />
+                      }
+                      text={"Finalizar Venda/Editar"}
                     />
                   </td>
                   <td>
-                    <FcEmptyTrash onClick={(e) => handlerRemoveSales(e, sales.id)}/>
+                    <MouseOverPopover 
+                      children={<FcEmptyTrash onClick={() => setModalShowDelete(!showModalDelete) || setDeleteId(sales.id)}/>}
+                      text={"Excluir venda"}
+                    />
                   </td>
                 </tr>
               ))}
@@ -113,6 +109,19 @@ const ListSales = ({ salesList, handlerRemoveSales }) => {
           </table>
         </form>
       </div>
+
+      <ModalSales 
+        showModal={showModal}
+        setShowModal={setShowModal}
+        ids={salesId}
+      />
+
+      <ModalDelete 
+        setShowModal={setModalShowDelete}
+        showModal={showModalDelete}
+        ids={DeleteId}
+      />
+
     </Container>
   );
 };
@@ -123,16 +132,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, state) => {
-  return {
-    handlerRemoveSales: async (e, id) => {
-      e.preventDefault();
-      const confirm = window.confirm( 'Tem certeza que deseja desfazer essa venda?');
-      if (confirm) {
-        dispatch(deleteSalesRequest(id));
-      }
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ListSales);
+export default connect(mapStateToProps)(ListSales);

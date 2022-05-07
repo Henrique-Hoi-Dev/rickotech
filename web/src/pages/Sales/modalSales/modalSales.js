@@ -16,7 +16,9 @@ export default function ModalSales({ showModal, setShowModal, ids }) {
 const dispatch = useDispatch();
 
 const { formSales } = useSelector((state) => state?.sales);
+
 console.log(formSales)
+
 useEffect(() => {
   if (ids) {
     dispatch(getByIdSalesRequest(ids));
@@ -24,7 +26,7 @@ useEffect(() => {
 }, [ids, dispatch]);
   
 const handleSubmit = async (values) => {
-  dispatch(UpdateSalesRequest(values, ids));
+  dispatch(UpdateSalesRequest(values, formSales.id));
   onCloseSales()
 };
 

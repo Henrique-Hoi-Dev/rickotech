@@ -16,6 +16,7 @@ import Modal from '~/components/modal/modal';
 
 import { FcHighPriority } from 'react-icons/fc';
 import { Container } from './styles';
+// import { formatMoney } from '~/util/mask';
 
 const schema = Yup.object().shape({
   name: Yup.string().required('Este compo é obrigatório.')
@@ -24,18 +25,18 @@ const schema = Yup.object().shape({
   price: Yup.number().required('Este compo é obrigatório.'),
 });
 
-export default function RegistrationProduct({ showModal, setShowModal, ids }) {
+export default function ModalRegistrationProduct({ showModal, setShowModal, ids }) {
   const dispatch = useDispatch();
 
   const { form } = useSelector((state) => state.product);
-  console.log(form)
+
   useEffect(() => {
     if (ids) {
       dispatch(getByIdProductRequest(ids));
     }
   }, [ids, dispatch]);
 
-  const handleSubmit = async (values, { resetForm }) => {
+  const handleSubmit = async (values) => {
     try {
       let body = JSON.parse(JSON.stringify(values));
 
@@ -43,29 +44,17 @@ export default function RegistrationProduct({ showModal, setShowModal, ids }) {
         document.getElementById('avatar').getAttribute('data-file')
       );
 
-      if (ids) {
-        dispatch(UpdateProductRequest({ product_id: ids, values: body }));
+      if (form.id) {
+        dispatch(UpdateProductRequest({ product_id: form.id, values: body }));
         setShowModal(false);
       } else {
-        dispatch(createProductRequest(values));
+        dispatch(createProductRequest({values: body}));
         onCloseProduct();
-        // handleReset(resetForm);
       }
     } catch (error) {
       toast.error('Error check data');
     }
   };
-
-  // const handleReset = (resetForm) => {
-  //   resetForm({});
-  //   document.getElementById('avatar').setAttribute('data-file', null);
-  //   document
-  //     .getElementById('avatar-img')
-  //     .setAttribute(
-  //       'src',
-  //       'https://faculty.iiit.ac.in/~indranil.chakrabarty/images/empty.png'
-  //     );
-  // };
 
   const onCloseProduct = () => {
     setShowModal(false);

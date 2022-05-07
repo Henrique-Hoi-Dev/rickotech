@@ -3,9 +3,9 @@ import { useField } from '@rocketseat/unform';
 import api from '~/services/api';
 import { useSelector } from 'react-redux';
 import { Container } from './styles';
-import img from '../../../assets/empty.png'
+import img from '../../../../assets/empty.png'
 
-export default function AvatarInput({id}) {
+export default function AvatarInput(id) {
   const { defaultValue, registerField } = useField('avatar');
   const { avatar } = useSelector((state) => state.product.form);
   const [file, setFile] = useState(defaultValue && defaultValue.id);

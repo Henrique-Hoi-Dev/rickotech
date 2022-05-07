@@ -1,7 +1,7 @@
-export function createProductRequest(values) {
+export function createProductRequest(data) {
   return {
     type: '@product/CREATE_PRODUCT_REQUEST',
-    payload: { values },
+    payload: { data },
   };
 }
 

@@ -1,17 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import * as moment from 'moment';
+import AddCircleSharpIcon from '@mui/icons-material/AddCircleSharp';
 
-import { Container } from './styles';
 import { FcEmptyTrash } from 'react-icons/fc';
+import { currencyFormat } from '~/util/mask';
 
+import { findAllServiceRequest } from '../../../store/modules/works/actions';
+  
+import ModalWorks from '../ModalWorks/modalWorks';
+import ModalDelete from '../modalDelete/modalDelete';
 import Header from '../../../components/Header';
 
-import { findAllServiceRequest, 
-          deleteServiceRequest } from '../../../store/modules/servicos/actions';
+import MouseOverPopover from '~/components/MouseOverPopover';
 
-const ListSales = ({ servicoList, handlerRemoveService }) => {
+import { Container } from './styles';
+
+const ListSales = ({ worksList }) => {
   const dispatch = useDispatch();
+
+  const [showModal, setShowModal] = useState(false)
+  const [showModalDelete, setModalShowDelete] = useState(false)
+
+  const [productDeleteId, setproductDeleteId] = useState('')
 
   const user = useSelector((state) => state.user.profile);
 
@@ -22,22 +33,26 @@ const ListSales = ({ servicoList, handlerRemoveService }) => {
     onLoad();
   }, [dispatch, user]);
 
-  //formatção do preço do produto
-  function currencyFormat(num) {
-    if (num) {
-      return (
-        'R$' +
-        parseFloat(num)
-          .toFixed(2)
-          .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-      );
-    }
-  }
-
   return (
     <Container>
       <Header  title="Serviços"/>
       <div className="header-main">
+        <div className='more' >
+          <MouseOverPopover 
+            children={
+              <AddCircleSharpIcon onClick={() => setShowModal(!showModal) }
+                sx={{ 
+                  height: "2em", 
+                  width: "2em", 
+                  cursor: "pointer", 
+                  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.5)",
+                  borderRadius: "50%" 
+                }} 
+              />
+            }
+            text={"Novo serviço"}
+          />
+        </div>
         <form className="form-table">
           <table className="table-list">
             <thead>
@@ -49,16 +64,22 @@ const ListSales = ({ servicoList, handlerRemoveService }) => {
               </tr>
             </thead>
             <tbody>
-              {[].concat(servicoList).map((servico, i) => (
+              {[].concat(worksList).map((servico, i) => (
                 <tr key={i} value={servico.id} >
-                  <td>{servico.user.name}</td>
+                  <td>{user.name}</td>
                   <td>{servico.name}</td>
                   <td>{currencyFormat(servico.price)}</td>
                   <td>{moment(servico.date_service).format('DD/MM/YYYY')}</td>
                   <td>
-                    <button onClick={(e) => handlerRemoveService(e, servico.id)}>
-                      <FcEmptyTrash />
-                    </button>
+                    <MouseOverPopover 
+                      children={
+                        <FcEmptyTrash 
+                          onClick={() => setproductDeleteId(servico.id) || 
+                          setModalShowDelete(true)}
+                        />
+                      }
+                      text={"Excluir"}
+                    />
                   </td>
                 </tr>
               ))}
@@ -66,28 +87,26 @@ const ListSales = ({ servicoList, handlerRemoveService }) => {
           </table>
         </form>
       </div>
+    
+    <ModalWorks 
+      showModal={showModal}
+      setShowModal={setShowModal}
+    />
+
+    <ModalDelete
+      setShowModal={setModalShowDelete}
+      showModal={showModalDelete}
+      ids={productDeleteId}
+    />
+
     </Container>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    servicoList: state.servicos.servicoList ? state.servicos.servicoList : [],
+    worksList: state.works.worksList ? state.works.worksList : [],
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    handlerRemoveService: async (e, id) => {
-      e.preventDefault();
-      const confirm = window.confirm(
-        'Tem certeza que deseja desfazer essa serviço?'
-      );
-      if (confirm) {
-        dispatch(deleteServiceRequest(id));
-      }
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ListSales);
+export default connect(mapStateToProps)(ListSales);

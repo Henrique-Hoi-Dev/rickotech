@@ -14,7 +14,6 @@ export default {
     const path = await File.findOne({ where: { id: id}, attributes: ['url']})
 
     // const filePath = path.dataValues.path
-    console.log(path)
     // const files = await File.destroy({
     //   where: {
     //     id: id,

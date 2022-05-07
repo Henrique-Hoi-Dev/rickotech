@@ -7,7 +7,6 @@ import {
   serviceFailure, 
   getByIdServiceSuccess,
   findAllServiceSuccess } from './actions';
-import history from '~/services/history';
 
 export function* createService({ payload }) {
   try {
@@ -16,9 +15,11 @@ export function* createService({ payload }) {
     const servicos = { name, price, date_service, employee_id }
 
     yield call(api.post, `/service/${financial_id}`, servicos);
-
     toast.success('Serviço registrado com sucesso!');
-    history.push('/listServico')
+
+    const response = yield call(api.get, `/services/${payload.id}`);
+    yield put(findAllServiceSuccess(response.data));
+
   } catch (err) {
     toast.error('Error em registrar serviço.');
     yield put(serviceFailure());

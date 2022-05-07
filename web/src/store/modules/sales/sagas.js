@@ -87,9 +87,16 @@ export function* UpdateSales({ payload }) {
     yield put(getCardSuccess(responseCard.data));
     yield put(findAllSalesSuccess(response.data));
 
-    if (res.data.responseData.status === 'open' || 'closed') {
-      toast.success('Editado com sucesso.');
+    if (res.data.responseData.status === 'open') {
+      toast.success('Venda editada!', {autoClose: 10000 });
+      toast.info('Venda em aberto!', {autoClose: 10000 });
     }
+
+    if (res.data.responseData.status === 'closed') {
+      toast.success('Venda editada!', {autoClose: 10000 });
+      toast.info('Venda foi fechada!', {autoClose: 10000 });
+    }
+
     if (res.data.responseData.status === 'sold') {
       toast.success('Venda realizada com sucesso!');
     }

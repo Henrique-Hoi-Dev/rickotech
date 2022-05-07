@@ -15,6 +15,10 @@ export const PageHeader = styled.div`
     padding: 1rem 0;
     margin: 1rem auto -5rem;
 
+    .img {
+      margin-right: 100px;
+    }
+
     a {
       height: 3.2rem;
       transition: opacity 0.2s;
