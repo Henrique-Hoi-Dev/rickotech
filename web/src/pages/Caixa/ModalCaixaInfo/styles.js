@@ -5,22 +5,12 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
 
-    background: #353535;
-    max-width: 50rem;
-    box-sizing: border-box;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-    border-radius: 0.8rem;
-    margin: -3rem auto 3.2rem;
+    margin: -3rem auto 1rem;
     padding-top: 3rem;
     overflow: hidden; 
   
     .form {
-      border-radius: 11px;
       padding: 42px;
-      background-color: #4d4c4c;
-      box-sizing: border-box;
-      box-shadow: 0px 4px 4px rgb(0 0 0 / 50%);
-      margin-bottom: 37px;
 
       display: grid;
       grid-template-columns: 1fr 1fr;

@@ -81,7 +81,7 @@ export default function ModalRegistrationProduct({ showModal, setShowModal, ids 
                 sx={{ 
                   width: "1.5em", 
                   height: "1.5em", 
-                  marginTop: "20px",
+                  margin: "20px",
                   cursor: "pointer", 
                   boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.5)",
                   borderRadius: "50%" 
