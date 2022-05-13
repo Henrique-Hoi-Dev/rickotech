@@ -1,40 +1,38 @@
 import React, { useEffect } from "react";
 
-import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Input } from '@rocketseat/unform';
 
 import * as moment from 'moment';
+import CloseIcon from '@mui/icons-material/Close';
 
 import { toast } from 'react-toastify';
 
 import { 
-  getByIdFinancialBoxRequest, 
+  getByIdFinancialBoxRequest,
   UpdateFinancialBoxRequest } from "~/store/modules/financialBox/actions";
 
 import { Container } from "./styles";
 
-import Header from "~/components/Header";
+import Modal from "~/components/modal/modal";
 
-export default function CaixaInfo() {
+const ModalCaixaInfo = ({ showModal, setShowModal, ids }) => {
   const dispatch = useDispatch(); 
-  const userId = useSelector((state) => state.user.profile.id);
 
   const { form } = useSelector((state) => state.financialBox);
-  const { id } = useParams();
-
+  console.log(ids)
   useEffect(() => {
-    if (id) {
-      dispatch(getByIdFinancialBoxRequest(id));
+    if (ids) {
+      dispatch(getByIdFinancialBoxRequest(ids));
     } 
-  }, [id, dispatch]);
+  }, [ids, dispatch]);
 
   const handleSubmit = async (values) => {
     const { close_caixa } = values
     const body = { status: true, close_caixa}
 
     try {
-      dispatch(UpdateFinancialBoxRequest( id, body ));
+      dispatch(UpdateFinancialBoxRequest( ids, body ));
     } catch {
       toast.error('Error check data');
     } 
@@ -51,10 +49,28 @@ export default function CaixaInfo() {
     }
   }
 
+  const onCloseSales = () => {
+    setShowModal(false);
+  };
+
+
   return (
-    <>
-      <Header title="Caixa Info"/>
+    <Modal
+      open={showModal}
+      onClose={onCloseSales}
+    >
       <Container>
+        <CloseIcon 
+          sx={{ 
+            width: "1.5em", 
+            height: "1.5em", 
+            margin: "20px",
+            cursor: "pointer", 
+            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.5)",
+            borderRadius: "50%" 
+          }} 
+          onClick={onCloseSales}
+        />
         <Form onSubmit={handleSubmit} initialData={form} >
           <div className="header-main">
             <div className="form">
@@ -98,16 +114,13 @@ export default function CaixaInfo() {
                       
                   <button type="submit">Fechar caixa</button>
                 </div>
-                  <Link to={`/caixa/${userId}`}>
-                    <button>
-                      Lista caixa
-                    </button>
-                  </Link>
               </div>
             </div>
           </div>
         </Form>
       </Container>
-    </>
+    </Modal>
   )
 }
+
+export default ModalCaixaInfo;

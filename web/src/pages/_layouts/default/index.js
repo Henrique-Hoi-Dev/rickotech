@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Header from '../../../components/HeaderMenu';
+import Header from '../../../components/Menu';
 import Footer from '~/components/Footer';
 import { Wrapper } from './styles';
 

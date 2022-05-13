@@ -18,7 +18,6 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Logout from '@mui/icons-material/Logout';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 import { TiThMenu } from 'react-icons/ti';
@@ -51,9 +50,6 @@ export default function Home() {
         </ListItem >
         <ListItem >
          <AttachMoneyIcon /> <Link to={`/caixa/${id}`}>Caixa</Link> 
-        </ListItem >
-        <ListItem >
-         <ProductionQuantityLimitsIcon /> <Link to="/registreServices">Registre serviço</Link> 
         </ListItem >
       </List>
       <Divider />

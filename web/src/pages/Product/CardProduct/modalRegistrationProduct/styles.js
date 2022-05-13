@@ -5,44 +5,49 @@ export const Container = styled.div`
   font-size: 0.8rem;
 
   .header-main {
-    background: #353535;
-    width: 100%;
-    max-width: 50rem;
-    box-sizing: border-box;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-    border-radius: 0.8rem;
-    margin: -3rem auto 3.2rem;
-    padding-top: 3rem;
-    overflow: hidden; 
-  
+    
     #container-input {
       max-width: 1100px;
 
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 195px;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 5px 200px 1fr;
       grid-template-areas:
-        'campo2 campo'
-        'button button'    
+        'name name name'
+        'campo2  campo4 campo3'
+        'button button button';
     }
+
+    .name-campo {
+      grid-area: name;    
+    }
+
     .campo2 {
       grid-area: campo2;
-      margin-left: 70px;
     }
-    .campo {
-      grid-area: campo;
+    .campo3 {
+      grid-area: campo3;
+
+      ul {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+    .campo4 {
+      grid-area: campo4;
     }
     .buttons-container {
       grid-area: button;
-    }  
+    }
 
     input {
       font: 1rem Archivo;
+      cursor: pointer;
       border-radius: 0.5rem;
       height: 2.2rem;
-      width: 13.5rem;
+      width: 215px;
       padding: 0 1rem;
-      margin: 0 0 1rem;
+      margin: 7px 0px 10px;
       border: 2px solid #8945de;
       font-weight: bold;
       color: #9c98a6;
@@ -51,37 +56,49 @@ export const Container = styled.div`
 
     select {  
       font: 1rem Archivo;
+      cursor: pointer;
       border-radius: 0.5rem;
       width: 13.5rem;
       height: 2.2rem;
       padding: 0 1rem;
-      margin: 0 0 1rem;
+      margin: 7px 0px 10px;
       border: 2px solid #8945de;
       font-weight: bold;
       color: #9c98a6;
     }
 
     .form-input {
-      border: 2;
       padding: 0 2.4rem;
-      margin-top: 0.1rem;
+      margin-left: 1rem;
+
+      svg {
+        background-color: #8945de;
+        margin: 15px 0px 13px -29px;
+
+        &:hover {
+          transform: scale(1.1);
+          transition: all 0.5s;
+        }
+      }
     }
+  }
+  .footer {
+    margin-top: 5rem;
   }
 
   button {
-    background: none;
-    border: 0;
-    color: #6842c2;
-    font: 700 1.6rem Archivo;
-    cursor: pointer;
-    transition: color 0.2s;
-
-    a {
-      color: #6842c2;
-    }
+    margin: 5px 18px 0;
+    height: 3rem;
+    width: 12rem;
+    background: #8945de;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background 0.2s;
 
     &:hover {
-      color: ${darken(0.03, '#6842c2')};
+      background: ${darken(0.03, '#8945de')};
       transform: scale(1.1);
       transition: all 0.5s;
     }
@@ -89,12 +106,7 @@ export const Container = styled.div`
 
   .header-title {
     border-radius: 11px;
-    padding: 42px;
-    background-color: #4d4c4c;
-    box-sizing: border-box;
-    box-shadow: 0px 4px 4px rgb(0 0 0 / 50%);
-    margin-bottom: 37px;
-
+    margin: 30px;
 
     label {
       font: 700 1.4rem Archivo;
@@ -108,6 +120,12 @@ export const Container = styled.div`
       margin-top: 0.5rem;
     }
 
+    span {
+      color: #ff0000;
+      margin: 0 0 0 28px;
+      font-weight: bold;
+    }
+
     p {
       display: flex;
       align-items: center;
@@ -115,7 +133,12 @@ export const Container = styled.div`
       text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
       line-height: 2.4rem;
       color: #9c98a6;
-    } 
+    }
+
+    main {
+      margin: 3.2rem auto;
+      width: 90%;
+    }
 
     footer {
       padding: 2rem ;
@@ -124,29 +147,11 @@ export const Container = styled.div`
       justify-content: space-between;
 
       svg {
-        margin-right: 1rem;
+        margin-right: 1rem!important;
+        background-color: #4D4C4C!important;
       }
     }
   }  
 
-  @media (max-width: 700px) {
-    #container-input {
-      max-width: 1100px;
-
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: 5px 455px 1fr;
-      grid-template-areas:
-        'name name name'
-    }
-    .campo {
-      grid-area: campo2;
-    }
-    .campo5 {
-      grid-area: campo5;
-    }
-    .buttons-container {
-      grid-area: button;
-    }  
-  }
+  @media (max-width: 700px) {}
 `;

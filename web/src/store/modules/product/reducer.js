@@ -3,6 +3,7 @@ import produce from 'immer';
 const INITIAL_STATE = {
   productList: [],
   form: {
+    avatar_id: undefined,
     name: '',
     price: '',
     category: '',
@@ -16,6 +17,7 @@ export default function product(state = INITIAL_STATE, action) {
     switch (action.type) {
       case '@product/RESET_FORM': {
         draft.form = {
+          avatar_id: undefined,
           name: '',
           price: '',
           category: '',

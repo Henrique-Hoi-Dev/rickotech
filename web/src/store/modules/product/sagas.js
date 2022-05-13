@@ -12,7 +12,8 @@ import {
 
 export function* createProduct({ payload }) {
   try {
-    yield call(api.post, '/product', payload.values);
+    console.log(payload)
+    yield call(api.post, '/product', payload.data.values);
 
     toast.success('Produto registrato com sucesso!');
     yield put(resetFormularioProduct());
@@ -20,7 +21,6 @@ export function* createProduct({ payload }) {
     const response = yield call(api.get, `/products`);
 
     yield put(findAllProductSuccess(response.data));
-
   } catch (err) {
     yield put(productFailure());
     toast.error('Erro em registrar produto.');

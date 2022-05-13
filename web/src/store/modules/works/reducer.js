@@ -1,7 +1,7 @@
 import produce from 'immer';
 
 const INITIAL_STATE = {
-  servicoList: [],
+  worksList: [],
   form: {
     financial_id: undefined,
     name: '',
@@ -10,7 +10,7 @@ const INITIAL_STATE = {
   },
 };
 
-export default function service(state = INITIAL_STATE, action) {
+export default function works(state = INITIAL_STATE, action) {
   return produce(state, (draft) => {
     switch (action.type) {
       case '@service/RESET_FORM': {
@@ -23,11 +23,11 @@ export default function service(state = INITIAL_STATE, action) {
         break;
       }
       case '@service/GET_BYID_SERVICE_SUCCESS': {
-        draft.servicoList = action.payload.data;
+        draft.form = action.payload.data;
         break;
       }
       case '@service/FIND_ALL_SERVICE_SUCCESS': {
-        draft.servicoList = action.payload.data;
+        draft.worksList = action.payload.data;
         break;
       }
       default:

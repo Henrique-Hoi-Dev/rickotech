@@ -6,9 +6,9 @@ import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 
 import {
-  createFinancialBoxRequest,
-  findAllOpenRequest,
-  resetFormulario } from '~/store/modules/financialBox/actions';
+  resetFormulario,
+  findAllFinancialBoxSuccess,
+  createFinancialBoxRequest } from '~/store/modules/financialBox/actions';
 
 import { Container } from './styles';
 
@@ -18,11 +18,12 @@ import ListCaixaOpen from './ListCaixaOpen';
 
 const Caixa = ({ financialBoxList }) => {
 const dispatch = useDispatch();
+
 const { id } = useParams();
 
 useEffect(() => {
   if (id) {
-    dispatch(findAllOpenRequest(id));
+    dispatch(findAllFinancialBoxSuccess(id));
   } 
 }, [id, dispatch]);
   
@@ -69,8 +70,8 @@ const handleSubmit = async (values) => {
                 </div>
             </Form>
         </Container>
-      <ListCaixaOpen />
-      <ListCaixa />
+      <ListCaixaOpen ids={id} />
+      <ListCaixa ids={id} />
     </>
   );
 }

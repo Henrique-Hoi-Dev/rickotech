@@ -5,7 +5,7 @@ import user from './user/reducer';
 import adress from './adress/reducer';
 import product from './product/reducer';
 import sales from './sales/reducer';
-import servicos from './servicos/reducer';
+import works from './works/reducer';
 import financialBox from './financialBox/reducer';
 
 export default combineReducers({ 
@@ -14,5 +14,5 @@ export default combineReducers({
   adress, 
   product, 
   sales, 
-  servicos, 
+  works, 
   financialBox });

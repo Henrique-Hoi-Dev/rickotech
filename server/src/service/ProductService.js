@@ -7,8 +7,8 @@ export default {
 async store(req, res) {
   let result = {}
 
-  const { name, price, category, quantity, description } = req
-  const body = { name, price, category, quantity, description }
+  const { name, price, category, quantity, description, avatar_id } = req
+  const body = { name, price, category, quantity, description, avatar_id }
 
   const schema = Yup.object().shape({
     name: Yup.string().required().max(100),

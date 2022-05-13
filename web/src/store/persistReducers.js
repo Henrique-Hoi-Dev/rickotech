@@ -12,7 +12,7 @@ export default (reducers) => {
         'adress', 
         'product', 
         'sales', 
-        'servicos',
+        'wokrs',
         'financialBox'
       ],
     },

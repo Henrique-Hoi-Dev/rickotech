@@ -12,6 +12,17 @@ export const Container = styled.div`
   align-items: stretch;
   margin-left: 28px;
 
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: flex-end;
+    
+    h1 {
+      color: #9c98a6;
+    }
+  }
+
   .titulo {
     display: flex;
     justify-content: center;

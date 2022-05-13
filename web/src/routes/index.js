@@ -12,9 +12,6 @@ import Dashboard from '~/pages/Dashboard';
 import ListProduct from '~/pages/Product/listProduct';
 import ListService from '~/pages/Works/ListWorks';
 
-import CaixaInfo from '~/pages/Caixa/CaixaInfo'; // modal
-import RegistrationServices from '~/pages/Works' // modal
-
 function RoutesApp() {
   return (
     <Switch>
@@ -23,9 +20,7 @@ function RoutesApp() {
       <Route isPrivate path="/perfil/:id" exact component={props => <Profile {...props} />} />
       <Route isPrivate path="/adress/:id" exact component={props => <Adress {...props} />} />
       <Route isPrivate path="/caixa/:id" exact component={props => <Caixa {...props} />} />
-      <Route isPrivate path="/caixaInfo/:id" exact component={props => <CaixaInfo {...props} />} />
       <Route isPrivate path="/dashboard" exact component={props => <Dashboard {...props} />} />
-      <Route isPrivate path="/registreServices" exact component={props => <RegistrationServices {...props} />} />
       <Route isPrivate path="/listProducts" exact component={props => <ListProduct {...props} />} />
       <Route isPrivate path="/listServico" exact component={props => <ListService {...props} />} />
     </Switch>
