@@ -25,6 +25,18 @@ export default function financialBox(state = INITIAL_STATE, action) {
         };
         break;
       }
+      case '@financialBox/RESET_FORM_MODAL': {
+        draft.form = {
+          status: '',
+          open_caixa: '',
+          close_caixa: '',
+          value_open: '',
+          value_total: '',
+          value_total_sales: '',
+          value_total_service: '',
+        };
+        break;
+      }
       case '@financialBox/GET_BYID_FINANCIALBOX_SUCCESS': {
         draft.form = action.payload.data;
         break;

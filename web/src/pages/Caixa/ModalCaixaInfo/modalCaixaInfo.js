@@ -9,6 +9,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { toast } from 'react-toastify';
 
 import { 
+  resetFormularioModal,
   getByIdFinancialBoxRequest,
   UpdateFinancialBoxRequest } from "~/store/modules/financialBox/actions";
 
@@ -16,23 +17,24 @@ import { Container } from "./styles";
 
 import Modal from "~/components/modal/modal";
 
-const ModalCaixaInfo = ({ showModal, setShowModal, ids }) => {
+const ModalCaixaInfo = ({ showModal, setShowModal, id }) => {
   const dispatch = useDispatch(); 
 
   const { form } = useSelector((state) => state.financialBox);
-  console.log(ids)
+
   useEffect(() => {
-    if (ids) {
-      dispatch(getByIdFinancialBoxRequest(ids));
-    } 
-  }, [ids, dispatch]);
+    if (id) {
+      dispatch(getByIdFinancialBoxRequest(id));
+    }
+  }, [id, dispatch]);
 
   const handleSubmit = async (values) => {
     const { close_caixa } = values
     const body = { status: true, close_caixa}
 
     try {
-      dispatch(UpdateFinancialBoxRequest( ids, body ));
+      dispatch(UpdateFinancialBoxRequest( form.id, body ));
+      onCloseSales()
     } catch {
       toast.error('Error check data');
     } 
@@ -51,6 +53,7 @@ const ModalCaixaInfo = ({ showModal, setShowModal, ids }) => {
 
   const onCloseSales = () => {
     setShowModal(false);
+    dispatch(resetFormularioModal())
   };
 
 

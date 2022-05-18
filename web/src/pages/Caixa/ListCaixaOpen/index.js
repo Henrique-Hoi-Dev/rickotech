@@ -10,9 +10,20 @@ import { Container } from './styles';
 import ModalCaixaInfo from '../ModalCaixaInfo/modalCaixaInfo';
 
 const ListCaixa = ({ financialBoxList, ids }) => {
-const dispatch = useDispatch();
-const [showModal, setModalShow] = useState(false)
-const [id, setId] = useState('')
+  const dispatch = useDispatch();
+
+  const [showModal, setModalShow] = useState(false)
+  const [caixaOpenId, setCaixaOpenId] = useState('')
+
+  useEffect(() => {
+    if (caixaOpenId) {
+      const inter = setInterval(() => {
+        setCaixaOpenId('')
+      }, 500);
+
+      return () => clearInterval(inter)
+    }
+  }, [caixaOpenId, setCaixaOpenId]);
 
   useEffect(() => {
     if (ids) {
@@ -36,7 +47,7 @@ const [id, setId] = useState('')
       <ModalCaixaInfo 
         showModal={showModal}
         setShowModal={setModalShow}
-        ids={id}
+        id={caixaOpenId}
       /> 
       <h2>Caixa em aberto</h2>
       <table className="table-list">
@@ -74,7 +85,7 @@ const [id, setId] = useState('')
                   (financial?.status === false && 'Em aberto')}
                 </td>
                 <td>
-                  <FcInfo onClick={() => setModalShow(!showModal) || setId(financial.id)}/>
+                  <FcInfo onClick={() => setModalShow(!showModal) || setCaixaOpenId(financial.id)}/>
                 </td>
               </tr>
             ))}
