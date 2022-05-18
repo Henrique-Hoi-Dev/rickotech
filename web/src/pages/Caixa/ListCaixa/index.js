@@ -3,21 +3,34 @@ import { useDispatch } from 'react-redux';
 import { FcInfo } from 'react-icons/fc';
 import * as moment from 'moment';
 
-import { getByIdFinancialBoxRequest } from '~/store/modules/financialBox/actions';
+import { 
+  findAllFinancialBoxRequest,
+  resetFormularioModal } from '~/store/modules/financialBox/actions';
 import { connect } from 'react-redux';
 
 import { Container } from './styles';
 import ModalCaixaInfo from '../ModalCaixaInfo/modalCaixaInfo';
 
 const ListCaixa = ({ financialBoxList, ids }) => {
-const dispatch = useDispatch();
-const [showModal, setModalShow] = useState(false)
-const [id, setId] = useState('')
+  const dispatch = useDispatch();
 
-  console.log(ids, 'caixa fechado')
+  const [showModal, setModalShow] = useState(false)
+  const [caixaClosedId, setCaixaClosedId] = useState('')
+
+  useEffect(() => {
+    if (caixaClosedId) {
+      const inter = setInterval(() => {
+        setCaixaClosedId('')
+      }, 500);
+
+      return () => clearInterval(inter)
+    }
+  }, [caixaClosedId, setCaixaClosedId]);
+
   useEffect(() => {
     if (ids) {
-      dispatch(getByIdFinancialBoxRequest(ids));
+      dispatch(findAllFinancialBoxRequest(ids));
+      dispatch(resetFormularioModal())
     } 
   }, [ids, dispatch]);
 
@@ -37,7 +50,7 @@ const [id, setId] = useState('')
       <ModalCaixaInfo 
         showModal={showModal}
         setShowModal={setModalShow}
-        ids={id}
+        id={caixaClosedId}
       />   
       <h2>Histórico do caixa</h2>
       <table className="table-list">
@@ -75,7 +88,7 @@ const [id, setId] = useState('')
                   (financial?.status === false && 'Em aberto')}
                 </td>
                 <td>
-                  <FcInfo onClick={() => setModalShow(!showModal)|| setId(financial?.id)}/>
+                  <FcInfo onClick={() => setModalShow(!showModal)|| setCaixaClosedId(financial?.id)}/>
                 </td>
               </tr>
             ))}
