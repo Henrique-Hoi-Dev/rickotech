@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   width: 100vw;
@@ -12,6 +13,21 @@ export const Container = styled.div`
     margin: 15px auto 3.2rem;
     padding-top: 3rem;
     overflow: hidden;
+
+    .more {
+      display: flex;
+      justify-content: flex-end;
+      margin: -30px 40px 15px 0;
+      color: #8945de;
+
+      svg {
+        &:hover {
+          color: ${darken(0.03, '#6842c2')};
+          transform: scale(1.1);
+          transition: all 0.5s;
+        }
+      }
+    }
   }
 
   .form-table {
@@ -22,9 +38,17 @@ export const Container = styled.div`
       box-sizing: border-box;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
 
-      td {
-        max-height: 5px;
+      th {
+        font-size: 21px;
+        padding: 15px;
         border-bottom: 0.2rem solid #8945de;
+      }
+
+      td {
+        color: #fff;
+        border-bottom: 0.2rem solid #8945de;
+        text-align: center;
+        font-weight: 300;
       }
     }
 
@@ -47,12 +71,6 @@ export const Container = styled.div`
     font: 1.1rem Archivo;
     color: #9c98a6;
     font-weight: bold;
-
-    td,
-    th {
-      padding: 0.2rem;
-      text-align: center;
-    }
 
     .avatar {
       width: 4rem;

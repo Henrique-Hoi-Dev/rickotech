@@ -96,13 +96,11 @@ export default function ModalRegistrationProduct({ showModal, setShowModal, ids 
                   <label htmlFor="category">Tipo de categoria</label>
                   <Field  component="select" name="category" >
                     <option value="0">Selecione</option>
-                    <option value="iphone">iPhone</option>
-                    <option value="samsung">Samsung</option>
+                    <option value="celular">Celular</option>
                     <option value="perfume">Perfume</option>
-                    <option value="apple-airpods">Apple AirPods</option>
+                    <option value="fone">Fones de Ouvido</option>
                     <option value="carregador" >Carregador</option>
-                    <option value="apple-watch" >Apple Watch</option>
-                    <option value="smartwatch" >Smartwatch</option>
+                    <option value="relogio" >Relogio</option>
                   </Field>  
                 </div>
 

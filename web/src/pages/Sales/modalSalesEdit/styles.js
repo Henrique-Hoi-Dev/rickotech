@@ -3,27 +3,34 @@ import { darken } from 'polished';
 
 export const Container = styled.div`
   max-width: 50rem;
-  box-sizing: border-box;
   border-radius: 0.8rem;
 
+  margin: -2rem auto 0;
+  padding: 3rem;
   display: flex;
 
   flex-direction: column;
   align-items: stretch;
-  margin-left: 28px;
 
   .header {
     display: flex;
     flex-direction: row;
     align-content: center;
     align-items: flex-end;
+
+    svg {
+      background-color: #8945de;
+      margin: -2px 0px 4px -37px;
+    }
     
     h1 {
-      color: #9c98a6;
+      color: #8945de;
+      margin: 0px 60px;
     }
   }
 
   .titulo {
+    margin-bottom: 2rem;
     display: flex;
     justify-content: center;
 
@@ -37,8 +44,7 @@ export const Container = styled.div`
   }
 
   form {
-    border-radius: 11px;
-    padding: 25px;
+    padding: 20px;
 
     display: grid; 
     justify-items: center;
@@ -51,11 +57,13 @@ export const Container = styled.div`
 
     .statos {
       grid-area: statos;
+      margin: 10px;
       display: flex;
       flex-direction: column;
     }
     .tipo-venda {
       grid-area: tipo-venda;
+      margin: 10px;
       display: flex;
       flex-direction: column;
     }
@@ -67,18 +75,13 @@ export const Container = styled.div`
     }
     .tipo-venda-2{
       grid-area: tipo-venda-2;
-      display: flex;
-      flex-direction: column;
+      display: none;
     }
     .but{
       grid-area: but;
       display: flex;
       flex-direction: row;
-
-      .cancela {
-        margin-left: 15px;
-        background: red;
-      }
+      margin: 34px auto -40px;
     }
     label {
       padding: 0.5rem;
@@ -136,13 +139,13 @@ export const Container = styled.div`
     justify-content: space-between;
   }
 
-  input {
+  input, select {
     min-width: 15rem;
     background: rgba(0, 0, 0, 0.1);
     padding: 0 15px;
     font: 1rem Archivo;
     border-radius: 0.5rem;
-    height: 2.2rem;
+    height: 3.2rem;
     padding: 0 1rem;
     margin: 0 0 1rem;
     border: 2px solid #8945de;
@@ -152,21 +155,8 @@ export const Container = styled.div`
     &::placeholder {
       color: rgba(255, 255, 255, 0.7);
     }
-  }
 
-  select {
-    font: 1rem Archivo;
-    min-width: 15rem;
-    border-radius: 0.5rem;
-    height: 2.2rem;
-    padding: 0 1rem;
-    margin: 0 0 1rem;
-    border: 2px solid #8945de;
-    font-weight: bold;
-    color: #9c98a6;
-    background: rgba(0, 0, 0, 0.1);
-
-    ::-webkit-scrollbar {
+    &::-webkit-scrollbar {
       width: 1px;
       height: 10px;
     }

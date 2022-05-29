@@ -41,6 +41,7 @@ export const Container = styled.div`
       grid-area: area-5;
       text-align: center;
       display: flex;
+      justify-content: center;
 
       svg {
         margin: 9px 19px 9px 19px;

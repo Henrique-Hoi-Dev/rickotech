@@ -1,7 +1,6 @@
 import { takeLatest, call, all, put } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
-import history from '~/services/history';
 import api from '~/services/api';
 
 import {
@@ -36,14 +35,14 @@ export function* createSales({ payload }) {
     const res = yield call(api.post, '/sales', sales);
     if (res.data.httpStatus === 404) {
       toast.info('Não há produto em estoque.');
-      return history.push('/listProducts');
     }
+
     const response = yield call(api.get, `/saleses/${res.data.seller_id}`);
     yield put(findAllSalesSuccess(response.data));
     yield put(resetFormulario());
 
     toast.success('Pedido de venda realizada com sucesso!');
-    history.push('/dashboard');
+
   } catch (err) {
     toast.error('Error na venda!');
     yield put(resetFormulario());

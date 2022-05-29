@@ -9,7 +9,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { toast } from 'react-toastify';
 
 import { 
-  resetFormularioModal,
+  resetFormularioCaixa,
   getByIdFinancialBoxRequest,
   UpdateFinancialBoxRequest } from "~/store/modules/financialBox/actions";
 
@@ -53,7 +53,7 @@ const ModalCaixaInfo = ({ showModal, setShowModal, id }) => {
 
   const onCloseSales = () => {
     setShowModal(false);
-    dispatch(resetFormularioModal())
+    dispatch(resetFormularioCaixa())
   };
 
 

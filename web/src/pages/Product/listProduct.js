@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
-
 import { findAllProductRequest  } from '../../store/modules/product/actions';
+import { Container } from './styles';
 
 import AddCircleSharpIcon from '@mui/icons-material/AddCircleSharp';
-
 import img from '../../assets/empty.png'
-
 import ModalRegistrationProduct from './CardProduct/modalRegistrationProduct/modalRegistrationProduct'
-
 import Header from '../../components/Header';
 import CardProduct from './CardProduct';
-
-import { Container } from './styles';
 import MouseOverPopover from '~/components/MouseOverPopover';
 
 const ProductList = ({ productList }) => {
