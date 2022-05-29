@@ -83,8 +83,8 @@ export function resetFormulario() {
   };
 }
 
-export function resetFormularioModal() {
+export function resetFormularioCaixa() {
   return {
-    type: '@financialBox/RESET_FORM_MODAL',
+    type: '@financialBox/RESET_FORM_CAIXA',
   };
 }

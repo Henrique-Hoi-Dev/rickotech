@@ -5,7 +5,7 @@ import * as moment from 'moment';
 
 import { 
   findAllFinancialBoxRequest,
-  resetFormularioModal } from '~/store/modules/financialBox/actions';
+  resetFormularioCaixa } from '~/store/modules/financialBox/actions';
 import { connect } from 'react-redux';
 
 import { Container } from './styles';
@@ -30,7 +30,7 @@ const ListCaixa = ({ financialBoxList, ids }) => {
   useEffect(() => {
     if (ids) {
       dispatch(findAllFinancialBoxRequest(ids));
-      dispatch(resetFormularioModal())
+      dispatch(resetFormularioCaixa())
     } 
   }, [ids, dispatch]);
 

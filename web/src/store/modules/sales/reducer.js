@@ -24,8 +24,8 @@ export default function sales(state = INITIAL_STATE, action) {
     switch (action.type) {
       case '@sales/RESET_FORM': {
         draft.form = {
-          financial_id: undefined,
-          product_id: undefined,
+          financial_id: null,
+          product_id: null,
           name_product: '',
           price_product: '',
           product_quantity: '',

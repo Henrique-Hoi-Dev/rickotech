@@ -20,6 +20,7 @@ export default function financialBox(state = INITIAL_STATE, action) {
     switch (action.type) {
       case '@financialBox/RESET_FORM': {
         draft.form = {
+          id: null,
           value_open: '',
           open_caixa: '',
         };

@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
-
-import { FcEmptyTrash, FcSalesPerformance, FcEditImage } from 'react-icons/fc';
-
+import { FcEmptyTrash, FcEditImage } from 'react-icons/fc';
 import { capitalizeFirst, currencyFormat } from "~/util/mask";
+import { Container } from './styles'
 
-import ModalSales from "./modalSales/modalSales";
 import ModalRegistrationProduct from "./modalRegistrationProduct/modalRegistrationProduct";
-
 import ModalDelete from "./modalDelete/modalDelete";
 import MouseOverPopover from "~/components/MouseOverPopover";
 
-import { Container } from './styles'
-
 export default function CardProduct(props) {
 
-  const [showModal, setModalShow] = useState(false)
+  // const [showModal, setModalShow] = useState(false)
   const [showModalProduct, setModalShowProduct] = useState(false)
   const [showModalDelete, setModalShowDelete] = useState(false)
 
@@ -75,17 +70,6 @@ export default function CardProduct(props) {
             />
           </div>
           
-          <div className="sales">
-            <MouseOverPopover 
-              children={
-                <FcSalesPerformance style={{ cursor: "pointer" }}
-                  onClick={() => setModalShow(!showModal) || setproductId(props.id)}
-                />
-              }
-              text={"Vendas"}
-            />
-          </div>
-          
           <div className="delete">
             <MouseOverPopover 
               children={
@@ -99,12 +83,6 @@ export default function CardProduct(props) {
           
         </div>
       </div>
-
-      <ModalSales 
-        showModal={showModal}
-        setShowModal={setModalShow}
-        ids={productId}
-      />
 
       <ModalRegistrationProduct 
         setShowModal={setModalShowProduct}

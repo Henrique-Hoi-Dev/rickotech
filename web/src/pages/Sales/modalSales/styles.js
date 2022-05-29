@@ -3,28 +3,32 @@ import { darken } from 'polished';
 
 export const Container = styled.div`
   max-width: 50rem;
+  box-sizing: border-box;
   border-radius: 0.8rem;
 
-  margin: -2rem auto 0;
-  padding: 3rem;
   display: flex;
 
   flex-direction: column;
   align-items: stretch;
+  margin-left: 28px;
 
   .header {
     display: flex;
     flex-direction: row;
     align-content: center;
     align-items: flex-end;
+
+    svg {
+      background-color: #8945de;
+    }
     
-    h2 {
-      color: #9c98a6;
+    h1 {
+      color: #8945de;
+      margin: 0px 60px;
     }
   }
 
   .titulo {
-    margin-bottom: 2rem;
     display: flex;
     justify-content: center;
 
@@ -38,7 +42,8 @@ export const Container = styled.div`
   }
 
   form {
-    padding: 20px;
+    border-radius: 11px;
+    padding: 25px;
 
     display: grid; 
     justify-items: center;
@@ -51,13 +56,11 @@ export const Container = styled.div`
 
     .statos {
       grid-area: statos;
-      margin: 10px;
       display: flex;
       flex-direction: column;
     }
     .tipo-venda {
       grid-area: tipo-venda;
-      margin: 10px;
       display: flex;
       flex-direction: column;
     }
@@ -65,20 +68,38 @@ export const Container = styled.div`
       grid-area: tipo-venda-1;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      margin-top: 25px;
+
+      h2 {
+        color: #2ECC71;
+        margin-top: 10px;
+      }
     }
-    .tipo-venda-2{
+    .tipo-venda-2 {
       grid-area: tipo-venda-2;
-      display: none;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      margin-top: 25px;
+
+      h2 {
+        color: #2ECC71;
+        margin-top: 10px;
+      }
     }
     .but{
       grid-area: but;
       display: flex;
       flex-direction: row;
-      margin: 34px auto -40px;
+      margin-top: 20px;
     }
+
     label {
-      padding: 0.5rem;
       font: 700 1.4rem Archivo;
 
       color: #9c98a6;
@@ -133,15 +154,15 @@ export const Container = styled.div`
     justify-content: space-between;
   }
 
-  input {
-    min-width: 15rem;
+  input, select, .css-154xyx0-MuiInputBase-root-MuiOutlinedInput-root {
+    min-width: 16rem;
     background: rgba(0, 0, 0, 0.1);
     padding: 0 15px;
     font: 1rem Archivo;
     border-radius: 0.5rem;
-    height: 2.2rem;
+    height: 3.2rem;
     padding: 0 1rem;
-    margin: 0 0 1rem;
+    margin: 7px 0 7px;
     border: 2px solid #8945de;
     font-weight: bold;
     color: #9c98a6;
@@ -149,23 +170,11 @@ export const Container = styled.div`
     &::placeholder {
       color: rgba(255, 255, 255, 0.7);
     }
-  }
 
-  select {
-    font: 1rem Archivo;
-    min-width: 15rem;
-    border-radius: 0.5rem;
-    height: 2.2rem;
-    padding: 0 1rem;
-    margin: 0 0 1rem;
-    border: 2px solid #8945de;
-    font-weight: bold;
-    color: #9c98a6;
-    background: rgba(0, 0, 0, 0.1);
-
-    ::-webkit-scrollbar {
+    &::-webkit-scrollbar {
       width: 1px;
       height: 10px;
     }
   }
+
 `;
