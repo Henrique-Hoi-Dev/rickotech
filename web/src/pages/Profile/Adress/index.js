@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { 
   createAdressRequest,
   updateAdressRequest,
-  getByIdAdresstRequest } from '~/store/modules/adress/actions';
+  getByIdAdresstRequest } from '../../../store/modules/adress/actions';
 
 export default function Adress() {
   const dispatch = useDispatch();

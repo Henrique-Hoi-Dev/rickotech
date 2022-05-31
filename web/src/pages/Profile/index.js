@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input, Select } from '@rocketseat/unform';
 import { Link } from 'react-router-dom'
 
-import { updateProfileRequest } from '~/store/modules/user/actions';
+import { updateProfileRequest } from '../../store/modules/user/actions';
 
 import AvatarInput from './AvatarInput';
 

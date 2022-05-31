@@ -12,10 +12,10 @@ import { Container } from './styles';
 import {
   createServicetRequest,
   findAllServiceRequest,
-  resetFormulario } from '~/store/modules/works/actions';
+  resetFormulario } from '../../../store/modules/works/actions';
 
-import { findAllOpenRequest } from '~/store/modules/financialBox/actions';
-import Modal from '~/components/modal/modal';
+import { findAllOpenRequest } from '../../../store/modules/financialBox/actions';
+import Modal from '../../../components/modal/modal';
   
 const ModalWorks = ({ showModal, setShowModal, financialBoxListOpen,  }) => {
   const dispatch = useDispatch();

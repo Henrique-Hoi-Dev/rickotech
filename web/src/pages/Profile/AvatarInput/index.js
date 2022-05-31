@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useField } from '@rocketseat/unform';
-import api from '~/services/api';
+import api from '../../../services/api';
 
 import { useSelector } from 'react-redux';
 import { Container } from './styles';

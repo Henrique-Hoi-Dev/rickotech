@@ -4,7 +4,7 @@ import * as moment from 'moment';
 import AddCircleSharpIcon from '@mui/icons-material/AddCircleSharp';
 
 import { FcEmptyTrash } from 'react-icons/fc';
-import { currencyFormat } from '~/util/mask';
+import { currencyFormat } from '../../../util/mask';
 
 import { findAllServiceRequest } from '../../../store/modules/works/actions';
   
@@ -12,7 +12,7 @@ import ModalWorks from '../ModalWorks/modalWorks';
 import ModalDelete from '../modalDelete/modalDelete';
 import Header from '../../../components/Header';
 
-import MouseOverPopover from '~/components/MouseOverPopover';
+import MouseOverPopover from '../../../components/MouseOverPopover';
 
 import { Container } from './styles';
 

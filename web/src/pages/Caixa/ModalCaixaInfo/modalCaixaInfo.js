@@ -11,11 +11,11 @@ import { toast } from 'react-toastify';
 import { 
   resetFormularioCaixa,
   getByIdFinancialBoxRequest,
-  UpdateFinancialBoxRequest } from "~/store/modules/financialBox/actions";
+  UpdateFinancialBoxRequest } from "../../../store/modules/financialBox/actions";
 
 import { Container } from "./styles";
 
-import Modal from "~/components/modal/modal";
+import Modal from "../../../components/modal/modal";
 
 const ModalCaixaInfo = ({ showModal, setShowModal, id }) => {
   const dispatch = useDispatch(); 

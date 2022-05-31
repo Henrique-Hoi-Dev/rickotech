@@ -8,7 +8,7 @@ import img from '../../assets/empty.png'
 import ModalRegistrationProduct from './CardProduct/modalRegistrationProduct/modalRegistrationProduct'
 import Header from '../../components/Header';
 import CardProduct from './CardProduct';
-import MouseOverPopover from '~/components/MouseOverPopover';
+import MouseOverPopover from '../../components/MouseOverPopover';
 
 const ProductList = ({ productList }) => {
   const dispatch = useDispatch();

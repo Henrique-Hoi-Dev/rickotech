@@ -5,7 +5,7 @@ import * as moment from 'moment';
 
 import { 
   findAllFinancialBoxRequest,
-  resetFormularioCaixa } from '~/store/modules/financialBox/actions';
+  resetFormularioCaixa } from '../../../store/modules/financialBox/actions';
 import { connect } from 'react-redux';
 
 import { Container } from './styles';

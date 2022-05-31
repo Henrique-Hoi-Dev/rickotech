@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCardRequest } from "~/store/modules/financialBox/actions";
+import { getCardRequest } from "../../../store/modules/financialBox/actions";
 
 import { Container } from './styles'
 

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 
-import { signInRequest } from '~/store/modules/auth/actions';
+import { signInRequest } from '../../store/modules/auth/actions';
 // faz as validação dos campos email e senha
 const schema = Yup.object().shape({
   email: Yup.string()

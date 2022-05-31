@@ -1,10 +1,10 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
-import api from '~/services/api';
+import api from '../../../services/api';
 
 import { updateProfileSuccess } from './actions';
-import history from '~/services/history';
+import history from '../../../services/history';
 
 export function* updateProfile({ payload }) {
   try {

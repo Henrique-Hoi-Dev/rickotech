@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { 
   UpdateSalesRequest, 
   getByIdSalesRequest,
-  resetFormularioSales } from '~/store/modules/sales/actions';
+  resetFormularioSales } from '../../../store/modules/sales/actions';
 import { Container } from './styles';
 
-import Modal from '~/components/modal/modal'
+import Modal from '../../../components/modal/modal'
 import CloseIcon from '@mui/icons-material/Close';
 
 export default function ModalSales({ showModal, setShowModal, ids }) {

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { FcEmptyTrash, FcEditImage } from 'react-icons/fc';
-import { capitalizeFirst, currencyFormat } from "~/util/mask";
+import { capitalizeFirst, currencyFormat } from "../../../util/mask";
 import { Container } from './styles'
 
 import ModalRegistrationProduct from "./modalRegistrationProduct/modalRegistrationProduct";
 import ModalDelete from "./modalDelete/modalDelete";
-import MouseOverPopover from "~/components/MouseOverPopover";
+import MouseOverPopover from "../../../components/MouseOverPopover";
 
 export default function CardProduct(props) {
 

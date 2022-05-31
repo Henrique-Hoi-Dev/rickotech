@@ -3,9 +3,9 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import {
   deleteServiceRequest,
-  resetFormulario } from '~/store/modules/works/actions';
+  resetFormulario } from '../../../store/modules/works/actions';
 
-import Modal from '~/components/modal/modal';
+import Modal from '../../../components/modal/modal';
 
 import { FcFullTrash, FcRedo } from 'react-icons/fc'
 

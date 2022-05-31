@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { Container } from './styles';
 import { FcEmptyTrash } from 'react-icons/fc';
-import { currencyFormat } from '~/util/mask';
+import { currencyFormat } from '../../../util/mask';
 import { findAllSalesRequest } from '../../../store/modules/sales/actions';
 
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
-import MouseOverPopover from '~/components/MouseOverPopover';
+import MouseOverPopover from '../../../components/MouseOverPopover';
 import AddCircleSharpIcon from '@mui/icons-material/AddCircleSharp';
 import ModalSalesEdit from '../modalSalesEdit/modalSales';
 import ModalDelete from '../modalDelete/modalDelete';

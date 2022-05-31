@@ -3,14 +3,14 @@ import { Switch } from 'react-router-dom';
 
 import Route from './Route';
 
-import SignIn from '~/pages/SignIn';
-import SignUp from '~/pages/SignUp';
-import Profile from '~/pages/Profile';
-import Adress from '~/pages/Profile/Adress';
-import Caixa from '~/pages/Caixa';
-import Dashboard from '~/pages/Dashboard';
-import ListProduct from '~/pages/Product/listProduct';
-import ListService from '~/pages/Works/ListWorks';
+import SignIn from '../pages/SignIn';
+import SignUp from '../pages/SignUp';
+import Profile from '../pages/Profile';
+import Adress from '../pages/Profile/Adress';
+import Caixa from '../pages/Caixa';
+import Dashboard from '../pages/Dashboard';
+import ListProduct from '../pages/Product/listProduct';
+import ListService from '../pages/Works/ListWorks';
 
 function RoutesApp() {
   return (

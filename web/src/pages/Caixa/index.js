@@ -8,11 +8,11 @@ import { toast } from 'react-toastify';
 import {
   resetFormulario,
   findAllFinancialBoxSuccess,
-  createFinancialBoxRequest } from '~/store/modules/financialBox/actions';
+  createFinancialBoxRequest } from '../../store/modules/financialBox/actions';
 
 import { Container } from './styles';
 
-import Header from '~/components/Header';
+import Header from '../../components/Header';
 import ListCaixa from './ListCaixa';
 import ListCaixaOpen from './ListCaixaOpen';
 

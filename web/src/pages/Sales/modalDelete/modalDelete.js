@@ -2,12 +2,12 @@ import React from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import Modal from '~/components/modal/modal';
+import Modal from '../../../components/modal/modal';
 
 import { FcFullTrash, FcRedo } from 'react-icons/fc'
 
 import { Container } from './styles';
-import { deleteSalesRequest, resetFormulario } from '~/store/modules/sales/actions';
+import { deleteSalesRequest, resetFormulario } from '../../../store/modules/sales/actions';
 
 export default function ModalDelete({ showModal, setShowModal, ids }) {
   const dispatch = useDispatch();

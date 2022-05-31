@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { FcInfo } from 'react-icons/fc';
 import * as moment from 'moment';
 
-import { findAllOpenRequest } from '~/store/modules/financialBox/actions';
+import { findAllOpenRequest } from '../../../store/modules/financialBox/actions';
 import { connect } from 'react-redux';
 
 import { Container } from './styles';

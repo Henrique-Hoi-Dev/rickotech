@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { createSalesRequest, resetFormulario } from '~/store/modules/sales/actions';
-import { findAllOpenRequest } from '~/store/modules/financialBox/actions';
+import { createSalesRequest, resetFormulario } from '../../../store/modules/sales/actions';
+import { findAllOpenRequest } from '../../../store/modules/financialBox/actions';
 import { FcHighPriority } from 'react-icons/fc';
 import { Container } from './styles';
-import { currencyFormat } from "~/util/mask";
+import { currencyFormat } from "../../../util/mask";
 import { 
   findAllProductRequest, 
   resetFormularioProduct,
   getByIdProductRequest
-} from '~/store/modules/product/actions';
+} from '../../../store/modules/product/actions';
 
-import Modal from "~/components/modal/modal";
+import Modal from "../../../components/modal/modal";
 import * as moment from 'moment';
 import CloseIcon from '@mui/icons-material/Close';
-import InputAutocomplete from "~/components/select/select";
+import InputAutocomplete from "../../../components/select/select";
 
 const ModalSales = ({ showModal, setShowModal }) => {
   const dispatch = useDispatch();

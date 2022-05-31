@@ -8,11 +8,11 @@ import {
   createProductRequest,
   getByIdProductRequest,
   UpdateProductRequest,
-  resetFormularioProduct } from '~/store/modules/product/actions';
+  resetFormularioProduct } from '../../../../store/modules/product/actions';
 
 import CloseIcon from '@mui/icons-material/Close';
 import AvatarInput from '../Avatarinput';
-import Modal from '~/components/modal/modal';
+import Modal from '../../../../components/modal/modal';
 
 import { FcHighPriority } from 'react-icons/fc';
 import { Container } from './styles';
