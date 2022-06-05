@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
 
-export const Container = styled.div` 
+export const Container = styled.div`
   font-size: 0.8rem;
 
   .header-main {
-    
     #container-input {
       max-width: 1100px;
 
@@ -19,7 +18,7 @@ export const Container = styled.div`
     }
 
     .name-campo {
-      grid-area: name;    
+      grid-area: name;
     }
 
     .campo2 {
@@ -51,10 +50,9 @@ export const Container = styled.div`
       border: 2px solid #8945de;
       font-weight: bold;
       color: #9c98a6;
-
     }
 
-    select {  
+    select {
       font: 1rem Archivo;
       cursor: pointer;
       border-radius: 0.5rem;
@@ -141,17 +139,18 @@ export const Container = styled.div`
     }
 
     footer {
-      padding: 2rem ;
+      padding: 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
 
       svg {
-        margin-right: 1rem!important;
-        background-color: #4D4C4C!important;
+        margin-right: 1rem !important;
+        background-color: #4d4c4c !important;
       }
     }
-  }  
+  }
 
-  @media (max-width: 700px) {}
+  @media (max-width: 700px) {
+  }
 `;

@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { darken } from 'polished';
+import styled from 'styled-components'
+import { darken } from 'polished'
 
 export const Container = styled.div`
   width: 100vw;
@@ -76,8 +76,8 @@ export const Container = styled.div`
       width: 4rem;
       height: 4rem;
       img {
-        border-radius: 10%; 
-      }  
+        border-radius: 10%;
+      }
     }
   }
 
@@ -85,7 +85,7 @@ export const Container = styled.div`
     .header-main {
       background: none;
       box-shadow: none;
-      
+
       .form-table {
         table {
           background: #353535;
@@ -93,4 +93,4 @@ export const Container = styled.div`
       }
     }
   }
-`;
+`

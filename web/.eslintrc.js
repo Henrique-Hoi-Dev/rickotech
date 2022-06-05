@@ -1,43 +1,63 @@
 module.exports = {
   env: {
     browser: true,
-    es2020: true,
+    es6: true,
   },
-  extends: ['plugin:react/recommended', 'airbnb', 'prettier', 'prettier/react'],
-  parser: 'babel-eslint',
+  extends: [
+    'plugin:react/recommended',
+    'airbnb',
+    'prettier',
+    'prettier/react',
+    'react-hooks',
+  ],
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+  },
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 11,
+    ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['react', 'prettier', 'airbnb'],
+  plugins: ['react', 'prettier', 'react-hooks'],
   rules: {
-    'prettier/prettier': 'error',
-    'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
-    'import/prefer-default-export': 'off',
-    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-    'react/jsx-one-expression-per-line': 'off',
-    'global-require': 'off',
-    'react-native/no-raw-text': 'off',
-    'no-param-reassign': 'off',
-    'no-underscore-dangle': 'off',
-    camelcase: 'off',
-    'no-console': ['error', { allow: ['tron'] }],
     'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
-    "indent": "error",
-    'react/jsx-filename-extension': [
+    "react-hooks/exhaustive-deps": "warn",
+    'prettier/prettier': [
       'error',
-      { extension: ['.jsx', '.js'] }, //Essa regra é para que o vs code aceite trabalhar com extensões .js sem dar warn
+      {
+        singleQuote: true,
+        printWidth: 120,
+        trailingComma: 'es5',
+      },
+    ],
+    'react/jsx-filename-extension': [
+      1,
+      {
+        extensions: ['.js', '.jsx'],
+      },
+    ],
+    'react/prop-types': 0,
+    'no-unused-vars': [
+      'error',
+      {
+        vars: 'local',
+        args: 'none',
+      },
+    ],
+    'jsx-a11y/anchor-is-valid': [
+      'error',
+      {
+        components: ['Link'],
+        specialLink: ['to', 'hrefLeft', 'hrefRight'],
+        aspects: ['noHref', 'invalidHref', 'preferButton'],
+      },
     ],
   },
+  // Configuração para o Gatsby
   settings: {
-    'import/resolver': {
-      'babel-plugin-root-import': {
-        rootPathSuffix: 'src',
-      },
-    },
+    'import/core-modules': ['react'],
   },
 };

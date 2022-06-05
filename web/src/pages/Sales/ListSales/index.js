@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import { Container } from './styles';
-import { FcEmptyTrash } from 'react-icons/fc';
-import { currencyFormat } from '../../../util/mask';
-import { findAllSalesRequest } from '../../../store/modules/sales/actions';
+import React, { useEffect, useState } from 'react'
+import { connect, useDispatch, useSelector } from 'react-redux'
+import { Container } from './styles'
+import { FcEmptyTrash } from 'react-icons/fc'
+import { currencyFormat } from '../../../util/mask'
+import { findAllSalesRequest } from '../../../store/modules/sales/actions'
 
-import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
-import MouseOverPopover from '../../../components/MouseOverPopover';
-import AddCircleSharpIcon from '@mui/icons-material/AddCircleSharp';
-import ModalSalesEdit from '../modalSalesEdit/modalSales';
-import ModalDelete from '../modalDelete/modalDelete';
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits'
+import MouseOverPopover from '../../../components/MouseOverPopover'
+import AddCircleSharpIcon from '@mui/icons-material/AddCircleSharp'
+import ModalSalesEdit from '../modalSalesEdit/modalSales'
+import ModalDelete from '../modalDelete/modalDelete'
 import img from '../../../assets/empty.png'
-import ModalSales from '../modalSales/modalSales';
+import ModalSales from '../modalSales/modalSales'
 
 const ListSales = ({ salesList }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const [showModal, setShowModal] = useState(false)
   const [showModalSales, setShowModalSales] = useState(false)
@@ -23,41 +23,42 @@ const ListSales = ({ salesList }) => {
   const [salesId, setSalesId] = useState('')
   const [DeleteId, setDeleteId] = useState('')
 
-  const user = useSelector((state) => state.user.profile);
+  const user = useSelector((state) => state.user.profile)
 
   useEffect(() => {
     if (salesId) {
       const inter = setInterval(() => {
         setSalesId('')
-      }, 500);
+      }, 500)
 
       return () => clearInterval(inter)
     }
-  }, [salesId, setSalesId]);
+  }, [salesId, setSalesId])
 
   useEffect(() => {
-    if(user.id) {
-      dispatch(findAllSalesRequest(user.id));
+    if (user.id) {
+      dispatch(findAllSalesRequest(user.id))
     }
-  }, [dispatch, user]);
+  }, [dispatch, user])
 
   return (
     <Container>
       <div className="header-main">
-        <div className='more' >
-          <MouseOverPopover 
+        <div className="more">
+          <MouseOverPopover
             children={
-              <AddCircleSharpIcon onClick={() => setShowModalSales(!showModalSales) }
-                sx={{ 
-                  height: "2em", 
-                  width: "2em", 
-                  cursor: "pointer", 
-                  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.5)",
-                  borderRadius: "50%" 
+              <AddCircleSharpIcon
+                onClick={() => setShowModalSales(!showModalSales)}
+                sx={{
+                  height: '2em',
+                  width: '2em',
+                  cursor: 'pointer',
+                  boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.5)',
+                  borderRadius: '50%',
                 }}
               />
             }
-            text={"Novo venda"}
+            text={'Novo venda'}
           />
         </div>
         <form className="form-table">
@@ -72,11 +73,11 @@ const ListSales = ({ salesList }) => {
                 <th></th>
                 <th>Status</th>
                 <th></th>
-              </tr> 
+              </tr>
             </thead>
             <tbody>
               {[].concat(salesList).map((sales, i) => (
-                <tr key={i} value={sales.id} >
+                <tr key={i} value={sales.id}>
                   <td>{sales.user.name}</td>
                   <td>{sales.name_product}</td>
                   <td>{sales.product_quantity}</td>
@@ -84,43 +85,45 @@ const ListSales = ({ salesList }) => {
                   <td>{sales.discount}%</td>
                   <td className="avatar">
                     <img
-                      src={sales.products.avatar ? sales.products.avatar.url : (img)}
+                      src={sales.products.avatar ? sales.products.avatar.url : img}
                       alt="avatar"
                       className="avatar"
                     />
                   </td>
-                  <td style={{ 
-                    borderRadius: '30px', 
-                    color: '#fff', 
-                    width: '12px',
-                    backgroundColor: 
-                      (sales.status === 'open' && 'green') ||
-                      (sales.status === 'closed' && 'red') || 
-                      (sales.status === 'sold' && 'orange') }}
+                  <td
+                    style={{
+                      borderRadius: '30px',
+                      color: '#fff',
+                      width: '12px',
+                      backgroundColor:
+                        (sales.status === 'open' && 'green') ||
+                        (sales.status === 'closed' && 'red') ||
+                        (sales.status === 'sold' && 'orange'),
+                    }}
                   >
-                    {
-                      (sales.status === 'open' && 'Em Aberto') || 
-                      (sales.status === 'closed' && 'Cancelado') || 
-                      (sales.status === 'sold' && 'Vendido')
-                    }
+                    {(sales.status === 'open' && 'Em Aberto') ||
+                      (sales.status === 'closed' && 'Cancelado') ||
+                      (sales.status === 'sold' && 'Vendido')}
                   </td>
                   {sales.status === 'open' && (
                     <td>
-                      <MouseOverPopover 
+                      <MouseOverPopover
                         children={
-                          <ProductionQuantityLimitsIcon 
+                          <ProductionQuantityLimitsIcon
                             onClick={() => setShowModal(!showModal) || setSalesId(sales.id)}
                           />
                         }
-                        text={"Editar / Finalizar Venda"}
+                        text={'Editar / Finalizar Venda'}
                       />
                     </td>
                   )}
                   {(sales.status === 'open' || sales.status === 'sold') && (
                     <td>
-                      <MouseOverPopover 
-                        children={<FcEmptyTrash onClick={() => setModalShowDelete(!showModalDelete) || setDeleteId(sales.id)}/>}
-                        text={"Excluir"}
+                      <MouseOverPopover
+                        children={
+                          <FcEmptyTrash onClick={() => setModalShowDelete(!showModalDelete) || setDeleteId(sales.id)} />
+                        }
+                        text={'Excluir'}
                       />
                     </td>
                   )}
@@ -130,33 +133,24 @@ const ListSales = ({ salesList }) => {
           </table>
         </form>
       </div>
-      
-      <ModalSales 
+
+      <ModalSales
         showModal={showModalSales}
         setShowModal={setShowModalSales}
         // ids={productId}
       />
 
-      <ModalSalesEdit 
-        showModal={showModal}
-        setShowModal={setShowModal}
-        ids={salesId}
-      />
+      <ModalSalesEdit showModal={showModal} setShowModal={setShowModal} ids={salesId} />
 
-      <ModalDelete 
-        setShowModal={setModalShowDelete}
-        showModal={showModalDelete}
-        ids={DeleteId}
-      />
-
+      <ModalDelete setShowModal={setModalShowDelete} showModal={showModalDelete} ids={DeleteId} />
     </Container>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => {
   return {
     salesList: state.sales.salesList ? state.sales.salesList : [],
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps)(ListSales);
+export default connect(mapStateToProps)(ListSales)

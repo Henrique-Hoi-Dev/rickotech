@@ -45,7 +45,7 @@ export default function AvatarInput(id) {
         <img
           id="avatar-img"
           src={preview ||(img)}
-          alt="Imagem do Produto"
+          alt="Img Produto"
         />
         <input
           type="file"

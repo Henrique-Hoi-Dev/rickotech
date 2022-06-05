@@ -4,10 +4,13 @@ import { useDispatch } from 'react-redux';
 
 import Modal from '../../../components/modal/modal';
 
-import { FcFullTrash, FcRedo } from 'react-icons/fc'
+import { FcFullTrash, FcRedo } from 'react-icons/fc';
 
 import { Container } from './styles';
-import { deleteSalesRequest, resetFormulario } from '../../../store/modules/sales/actions';
+import {
+  deleteSalesRequest,
+  resetFormulario,
+} from '../../../store/modules/sales/actions';
 
 export default function ModalDelete({ showModal, setShowModal, ids }) {
   const dispatch = useDispatch();
@@ -19,15 +22,11 @@ export default function ModalDelete({ showModal, setShowModal, ids }) {
 
   const onClose = () => {
     setShowModal(false);
-    dispatch(resetFormulario())
+    dispatch(resetFormulario());
   };
 
   return (
-    <Modal 
-      open={showModal}
-      onClose={onClose}
-      maxWidth={"510px"}
-    >
+    <Modal open={showModal} onClose={onClose} maxWidth={'510px'}>
       <Container>
         <h1>Deseja excluir venda ?</h1>
         <div className="buttons">
@@ -36,7 +35,7 @@ export default function ModalDelete({ showModal, setShowModal, ids }) {
           </button>
           <button onClick={() => onClose()}>
             Voltar... <FcRedo />
-          </button>  
+          </button>
         </div>
       </Container>
     </Modal>
