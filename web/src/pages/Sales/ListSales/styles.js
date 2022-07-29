@@ -6,7 +6,7 @@ export const Container = styled.div`
 
   .header-main {
     background: #353535;
-    max-width: 70rem;
+    max-width: 60rem;
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
     border-radius: 0.8rem;
@@ -32,23 +32,48 @@ export const Container = styled.div`
 
   .form-table {
     padding: 0 2.4rem;
+    display: flex;
+    justify-content: center;
 
     table {
       background-color: #4d4c4c;
+      border: 0.2rem solid #8945de;
+
+      width: 850px;
+      border-radius: 0.8rem;
       box-sizing: border-box;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+      margin-bottom: 2.5rem;
+
+      font: 1.1rem Archivo;
+      color: #9c98a6;
+      font-weight: bold;
 
       th {
         font-size: 21px;
-        padding: 15px;
+        padding: 7px;
         border-bottom: 0.2rem solid #8945de;
       }
 
       td {
         color: #fff;
-        border-bottom: 0.2rem solid #8945de;
         text-align: center;
         font-weight: 300;
+      }
+
+      .avatar {
+        width: 4rem;
+        height: 4rem;
+        img {
+          border-radius: 10%;
+        }
+      }
+
+      .edit {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 20px;
       }
     }
 
@@ -58,25 +83,23 @@ export const Container = styled.div`
       font-size: 28px;
       cursor: pointer;
     }
-  }
 
-  .table-list {
-    width: 100%;
-    border-radius: 0.8rem;
-    box-sizing: border-box;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-    margin-bottom: 2.5rem;
+    .error {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+      margin-bottom: 60px;
 
-    padding: 1.6rem;
-    font: 1.1rem Archivo;
-    color: #9c98a6;
-    font-weight: bold;
+      background: #353535;
+      border-radius: 0.8rem;
+      box-sizing: border-box;
 
-    .avatar {
-      width: 4rem;
-      height: 4rem;
-      img {
-        border-radius: 10%;
+      h3 {
+        font-weight: bold;
+        font-size: 30px;
+        color: #fff;
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
       }
     }
   }
@@ -93,4 +116,4 @@ export const Container = styled.div`
       }
     }
   }
-`
+`;

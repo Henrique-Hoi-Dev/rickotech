@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import { Container } from './styles'
 import { FcEmptyTrash } from 'react-icons/fc'
-import { currencyFormat } from '../../../util/mask'
+import { moneyMask } from '../../../util/mask'
 import { findAllSalesRequest } from '../../../store/modules/sales/actions'
 
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits'
@@ -61,77 +61,107 @@ const ListSales = ({ salesList }) => {
             text={'Novo venda'}
           />
         </div>
-        <form className="form-table">
-          <table className="table-list">
-            <thead>
-              <tr>
-                <th>Vendedor</th>
-                <th>Produto</th>
-                <th>Quantidade</th>
-                <th>Valor</th>
-                <th>Desconto</th>
-                <th></th>
-                <th>Status</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {[].concat(salesList).map((sales, i) => (
-                <tr key={i} value={sales.id}>
-                  <td>{sales.user.name}</td>
-                  <td>{sales.name_product}</td>
-                  <td>{sales.product_quantity}</td>
-                  <td>{currencyFormat(sales.price_total || [0])}</td>
-                  <td>{sales.discount}%</td>
-                  <td className="avatar">
-                    <img
-                      src={sales.products.avatar ? sales.products.avatar.url : img}
-                      alt="avatar"
-                      className="avatar"
-                    />
-                  </td>
-                  <td
+        <div className="form-table">
+          {salesList?.length > 0 && ( 
+            <table>
+              <thead>
+                <tr>
+                  <th style={{ width: '7rem' }}>Vendedor</th>
+                  <th style={{ width: '7rem' }}>Produto</th>
+                  <th
                     style={{
-                      borderRadius: '30px',
-                      color: '#fff',
-                      width: '12px',
-                      backgroundColor:
-                        (sales.status === 'open' && 'green') ||
-                        (sales.status === 'closed' && 'red') ||
-                        (sales.status === 'sold' && 'orange'),
+                      maxWidth: '3rem',
+                      textOverflow: 'ellipsis',
+                      overflow: 'hidden',
+                      whiteSpace: 'normal',
                     }}
                   >
-                    {(sales.status === 'open' && 'Em Aberto') ||
-                      (sales.status === 'closed' && 'Cancelado') ||
-                      (sales.status === 'sold' && 'Vendido')}
-                  </td>
-                  {sales.status === 'open' && (
-                    <td>
-                      <MouseOverPopover
-                        children={
-                          <ProductionQuantityLimitsIcon
-                            onClick={() => setShowModal(!showModal) || setSalesId(sales.id)}
-                          />
-                        }
-                        text={'Editar / Finalizar Venda'}
-                      />
-                    </td>
-                  )}
-                  {(sales.status === 'open' || sales.status === 'sold') && (
-                    <td>
-                      <MouseOverPopover
-                        children={
-                          <FcEmptyTrash onClick={() => setModalShowDelete(!showModalDelete) || setDeleteId(sales.id)} />
-                        }
-                        text={'Excluir'}
-                      />
-                    </td>
-                  )}
+                    Quantidade
+                  </th>
+                  <th style={{ width: '7rem' }}>Valor</th>
+                  <th
+                    style={{
+                      maxWidth: '3rem',
+                      textOverflow: 'ellipsis',
+                      overflow: 'hidden',
+                      whiteSpace: 'normal',
+                    }}
+                  >
+                    Desconto
+                  </th>
+                  <th style={{ maxWidth: '3rem' }}>Status</th>
+                  <th>Imagem</th>
+                  <th style={{ width: '5rem' }}>Ações</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </form>
+              </thead>
+              <tbody>
+                {[].concat(salesList).map((sales, i) => (
+                  <tr key={i} value={sales.id}>
+                    <td>{sales.user.name}</td>
+                    <td>{sales.name_product}</td>
+                    <td>{sales.product_quantity}</td>
+                    <td>{moneyMask(sales.price_total || [0])}</td>
+                    <td>{sales.discount}%</td>
+                    <td
+                      style={{
+                        fontWeight: 'bold',
+                        color:
+                          (sales.status === 'open' && '#2ecc71') ||
+                          (sales.status === 'closed' && 'red') ||
+                          (sales.status === 'sold' && 'orange'),
+                      }}
+                    >
+                      {sales.status}
+                    </td>
+                    <td className="avatar">
+                      <img
+                        src={
+                          sales.products.avatar ? sales.products.avatar.url : img
+                        }
+                        alt="avatar"
+                        className="avatar"
+                      />
+                    </td>
+                    <td className="edit">
+                      {sales.status === 'open' && (
+                        <MouseOverPopover
+                          children={
+                            <ProductionQuantityLimitsIcon
+                              sx={{ marginRight: '5px' }}
+                              onClick={() =>
+                                setShowModal(!showModal) || setSalesId(sales.id)
+                              }
+                            />
+                          }
+                          text={'Editar / Finalizar Venda'}
+                        />
+                      )}
+                      {(sales.status === 'open' || sales.status === 'sold') && (
+                        <MouseOverPopover
+                          children={
+                            <FcEmptyTrash
+                              onClick={() =>
+                                setModalShowDelete(!showModalDelete) ||
+                                setDeleteId(sales.id)
+                              }
+                            />
+                          }
+                          text={'Excluir'}
+                        />
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>            
+          )}
+
+          {salesList?.length === 0 && (
+            <div className="error">
+              <h3>Nenhum caixa aberto foi encontrado!</h3>
+            </div>
+          )}
+        </div>
       </div>
 
       <ModalSales
@@ -140,11 +170,19 @@ const ListSales = ({ salesList }) => {
         // ids={productId}
       />
 
-      <ModalSalesEdit showModal={showModal} setShowModal={setShowModal} ids={salesId} />
+      <ModalSalesEdit
+        showModal={showModal}
+        setShowModal={setShowModal}
+        ids={salesId}
+      />
 
-      <ModalDelete setShowModal={setModalShowDelete} showModal={showModalDelete} ids={DeleteId} />
+      <ModalDelete
+        setShowModal={setModalShowDelete}
+        showModal={showModalDelete}
+        ids={DeleteId}
+      />
     </Container>
-  )
+  );
 }
 
 const mapStateToProps = (state) => {

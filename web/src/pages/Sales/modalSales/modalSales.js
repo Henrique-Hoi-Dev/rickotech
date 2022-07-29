@@ -6,9 +6,8 @@ import {
   resetFormulario,
 } from '../../../store/modules/sales/actions';
 import { findAllOpenRequest } from '../../../store/modules/financialBox/actions';
-import { FcHighPriority } from 'react-icons/fc';
 import { Container } from './styles';
-import { currencyFormat } from '../../../util/mask';
+import { moneyMask } from '../../../util/mask';
 import {
   findAllProductRequest,
   resetFormularioProduct,
@@ -48,7 +47,7 @@ const ModalSales = ({ showModal, setShowModal }) => {
     setProductId(null);
     setBody((state) => ({
       ...state,
-      financial_id: financialBoxListOpen[0]?.id,
+      financial_id: financialBoxListOpen?.id,
       name_product: product?.name,
       price_product: product?.price,
       product_quantity: Number(product?.quantity),
@@ -110,13 +109,13 @@ const ModalSales = ({ showModal, setShowModal }) => {
           initialValues={form}
         >
           <Form>
-            <div className="statos">
+            <div className="status">
               <label htmlFor="name_product">Produtos</label>
               <InputAutocomplete
                 options={productList ?? []}
                 getOptionLabel={(option) => option.name}
+                isOptionEqualToValue={(option, value) => option.id === value.id}
                 onChange={(event, newValue) => {
-                  console.log(newValue);
                   if (newValue) {
                     setProductId(newValue?.id);
                   }
@@ -163,7 +162,7 @@ const ModalSales = ({ showModal, setShowModal }) => {
 
             <div className="tipo-venda-1">
               <label htmlFor="price_product">Valor Produto</label>
-              <h2>{currencyFormat(body?.price_product) || [0]}</h2>
+              <h2>{moneyMask(body?.price_product) || [0]}</h2>
             </div>
 
             <div className="tipo-venda-2">
@@ -174,12 +173,6 @@ const ModalSales = ({ showModal, setShowModal }) => {
             <div className="but">
               <button type="submit">Confirmar venda</button>
             </div>
-            <p>
-              <FcHighPriority />
-              Importante!
-              <br />
-              Preencha todos os dados!
-            </p>
           </Form>
         </Formik>
       </Container>

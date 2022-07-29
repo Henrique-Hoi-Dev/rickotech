@@ -26,6 +26,8 @@ export default createGlobalStyle`
     background-color: #4D4C4C;
 
     .MuiMenuItem-root {
+      width: 150px;
+
       &:hover {
         transform: scale(1.1);
         transition: all 0.5s;
@@ -56,9 +58,25 @@ export default createGlobalStyle`
     }
 
     .MuiPaper-root  {
+      font-family: 'Roboto', sans-serif;
       background-color: #353535;
-      font-weight: bold!important;
       color: #9c98a6;
+      font-weight: bold!important;
+      font-size: 18px;
+
+      .css-1p823my-MuiListItem-root {
+        display: flex;
+        align-items: flex-end;
+        color: #9c98a6;
+
+        &:hover {
+          color: #9c98a6;
+          transform: scale(1.1);
+          transition: all 0.5s;
+        }
+      }
+      /* width: 150px; */
+      /*font-weight: bold!important;
       border-radius: 10px;
       overflow: initial;
 
@@ -75,13 +93,14 @@ export default createGlobalStyle`
       }
 
       .css-1p823my-MuiListItem-root {
-        margin-left: 25px;
+        margin-left: 18px;
+        font-size: 18px;
 
         &:hover {
           transform: scale(1.1);
           transition: all 0.5s;
         }
-      }
+      } */
     }
 }
   

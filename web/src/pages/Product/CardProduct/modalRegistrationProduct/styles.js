@@ -50,6 +50,7 @@ export const Container = styled.div`
       border: 2px solid #8945de;
       font-weight: bold;
       color: #9c98a6;
+      background: rgba(0, 0, 0, 0.1);
     }
 
     select {
@@ -63,6 +64,7 @@ export const Container = styled.div`
       border: 2px solid #8945de;
       font-weight: bold;
       color: #9c98a6;
+      background: rgba(0, 0, 0, 0.1);
     }
 
     .form-input {
@@ -108,14 +110,12 @@ export const Container = styled.div`
 
     label {
       font: 700 1.4rem Archivo;
-      color: #8945de;
+      color: #9c98a6;
       text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
       display: flex;
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      padding-bottom: 1rem;
-      margin-top: 0.5rem;
     }
 
     span {
@@ -139,7 +139,7 @@ export const Container = styled.div`
     }
 
     footer {
-      padding: 2rem;
+      padding: 1.4rem;
       display: flex;
       align-items: center;
       justify-content: space-between;

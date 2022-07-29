@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCardRequest } from "../../../store/modules/financialBox/actions";
-
+import { moneyMask } from "../../../util/mask";
 import { Container } from './styles'
 
 import InventoryIcon from '@mui/icons-material/Inventory';
@@ -17,25 +17,14 @@ export default function Card() {
       dispatch(getCardRequest())
   }, [dispatch]);
 
-  function currencyFormat(num) {
-    if (num) {
-      return (
-        'R$' +
-        parseFloat(num)
-          .toFixed(2)
-          .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-      );
-    }
-  }
-  
   return (
     <Container>
       <div className="cards">
         <PaidIcon />
         <hr />
-        <div className="value">     
-          <h2>Valor vendas</h2>    
-          <strong>{currencyFormat(card.totalOrder || [0])}</strong>
+        <div className="value">
+          <h2>Valor vendas</h2>
+          <strong>{moneyMask(card.totalOrder || [0])}</strong>
         </div>
         <hr />
       </div>
@@ -44,7 +33,7 @@ export default function Card() {
         <hr />
         <div className="value">
           <h2>Valor produtos</h2>
-          <strong>{currencyFormat(card.totalProduct || [0])}</strong>
+          <strong>{moneyMask(card.totalProduct || [0])}</strong>
         </div>
         <hr />
       </div>
@@ -57,15 +46,15 @@ export default function Card() {
         </div>
         <hr />
       </div>
-      <div className="cards">           
+      <div className="cards">
         <AttachMoneyIcon />
         <hr />
         <div className="value">
           <h2>Valor serviços</h2>
-          <strong>{currencyFormat(card.totalService || [0])}</strong>
+          <strong>{moneyMask(card.totalService || [0])}</strong>
         </div>
         <hr />
       </div>
     </Container>
-  )
+  );
 }

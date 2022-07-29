@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { Container } from './styles';
 import img from '../../../../assets/empty.png'
 
-export default function AvatarInput(id) {
+export default function AvatarInput({ id, setUpAvatar }) {
   const { defaultValue, registerField } = useField('avatar');
   const { avatar } = useSelector((state) => state.product.form);
   const [file, setFile] = useState(defaultValue && defaultValue.id);
@@ -24,6 +24,7 @@ export default function AvatarInput(id) {
       setFile(avatar.id);
       setPreview(avatar.url);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [avatar, id, ref, registerField]);
 
   async function handleChange(e) {
@@ -42,11 +43,7 @@ export default function AvatarInput(id) {
   return (
     <Container>
       <label htmlFor="avatar">
-        <img
-          id="avatar-img"
-          src={preview ||(img)}
-          alt="Img Produto"
-        />
+        <img id="avatar-img" src={preview || img} alt="Img Produto" />
         <input
           type="file"
           id="avatar"

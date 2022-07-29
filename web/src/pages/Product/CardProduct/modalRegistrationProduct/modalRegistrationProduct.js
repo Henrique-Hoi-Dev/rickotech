@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik, Field, Form } from 'formik';
 import { toast } from 'react-toastify';
-import * as Yup from 'yup';
-
 import { useDispatch, useSelector } from 'react-redux';
 import {
   createProductRequest,
@@ -10,14 +8,15 @@ import {
   UpdateProductRequest,
   resetFormularioProduct,
 } from '../../../../store/modules/product/actions';
+import { FcHighPriority } from 'react-icons/fc';
+import { Container } from './styles';
+import { formatMoney, unmaskMoney } from '../../../../util/mask';
 
+import * as Yup from 'yup';
 import CloseIcon from '@mui/icons-material/Close';
 import AvatarInput from '../Avatarinput';
 import Modal from '../../../../components/modal/modal';
-
-import { FcHighPriority } from 'react-icons/fc';
-import { Container } from './styles';
-// import { formatMoney } from '~/util/mask';
+import InputAutocomplete from '../../../../components/select/select';
 
 const schema = Yup.object().shape({
   name: Yup.string()
@@ -27,34 +26,67 @@ const schema = Yup.object().shape({
   price: Yup.number().required('Este compo é obrigatório.'),
 });
 
-export default function ModalRegistrationProduct({
-  showModal,
-  setShowModal,
-  ids,
-}) {
+export default function ModalRegistrationProduct(
+  {
+    showModal,
+    setShowModal,
+    ids,
+  }) {
+
   const dispatch = useDispatch();
 
   const { form } = useSelector((state) => state.product);
-  console.log(form)
+  const [data, setData] = useState({})
+
+  const descriptionList = [
+    { value: 'novo', label: 'Novo' },
+    { value: 'seminovo', label: 'Seminovo' },
+    { value: 'usado', label: 'Usado' },
+  ];
+
+  const categoryList = [
+    { value: 'celular', label: 'Celular' },
+    { value: 'perfume', label: 'Perfume' },
+    { value: 'fone', label: 'Fones de Ouvido' },
+    { value: 'carregador', label: 'Carregador' },
+    { value: 'relogio', label: 'Relogio' },
+  ];
+
+  const getListDescription = () =>
+    descriptionList.find((item) => item.value === data?.description) ?? null;
+
+  const getListCategory = () =>
+    categoryList.find((item) => item.value === data?.category) ?? null;
+
   useEffect(() => {
     if (ids) {
       dispatch(getByIdProductRequest(ids));
     }
   }, [ids, dispatch]);
+  
+  useEffect(() => {
+    setData((state) => ({
+      ...state,
+      price: form?.price,
+      category: form?.category,
+      description: form?.description,
+      name: form?.name,
+      quantity: form?.quantity,
+      avatar: form?.avatar?.id,
+    }));
+  }, [form]);
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async () => {
     try {
-      let body = JSON.parse(JSON.stringify(values));
-
-      body.avatar_id = parseInt(
+      data.avatar_id = parseInt(
         document.getElementById('avatar').getAttribute('data-file')
       );
 
       if (form.id) {
-        dispatch(UpdateProductRequest({ product_id: form.id, values: body }));
+        dispatch(UpdateProductRequest({ product_id: form.id, values: data }));
         setShowModal(false);
       } else {
-        dispatch(createProductRequest({ values: body }));
+        dispatch(createProductRequest({ values: data }));
         onCloseProduct();
       }
     } catch (error) {
@@ -98,23 +130,59 @@ export default function ModalRegistrationProduct({
                   <div id="container-input" className="header-title">
                     <div className="campo2">
                       <label htmlFor="Nome Produto">Nome</label>
-                      <Field name="name" />
+                      <Field
+                        name="name"
+                        value={data?.name}
+                        onChange={(ev) => {
+                          ev.persist();
+                          setData((state) => ({
+                            ...state,
+                            name: ev.target.value,
+                          }));
+                        }}
+                      />
                       <span>{formProps.errors.name}</span>
+
                       <label htmlFor="category">Tipo de categoria</label>
-                      <Field component="select" name="category">
-                        <option value="0">Selecione</option>
-                        <option value="celular">Celular</option>
-                        <option value="perfume">Perfume</option>
-                        <option value="fone">Fones de Ouvido</option>
-                        <option value="carregador">Carregador</option>
-                        <option value="relogio">Relogio</option>
-                      </Field>
+                      <InputAutocomplete
+                        options={categoryList ?? []}
+                        getOptionLabel={(option) => option.label}
+                        isOptionEqualToValue={(option, value) =>
+                          option.value === value.value
+                        }
+                        value={getListCategory()}
+                        onChange={(event, newValue) => {
+                          if (newValue) {
+                            setData((state) => ({
+                              ...state,
+                              category: newValue.value,
+                            }));
+                          }
+                          if (newValue === null) {
+                            setData((state) => ({
+                              ...state,
+                              category: '',
+                            }));
+                          }
+                        }}
+                      />
                     </div>
 
                     <div className="campo3">
                       <label htmlFor="price">Valor</label>
-                      <Field name="price" type="number" />
+                      <Field
+                        name="price"
+                        value={formatMoney(data?.price)}
+                        onChange={(ev) => {
+                          ev.persist();
+                          setData((state) => ({
+                            ...state,
+                            price: unmaskMoney(ev.target.value),
+                          }));
+                        }}
+                      />
                       <span>{formProps.errors.price}</span>
+
                       <ul>
                         <AvatarInput name="avatar_id" id={form?.avatar?.id} />
                       </ul>
@@ -122,14 +190,41 @@ export default function ModalRegistrationProduct({
 
                     <div className="campo4">
                       <label htmlFor="quantity">Quantidade</label>
-                      <Field name="quantity" />
+                      <Field
+                        name="quantity"
+                        value={data?.quantity}
+                        onChange={(ev) => {
+                          ev.persist();
+                          setData((state) => ({
+                            ...state,
+                            quantity: ev.target.value,
+                          }));
+                        }}
+                      />
+
                       <label htmlFor="description">Tipo de descrição</label>
-                      <Field component="select" name="description">
-                        <option value="0">Selecione</option>
-                        <option value="novo">Novo</option>
-                        <option value="seminovo">Seminovo</option>
-                        <option value="usado">Usado</option>
-                      </Field>
+                      <InputAutocomplete
+                        options={descriptionList ?? []}
+                        getOptionLabel={(option) => option.label}
+                        isOptionEqualToValue={(option, value) =>
+                          option.value === value.value
+                        }
+                        value={getListDescription()}
+                        onChange={(event, newValue) => {
+                          if (newValue) {
+                            setData((state) => ({
+                              ...state,
+                              description: newValue.value,
+                            }));
+                          }
+                          if (newValue === null) {
+                            setData((state) => ({
+                              ...state,
+                              description: '',
+                            }));
+                          }
+                        }}
+                      />
                       <span>{formProps.errors.description}</span>
                     </div>
 

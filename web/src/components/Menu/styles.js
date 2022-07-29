@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-  /* position: absolute; */
+  position: absolute;
   width: 100%;
-  height: 5rem;
+  z-index: 1;
 
   background: #353535;
   box-sizing: border-box;
@@ -42,7 +42,7 @@ export const Header = styled.div`
   }
 
   svg {
-    margin: 7px;
+    margin: 2px;
 
     border-radius: 5px;
     transition: background 0.5s;

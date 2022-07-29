@@ -2,29 +2,23 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-  max-width: 50rem;
-  box-sizing: border-box;
-  border-radius: 0.8rem;
-
   display: flex;
 
+  justify-content: center;
   flex-direction: column;
-  align-items: stretch;
-  margin-left: 28px;
 
   .header {
     display: flex;
-    flex-direction: row;
-    align-content: center;
-    align-items: flex-end;
+    width: 630px;
+    margin-bottom: 20px;
 
     svg {
       background-color: #8945de;
     }
-    
+
     h1 {
-      color: #8945de;
-      margin: 0px 60px;
+      color: #9c98a6;
+      margin: 23px 60px 0 0;
     }
   }
 
@@ -42,28 +36,29 @@ export const Container = styled.div`
   }
 
   form {
-    border-radius: 11px;
-    padding: 25px;
-
-    display: grid; 
+    display: grid;
     justify-items: center;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     grid-template-areas:
-    'statos tipo-venda'
-    'tipo-venda-1 tipo-venda-2'
-    'but but';
+      'status tipo-venda'
+      'tipo-venda-1 tipo-venda-2'
+      'but but';
 
-    .statos {
-      grid-area: statos;
+    .status {
+      grid-area: status;
       display: flex;
       flex-direction: column;
+      margin: 10px;
     }
+
     .tipo-venda {
       grid-area: tipo-venda;
       display: flex;
       flex-direction: column;
+      margin: 10px;
     }
+
     .tipo-venda-1 {
       grid-area: tipo-venda-1;
       display: flex;
@@ -74,10 +69,11 @@ export const Container = styled.div`
       margin-top: 25px;
 
       h2 {
-        color: #2ECC71;
+        color: #2ecc71;
         margin-top: 10px;
       }
     }
+
     .tipo-venda-2 {
       grid-area: tipo-venda-2;
       display: flex;
@@ -88,11 +84,12 @@ export const Container = styled.div`
       margin-top: 25px;
 
       h2 {
-        color: #2ECC71;
+        color: #2ecc71;
         margin-top: 10px;
       }
     }
-    .but{
+
+    .but {
       grid-area: but;
       display: flex;
       flex-direction: row;
@@ -104,19 +101,6 @@ export const Container = styled.div`
 
       color: #9c98a6;
       text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-    }
-
-    p {
-      display: flex;
-      align-items: center;
-      font-size: 1.4rem;
-      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-      line-height: 2.4rem;
-      color: #9c98a6;
-    } 
-
-    svg {
-      margin-right: 1rem;
     }
   }
 
@@ -154,7 +138,9 @@ export const Container = styled.div`
     justify-content: space-between;
   }
 
-  input, select, .css-154xyx0-MuiInputBase-root-MuiOutlinedInput-root {
+  input,
+  select,
+  .css-154xyx0-MuiInputBase-root-MuiOutlinedInput-root {
     min-width: 16rem;
     background: rgba(0, 0, 0, 0.1);
     padding: 0 15px;
@@ -176,5 +162,4 @@ export const Container = styled.div`
       height: 10px;
     }
   }
-
 `;

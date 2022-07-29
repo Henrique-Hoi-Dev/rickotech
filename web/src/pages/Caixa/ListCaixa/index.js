@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { FcInfo } from 'react-icons/fc';
-import * as moment from 'moment';
-
+import { Container } from './styles';
+import { moneyMask } from '../../../util/mask';
+import { connect } from 'react-redux';
 import { 
   findAllFinancialBoxRequest,
   resetFormularioCaixa } from '../../../store/modules/financialBox/actions';
-import { connect } from 'react-redux';
 
-import { Container } from './styles';
+import * as moment from 'moment';
 import ModalCaixaInfo from '../ModalCaixaInfo/modalCaixaInfo';
 
 const ListCaixa = ({ financialBoxList, ids }) => {
@@ -33,17 +33,6 @@ const ListCaixa = ({ financialBoxList, ids }) => {
       dispatch(resetFormularioCaixa())
     } 
   }, [ids, dispatch]);
-
-  function currencyFormat(num) {
-    if (num) {
-      return (
-        'R$' +
-        parseFloat(num)
-          .toFixed(2)
-          .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-      );
-    }
-  }
 
   return (
     <Container>
@@ -76,10 +65,10 @@ const ListCaixa = ({ financialBoxList, ids }) => {
                   {(financial?.close_caixa === null) ? 'Em espera...' :
                   moment(financial?.close_caixa).format('DD/MM/YYYY')}
                 </td>
-                <td>{currencyFormat(financial?.value_open || [0])}</td>
-                <td>{currencyFormat(financial?.value_total_sales || [0])}</td>
-                <td>{currencyFormat(financial?.value_total_service || [0])}</td>
-                <td>{currencyFormat(financial?.value_total || [0])}</td>
+                <td>{moneyMask(financial?.value_open || [0])}</td>
+                <td>{moneyMask(financial?.value_total_sales || [0])}</td>
+                <td>{moneyMask(financial?.value_total_service || [0])}</td>
+                <td>{moneyMask(financial?.value_total || [0])}</td>
                 <td 
                   style={{ color: (financial?.status === true && 'red') || 
                   (financial?.status === false && 'green') }} 

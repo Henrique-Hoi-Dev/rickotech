@@ -2,35 +2,28 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-  max-width: 50rem;
-  border-radius: 0.8rem;
-
-  margin: -2rem auto 0;
-  padding: 3rem;
   display: flex;
 
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  align-items: stretch;
 
   .header {
     display: flex;
-    flex-direction: row;
-    align-content: center;
-    align-items: flex-end;
+    width: 630px;
+    margin-bottom: 40px;
 
     svg {
       background-color: #8945de;
-      margin: -2px 0px 4px -37px;
     }
-    
+
     h1 {
-      color: #8945de;
-      margin: 0px 60px;
+      color: #9c98a6;
+      margin: 23px 0px 0 0;
     }
   }
 
   .titulo {
-    margin-bottom: 2rem;
     display: flex;
     justify-content: center;
 
@@ -44,45 +37,41 @@ export const Container = styled.div`
   }
 
   form {
-    padding: 20px;
-
-    display: grid; 
+    display: grid;
     justify-items: center;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 270px 270px;
     grid-template-rows: 1fr;
     grid-template-areas:
-    'statos tipo-venda'
-    'tipo-venda-1 tipo-venda-2'
-    'but but';
+      'status tipo-venda'
+      'but but';
 
-    .statos {
-      grid-area: statos;
-      margin: 10px;
+    .status {
+      grid-area: status;
       display: flex;
       flex-direction: column;
+      height: 20px;
     }
+
     .tipo-venda {
       grid-area: tipo-venda;
-      margin: 10px;
+      margin: 8px;
       display: flex;
       flex-direction: column;
     }
+
     .tipo-venda-1 {
       grid-area: tipo-venda-1;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
     }
-    .tipo-venda-2{
-      grid-area: tipo-venda-2;
-      display: none;
-    }
-    .but{
+
+    .but {
       grid-area: but;
       display: flex;
       flex-direction: row;
-      margin: 34px auto -40px;
+      margin-top: 10px;
     }
+
     label {
       padding: 0.5rem;
       font: 700 1.4rem Archivo;
@@ -98,7 +87,7 @@ export const Container = styled.div`
       text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
       line-height: 2.4rem;
       color: #9c98a6;
-    } 
+    }
 
     svg {
       margin-right: 1rem;
@@ -139,7 +128,8 @@ export const Container = styled.div`
     justify-content: space-between;
   }
 
-  input, select {
+  input,
+  select {
     min-width: 15rem;
     background: rgba(0, 0, 0, 0.1);
     padding: 0 15px;

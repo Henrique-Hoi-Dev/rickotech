@@ -5,12 +5,11 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
 
-    margin: -3rem auto 1rem;
-    padding-top: 3rem;
+    margin: -3rem auto 0rem;
     overflow: hidden; 
   
     .form {
-      padding: 42px;
+      padding: 35px;
 
       display: grid;
       grid-template-columns: 1fr 1fr;

@@ -68,19 +68,17 @@
     ]
   },
   "devDependencies": {
-    "@babel/template": "^7.16.7",
-    "@types/babel__core": "^7.1.19",
-    "@types/node": "^17.0.36",
     "babel-eslint": "^10.1.0",
     "babel-plugin-root-import": "^6.5.0",
     "customize-cra": "^1.0.0",
-    "eslint": "^8.16.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.0.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-flowtype": "^8.0.3",
     "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-prettier-config": "^1.0.1",
-    "install-peerdeps": "^3.0.3",
     "prettier": "^2.1.1",
     "react-app-rewired": "^2.1.6"
   }

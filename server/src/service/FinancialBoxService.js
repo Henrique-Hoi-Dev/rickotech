@@ -62,45 +62,40 @@ export default {
     return closed
   },
   async open(req, res) {
-    let financials = await FinancialBox.findAll({ 
-      where: { user_id: req.id},
-      order: [['id', 'DESC']],
-      attributes: [ 
-        'id', 
-        'open_caixa', 
+    let userId = req.id;
+
+    let financials = await FinancialBox.findOne({
+      where: { user_id: userId, status: false },
+      attributes: [
+        'id',
+        'open_caixa',
         'close_caixa',
         'status',
-        'value_open', 
-        'value_total_sales', 
-        'value_total_service',   
-        'value_total'
+        'value_open',
+        'value_total_sales',
+        'value_total_service',
+        'value_total',
       ],
       include: [
         {
           model: User,
           as: 'user',
-          attributes: [ 'id', 'name' ]
+          attributes: ['id', 'name'],
         },
         {
           model: Service,
           as: 'service',
-          attributes: [ 'id', 'name', 'price' ]
+          attributes: ['id', 'name', 'price'],
         },
         {
           model: Sales,
           as: 'order',
-          attributes: [ 'id', 'financial_id', 'price_product' ]
-        }
-      ]
+          attributes: ['id', 'financial_id', 'price_product'],
+        },
+      ],
     });
-
-    const open = financials.filter(function (res) {
-      if (res.dataValues.status === false) {
-        return res.dataValues
-      }
-    })
     
-    return open
+    return financials;
   },
   async getId(req, res) {
     let financialId = req.id

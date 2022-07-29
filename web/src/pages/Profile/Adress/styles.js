@@ -9,6 +9,7 @@ export const Container = styled.div`
   form {
     display: flex;
     flex-direction: column;
+    margin-top: 70px;
   }
 
   h2 {

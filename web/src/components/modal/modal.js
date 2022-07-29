@@ -1,15 +1,16 @@
 import { Grid, Modal as MuiModal } from "@mui/material";
 import React from "react";
 
-const Modal = ({
-  open,
-  onClose,
-  children,
-  component,
-  onSubmit,
-  height,
-  maxWidth,
-}) => {
+const Modal = (
+  {
+    open,
+    onClose,
+    children,
+    component,
+    onSubmit,
+    height,
+    maxWidth,
+  }) => {
 
   return (
     <MuiModal open={open} onClose={onClose} onBackdropClick={onClose}>
@@ -38,12 +39,12 @@ const Modal = ({
           direction="row"
           spacing={1}
           p={1}
-          sx={{ overflowY: "auto"}}
+          sx={{ overflowY: "auto" }}
         >
           <Grid item container>
             {/* <Text>{title}</Text> */}
           </Grid>
-          <Grid item container spacing={2}>
+          <Grid item container spacing={2} justifyContent={"center"}>
             {children}
           </Grid>
         </Grid>  

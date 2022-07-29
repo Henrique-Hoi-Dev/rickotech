@@ -4,6 +4,7 @@ export const PageHeader = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #8945de;
+  margin-top: 80px;
 
   .header {
     width: 90%;

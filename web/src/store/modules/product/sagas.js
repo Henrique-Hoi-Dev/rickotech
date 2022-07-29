@@ -12,7 +12,6 @@ import {
 
 export function* createProduct({ payload }) {
   try {
-    console.log(payload)
     yield call(api.post, '/product', payload.data.values);
 
     toast.success('Produto registrato com sucesso!');

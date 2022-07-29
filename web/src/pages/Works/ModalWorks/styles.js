@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
 
-export const Container = styled.div` 
+export const Container = styled.div`
   font-size: 0.8rem;
 
   svg {
@@ -13,15 +13,15 @@ export const Container = styled.div`
 
   .header-main {
     border-radius: 0.8rem;
-    overflow: hidden; 
-  
+    overflow: hidden;
+
     #container-input {
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 195px;
       grid-template-areas:
         'campo2 campo'
-        'button button'    
+        'button button';
     }
     .campo2 {
       grid-area: campo2;
@@ -33,11 +33,12 @@ export const Container = styled.div`
     }
     .buttons-container {
       grid-area: button;
-    }  
+    }
 
     input {
       font: 1rem Archivo;
       border-radius: 0.5rem;
+      background: rgba(0, 0, 0, 0.1);
       height: 2.2rem;
       width: 13.5rem;
       padding: 0 1rem;
@@ -45,12 +46,12 @@ export const Container = styled.div`
       border: 2px solid #8945de;
       font-weight: bold;
       color: #9c98a6;
-
     }
 
-    select {  
+    select {
       font: 1rem Archivo;
       border-radius: 0.5rem;
+      background: rgba(0, 0, 0, 0.1);
       width: 13.5rem;
       height: 2.2rem;
       padding: 0 1rem;
@@ -106,10 +107,10 @@ export const Container = styled.div`
       text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
       line-height: 2.4rem;
       color: #9c98a6;
-    } 
+    }
 
     footer {
-      padding: 2rem ;
+      padding: 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -118,7 +119,7 @@ export const Container = styled.div`
         margin-right: 1rem;
       }
     }
-  }  
+  }
 
   @media (max-width: 700px) {
     #container-input {
@@ -127,8 +128,7 @@ export const Container = styled.div`
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       grid-template-rows: 5px 455px 1fr;
-      grid-template-areas:
-        'name name name'
+      grid-template-areas: 'name name name';
     }
     .campo {
       grid-area: campo2;
@@ -138,6 +138,6 @@ export const Container = styled.div`
     }
     .buttons-container {
       grid-area: button;
-    }  
+    }
   }
 `;
