@@ -1,7 +1,7 @@
 
 # Projeto de Vendas e Registro de serviços
 
-Esse projeto foi desenvolvido para práticas de lógicas e regras de negócio
+Esse projeto foi desenvolvido para práticas de lógicas e regra de negócio
 
 ## Tech Stack
 
