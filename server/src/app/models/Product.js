@@ -4,7 +4,7 @@ class Product extends Model {
   static init(sequelize) {
     super.init(
       {
-        avatar_id: Sequelize.INTEGER,
+        product_images: { type: Sequelize.ARRAY(Sequelize.JSON), defaultValue: [] },
         name: Sequelize.STRING,
         price: Sequelize.DOUBLE,
         quantity: Sequelize.DOUBLE,
@@ -19,7 +19,6 @@ class Product extends Model {
     return this;
   }
   static associate(models) {
-    this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
     this.hasMany(models.Order, { foreignKey: 'product_id', as: 'order' });
   }
 }

@@ -20,6 +20,7 @@ export default {
     result = {httpStatus: httpStatus.OK, status: "successful", responseData: createFinancialBox}      
     return result
   },
+  
   async index(req, res) {
     let financials = await FinancialBox.findAll({ 
       where: { user_id: req.id},
@@ -61,6 +62,7 @@ export default {
     
     return closed
   },
+
   async open(req, res) {
     let userId = req.id;
 
@@ -97,6 +99,7 @@ export default {
     
     return financials;
   },
+
   async getId(req, res) {
     let financialId = req.id
 
@@ -191,6 +194,7 @@ export default {
 
     return financial
   },
+
   async update(req, res) {
     let result = {}
     

@@ -7,8 +7,9 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      avatar_id: {
-        type: Sequelize.INTEGER,
+      product_images: {
+        type: Sequelize.ARRAY(Sequelize.JSON),
+        defaultValue: []
       },
       name: {
         type: Sequelize.STRING,

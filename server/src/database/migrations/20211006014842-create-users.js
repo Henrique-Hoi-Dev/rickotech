@@ -29,8 +29,8 @@ module.exports = {
         values: ['COLABORADOR', 'CEO', 'DIRETOR', 'GERENTE'],
         defaultValue: null,
       },
-      avatar_id: {
-        type: Sequelize.INTEGER,
+      avatar: {
+        type: Sequelize.STRING,
       },
       password_hash: {
         type: Sequelize.STRING,

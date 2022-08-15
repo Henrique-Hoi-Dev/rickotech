@@ -3,7 +3,6 @@ import Order from "../app/models/Order";
 import httpStatus from 'http-status-codes';
 import FinancialBox from "../app/models/FinancialBox";
 import User from "../app/models/User";
-import File from "../app/models/File";
 
 export default  {
   async store(req, res) {
@@ -98,51 +97,49 @@ export default  {
       return saleses
     }
   },
+
   async index(req, res) {
     let sales = await Order.findAll({
-        where: { seller_id: req.id },
-        attributes: [ 
-          'id', 
-          'product_id',
-          'name_product', 
-          'price_product', 
-          'discount',
-          'product_quantity', 
-          'price_total',
-          'status' 
-        ],
-        include: [
-          {
-            model: Product,
-            as: 'products',
-            attributes: [ 'id', 'name', 'category', 'price' ],
-            include: [{
-              model: File, 
-              as: 'avatar',
-              attributes: [ 'url', 'id', 'path' ] 
-            }]
-          },
-          {
-            model: User,
-            as: 'user',
-            attributes: [ 'id', 'name' ]
-          },
-          {
-            model: FinancialBox,
-            as: 'financial',
-            attributes: [ 
-              'id', 
-              'value_total_sales', 
-              'value_total_service', 
-              'value_total', 
-              'open_caixa', 
-              'close_caixa']
-          }
-        ],
+      where: { seller_id: req.id },
+      attributes: [ 
+        'id', 
+        'product_id',
+        'name_product', 
+        'price_product', 
+        'discount',
+        'product_quantity', 
+        'price_total',
+        'status' 
+      ],
+      include: [
+        {
+          model: Product,
+          as: 'products',
+          attributes: [ 'id', 'name', 'category', 'price', 'product_images' ],
+        },
+        {
+          model: User,
+          as: 'user',
+          attributes: [ 'id', 'name' ]
+        },
+        {
+          model: FinancialBox,
+          as: 'financial',
+          attributes: [ 
+            'id', 
+            'value_total_sales', 
+            'value_total_service', 
+            'value_total', 
+            'open_caixa', 
+            'close_caixa'
+          ]
+        }
+      ],
     });
 
     return sales
   },
+
   async getId(req, res) {
     let id = req.id
 
@@ -158,6 +155,7 @@ export default  {
 
     return salesId
   },
+
   async delete(req, res) {
     let result = {}
     const id  = req.id;

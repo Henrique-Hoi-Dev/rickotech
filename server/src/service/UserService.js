@@ -1,6 +1,5 @@
 import * as Yup from 'yup';
 import Adress from '../app/models/Adress';
-import File from '../app/models/File';
 import User from "../app/models/User";
 import httpStatus from 'http-status-codes';
 
@@ -28,6 +27,7 @@ export default {
 
     return users;
   },
+
   async index(req, res) {
     const users = await User.findAll({
       attributes: [ 
@@ -38,18 +38,13 @@ export default {
         'cpf', 
         'date_birth', 
         'cpf', 
-        'avatar_id'
+        'product_images'
       ],
       include: [
       {
-        model: File,
-        as: 'avatar',
-        attributes:  [ 'id', 'path', 'url' ],
-      },
-      {
         model: Adress,
         as: 'adress',
-        attributes:  [ 
+        attributes: [ 
             'id', 
             'cep', 
             'logradouro', 
@@ -64,6 +59,7 @@ export default {
     });
     return users;
   },
+
   async getId(req, res) {
     let user = await User.findByPk(req.id, {
       attributes: [ 
@@ -72,15 +68,10 @@ export default {
         'email', 
         'company_position', 
         'cpf', 
-        'avatar_id', 
+        'product_images', 
         'date_birth' 
       ],
       include: [
-      {
-        model: File,
-        as: 'avatar',
-        attributes:  [ 'id', 'path', 'url' ],
-      },
       {
         model: Adress,
         as: 'adress',
@@ -135,7 +126,6 @@ export default {
       return res.status(401).json({ error: 'Senha não corresponde' });
     }
 
-
     await user.update(users);
 
     const result = await User.findByPk(userId, {
@@ -146,14 +136,9 @@ export default {
         'company_position', 
         'date_birth', 
         'cpf', 
-        'avatar_id', 
+        'product_images', 
       ],
       include: [
-        {
-          model: File,
-          as: 'avatar',
-          attributes: ['id', 'path', 'url'],
-        },
         {
           model: Adress,
           as: 'adress',
@@ -173,6 +158,7 @@ export default {
 
     return result
   },
+  
   async delete(req, res) {
     let result = {}
     
